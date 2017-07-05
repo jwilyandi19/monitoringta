@@ -1,0 +1,131 @@
+.footer {
+	margin-top: 20px;
+}
+
+.waktu-jadwal {
+	text-align: center;
+}
+
+.label-durasi {
+	margin-top: 10px;
+}
+
+.panel-form {
+	padding: 10px;
+}
+
+.form-reservasi {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.kalender {
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+
+.kotak-kalender {
+	margin-top: -20px;
+	margin-bottom: 60px;
+	clear: right;
+}
+
+.hari-minggu {
+	color: #ff0000;
+}
+
+.hari-kalender {
+	float: left;
+	display: inline-block; 
+	width: 162.8px; 
+	height: 30px; 
+	background-color: #efefef; 
+	margin: auto;
+}
+
+.hari-kalender p {
+	text-align: center;
+	margin: auto; 
+	width: 50%; 
+	margin-top: 2px; 
+	font-size: 16px;
+}
+
+.tanggal-kalender {
+	float: left;
+	width: 162.8px;
+	height: 100px;
+	padding: 7px;
+	margin-bottom: 0px;
+}
+
+.konten-tanggal p {
+	margin-top: -1px;
+	margin-bottom: 2px;
+	margin-left: 5px;
+	font-size: 16px;
+}
+
+.konten-jadwal {
+	overflow-y: auto; 
+	float: left;
+	width: 145px;
+}
+
+.jadwal {
+	outline: none;
+	border-radius: 16px;
+	white-space: nowrap;
+	font-size: 13px;
+	background-color: #efefef;
+	box-shadow: 0 0 0;
+}
+
+.jadwal:active {
+	outline: none;
+	border: none;
+}
+
+.jadwal:focus {
+	outline: none;
+}
+
+.jadwal.change {
+	border: none;
+}
+
+.jadwal p {
+	text-align: center;
+	margin: auto; 
+	width: 50%; 
+	margin-top: 2px; 
+	color: #000000;
+	font-size: 13px; 
+}
+
+.waktu-home {
+	margin-top: 70px;
+	margin-bottom: 35px;
+}
+
+.schedule-hari {
+	margin-bottom: 15px;
+}
+
+.schedule {
+	padding-top: 30px;
+
+}
+
+.schedule h4 {
+	text-align: center;
+	margin: auto; 
+	width: 50%; 
+	margin-top: 2px; 
+	color: #000000;
+}
+
+.detail-schedule {
+	padding-left: 40px;
+	text-align: left; 
+}
