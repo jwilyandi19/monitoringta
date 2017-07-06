@@ -23,7 +23,7 @@ Home
 @section('content')
 	<div class="panel" style="height: 500px; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;">
 		INI HALAMAN HOME
-	</div>		
+	</div>	
 @endsection
 
 @section('moreScript')
