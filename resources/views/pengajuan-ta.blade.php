@@ -31,6 +31,9 @@ Pengajuan TA
         <div class="panel-body isi-halaman">
             <form class="form-horizontal col-md-8 col-md-offset-2" method="POST" action="{{url('/penagjuanta')}}">
                 <fieldset>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <h6 class="text-danger">* harus diisi</h6>
+                    </div>
                     <div class="form-group">
                         <label class="control-label" for="judulta"><h5>Judul Tugas Akhir *</h5></label>
                         <textarea type="text" name="judulta" id="judulta" class="form-control col-md-10" placeholder="Judul Tugas Akhir"></textarea>
@@ -140,6 +143,7 @@ Pengajuan TA
                         <label class="control-label" for="proposal"><h5>Unggah File Proposal</h5></label>
                         <input class="form-control" type="file" name="proposal" >
                     </div>
+                    <br>
                     <div class="form-group">
                         <a href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ajukan Judul</a>
                         <!-- <button href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ajukan Judul</button> -->                        
