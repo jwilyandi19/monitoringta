@@ -1,3 +1,7 @@
+body {
+	background-color: #f4f4f4;
+}
+
 .footer {
 	margin-top: 20px;
 }
@@ -128,4 +132,24 @@
 .detail-schedule {
 	padding-left: 40px;
 	text-align: left; 
+}
+
+.white-font {
+	font-color : #ffffff;
+}
+
+.login-button {
+	padding-top: 10px; 
+	padding-bottom: 10px; 
+	margin-top: 10px; 
+	margin-left: 50px;
+}
+
+.web-logo {
+	font-size: 20px; 
+	margin-left: -30px;
+}
+
+.dropdown-navbar {
+	display: none;
 }
