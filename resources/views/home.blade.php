@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-SI-TA | Home
+Home
 @endsection
 
 @section('moreStyle')
@@ -23,8 +23,11 @@ SI-TA | Home
            {{Session::get('message')}}
         </div>
     @endif
-	<div class="panel" style="height: 500px; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;">
-		INI HALAMAN HOME
+	<div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
+		<div class="judul-halaman">
+            <h4><strong>Berita</strong></h4>
+            <hr>
+        </div>
 	</div>	
 @endsection
 

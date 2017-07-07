@@ -18,7 +18,7 @@ class FrontendController extends Controller
     	return view('status-proposal');
     }
 
-    public function detailProgres(){
-    	return view('detail-progres');
+    public function detailTa(){
+    	return view('detailta');
     }
 }

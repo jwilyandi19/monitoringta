@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@yield('title')</title>
+	<title>SI-TA | @yield('title')</title>
 	
 	<link rel="icon" type="image/png" href="{{asset('img/Logo-Material.png')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">

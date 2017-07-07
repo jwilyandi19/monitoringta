@@ -153,3 +153,7 @@ body {
 .dropdown-navbar {
 	display: none;
 }
+
+.judul-halaman h4 {
+	color: #2a456f;
+}

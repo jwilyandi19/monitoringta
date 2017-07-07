@@ -1,5 +1,5 @@
-<div class="panel panel-info">
-	<div class="panel-heading" style="background-color: #2a456f; border-color: #2a456f;">
+<div class="panel panel-primary">
+	<div class="panel-heading" >
 		<h5 style="color: #ffffff; margin: 0 0">Berita Terbaru</h5>
 	</div>
 	<div class="panel-body list-group" style="padding: 1px;">
@@ -9,8 +9,8 @@
 	</div>	
 </div>
 
-<div class="panel panel-info">
-	<div class="panel-heading" style="background-color: #2a456f; border-color: #2a456f;">
+<div class="panel panel-primary">
+	<div class="panel-heading">
 		<h5 style="color: #ffffff; margin: 0 0">Lain - Lain</h5>
 	</div>
 	<div class="panel-body list-group" style="padding: 1px;">

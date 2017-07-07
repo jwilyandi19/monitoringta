@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-SI-TA | Pengajuan TA
+Pengajuan TA
 @endsection
 
 @section('moreStyle')
@@ -25,26 +25,26 @@ SI-TA | Pengajuan TA
     @endif
 	<div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
 		<div class="judul-halaman">
-            <h4>Pengajuan Judul Tugas Akhir</h4>
+            <h4><strong>Pengajuan Judul Tugas Akhir </strong></h4>
             <hr>
         </div>
         <div class="panel-body isi-halaman">
             <form class="form-horizontal col-md-8 col-md-offset-2" method="POST" action="{{url('/penagjuanta')}}">
                 <fieldset>
                     <div class="form-group">
-                        <label class="control-label" for="judulta"><strong>Judul Tugas Akhir</strong></label>
+                        <label class="control-label" for="judulta"><h5>Judul Tugas Akhir *</h5></label>
                         <textarea type="text" name="judulta" id="judulta" class="form-control col-md-10" placeholder="Judul Tugas Akhir"></textarea>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="bidang"><strong>Bidang Minat</strong></label>
+                        <label class="control-label" for="bidang"><h5>Bidang Matakuliah *</h5></label>
                         <select class="form-control" id="bidang">
-                            <option class="selected" >Bidang Minat</option>
+                            <option class="selected" >Bidang Matakuliah</option>
                             <option>Material Inovasi</option>
                             <option>Metalurgi</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="pembimbing1"><strong>Dosen Pembiming 1</strong></label>
+                        <label class="control-label" for="pembimbing1"><h5>Dosen Pembiming 1 *</h5></label>
                         <select class="form-control" id="pembimbing1">
                             <option selected >Pilih Dosen Pembimbing 1</option>
                             <option   value='051100114'>ABDUL MUNIF</option>
@@ -90,7 +90,7 @@ SI-TA | Pengajuan TA
                         </select> 
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="pembimbing2"><strong>Dosen Pembiming 2</strong></label>
+                        <label class="control-label" for="pembimbing2"><h5>Dosen Pembiming 2</h5></label>
                         <select class="form-control" id="pembimbing2">
                             <option selected >Pilih Dosen Pembimbing 2</option>
                             <option   value='051100114'>ABDUL MUNIF</option>
@@ -137,8 +137,12 @@ SI-TA | Pengajuan TA
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label class="control-label" for="proposal"><strong>Unggah File Proposal</strong></label>
+                        <label class="control-label" for="proposal"><h5>Unggah File Proposal</h5></label>
                         <input class="form-control" type="file" name="proposal" >
+                    </div>
+                    <div class="form-group">
+                        <a href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ajukan Judul</a>
+                        <!-- <button href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ajukan Judul</button> -->                        
                     </div>
                 </fieldset>                
             </form>
