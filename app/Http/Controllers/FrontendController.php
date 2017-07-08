@@ -37,4 +37,12 @@ class FrontendController extends Controller
     public function statusTa(){
         return view('statusta');
     }
+
+    public function mahasiswaBimbingan(){
+        return view('mahasiswabimbingan');
+    }
+
+    public function tambahkanJadwal(){
+        return view('tambahkanjadwal');
+    }
 }

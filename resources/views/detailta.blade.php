@@ -38,13 +38,13 @@ Detail Tugas Akhir
                 <div class="row" >
                     <label class="col-md-2"><h6 class="pull-left">NRP</h6></label>
                     <div class="col-md-10">
-                        <h6>: 5114100110</h6> 
+                        <h6>: 5114100046</h6> 
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-md-2"><h6 class="pull-left">Nama</h6></label>
                     <div class="col-md-10">
-                        <h6>: Rafiar Rahmansyah</h6> 
+                        <h6>: Raras Anggita</h6> 
                     </div>
                 </div>
                 <div class="row">
@@ -100,11 +100,26 @@ Detail Tugas Akhir
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr> -->
+                            <tr>
+                                <td>1</td>
+                                <td>12/Jan/2017</td>
+                                <td>Perkenalan</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>21/Jan/2017</td>
+                                <td>Research Plan</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>12/Feb/2017</td>
+                                <td>Progress Research Bahan I</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>21/Feb/2017</td>
+                                <td>Progress Research Bahan II</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -114,18 +129,33 @@ Detail Tugas Akhir
             <div>
                 <h4>Seminar Tugas Akhir</h4>
             </div>
-            <div class="row">
+            <div class="col-md-12">
+                <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                <div class="col-md-10">
+                    <h6>: -</h6>
+                </div>
+            </div>
+            <div class="col-md-12">
                 <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
                 <div class="col-md-10">
                     <h6>: -</h6>
                 </div>
             </div>
             <br>
+            <br>
+            <br>
+            <br>
             <hr>
             <div>
                 <h4>Sidang Tugas Akhir</h4>
             </div>
-            <div class="row">
+            <div class="col-md-12">
+                <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                <div class="col-md-10">
+                    <h6>: -</h6>
+                </div>
+            </div>
+            <div class="col-md-12">
                 <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
                 <div class="col-md-10">
                     <h6>: -</h6>

@@ -33,13 +33,13 @@ Detail Tugas Akhir
                                 <div class="row" >
                     <label class="col-md-2"><h6 class="pull-left">NRP</h6></label>
                     <div class="col-md-10">
-                        <h6>: 5114100110</h6> 
+                        <h6>: 5114100046</h6> 
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-md-2"><h6 class="pull-left">Nama</h6></label>
                     <div class="col-md-10">
-                        <h6>: Rafiar Rahmansyah</h6> 
+                        <h6>: RARAS ANGGITA</h6> 
                     </div>
                 </div>
                 <div class="row">
@@ -125,7 +125,7 @@ Detail Tugas Akhir
                 <h4>Seminar Tugas Akhir</h4>
             </div>
             <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                <label class="col-md-2"><h6 class="pull-left">Nilai / Status</h6></label>
                 <div class="col-md-10">
                     <h6>: -</h6>
                 </div>
@@ -136,7 +136,7 @@ Detail Tugas Akhir
                     <h6>: -</h6>
                 </div>
             </div>
-            <button class="btn btn-primary pull-right">Masukkan Nilai</button>
+            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#nilaiSeminar">Masukkan Nilai</button>
             <br>
             <br>
             <br>
@@ -147,7 +147,7 @@ Detail Tugas Akhir
                 <h4>Sidang Tugas Akhir</h4>
             </div>
             <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                <label class="col-md-2"><h6 class="pull-left">Nilai / Status</h6></label>
                 <div class="col-md-10">
                     <h6>: -</h6>
                 </div>
@@ -158,7 +158,7 @@ Detail Tugas Akhir
                     <h6>: -</h6>
                 </div>
             </div>
-            <button class="btn btn-primary pull-right">Masukkan Nilai</button>
+            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#nilaiSidang">Masukkan Nilai</button>
 
 
         </div>
@@ -187,7 +187,83 @@ Detail Tugas Akhir
                         </div>
                         <div class="form-group">
                             {{csrf_field()}}
-                            <a class="btn btn-primary pull-right" href="#" style="margin : 0 15px;">Tambahkan</a>
+                            <a class="btn btn-primary pull-right" href="#" style="margin : 0 15px;" data-dismiss="modal">Tambahkan</a>
+                            {{--<button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Tambahkan</button>--}}
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="nilaiSeminar">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+                    <h4 class="modal-title" style="color: #ffffff;">Penilaian Seminar</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="POST" action="{{url('#')}}">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="status">Nilai / Status</label>
+                            <div class="col-md-10" >
+                                <select class="form-control" id="status">
+                                    <option>Pilih Nilai / Status Tugas Akhir</option>
+                                    <option>A (Diterima Dengan Perbaikan)</option>
+                                    <option>B (Diterima Dengan Perubahan Judul)</option>
+                                    <option>C (Ditolak)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Evaluasi</label>
+                            <div class="col-md-10">
+                                <textarea type="text" name="evaluasi" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{csrf_field()}}
+                            <a class="btn btn-primary pull-right" href="#" style="margin : 0 15px;" data-dismiss="modal">Tambahkan</a>
+                            {{--<button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Tambahkan</button>--}}
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="nilaiSidang">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+                    <h4 class="modal-title" style="color: #ffffff;">Penilaian Sida</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="POST" action="{{url('#')}}">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="status">Nilai / Status</label>
+                            <div class="col-md-10" >
+                                <select class="form-control" id="status">
+                                    <option>Pilih Nilai / Status Tugas Akhir</option>
+                                    <option>A (Diterima Dengan Perbaikan)</option>
+                                    <option>B (Diterima Dengan Perubahan Judul)</option>
+                                    <option>C (Ditolak)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Evaluasi</label>
+                            <div class="col-md-10">
+                                <textarea type="text" name="evaluasi" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{csrf_field()}}
+                            <a class="btn btn-primary pull-right" href="#" style="margin : 0 15px;" data-dismiss="modal">Tambahkan</a>
                             {{--<button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Tambahkan</button>--}}
                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
                         </div>
