@@ -1,11 +1,11 @@
 <div class="panel panel-primary">
 	<div class="panel-heading" >
-		<h5 style="color: #ffffff; margin: 0 0">Berita Terbaru</h5>
+		<h5 style="color: #ffffff; margin: 0 0">Informasi</h5>
 	</div>
 	<div class="panel-body list-group" style="padding: 1px;">
-		<a href="#" class="list-group-item">Kelengkapan yang WAJIB dipenuhi setelah sidang Tugas Akhir GASAL 2016/2017</a>
-		<a href="#" class="list-group-item">Pembagian RMK beserta anggotanya</a>
-		<a href="#" class="list-group-item">Template dan Contoh Proposal TA</a>
+		<a href="#" class="list-group-item">Panduan Sistem Informasi Tugas Akhir</a>
+		<a href="#" class="list-group-item">Panduan Tugas Akhir</a>
+		<a href="#" class="list-group-item">Prosedur Tugas Akhir</a>
 	</div>	
 </div>
 

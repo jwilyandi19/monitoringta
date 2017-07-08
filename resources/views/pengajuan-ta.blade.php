@@ -29,16 +29,17 @@ Pengajuan TA
             <hr>
         </div>
         <div class="panel-body isi-halaman">
-            <form class="form-horizontal col-md-8 col-md-offset-2" method="POST" action="{{url('/penagjuanta')}}">
+            <form class="form-horizontal col-md-10 col-md-offset-1" method="POST" action="{{url('/penagjuanta')}}">
                 <fieldset>
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <h6 class="text-danger">* harus diisi</h6>
+                    <div class="form-group alert alert-dismissable alert-warning" style="margin-bottom: 0;">
+                        <button type="button" class="close fade" data-dismiss="alert">&times;</button>
+                        <p><strong>* harus diisi</strong></p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-warning">
                         <label class="control-label" for="judulta"><h5>Judul Tugas Akhir *</h5></label>
                         <textarea type="text" name="judulta" id="judulta" class="form-control col-md-10" placeholder="Judul Tugas Akhir"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-warning">
                         <label class="control-label" for="bidang"><h5>Bidang Matakuliah *</h5></label>
                         <select class="form-control" id="bidang">
                             <option class="selected" >Bidang Matakuliah</option>
@@ -46,7 +47,7 @@ Pengajuan TA
                             <option>Metalurgi</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-warning">
                         <label class="control-label" for="pembimbing1"><h5>Dosen Pembiming 1 *</h5></label>
                         <select class="form-control" id="pembimbing1">
                             <option selected >Pilih Dosen Pembimbing 1</option>
@@ -92,7 +93,7 @@ Pengajuan TA
                             <option   value='051100115'>WIJAYANTI NURUL</option>
                         </select> 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-warning">
                         <label class="control-label" for="pembimbing2"><h5>Dosen Pembiming 2</h5></label>
                         <select class="form-control" id="pembimbing2">
                             <option selected >Pilih Dosen Pembimbing 2</option>
@@ -138,13 +139,14 @@ Pengajuan TA
                             <option   value='051100115'>WIJAYANTI NURUL</option>
                         </select> 
                     </div>
-                    <hr>
-                    <div class="form-group">
+                    <br>
+                    <hr style="border-top: 1px solid #24292e;">
+                    <div class="form-group has-warning">
                         <label class="control-label" for="proposal"><h5>Unggah File Proposal</h5></label>
                         <input class="form-control" type="file" name="proposal" >
                     </div>
                     <br>
-                    <div class="form-group">
+                    <div class="form-group has-warning">
                         <a href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ajukan Judul</a>
                         <!-- <button href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ajukan Judul</button> -->                        
                     </div>
