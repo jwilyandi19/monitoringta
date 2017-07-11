@@ -89,18 +89,18 @@ Detail Tugas Akhir
             <br>
             <hr>
             <div>
-                <h4>Progres bimbingan</h4>
+                <h4>Progres Asistensi</h4>
                 <div class="">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Bimbingan</th>
+                                <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Materi Bimbingan</th>
+                                <th>Materi Asistensi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- <tr>
                                 <td>1</td>
                                 <td>12/Jan/2017</td>
                                 <td>Perkenalan</td>
@@ -119,7 +119,7 @@ Detail Tugas Akhir
                                 <td>4</td>
                                 <td>21/Feb/2017</td>
                                 <td>Progress Research Bahan II</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
