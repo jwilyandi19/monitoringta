@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use DB;
 
 class UserSeeder extends Seeder
 {
@@ -13,11 +14,13 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = new User();
-       	$user->user_username = 'admin';
-       	$user->user_password = bcrypt('admin');
-       	$user->user_role = 1;
-       	$user->user_name = 'Admin';
-       	$user->save();
-
+       	$username = '5114100109';
+        $password = bcrypt('5114100109');
+        $role = 1;
+        $name = 'Nafiar Rahmansyah';
+        $id = DB::table('user')->insertGetId(
+            ['username' => $username, 'password' => $password, 'role' => $role, 'name' => $name]
+          );
+        echo $id;
     }
 }
