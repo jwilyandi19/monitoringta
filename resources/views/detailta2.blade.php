@@ -82,14 +82,14 @@ Detail Tugas Akhir
             <br>
             <hr>
             <div>
-                <h4>Progres bimbingan</h4>
+                <h4>Progres Asistensi</h4>
                 <div class="">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Bimbingan</th>
+                                <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Materi Bimbingan</th>
+                                <th>Materi Asistensi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,7 +116,7 @@ Detail Tugas Akhir
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#bimbinganModal">Tambahkan Bimbingan</button>
+                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#bimbinganModal">Tambahkan Asistensi</button>
                 <br>
             </div>
             <br>
