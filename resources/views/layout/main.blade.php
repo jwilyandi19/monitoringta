@@ -23,7 +23,11 @@
 </head>
 <body>
 <div>
-	@include('layout.header')
+	@if(session('user'))
+		@include('layout.header_logedin')
+	@else
+		@include('layout.header')
+	@endif
 	<div class="col-md-12 col-lg-12 col-sm-12" style="margin-top: 10px;">
 		<div class="col-md-3 col-lg-3">
 			@include('layout.sidebar')
