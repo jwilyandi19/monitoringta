@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class koordinator
+class Koordinator
 {
     /**
      * Handle an incoming request.
