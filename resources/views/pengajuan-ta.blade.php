@@ -140,12 +140,6 @@ Pengajuan TA
                         </select> 
                     </div>
                     <br>
-                    <hr style="border-top: 1px solid #24292e;">
-                    <div class="form-group has-warning">
-                        <label class="control-label" for="proposal"><h5>Unggah File Proposal</h5></label>
-                        <input class="form-control" type="file" name="proposal" >
-                    </div>
-                    <br>
                     <div class="form-group has-warning">
                         <a href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ajukan Judul</a>
                         <!-- <button href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ajukan Judul</button> -->                        

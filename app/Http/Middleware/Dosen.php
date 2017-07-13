@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class dosen
+class Dosen
 {
     /**
      * Handle an incoming request.

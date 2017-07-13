@@ -5,10 +5,26 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"> Tugas Akhir</a></li>
+                
+                <li class="dropdown" style="list-style: none;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Tugas Akhir <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/home">Coba1</a></li>
+                        <li><a href="/home">Coba2</a></li>
+                    </ul>
+                </li>
                 <li><a href="#"> Seminar TA</a></li>
+                
                 <li><a href="#" id="sidang-ta" > Sidang TA <span class="caret"></span></a></li>
-                <li><a href="/logout" id="logout">{{session('user')['nama']}}</a></li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{session('user')['nama']}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/gantipassword"><i class=" glyphicon glyphicon-cog"></i> Ganti Password</a></li>
+                        <li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                    </ul>
+                </li>
+            
             </ul>
         </div>
     </div>

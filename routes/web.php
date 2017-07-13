@@ -20,6 +20,7 @@ Route::get('/home', 'FrontendController@home');
 Route::get('/login', 'AuthController@logIn');
 Route::post('/login', 'AuthController@doLogin');
 Route::get('/logout', 'AuthController@logOut');
+Route::get('/gantipassword', 'AuthController@gantiPass');
 Route::get('/detailta2', 'FrontendController@detailTa2');
 Route::get('/ketersediaandosen', 'FrontendController@ketersediaanDosen');
 Route::get('/pengajuanjadwal', 'FrontendController@pengajuanJadwal');
@@ -27,7 +28,7 @@ Route::get('/statusta', 'FrontendController@statusTa');
 Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
 Route::get('/tambahkanjadwal', 'FrontendController@tambahkanJadwal');
 
-Route::group(['middleware' => ['mahasiswa']], function(){
+Route::group(['middleware' => ['Mahasiswa']], function(){
 	Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
 	Route::get('/statusproposal', 'FrontendController@statusProposal');
 	Route::get('/detailta', 'FrontendController@detailTa');

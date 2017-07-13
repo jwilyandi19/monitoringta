@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
        	$username = '5114100109';
         $password = bcrypt('5114100109');
         $role = 1;
-        $name = 'Nafiar Rahmansyah';
+        $nama = 'Nafiar Rahmansyah';
         $id = DB::table('user')->insertGetId(
-            ['username' => $username, 'password' => $password, 'role' => $role, 'name' => $name]
+            ['username' => $username, 'password' => $password, 'role' => $role, 'nama' => $nama]
           );
         echo $id;
     }

@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class mahasiswa
+class Mahasiswa
 {
     /**
      * Handle an incoming request.
