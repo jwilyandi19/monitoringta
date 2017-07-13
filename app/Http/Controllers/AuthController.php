@@ -42,7 +42,7 @@ class AuthController extends Controller
         	$user = DB::table('user')->where('username', $username)->first();
         	if($user){
         		if(Hash::check($request->password, $user->password)){
-    				$dataUser = array('username' => $user->username, 'nama' => $user->name, 'role' => $user->role);
+    				$dataUser = array('username' => $user->username, 'nama' => $user->nama, 'role' => $user->role);
     				$request->session()->put('user', $dataUser);
     				return Redirect::to('home');
         		}
@@ -59,5 +59,14 @@ class AuthController extends Controller
     public function logOut(Request $request){
         $request->session()->flush();
         return Redirect::to('/home')->with('message', 'Berhasil Logout');
+    }
+
+    public function gantiPass(){
+        if(!session('user')){
+            return view('home');
+        }
+        else{
+            return view('gantipassword');
+        }
     }
 }

@@ -11,12 +11,16 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/papercustom.min.css')}}">
 	<link href="{{asset('css/rooboto.css')}}">
 	<link href="{{asset('css/material-icon.css')}}" rel="stylesheet">
-	<script type="text/javascript" src="{{asset('js/jquery-2.2.3.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/bootstrappaper.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/ga.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+	<!-- <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script> -->
+	<script type="text/javascript" src="{{asset('js/jquery-2.2.3.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
-	
+	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
 	<!-- Custom layout -->
 	<link rel="stylesheet" href="{{asset('css/custom.css')}}">
 	@yield('moreStyle')
