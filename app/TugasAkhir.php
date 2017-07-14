@@ -9,18 +9,29 @@ class TugasAkhir extends Model
     protected $table = 'tugas_akhir';
     protected $primaryKey='id_ta';
     public $incrementing = true;
-    public $timestamps=true;
-    protected $fillable =[
-    'judul',
-    'nrp',
+    public $timestamps = false;
+    protected $fillable = [
+    'id_ta',
+    'id_user',
     'id_status',
-    'dosen1',
-    'dosen2',
-    'id_dosen1',
-    'id_dosen2',
-    'rmk',
+    'id_bidang_mk',
+    'judul',
     'file',
-    'created_at',
-    'updated_at',
     ];
+
+    public function asistensis(){
+        return $this->hasMany('App\Asistensi', 'id_ta', 'id_ta');
+    }
+
+    public function dosbings(){
+        return $this->hasMany('App\DosenPembimbing', 'id_ta', 'id_ta');
+    }
+
+    public function status(){
+        return $this->hasOne('App\StatusTA', 'id_status', 'id_status');
+    }
+
+    public function user(){
+        return $this->hasOne('App\User', 'id_user', 'id_user');
+    }
 }

@@ -41,10 +41,10 @@ Pengajuan TA
                     </div>
                     <div class="form-group has-warning">
                         <label class="control-label" for="bidang"><h5>Bidang Matakuliah *</h5></label>
-                        <select class="form-control" id="bidang">
+                        <select class="form-control" id="bidang" name="rmk">
                             <option class="selected" >Bidang Matakuliah</option>
-                            <option>Material Inovasi</option>
-                            <option>Metalurgi</option>
+                            <option value="1">Material Inovasi</option>
+                            <option value="">Metalurgi</option>
                         </select>
                     </div>
                     <div class="form-group has-warning">

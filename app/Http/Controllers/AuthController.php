@@ -42,7 +42,7 @@ class AuthController extends Controller
         	$user = DB::table('user')->where('username', $username)->first();
         	if($user){
         		if(Hash::check($request->password, $user->password)){
-    				$dataUser = array('username' => $user->username, 'nama' => $user->nama, 'role' => $user->role);
+    				$dataUser = array('username' => $user->username, 'role' => $user->role, 'id' => $user->id_user);
     				$request->session()->put('user', $dataUser);
     				return Redirect::to('home');
         		}

@@ -51,13 +51,13 @@ Detail Tugas Akhir
                 <div class="row">
                     <label class=" col-md-2"><h6 class="pull-left">Pembimbing 1</h6></label>
                     <div class="col-md-10">
-                        <h6>: RIZKY JANUAR AKBAR, S.Kom., M.Eng.</h6> 
+                        <h6 class="text-success">: RIZKY JANUAR AKBAR, S.Kom., M.Eng.</h6> 
                     </div>
                 </div>
                 <div class="row">
                     <label class=" col-md-2"><h6 class="pull-left">Pembimbing 2</h6></label>
                     <div class="col-md-10">
-                        <h6>: WIJAYANTI NURUL K.,S.Kom., M.Sc.</h6> 
+                        <h6 class="text-warning">: WIJAYANTI NURUL K.,S.Kom., M.Sc.</h6> 
                     </div>
                 </div>
                 <div class="row">

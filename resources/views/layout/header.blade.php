@@ -5,9 +5,9 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"> Pencarian TA </a></li>
-                <li><a href="#"> Seminar TA </a></li>
-                <li><a href="#" id="sidang-ta" > Sidang TA </a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-search"></i> Pencarian TA </a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-blackboard"></i> Seminar TA </a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-book"></i> Sidang TA </a></li>
                 <li><button href="#" class="btn btn-primary white-font login-button" data-toggle="modal" data-target="#loginModal"><i class="glyphicon glyphicon-log-in"></i> Login</button></li>
             </ul>
         </div>
