@@ -33,4 +33,5 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
 	Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
 	Route::get('/statusproposal', 'FrontendController@statusProposal');
 	Route::get('/detailta', 'FrontendController@detailTa');
+    Route::post('/gantipassword', 'AuthController@gantiPassword');
 });
