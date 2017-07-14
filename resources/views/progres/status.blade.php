@@ -42,17 +42,15 @@ Status TA
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($taMahasiswas as $taMahasiswa)
-                        <tr>
-                            <td>{{$taMahasiswa->id_ta}}</td>
-                            <td>{{$taMahasiswa->tanggal}}</td>
-                            <td>{{$taMahasiswa->judul}}</td>
-                            <td>Dr.Eng. CHASTINE FATICHAH, S.Kom., M.Kom.</td>
-                            <td>BILQIS AMALIAH, S.Kom., M.Kom.</td>
-                            <td>Menuju Seminar</td>
-                            <td><a href="#" class="btn btn-sm btn-info">Ubah</a></td> 
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>3282</td>
+                        <td>22/11/2016</td>
+                        <td>Studi Kinerja Metode Ekstraksi Fitur Local Line Binary Pattern dan Scale Invariant Feature Transform pada Aplikasi Palm dan Finger Vein Recognition</td>
+                        <td>Dr.Eng. CHASTINE FATICHAH, S.Kom., M.Kom.</td>
+                        <td>BILQIS AMALIAH, S.Kom., M.Kom.</td>
+                        <td>Menuju Seminar</td>
+                        <td><a href="#" class="btn btn-sm btn-info">Ubah</a></td> 
+                    </tr>
                     <tr>
                         <td>3158</td>
                         <td>29/06/2016</td>

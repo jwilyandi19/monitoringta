@@ -16,7 +16,7 @@ class ProgresController extends Controller
      */
     public function index()
     {
-        $dosens = Dosen::all();
+        /*$dosens = Dosen::all();
 
         $taMahasiswas = TugasAkhir::where('id_user', session('user')['id'])->get();
         $statusTas = array();
@@ -28,9 +28,9 @@ class ProgresController extends Controller
             $statusTas[$key]['pemb2'] = "-";
             $statusTas[$key]['status'] = $taMahasiswa->status()->keterangan;
          }
-         dd($statusTas);
+         dd($statusTas);*/
 
-        //return view('statusta');
+        return view('statusta');
     }
 
     /**
