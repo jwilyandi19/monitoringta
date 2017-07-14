@@ -28,7 +28,9 @@
 <body>
 <div>
 	@if(session('user'))
-		@include('layout.header_logedin')
+		@if(session('user')['role'] == 1)
+			@include('layout.header_mahasiswa')
+		@endif
 	@else
 		@include('layout.header')
 	@endif
