@@ -12,7 +12,7 @@ class BidangMK extends Model
     public $timestamps = true;
     protected $fillable = [
     'id_bidang_mk',
-    'keterangan',
+    'nama_bidang',
     ];
 
     public function ta(){
