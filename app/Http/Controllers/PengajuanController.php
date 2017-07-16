@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Html\FormFacade;
 use Illuminate\Support\Facades\Validator;
-use App\BidangMK;
-use App\Dosen;
-use App\TugasAkhir;
+use Illuminate\Html\FormFacade;
+use Illuminate\Http\Request;
 use App\DosenPembimbing;
+use App\TugasAkhir;
+use App\BidangMK;
 use App\StatusTA;
-use DB;
-use Session;
-use Redirect;
+use App\Dosen;
 use Response;
+use Redirect;
+use Session;
+use DB;
 
-class TAController extends Controller
+class PengajuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,12 +36,12 @@ class TAController extends Controller
     {
         $ta = TugasAkhir::where('id_user', session('user')['id'])->where('id_status', '>=', '0')->first();
         if($ta){
-            return view('tugasakhir.sudahmengajukanta');
+            return view('pengajuan.sudah');
         }
         else{
             $data['bidang_mks'] = BidangMK::all();
             $data['dosens'] = Dosen::all();
-            return view('tugasakhir.pengajuanta', $data);
+            return view('pengajuan.index', $data);
         }
     }
 
@@ -67,7 +67,7 @@ class TAController extends Controller
 
         if($validator->fails()) 
         {
-            return Redirect::to(str_replace('/create', '', $request->url()))->withErrors($validator)->withInput();
+            return Redirect::to(url('pengajuan/create'))->withErrors($validator)->withInput();
         }
         else{
             $statusTA = StatusTA::find(0);
@@ -75,11 +75,9 @@ class TAController extends Controller
             $taBaru->id_user = session('user')['id'];
             $taBaru->id_bidang_mk = $request->bidangMk;
             $taBaru->judul = $request->judulTA;
-
-            $string = str_replace('/create', '', $request->url());
-            dd($string);
+            $taBaru->tanggal = date('Y-m-d');
             if(!$statusTA->TAs()->save($taBaru)){
-                return Redirect::to(str_replace('/create', '', $request->url()))->withErrors('Gagal Menyimpan Data');
+                return Redirect::to(url('pengajuan/create'))->withErrors('Gagal Menyimpan Data');
             }
 
             $taUser = TugasAkhir::where('id_user', session('user')['id'])->where('id_status', '>=', '0')->first(['id_ta']);
@@ -99,15 +97,15 @@ class TAController extends Controller
                 $dosbing2->peran = 2;
                 $dosbing2->status = 0;
                 if(!$dosbing2->save()){
-                    return Redirect::to(str_replace('/create', '', $request->url()))->withErrors('Gagal Menyimpan Data');
+                    return Redirect::to(url('pengajuan/create'))->withErrors('Gagal Menyimpan Data');
                 }
                 else{
-                    return Redirect::to(str_replace('/create', '', $request->url()))->with('message','Sukses menyimpan data Pengajuan Tugas Akhir');
+                    return Redirect::to(url('pengajuan/create'))->with('message','Sukses menyimpan data Pengajuan Tugas Akhir');
                 }
 
             }
             else{
-                return Redirect::to(str_replace('/create', '', $request->url()))->with('message','Sukses menyimpan data Pengajuan Tugas Akhir');
+                return Redirect::to(url('pengajuan/create'))->with('message','Sukses menyimpan data Pengajuan Tugas Akhir');
             }
         }
     }

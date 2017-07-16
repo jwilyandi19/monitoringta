@@ -16,6 +16,7 @@ class TugasAkhir extends Model
     'id_status',
     'id_bidang_mk',
     'judul',
+    'tanggal',
     'file',
     ];
 
@@ -28,7 +29,7 @@ class TugasAkhir extends Model
     }
 
     public function status(){
-        return $this->hasOne('App\StatusTA', 'id_status', 'id_status');
+        return $this->belongsTo('App\StatusTA', 'id_status', 'id_status');
     }
 
     public function user(){
