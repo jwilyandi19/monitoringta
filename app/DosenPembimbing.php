@@ -15,4 +15,12 @@ class DosenPembimbing extends Model
     'peran',
     'status',
     ];
+
+    public function tugasAkhir(){
+    	return $this->belongsTo('App\TugasAkhir', 'id_ta', 'id_ta');
+    }
+
+    public function dataDosen(){
+    	return $this->belongsTo('App\Dosen', 'id_dosen', 'id_dosen');
+    }
 }
