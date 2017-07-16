@@ -9,11 +9,20 @@ use Session;
 use Uuid;
 use Redirect;
 use App\User;
+use DB;
 
 class AuthController extends Controller
 {
+    public function logIn(){
+        if(!session('user')['username']){
+            return view('home');
+        }
+        else{
+            return Redirect::to('home');
+        }
+    }
+
     public function doLogin(Request $request){
-    	//dd($request);
     	$messagesError = [ 
             'username.required' => 'Username tidak boleh kosong.',
             'password.required' => 'Password tidak boleh kosong.',
@@ -26,16 +35,15 @@ class AuthController extends Controller
 
         if($validator->fails()) 
         { 
-            return Redirect::to('home')->withErrors($validator)->withInput();
+            return Redirect::to('/home')->withErrors($validator)->withInput();
         }
         else{
         	$username = $request->username;
-        	$user = User::where('user_username', $username)->first();
+        	$user = DB::table('user')->where('username', $username)->first();
         	if($user){
-        		if(Hash::check($request->password, $user->user_password)){
-    				//$dataUkm = Ukm::where('id_ukm', $user->id_ukm_user)->first();
-    				//$dataUser = array('username' => $user->user_username, 'nama' => $user->user_name, 'role' => $user->user_role);
-    				//$request->session()->put('user', $dataUser);
+        		if(Hash::check($request->password, $user->password)){
+    				$dataUser = array('username' => $user->username, 'role' => $user->role, 'id' => $user->id_user);
+    				$request->session()->put('user', $dataUser);
     				return Redirect::to('home');
         		}
         		else{
@@ -45,6 +53,67 @@ class AuthController extends Controller
         	else{
         		return Redirect::to('home')->withErrors('Username atau Password yang dimasukkan Salah');
         	}
+        }
+    }
+
+    public function logOut(Request $request){
+        $request->session()->flush();
+        return Redirect::to('/home')->with('message', 'Berhasil Logout');
+    }
+
+    public function gantiPass(){
+        if(!session('user')){
+            return view('home');
+        }
+        else{
+            return view('gantipassword');
+        }
+    }
+    public function gantiPassword(Request $request){
+        $messagesError = [
+            'passwordLama.required' => 'Password Lama tidak boleh kosong.',
+            'passwordBaru.required' => 'Password Baru tidak boleh kosong.',
+            'konfirmasiPassword.required' => 'Konfirmasi Password tidak boleh kosong',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'passwordLama' => 'required',
+            'passwordBaru' => 'required',
+            'konfirmasiPassword' => 'required',
+        ], $messagesError);
+
+        if($validator->fails())
+        {
+            return Redirect::to('/gantipassword')->withErrors($validator)->withInput();
+        }
+        else
+        {
+
+        }
+        $user = User::where('id_user',session('user')['id'])->first();
+        if(Hash::check($request->passwordLama, $user->password))
+        {
+            $hashPswdBaru = bcrypt($request->passwordBaru);
+            if(Hash::check($request->konfirmasiPassword, $hashPswdBaru))
+            {
+                $user->password = $hashPswdBaru;
+                if($user->save())
+                {
+                    return Redirect::to('gantipassword')->with('message','Berhasil Mengganti Password');
+                }
+                else
+                {
+                    return Redirect::to('gantipassword')->withErrors('Gagal menyimpan data!');
+                }
+            }
+            else
+            {
+                return Redirect::to('gantipassword')->withErrors('Password Baru dan Konfirmasi Password TIdak sesuai!');
+            }
+        }
+        else
+        {
+            return Redirect::to('gantipassword')->withErrors('Password Lama Salah!');
         }
     }
 }

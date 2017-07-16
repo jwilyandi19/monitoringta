@@ -41,10 +41,10 @@ Pengajuan TA
                     </div>
                     <div class="form-group has-warning">
                         <label class="control-label" for="bidang"><h5>Bidang Matakuliah *</h5></label>
-                        <select class="form-control" id="bidang">
+                        <select class="form-control" id="bidang" name="rmk">
                             <option class="selected" >Bidang Matakuliah</option>
-                            <option>Material Inovasi</option>
-                            <option>Metalurgi</option>
+                            <option value="1">Material Inovasi</option>
+                            <option value="">Metalurgi</option>
                         </select>
                     </div>
                     <div class="form-group has-warning">
@@ -138,12 +138,6 @@ Pengajuan TA
                             <option   value='132256272'>WASKITHO WIBISONO</option>
                             <option   value='051100115'>WIJAYANTI NURUL</option>
                         </select> 
-                    </div>
-                    <br>
-                    <hr style="border-top: 1px solid #24292e;">
-                    <div class="form-group has-warning">
-                        <label class="control-label" for="proposal"><h5>Unggah File Proposal</h5></label>
-                        <input class="form-control" type="file" name="proposal" >
                     </div>
                     <br>
                     <div class="form-group has-warning">

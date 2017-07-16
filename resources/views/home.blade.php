@@ -34,7 +34,7 @@ Home
             <div class="berita-singkat">
                 <p>Berikut beberapa kelengkapan yang wajib ...</p> 
             </div>
-            <a href="#" class="btn btn-warning pull-right">Lihat Selengkapnya</a>
+            <a href="#" class="btn btn-warning pull-right"><i class="glyphicon glyphicon-eye-open"></i> Lihat Selengkapnya</a>
             <br>
             <br>
             <hr class="berita">
@@ -45,7 +45,7 @@ Home
             <div class="berita-singkat">
                 <p>Berikut beberapa RMK yang ada ...</p> 
             </div>
-            <a href="#" class="btn btn-warning pull-right">Lihat Selengkapnya</a>
+            <a href="#" class="btn btn-warning pull-right"><i class="glyphicon glyphicon-eye-open"></i> Lihat Selengkapnya</a>
             <br>
             <br>
             <hr class="berita">
@@ -61,7 +61,7 @@ Home
                     4. Prosedur dan aturan TA</p>
                 <p>Terima kasih</p>...
             </div>
-            <a href="#" class="btn btn-warning pull-right">Lihat Selengkapnya</a>
+            <a href="#" class="btn btn-warning pull-right"><i class="glyphicon glyphicon-eye-open"></i> Lihat Selengkapnya</a>
             <br>
             <br>
             <hr class="berita">
