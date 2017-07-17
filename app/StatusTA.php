@@ -15,7 +15,7 @@ class StatusTA extends Model
     'keterangan',
     ];
 
-    public function TAs(){
+    public function tugasAkhirs(){
     	return $this->hasMany('App\TugasAkhir', 'id_status', 'id_status');
     }
 }

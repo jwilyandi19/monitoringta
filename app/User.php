@@ -17,4 +17,12 @@ class User extends Model
     'role',
     'nama',
     ];
+
+    public function tugasAkhirs(){
+        return $this->hasMany('App\TugasAkhir', 'id_user', 'id_user');
+    }
+
+    public function akunDosen(){
+        return $this->hasOne('App\Dosen', 'id_user', 'id_user');
+    }
 }

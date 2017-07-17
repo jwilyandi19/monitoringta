@@ -19,7 +19,7 @@ class Asistensi extends Model
     'updated_at',
     ];
 
-    public function ta(){
-    	return $this->hasOne('App\TugasAkhir', 'id_ta', 'id_ta');
+    public function tugasAkhirs(){
+    	return $this->belongsTo('App\TugasAkhir', 'id_ta', 'id_ta');
     }
 }
