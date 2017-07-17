@@ -4540,8 +4540,8 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <o:ReferenceSymbol Id="o51">
 <a:CreationDate>1499884154</a:CreationDate>
 <a:ModificationDate>1499884452</a:ModificationDate>
-<a:Rect>((-7761,12293), (-4260,19978))</a:Rect>
-<a:ListOfPoints>((-7361,12693),(-4885,12693),(-4885,19578))</a:ListOfPoints>
+<a:Rect>((-7761,12111), (-4260,19978))</a:Rect>
+<a:ListOfPoints>((-7361,12511),(-4885,12511),(-4885,19578))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -4652,9 +4652,9 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:ReferenceSymbol>
 <o:ReferenceSymbol Id="o63">
 <a:CreationDate>1500004180</a:CreationDate>
-<a:ModificationDate>1500004180</a:ModificationDate>
-<a:Rect>((3060,14003), (23074,22151))</a:Rect>
-<a:ListOfPoints>((22674,14403),(22674,21526),(3460,21526))</a:ListOfPoints>
+<a:ModificationDate>1500234234</a:ModificationDate>
+<a:Rect>((3060,14003), (23074,21701))</a:Rect>
+<a:ListOfPoints>((22674,14403),(22674,21076),(3460,21076))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -4662,6 +4662,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <a:FontList>CENTER 0 Arial,8,N
 SOURCE 0 Arial,8,N
 DESTINATION 0 Arial,8,N</a:FontList>
+<a:AutomaticRoutingState>2</a:AutomaticRoutingState>
 <c:SourceSymbol>
 <o:TableSymbol Ref="o22"/>
 </c:SourceSymbol>
@@ -4838,9 +4839,9 @@ LABL 0 Arial,8,N</a:FontList>
 </o:TableSymbol>
 <o:TableSymbol Id="o10">
 <a:CreationDate>1499533269</a:CreationDate>
-<a:ModificationDate>1499535734</a:ModificationDate>
+<a:ModificationDate>1500234085</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((5356,-21193), (16736,-17194))</a:Rect>
+<a:Rect>((8206,-24268), (19586,-20269))</a:Rect>
 <a:LineColor>12615680</a:LineColor>
 <a:FillColor>16570034</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -5138,9 +5139,9 @@ LABL 0 Arial,8,N</a:FontList>
 </o:TableSymbol>
 <o:TableSymbol Id="o49">
 <a:CreationDate>1499535736</a:CreationDate>
-<a:ModificationDate>1499535809</a:ModificationDate>
+<a:ModificationDate>1500234075</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-25405,-23594), (-13869,-16178))</a:Rect>
+<a:Rect>((-29380,-26219), (-17844,-18803))</a:Rect>
 <a:LineColor>12615680</a:LineColor>
 <a:FillColor>16570034</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -5190,7 +5191,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:CreationDate>1499884082</a:CreationDate>
 <a:ModificationDate>1499884288</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-18863,6928), (-7327,15318))</a:Rect>
+<a:Rect>((-18863,7415), (-7327,14831))</a:Rect>
 <a:LineColor>12615680</a:LineColor>
 <a:FillColor>16570034</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -5439,7 +5440,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>RMK</a:Code>
 <a:CreationDate>1499537593</a:CreationDate>
 <a:Creator>Rafiar</a:Creator>
-<a:ModificationDate>1499537602</a:ModificationDate>
+<a:ModificationDate>1499533350</a:ModificationDate>
 <a:Modifier>Rafiar</a:Modifier>
 <a:DataType>integer</a:DataType>
 </o:Column>
@@ -6649,20 +6650,20 @@ LABL 0 Arial,8,N</a:FontList>
 <a:ObjectID>F87FFB12-47D1-44CC-B1B1-9E8592A3E0E6</a:ObjectID>
 <a:Name>created_at</a:Name>
 <a:Code>CREATED_AT</a:Code>
-<a:CreationDate>1499884189</a:CreationDate>
-<a:Creator>Rafiar</a:Creator>
-<a:ModificationDate>1499884250</a:ModificationDate>
-<a:Modifier>Rafiar</a:Modifier>
+<a:CreationDate>1500234767</a:CreationDate>
+<a:Creator>Nafiar</a:Creator>
+<a:ModificationDate>1500234798</a:ModificationDate>
+<a:Modifier>Nafiar</a:Modifier>
 <a:DataType>timestamp</a:DataType>
 </o:Column>
 <o:Column Id="o192">
 <a:ObjectID>8062A101-9C20-4F58-A748-43B12CE7457D</a:ObjectID>
 <a:Name>updated_at</a:Name>
 <a:Code>UPDATED_AT</a:Code>
-<a:CreationDate>1499884189</a:CreationDate>
-<a:Creator>Rafiar</a:Creator>
-<a:ModificationDate>1499884250</a:ModificationDate>
-<a:Modifier>Rafiar</a:Modifier>
+<a:CreationDate>1500234767</a:CreationDate>
+<a:Creator>Nafiar</a:Creator>
+<a:ModificationDate>1500234798</a:ModificationDate>
+<a:Modifier>Nafiar</a:Modifier>
 <a:DataType>timestamp</a:DataType>
 </o:Column>
 <o:Column Id="o193">
@@ -6675,7 +6676,38 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Modifier>Rafiar</a:Modifier>
 <a:DataType>timestamp</a:DataType>
 </o:Column>
+<o:Column Id="o189">
+<a:ObjectID>77E09EE4-33B9-4A45-88C5-9268A3AC86DC</a:ObjectID>
+<a:Name>nama_bidang</a:Name>
+<a:Code>NAMA_BIDANG</a:Code>
+<a:CreationDate>1500234111</a:CreationDate>
+<a:Creator>Nafiar</a:Creator>
+<a:ModificationDate>1500234147</a:ModificationDate>
+<a:Modifier>Nafiar</a:Modifier>
+<a:DataType>varchar(50)</a:DataType>
+<a:Length>50</a:Length>
+</o:Column>
 </c:Columns>
+<c:Keys>
+<o:Key Id="o190">
+<a:ObjectID>D4550271-1869-4FEA-B17C-53A320788FCA</a:ObjectID>
+<a:Name>Key_1</a:Name>
+<a:Code>KEY_1</a:Code>
+<a:CreationDate>1500234111</a:CreationDate>
+<a:Creator>Nafiar</a:Creator>
+<a:ModificationDate>1500234147</a:ModificationDate>
+<a:Modifier>Nafiar</a:Modifier>
+<c:Key.Columns>
+<o:Column Ref="o188"/>
+</c:Key.Columns>
+</o:Key>
+</c:Keys>
+<c:PrimaryKey>
+<o:Key Ref="o190"/>
+</c:PrimaryKey>
+<c:ClusterObject>
+<o:Key Ref="o190"/>
+</c:ClusterObject>
 </o:Table>
 <o:Table Id="o92">
 <a:ObjectID>4F8A5E78-C28D-4EB3-B8FE-D93EF45F2A47</a:ObjectID>

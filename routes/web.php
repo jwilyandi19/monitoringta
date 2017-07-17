@@ -21,14 +21,23 @@ Route::get('/detailta2', 'FrontendController@detailTa2');
 Route::get('/ketersediaandosen', 'FrontendController@ketersediaanDosen');
 Route::get('/pengajuanjadwal', 'FrontendController@pengajuanJadwal');
 Route::get('/statusta', 'FrontendController@statusTa');
-Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
 Route::get('/tambahkanjadwal', 'FrontendController@tambahkanJadwal');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
-	Route::resource('/pengajuan', 'PengajuanController');
-	Route::resource('/progres', 'ProgresController');
-	Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
-	Route::get('/statusproposal', 'FrontendController@statusProposal');
-	Route::get('/detailta', 'FrontendController@detailTa');
+    Route::resource('/pengajuan', 'PengajuanController');
+    Route::resource('/progres', 'ProgresController');
+    Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
+    Route::get('/statusproposal', 'FrontendController@statusProposal');
+    Route::get('/detailta', 'FrontendController@detailTa');
+    Route::post('/gantipassword', 'AuthController@gantiPassword');
+});
+
+Route::group(['middleware' => ['Dosen']], function(){
+    Route::post('/gantipassword', 'AuthController@gantiPassword');
+    Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
+
+});
+
+Route::group(['middleware' => ['Koordinator']], function(){
     Route::post('/gantipassword', 'AuthController@gantiPassword');
 });

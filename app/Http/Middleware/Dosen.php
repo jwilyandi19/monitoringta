@@ -15,6 +15,14 @@ class Dosen
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(!session('user')){
+            return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
+        }
+        else{
+            if(session('user')['role'] != 2){
+                return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
+            }
+            return $next($request);
+        }
     }
 }

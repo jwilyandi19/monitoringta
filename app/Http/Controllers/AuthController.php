@@ -57,16 +57,21 @@ class AuthController extends Controller
     }
 
     public function logOut(Request $request){
-        $request->session()->flush();
-        return Redirect::to('/home')->with('message', 'Berhasil Logout');
+        if(!session('user')){
+            return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
+        }
+        else{
+            $request->session()->flush();
+            return Redirect::to('/home')->with('message', 'Berhasil Logout');
+        }
     }
 
     public function gantiPass(){
         if(!session('user')){
-            return view('home');
+            return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
         }
         else{
-            return view('gantipassword');
+            return view('/gantipassword');
         }
     }
     public function gantiPassword(Request $request){
