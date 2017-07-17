@@ -32,17 +32,44 @@ Status TA
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID Proposal</th>
-                        <th>Tanggal Pengajuan</th>
-                        <th>Judul Tugas Akhir</th>
-                        <th>Pembimbing 1</th>
-                        <th>Pembimbing 2</th>
-                        <th>Status</th>
-                        <th>Aksi</th> 
+                        <th class="text-center">ID Proposal</th>
+                        <th class="col-md-2">Tanggal Pengajuan</th>
+                        <th class="col-md-8">Judul Tugas Akhir</th>
+                        <th class="col-md-1 text-center">Pembimbing 1</th>
+                        <th class="col-md-1 text-center">Pembimbing 2</th>
+                        <th class="col-md-1 text-center">Status</th>
+                        <th class="col-md-1 text-center">Aksi</th> 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    @foreach($tugasAkhirs as $keys => $tugasAkhir)
+                        <tr>
+                            <td class="text-center">{{$tugasAkhir->id_ta}}</td>
+                            <td>{{$tugasAkhir->tanggalBuat}}</td>
+                            <td>{{$tugasAkhir->judul}}</td>
+                            @if($tugasAkhir->dosbing1)
+                                <td>{{$tugasAkhir->dosbing->nama_lengkap}}</td>
+                            @else
+                                <td class="text-center">-</td>
+                            @endif
+
+                            @if($tugasAkhir->dosbing2)
+                                <td>{{$tugasAkhir->dosbing2->nama_lengkap}}</td>
+                            @else
+                                <td class="text-center">-</td>
+                            @endif
+                            
+                            <td>{{$tugasAkhir->status->keterangan}}</td>
+                            
+                            @if($tugasAkhir->id_status >= 0)
+                                <td class="text-center"><a href="#" class="btn btn-sm btn-info">Ubah</a></td>
+                            @else
+                                <td class="text-center">-</td>
+                            @endif
+                             
+                        </tr>    
+                    @endforeach
+                    <!-- <tr>
                         <td>3282</td>
                         <td>22/11/2016</td>
                         <td>Studi Kinerja Metode Ekstraksi Fitur Local Line Binary Pattern dan Scale Invariant Feature Transform pada Aplikasi Palm dan Finger Vein Recognition</td>
@@ -59,7 +86,7 @@ Status TA
                         <td>DWI SUNARYONO, S.Kom., M.Kom.</td>
                         <td>Ditolak</td>
                         <td>-</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
