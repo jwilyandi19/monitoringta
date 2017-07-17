@@ -16,7 +16,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-education"></i> Mahasiswa </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('/mahasiswabimbingan')}}"><i class="glyphicon glyphicon-user"></i> Bimbingan</a></li>
+                        <li><a href="{{url('/bimbingan')}}"><i class="glyphicon glyphicon-user"></i> Bimbingan</a></li>
                     </ul>
                 </li>
 

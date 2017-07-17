@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TugasAkhir;
-use App\DosenPembimbing;
 use App\Dosen;
+use App\DosenPembimbing;
+use App\TugasAkhir;
 
-class ProgresController extends Controller
+class BimbinganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,16 @@ class ProgresController extends Controller
      */
     public function index()
     {
-        $data['tugasAkhirs'] = TugasAkhir::where('id_user', session('user')['id'])->orderBy('id_ta', 'desc')->with(['dosbing1', 'dosbing2', 'status'])->get();
+        $data['bimbingans'] = DosenPembimbing::where([ 
+            ['id_dosen', '=', session('user')['id_dosen']], 
+            ['status', '=', '0']])->orderBy('created_at')->with(['tugasAkhir' => function($query){
+                $query->where('id_status','>=','0')->with('user');
+            }])->get();
+        
+        /*$data['bimbingans'] = TugasAkhir::where([['id_status', '>=', '0'], ['id_dosbing1', session('user')['id_dosen']]])->orWhere('id_dosbing2', session('user')['id_dosen'])->with('user')->get();*/
+        //dd($data);
 
-        return view('progres.status', $data);
+        return view('bimbingan.index', $data);
     }
 
     /**
