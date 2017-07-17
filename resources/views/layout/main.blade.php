@@ -30,6 +30,8 @@
 	@if(session('user'))
 		@if(session('user')['role'] == 1)
 			@include('layout.header_mahasiswa')
+		@elseif(session('user')['role'] == 2)
+			@include('layout.header_dosen')
 		@endif
 	@else
 		@include('layout.header')
