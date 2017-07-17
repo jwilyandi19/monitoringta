@@ -21,7 +21,6 @@ Route::get('/detailta2', 'FrontendController@detailTa2');
 Route::get('/ketersediaandosen', 'FrontendController@ketersediaanDosen');
 Route::get('/pengajuanjadwal', 'FrontendController@pengajuanJadwal');
 Route::get('/statusta', 'FrontendController@statusTa');
-Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
 Route::get('/tambahkanjadwal', 'FrontendController@tambahkanJadwal');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
@@ -35,4 +34,6 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
 
 Route::group(['middleware' => ['Dosen']], function(){
     Route::post('/gantipassword', 'AuthController@gantiPassword');
+    Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
+
 });
