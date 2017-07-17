@@ -23,6 +23,14 @@ class Dosen extends Model
     }
 
     public function user(){
-    	return $this->hasOne('App\User', 'id_user', 'id_user');
+    	return $this->belongsTo('App\User', 'id_user', 'id_user');
+    }
+
+    public function pembimbing1s(){
+        return $this->hasMany('App\TugasAkhir', 'id_dosbing1', 'id_dosen');
+    }
+
+    public function pembimbing2s(){
+        return $this->hasMany('App\TugasAkhir', 'id_dosbing2', 'id_dosen');
     }
 }

@@ -15,7 +15,7 @@ class BidangMK extends Model
     'nama_bidang',
     ];
 
-    public function ta(){
-    	return $this->belongsTo('App\TugasAkhir', 'id_bidang_mk', 'id_bidang_mk');
+    public function tugasAkhirs(){
+    	return $this->hasMany('App\TugasAkhir', 'id_bidang_mk', 'id_bidang_mk');
     }
 }
