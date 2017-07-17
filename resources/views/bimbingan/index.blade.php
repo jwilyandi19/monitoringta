@@ -42,7 +42,6 @@ Mahasiswa Bimbingan
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $counter = 0;?>
                     @if($konfirmasis)
                         @foreach($konfirmasis as $key => $konfirmasi)
                             <tr>
