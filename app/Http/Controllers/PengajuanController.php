@@ -10,6 +10,7 @@ use App\TugasAkhir;
 use App\BidangMK;
 use App\StatusTA;
 use App\Dosen;
+use Carbon\Carbon;
 use Response;
 use Redirect;
 use Session;
@@ -75,8 +76,8 @@ class PengajuanController extends Controller
             $taBaru->id_user = session('user')['id'];
             $taBaru->id_bidang_mk = $request->bidangMk;
             $taBaru->judul = $request->judulTA;
-            $taBaru->tanggal = date('Y-m-d');
-            if(!$statusTA->TAs()->save($taBaru)){
+            $taBaru->tanggalBuat = date('Y-m-d');
+            if(!$statusTA->tugasAkhirs()->save($taBaru)){
                 return Redirect::to(url('pengajuan/create'))->withErrors('Gagal Menyimpan Data');
             }
 
@@ -86,6 +87,8 @@ class PengajuanController extends Controller
             $dosbing1->id_ta = $taUser->id_ta;
             $dosbing1->peran = 1;
             $dosbing1->status = 0;
+            //$dosbing1->created_at->timezone('Asia/Jakarta');
+            //$dosbing2->updated_at->timezone('Asia/Jakarta');
             if(!$dosbing1->save()){
                 return Redirect::to(str_replace('/create', '', $request->url()))->withErrors('Gagal Menyimpan Data');
             }
@@ -96,6 +99,8 @@ class PengajuanController extends Controller
                 $dosbing2->id_ta = $taUser->id_ta;
                 $dosbing2->peran = 2;
                 $dosbing2->status = 0;
+                //$dosbing1->created_at->timezone('Asia/Jakarta');
+                //$dosbing2->updated_at->timezone('Asia/Jakarta');
                 if(!$dosbing2->save()){
                     return Redirect::to(url('pengajuan/create'))->withErrors('Gagal Menyimpan Data');
                 }

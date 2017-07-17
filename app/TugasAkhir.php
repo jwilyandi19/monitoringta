@@ -18,7 +18,7 @@ class TugasAkhir extends Model
     'id_status',
     'id_bidang_mk',
     'judul',
-    'tanggal',
+    'tanggalBuat',
     'file',
     ];
 

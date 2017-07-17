@@ -16,21 +16,10 @@ class ProgresController extends Controller
      */
     public function index()
     {
-        /*$dosens = Dosen::all();
+        $data['tugasAkhirs'] = TugasAkhir::where('id_user', session('user')['id'])->orderBy('id_ta', 'desc')->with(['dosbing1', 'dosbing2', 'status'])->get();
+        /*dd($tugasAkhirs);*/
 
-        $taMahasiswas = TugasAkhir::where('id_user', session('user')['id'])->get();
-        $statusTas = array();
-        foreach ($taMahasiswas as $key => $taMahasiswa) {
-            $statusTas[$key]['id_ta'] = $taMahasiswa->id_ta;
-            $statusTas[$key]['tanggal'] = $taMahasiswa->tanggal;
-            $statusTas[$key]['judul'] = $taMahasiswa->judul;
-            $statusTas[$key]['pemb1'] = "-";
-            $statusTas[$key]['pemb2'] = "-";
-            $statusTas[$key]['status'] = $taMahasiswa->status()->keterangan;
-         }
-         dd($statusTas);*/
-
-        return view('statusta');
+        return view('progres.status', $data);
     }
 
     /**
