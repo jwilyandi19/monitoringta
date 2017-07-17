@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;    
 use Session;
 use Uuid;
-use Redirect;
-use App\User;
 use DB;
+use Redirect;
+use App\Dosen;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -42,7 +43,13 @@ class AuthController extends Controller
         	$user = DB::table('user')->where('username', $username)->first();
         	if($user){
         		if(Hash::check($request->password, $user->password)){
-    				$dataUser = array('username' => $user->username, 'role' => $user->role, 'id' => $user->id_user);
+    				if($user->role == 2){
+                        $dosen = Dosen::where('id_user', $user->id_user)->first();
+                        $dataUser = array('username' => $user->username, 'role' => $user->role, 'id' => $user->id_user, 'id_dosen' => $dosen->id_dosen);
+                    }
+                    else{
+                        $dataUser = array('username' => $user->username, 'role' => $user->role, 'id' => $user->id_user);
+                    }
     				$request->session()->put('user', $dataUser);
     				return Redirect::to('home');
         		}
