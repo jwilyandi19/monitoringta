@@ -15,6 +15,14 @@ class Koordinator
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(!session('user')){
+            return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
+        }
+        else{
+            if(session('user')['role'] != 3){
+                return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
+            }
+            return $next($request);
+        }
     }
 }

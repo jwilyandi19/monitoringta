@@ -37,3 +37,7 @@ Route::group(['middleware' => ['Dosen']], function(){
     Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
 
 });
+
+Route::group(['middleware' => ['Koordinator']], function(){
+    Route::post('/gantipassword', 'AuthController@gantiPassword');
+});
