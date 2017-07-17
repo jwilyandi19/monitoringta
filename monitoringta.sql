@@ -118,7 +118,6 @@ CREATE TABLE `dosen_pembimbing` (
 
 LOCK TABLES `dosen_pembimbing` WRITE;
 /*!40000 ALTER TABLE `dosen_pembimbing` DISABLE KEYS */;
-INSERT INTO `dosen_pembimbing` VALUES (1,NULL,1,0);
 /*!40000 ALTER TABLE `dosen_pembimbing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -441,13 +440,16 @@ DROP TABLE IF EXISTS `tugas_akhir`;
 CREATE TABLE `tugas_akhir` (
   `id_ta` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_dosbing1` int(11) DEFAULT NULL,
+  `id_dosbing2` int(11) DEFAULT NULL,
   `id_status` int(11) DEFAULT NULL,
   `id_bidang_mk` int(11) DEFAULT NULL,
-  `judul` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `judul` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
   `file` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_ta`),
   KEY `nrp` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -456,7 +458,6 @@ CREATE TABLE `tugas_akhir` (
 
 LOCK TABLES `tugas_akhir` WRITE;
 /*!40000 ALTER TABLE `tugas_akhir` DISABLE KEYS */;
-INSERT INTO `tugas_akhir` VALUES (1,'3',0,1,'Coba Judul',NULL);
 /*!40000 ALTER TABLE `tugas_akhir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -519,4 +520,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-15  5:51:16
+-- Dump completed on 2017-07-17  9:00:03
