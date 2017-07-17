@@ -40,4 +40,5 @@ Route::group(['middleware' => ['Dosen']], function(){
 
 Route::group(['middleware' => ['Koordinator']], function(){
     Route::post('/gantipassword', 'AuthController@gantiPassword');
+    Route::get('/buatuser', 'FrontendController@buatUser');
 });

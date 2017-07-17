@@ -45,4 +45,9 @@ class FrontendController extends Controller
     public function tambahkanJadwal(){
         return view('tambahkanjadwal');
     }
+
+    public function buatUser()
+    {
+        return view('buatuser');
+    }
 }

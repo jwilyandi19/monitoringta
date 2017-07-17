@@ -74,6 +74,16 @@ class AuthController extends Controller
             return view('/gantipassword');
         }
     }
+
+    public function buatUser(){
+        $user = new User();
+        $user->username = 'raf';
+        $user->password = bcrypt('raf');
+        $user->role = 3;
+        $user->nama = 'rafiar';
+        $user->save();
+    }
+
     public function gantiPassword(Request $request){
         $messagesError = [
             'passwordLama.required' => 'Password Lama tidak boleh kosong.',
