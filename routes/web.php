@@ -23,7 +23,7 @@ Route::get('/ketersediaandosen', 'FrontendController@ketersediaanDosen');
 Route::get('/pengajuanjadwal', 'FrontendController@pengajuanJadwal');
 Route::get('/statusta', 'FrontendController@statusTa');
 Route::get('/tambahkanjadwal', 'FrontendController@tambahkanJadwal');
-Route::get('/pencarianta', 'FrontendController@pencarianTA');
+Route::get('/pencarianta', 'PencarianController@pencarianTA');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
     Route::resource('/pengajuan', 'PengajuanController');

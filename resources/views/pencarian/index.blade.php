@@ -29,7 +29,7 @@ Pencarian Tugas Akhir
             <hr>
         </div>
         <div class="pencarian">
-            <table id="tugasAkhir" class="table table-striped">
+            <table id="tugasAkhir" class="table table-striped table-hover">
                 <thead>
                     <tr class="row">
                         <th class="text-center">No</th>
@@ -42,7 +42,11 @@ Pencarian Tugas Akhir
                 </thead>
                 <tbody>
                     @foreach($tugasAkhirs as $key => $tugasAkhir)
-                        <tr class="row btn-link" data-toggle="modal" data-target="#modalDataTA">
+                        @if($key%2 == 0)
+                            <tr class="row btn-link warning" data-toggle="modal" data-target="#modalDataTA">
+                        @else
+                            <tr class="row btn-link" data-toggle="modal" data-target="#modalDataTA">
+                        @endif
                             <td>{{$key+1}}</td>
                             <td>{{$tugasAkhir->id_ta}}</td>
                             <td id="row-bidang">{{$tugasAkhir->bidang->nama_bidang}}</td>
@@ -80,7 +84,7 @@ Pencarian Tugas Akhir
             </table>
         </div>
 	</div>
-    <div class="modal fade" id="modalDataTA">
+    <div class="modal modal-md fade" id="modalDataTA">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
