@@ -7,6 +7,7 @@ use App\Dosen;
 use App\DosenPembimbing;
 use App\TugasAkhir;
 use Redirect;
+use App\Asistensi;
 
 class BimbinganController extends Controller
 {
@@ -49,16 +50,25 @@ class BimbinganController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_ta)
     {
-        //
+        $detailta = TugasAkhir::find($id_ta)->with(['user','dosbing1','dosbing2','status','bidang'])->first();
+        if($detailta){
+            $data['detailta'] = $detailta;
+            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->get();
+            //dd($data);
+            return view('progres.detail_dosbing',$data);
+        }
+        else
+        {
+            return view('home');
+        }
     }
 
     /**
@@ -127,6 +137,24 @@ class BimbinganController extends Controller
         }
         else{
             return Redirect::to('/bimbingan')->withError('Menolak penerimaan bimbingan gagal dilakukan');
+        }
+    }
+
+    public function asistensi(Request $request)
+    {
+        $asistensi = new Asistensi();
+        $asistensi->id_ta = $request->id_ta;
+        $asistensi->tanggal = $request->tanggal;
+        $asistensi->materi = $request->materi;
+        if($asistensi->save())
+        {
+            $ta = (string)$request->id_ta;
+            $url = url('/bimbingan')."/".$ta;
+            return Redirect::to($url)->with('message', 'Berhasil Menambahkan data asistensi');
+        }
+        else
+        {
+            return Redirect::to('/bimbingan')->withError('Gagal Mengisi Asistensi');
         }
     }
 }

@@ -28,6 +28,11 @@
             <h4><strong>Buat User </strong></h4>
             <hr>
         </div>
+        <div class="panel-body">
+            <form class="form-horizontal col-md-10 col-md-offset-1" method="POST" action="{{url('/buatuser')}}">
+                <div class="form-group"
+            </form>
+        </div>
     </div>
 @endsection
 
