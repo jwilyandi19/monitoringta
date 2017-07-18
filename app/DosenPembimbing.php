@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class DosenPembimbing extends Model
 {
     protected $table = 'dosen_pembimbing';
+    public $primaryKey = 'id_dosen_pembimbing';
     public $incrementing = false;
     public $timestamps = true;
     protected $fillable =[
+    'id_dosen_pembimbing',
     'id_dosen',
     'id_ta',
     'peran',

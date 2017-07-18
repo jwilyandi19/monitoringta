@@ -102,7 +102,17 @@ class BimbinganController extends Controller
         $bimbingan->status = 1;
         //dd($bimbingan); 
         if($bimbingan->save()){
-            return Redirect::to('/bimbingan')->with('message', 'Konfirmasi penerimaan bimbingan berhasil dilakukan');
+            $tugasAkhir = TugasAkhir::find($bimbingan->id_ta)->first();
+            if($bimbingan->peran == 1){
+                $tugasAkhir->id_dosbing1 = session('user')['id_dosen'];   
+            }
+            elseif($bimbingan->peran == 2){
+                $tugasAkhir->id_dosbing2 = session('user')['id_dosen'];
+            }
+            
+            if($tugasAkhir->save()){
+                return Redirect::to('/bimbingan')->with('message', 'Konfirmasi penerimaan bimbingan berhasil dilakukan');
+            }
         }
         else{
             return Redirect::to('/bimbingan')->withError('Konfirmasi penerimaan bimbingan gagal dilakukan');
