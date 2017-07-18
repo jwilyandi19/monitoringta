@@ -32,8 +32,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-folder-close"></i> Progres TA </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('progres')}}"><i class="glyphicon glyphicon-list"></i> Status TA</a></li>
-                        <li><a href="detailprogres"><i class="glyphicon glyphicon-list-alt"></i> Detail Progres TA</a></li>
+                        <li><a href="{{url('/progres')}}"><i class="glyphicon glyphicon-list"></i> Status TA</a></li>
+                        <li><a href="{{url('/detailta')}}"><i class="glyphicon glyphicon-list-alt"></i> Detail Progres TA</a></li>
                     </ul>
                 </li>
                 
