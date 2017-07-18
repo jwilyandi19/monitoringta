@@ -122,7 +122,7 @@ CREATE TABLE `dosen_pembimbing` (
 
 LOCK TABLES `dosen_pembimbing` WRITE;
 /*!40000 ALTER TABLE `dosen_pembimbing` DISABLE KEYS */;
-INSERT INTO `dosen_pembimbing` VALUES (1,1,1,1,0,'2017-07-18 02:14:17','2017-07-18 02:14:17'),(2,2,1,2,1,'2017-07-18 02:14:17','2017-07-18 02:21:02');
+INSERT INTO `dosen_pembimbing` VALUES (1,1,1,1,0,'2017-07-18 02:14:17','2017-07-18 02:14:17'),(2,2,1,2,0,'2017-07-18 02:14:17','2017-07-18 02:21:02');
 /*!40000 ALTER TABLE `dosen_pembimbing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -463,7 +463,7 @@ CREATE TABLE `tugas_akhir` (
 
 LOCK TABLES `tugas_akhir` WRITE;
 /*!40000 ALTER TABLE `tugas_akhir` DISABLE KEYS */;
-INSERT INTO `tugas_akhir` VALUES (1,'3',NULL,2,0,2,'Rancang Bangun Aplikasi e-Learning pada Fitur Manajemen Perkuliahan Berbasis Perangkat Bergerak Android Menggunakan Paradigma Reactive Programming','2017-07-18',NULL),(2,'8',NULL,NULL,0,1,'Sinkronisasi Basis Data Relasional menggunakan Paradigma Publish/Subscribe pada Studi Kasus Sistem Informasi Berbasis Web di ITS','2017-07-18',NULL);
+INSERT INTO `tugas_akhir` VALUES (1,'3',NULL,0,0,2,'Rancang Bangun Aplikasi e-Learning pada Fitur Manajemen Perkuliahan Berbasis Perangkat Bergerak Android Menggunakan Paradigma Reactive Programming','2017-07-18',NULL),(2,'8',NULL,NULL,0,1,'Sinkronisasi Basis Data Relasional menggunakan Paradigma Publish/Subscribe pada Studi Kasus Sistem Informasi Berbasis Web di ITS','2017-07-18',NULL);
 /*!40000 ALTER TABLE `tugas_akhir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -526,4 +526,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-18  9:35:45
+-- Dump completed on 2017-07-18  9:41:42
