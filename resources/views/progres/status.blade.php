@@ -61,8 +61,10 @@ Status TA
                             
                             <td>{{$tugasAkhir->status->keterangan}}</td>
                             
-                            @if($tugasAkhir->id_status >= 0)
-                                <td class="text-center"><a href="#" class="btn btn-sm btn-info">Ubah</a></td>
+                            @if($tugasAkhir->id_status >= 0 && $tugasAkhir->id_status < 3)
+                                <td class="text-center">
+                                    <a href="{{url('/progres')}}/{{$tugasAkhir->id_ta}}/edit" class="btn btn-sm btn-info">Ubah</a>
+                                </td>
                             @else
                                 <td class="text-center">-</td>
                             @endif

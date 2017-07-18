@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TugasAkhir;
 
 class FrontendController extends Controller
 {
@@ -50,5 +51,11 @@ class FrontendController extends Controller
     public function buatUser()
     {
         return view('buatuser');
+    }
+
+    public function pencarianTA(){
+        $data['tugasAkhirs'] = TugasAkhir::with(['bidang', 'status', 'user', 'dosbing1', 'dosbing2'])->get();
+
+        return view('pencarianta');
     }
 }

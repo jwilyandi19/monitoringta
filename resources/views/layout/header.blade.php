@@ -10,7 +10,7 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="glyphicon glyphicon-search"></i> Pencarian TA </a></li>
+                <li><a href="{{url('/pencarianta')}}"><i class="glyphicon glyphicon-search"></i> Pencarian TA </a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-blackboard"></i> Seminar TA </a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-book"></i> Sidang TA </a></li>
                 <li><button href="#" class="btn btn-primary white-font login-button" data-toggle="modal" data-target="#loginModal"><i class="glyphicon glyphicon-log-in"></i> Login</button></li>
@@ -26,7 +26,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="{{url('/login')}}">
-                    <div class="form-group">
+                    <div class="form-group row">
                         <label class="col-md-2 control-label">Username</label>
                         <div class="col-md-10">
                             <input type="text" name="username" class="form-control">
