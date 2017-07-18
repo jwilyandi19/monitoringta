@@ -32,13 +32,13 @@ Status TA
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th class="text-center">ID Proposal</th>
-                        <th class="col-md-2">Tanggal Pengajuan</th>
+                        <th class="">ID Proposal</th>
+                        <th class="col-md-1">Tanggal Pengajuan</th>
                         <th class="col-md-8">Judul Tugas Akhir</th>
                         <th class="col-md-1 text-center">Pembimbing 1</th>
                         <th class="col-md-1 text-center">Pembimbing 2</th>
                         <th class="col-md-1 text-center">Status</th>
-                        <th class="col-md-1 text-center">Aksi</th> 
+                        <th class="text-center">Aksi</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +48,7 @@ Status TA
                             <td>{{$tugasAkhir->tanggalBuat}}</td>
                             <td>{{$tugasAkhir->judul}}</td>
                             @if($tugasAkhir->dosbing1)
-                                <td>{{$tugasAkhir->dosbing->nama_lengkap}}</td>
+                                <td>{{$tugasAkhir->dosbing1->nama_lengkap}}</td>
                             @else
                                 <td class="text-center">-</td>
                             @endif

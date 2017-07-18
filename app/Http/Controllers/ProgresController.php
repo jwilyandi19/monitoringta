@@ -17,7 +17,7 @@ class ProgresController extends Controller
     public function index()
     {
         $data['tugasAkhirs'] = TugasAkhir::where('id_user', session('user')['id'])->orderBy('id_ta', 'desc')->with(['dosbing1', 'dosbing2', 'status'])->get();
-
+        //dd($data);
         return view('progres.status', $data);
     }
 

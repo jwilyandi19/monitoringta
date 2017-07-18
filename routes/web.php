@@ -35,6 +35,8 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
 Route::group(['middleware' => ['Dosen']], function(){
     Route::post('/gantipassword', 'AuthController@gantiPassword');
     Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
+    Route::post('/bimbingan/konfirmasitugasakhir', 'BimbinganController@konfirmasiTA');
+    Route::post('/bimbingan/tolaktugasakhir', 'BimbinganController@tolakTA');
     Route::resource('/bimbingan', 'BimbinganController');
 });
 

@@ -5,7 +5,7 @@ Mahasiswa Bimbingan
 @endsection
 
 @section('moreStyle')
-
+<link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
 @endsection
 
 @section('content')
@@ -33,12 +33,12 @@ Mahasiswa Bimbingan
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>NRP</th>
-                        <th>Nama</th>
-                        <th>Judul TA</th>
-                        <th>Sebagai</th>
-                        <th>Aksi</th>
+                        <th >No</th>
+                        <th class="col-md-1">NRP</th>
+                        <th class="col-md-1">Nama</th>
+                        <th class="col-md-7">Judul TA</th>
+                        <th class="col-md-1 text-center">Sebagai</th>
+                        <th class="col-md-1 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,42 +49,16 @@ Mahasiswa Bimbingan
                                 <td>{{$konfirmasi->tugasAkhir->user->username}}</td>
                                 <td>{{$konfirmasi->tugasAkhir->user->nama}}</td>
                                 <td>{{$konfirmasi->tugasAkhir->judul}}</td>
-                                <td>Pembimbing {{$konfirmasi->peran}}</th>
+                                <td class="text-center">Pembimbing {{$konfirmasi->peran}}</th>
                                 <td>
-                                    <div style="text-align: center;">
-                                        <a href="#" class="btn btn-danger btn-sm">Tolak</a>
-                                        <a href="#" class="btn btn-success btn-sm">Terima</a>
+                                    <div class="text-center">
+                                        <button value="{{$konfirmasi->tugasAkhir->id_ta}}" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button>
+                                        <button value="{{$konfirmasi->tugasAkhir->id_ta}}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-ban-circle"></i></button>
                                     </div>
                                 </td>
                             </tr>
                         @endforeach
                     @endif
-                    <!-- <tr>
-                        <td>1</td>
-                        <td>5113100001</td>
-                        <td>Muhammad Adnan Yusuf</td>
-                        <td>Clustering dan Merging bisnis proses model berdasarkan Graph Database</td>
-                        <td>Pembimbing 1</th>
-                        <td>
-                            <div style="text-align: center;">
-                                <a href="#" class="btn btn-danger btn-sm">Tolak</a>
-                                <a href="#" class="btn btn-success btn-sm">Terima</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>5113100147</td>
-                        <td>Lusiana Nurul Aini</td>
-                        <td>Studi Kinerja Metode Ekstraksi Fitur Local Line Binary Pattern dan Scale Invariant Feature Transform pada Aplikasi Palm dan Finger Vein Recognition</td>
-                        <td>Pembimbing 2</th>
-                        <td>
-                            <div style="text-align: center;">
-                                <a href="#" class="btn btn-danger btn-sm">Tolak</a>
-                                <a href="#" class="btn btn-success btn-sm">Terima</a>
-                            </div>
-                        </td>
-                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -95,12 +69,12 @@ Mahasiswa Bimbingan
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>NRP</th>
-                        <th>Nama</th>
-                        <th>Judul TA</th>
-                        <th>Sebagai</th>
-                        <th>Aksi</th>
+                        <th >No</th>
+                        <th class="col-md-1">NRP</th>
+                        <th class="col-md-1">Nama</th>
+                        <th class="col-md-7">Judul TA</th>
+                        <th class="col-md-1 text-center">Sebagai</th>
+                        <th class="col-md-1 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,37 +85,72 @@ Mahasiswa Bimbingan
                                 <td>{{$bimbingan->user->username}}</td>
                                 <td>{{$bimbingan->user->nama}}</td>
                                 <td>{{$bimbingan->judul}}</td>
-                                @if($)
+                                @if($bimbingan->id_dosbing1 == session('user')['id_dosen'])
+                                    <td class="text-center">Pembimbing 1</th>
                                 @else
+                                    <td class="text-center">Pembimbing 2</th>
                                 @endif
-                                <td>Pembimbing 1</th>
-                                <td><a href="detailta2" class="btn btn-info btn-sm">Detail TA</a></td>
+                                <td class="text-center"><a href="detailta2" class="btn btn-info btn-sm">Detail TA</a></td>
                             </tr>
                         @endforeach
                     @endif
-                    <tr>
-                        <td>1</td>
-                        <td>5114100046</td>
-                        <td>Raras Anggita</td>
-                        <td>Implementasi Aplikasi Manajemen API Berbasis Protokol REST Menggunakan Platform WSO2</td>
-                        <td>Pembimbing 1</th>
-                        <td><a href="detailta2" class="btn btn-info btn-sm">Detail TA</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>5113100147</td>
-                        <td>Lusiana Nurul Aini</td>
-                        <td>Studi Kinerja Metode Ekstraksi Fitur Local Line Binary Pattern dan Scale Invariant Feature Transform pada Aplikasi Palm dan Finger Vein Recognition</td>
-                        <td>Pembimbing 2</th>
-                        <td><a href="detailta2" class="btn btn-info btn-sm">Detail TA</a></td>
-                    </tr>
                 </tbody>
             </table>
+            
         </div>
-	</div>	
+        <div class="text-right">
+                {{$bimbingans->links()}}
+            </div>
+	</div>
+    <form id="tolak-permintaan" action="{{url('/bimbingan/tolaktugasakhir')}}" method="POST" style="display: none;">
+        {{csrf_field()}}
+        {{method_field('POST')}}
+        <input type="text" name="idTugasAkhir" id="inp-taDitolak">
+    </form>
+    <form id="konfirmasi-permintaan" action="{{url('/bimbingan/konfirmasitugasakhir')}}" method="POST" style="display: none;">
+        {{csrf_field()}}
+        {{method_field('POST')}}
+        <input type="text" name="idTugasAkhir" id="inp-taDikonfirmasi">
+    </form>	
 @endsection
 
 @section('moreScript')
+<script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
+<script type="text/javascript">
+    $(document).on('click', '.btn-success', function(){
+        var idTugasAkhir = $(this).attr('value');
+        console.log(idTugasAkhir);
 
+        swal({
+            title: "Perhatian",
+            text: "Apakah anda yakin ingin menerima permintaan bimbingan dari TA berikut ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, konfirmasi",
+            cancelButtonText: "Batal"
+        },
+        function(){
+            $('#inp-taDikonfirmasi').val(idTugasAkhir);
+            $('#konfirmasi-permintaan').submit();
+        });
+    });
+    $(document).on('click', '.btn-danger', function(){
+        var idTugasAkhir = $(this).attr('value');
+        console.log(idTugasAkhir);
+
+        swal({
+            title: "Perhatian",
+            text: "Apakah anda yakin ingin menolak permintaan bimbingan dari TA berikut ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, tolak",
+            cancelButtonText: "Batal"
+        },
+        function(){
+            $('#inp-taDitolak').val(idTugasAkhir);
+            $('#tolak-permintaan').submit();
+        });
+    });
+</script>
 @endsection
 
