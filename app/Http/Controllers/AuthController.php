@@ -110,32 +110,31 @@ class AuthController extends Controller
         }
         else
         {
-
-        }
-        $user = User::where('id_user',session('user')['id'])->first();
-        if(Hash::check($request->passwordLama, $user->password))
-        {
-            $hashPswdBaru = bcrypt($request->passwordBaru);
-            if(Hash::check($request->konfirmasiPassword, $hashPswdBaru))
+            $user = User::where('id_user',session('user')['id'])->first();
+            if(Hash::check($request->passwordLama, $user->password))
             {
-                $user->password = $hashPswdBaru;
-                if($user->save())
+                $hashPswdBaru = bcrypt($request->passwordBaru);
+                if(Hash::check($request->konfirmasiPassword, $hashPswdBaru))
                 {
-                    return Redirect::to('gantipassword')->with('message','Berhasil Mengganti Password');
+                    $user->password = $hashPswdBaru;
+                    if($user->save())
+                    {
+                        return Redirect::to('gantipassword')->with('message','Berhasil Mengganti Password');
+                    }
+                    else
+                    {
+                        return Redirect::to('gantipassword')->withErrors('Gagal menyimpan data!');
+                    }
                 }
                 else
                 {
-                    return Redirect::to('gantipassword')->withErrors('Gagal menyimpan data!');
+                    return Redirect::to('gantipassword')->withErrors('Password Baru dan Konfirmasi Password TIdak sesuai!');
                 }
             }
             else
             {
-                return Redirect::to('gantipassword')->withErrors('Password Baru dan Konfirmasi Password TIdak sesuai!');
+                return Redirect::to('gantipassword')->withErrors('Password Lama Salah!');
             }
-        }
-        else
-        {
-            return Redirect::to('gantipassword')->withErrors('Password Lama Salah!');
         }
     }
 }

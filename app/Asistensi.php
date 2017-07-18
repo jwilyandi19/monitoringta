@@ -13,7 +13,7 @@ class Asistensi extends Model
     protected $fillable = [
     'id_asistensi',
     'id_ta',
-    'taggal',
+    'tanggal',
     'materi',
     'created_at',
     'updated_at',

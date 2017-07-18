@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TugasAkhir;
-use App\DosenPembimbing;
-use App\Dosen;
+use App\Asistensi;
 
 class ProgresController extends Controller
 {
@@ -85,5 +84,20 @@ class ProgresController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function detail()
+    {
+        $detailta = TugasAkhir::where([['id_user', '=', session('user')['id']],['id_status','>=','0']])->with(['user','dosbing1','dosbing2','status','bidang'])->first();
+        if($detailta){
+            $data['detailta'] = $detailta;
+            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->get();
+            //dd($data);
+            return view('progres.detail',$data);
+        }
+        else
+        {
+            return view('home');
+        }
     }
 }

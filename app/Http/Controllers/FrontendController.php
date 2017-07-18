@@ -19,6 +19,7 @@ class FrontendController extends Controller
     }
 
     public function detailTa(){
+
     	return view('detailta');
     }
 
