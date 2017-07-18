@@ -30,7 +30,10 @@
         </div>
         <div class="panel-body isi-halaman">
             <div >
-
+                <div class="alert alert-warning">
+                    <h4>Perhatian</h4>
+                    <p><strong>Anda belum pernah mengupload file proposal</strong></p>
+                </div>
                 <div class="row" >
                     <label class="col-md-2"><h6 class="pull-left">NRP</h6></label>
                     <div class="col-md-10">
