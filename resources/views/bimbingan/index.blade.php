@@ -90,7 +90,7 @@ Mahasiswa Bimbingan
                                 @else
                                     <td class="text-center">Pembimbing 2</th>
                                 @endif
-                                <td class="text-center"><a href="detailta2" class="btn btn-info btn-sm">Detail TA</a></td>
+                                <td class="text-center"><a href="{{url('/bimbingan')}}/{{$bimbingan->id_ta}}" class="btn btn-info btn-sm">Detail TA</a></td>
                             </tr>
                         @endforeach
                     @endif

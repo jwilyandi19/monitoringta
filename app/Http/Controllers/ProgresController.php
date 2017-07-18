@@ -179,7 +179,6 @@ class ProgresController extends Controller
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->get();
-            //dd($data);
             return view('progres.detail',$data);
         }
         else

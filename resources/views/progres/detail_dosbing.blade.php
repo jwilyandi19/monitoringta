@@ -33,9 +33,6 @@
                 <div class="alert alert-warning">
                     <h4>Perhatian</h4>
                     <p><strong>Anda belum pernah mengupload file proposal</strong></p>
-                    @if($asistensis==null)
-                        <p><strong>Anda belum pernah melakukan bimbingan</strong></p>
-                    @endif
                 </div>
                 <div class="row" >
                     <label class="col-md-2"><h6 class="pull-left">NRP</h6></label>
@@ -94,7 +91,6 @@
                         <h6>: -</h6>
                     </div>
                 </div>
-                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#fileUploadModal">Tambahkan File</button>
                 <br>
             </div>
             <br>
@@ -124,6 +120,10 @@
                         </tbody>
                     </table>
                 </div>
+
+                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#bimbinganModal">Tambahkan Asistensi</button>
+                <br>
+
             </div>
             <br>
             <hr>
@@ -166,16 +166,42 @@
 
         </div>
     </div>
-
-    <div class="modal fade" id="fileUploadModal">
+    <div class="modal fade" id="bimbinganModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
-                    <h4 class="modal-title" style="color: #ffffff;"> Upload File TA</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+                    <h4 class="modal-title" style="color: #ffffff;">Detail Bimbingan</h4>
+
                 </div>
                 <div class="modal-body">
-                    <label class="control-label">Select File</label>
-                    <input id="input-1a" type="file" class="file" data-show-preview="false">
+                    <form class="form-horizontal" method="POST" action="{{url('/bimbingan/asistensi')}}">
+                        <div class="form-group" style="display: none;">
+                            <label class="col-md-2 control-label">ID TA</label>
+                            <div class="col-md-10">
+                                <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Tanggal</label>
+                            <div class="col-md-10">
+                                <input type="date" name="tanggal" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Materi</label>
+                            <div class="col-md-10">
+                                <textarea type="text" name="materi" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{csrf_field()}}
+                            {{method_field('POST')}}
+                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Tambahkan</button>
+                            {{--<button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Tambahkan</button>--}}
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
