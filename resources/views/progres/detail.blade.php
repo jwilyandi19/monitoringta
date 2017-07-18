@@ -94,7 +94,7 @@
                         <h6>: -</h6>
                     </div>
                 </div>
-                <button class="btn btn-primary pull-right">Tambahkan File</button>
+                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#fileUploadModal">Tambahkan File</button>
                 <br>
             </div>
             <br>
@@ -164,6 +164,20 @@
             </div>
             <br>
 
+        </div>
+    </div>
+
+    <div class="modal fade" id="fileUploadModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                    <h4 class="modal-title" style="color: #ffffff;"> Upload File TA</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="control-label">Select File</label>
+                    <input id="input-1a" type="file" class="file" data-show-preview="false">
+                </div>
+            </div>
         </div>
     </div>
 @endsection
