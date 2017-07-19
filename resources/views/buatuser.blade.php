@@ -36,35 +36,23 @@
                         <p><strong>* harus diisi</strong></p>
                     </div>
                     <div class="form-group has-warning">
-                        <label class="control-label" for="judulta"><h5>Judul Tugas Akhir *</h5></label>
-                        <textarea type="text" name="judulTA" class="form-control col-md-10" placeholder="Judul Tugas Akhir"></textarea>
+                        <label class="control-label" for="judulta"><h5>User Name *</h5></label>
+                        <input type="text" name="username" class="form-control col-md-10" placeholder="Username">
                     </div>
                     <div class="form-group has-warning">
-                        <label class="control-label" for="bidang"><h5>Bidang Matakuliah *</h5></label>
+                        <label class="control-label" for="bidang"><h5>Peran *</h5></label>
                         <select class="form-control" name="bidangMk">
-                            <option value="" selected >Bidang Matakuliah</option>
+                            <option value="1"selected>Mahasiswa</option>
+                            <option value="2">Dosen</option>
+                            <option value="3">Koordinator TA</option>
                             {{--@foreach($bidang_mks as $bidang_mk)--}}
                                 {{--<option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->keterangan}}</option>--}}
                             {{--@endforeach--}}
                         </select>
                     </div>
                     <div class="form-group has-warning">
-                        <label class="control-label" for="pembimbing1"><h5>Dosen Pembiming 1 *</h5></label>
-                        <select class="form-control" name="pembimbing1">
-                            <option value="" selected >Pilih Dosen Pembimbing 1</option>
-                            {{--@foreach($dosens as $dosen)--}}
-                                {{--<option value="{{$dosen->id_dosen}}">{{$dosen->nama}}</option>--}}
-                            {{--@endforeach--}}
-                        </select>
-                    </div>
-                    <div class="form-group has-warning">
-                        <label class="control-label" for="pembimbing2"><h5>Dosen Pembiming 2</h5></label>
-                        <select class="form-control" name="pembimbing2">
-                            <option value="" selected >Pilih Dosen Pembimbing 2</option>
-                            {{--@foreach($dosens as $dosen)--}}
-                                {{--<option value="{{$dosen->id_dosen}}">{{$dosen->nama}}</option>--}}
-                            {{--@endforeach--}}
-                        </select>
+                        <label class="control-label" for="judulta"><h5>Nama *</h5></label>
+                        <textarea type="text" name="nama" class="form-control col-md-10" placeholder="Nama"></textarea>
                     </div>
                     <br>
                     {{csrf_field()}}
