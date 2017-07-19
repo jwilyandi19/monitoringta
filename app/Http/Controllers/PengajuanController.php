@@ -71,7 +71,7 @@ class PengajuanController extends Controller
             return Redirect::to(url('pengajuan/create'))->withErrors($validator)->withInput();
         }
         else{
-            $statusTA = StatusTA::find(0);
+            $statusTA = StatusTA::where('id_status', 0);
             $taBaru = new TugasAkhir();
             $taBaru->id_user = session('user')['id'];
             $taBaru->id_bidang_mk = $request->bidangMk;

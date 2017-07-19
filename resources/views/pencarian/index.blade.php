@@ -38,9 +38,9 @@ Pencarian Tugas Akhir
                         <th class="text-center">Status</th>
                         <th class="text-center">NRP</th>
                         <th class="text-center">Judul</th>
-                        <th >Nama</th>
-                        <th >Pembimbing1</th>
-                        <th >Pembimbing2</th>
+                        <!-- <th class="text-center">Nama</th>
+                        <th class="text-center">Pembimbing1</th>
+                        <th class="text-center">Pembimbing2</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -57,18 +57,18 @@ Pencarian Tugas Akhir
                             <td id="row-nrp">{{$tugasAkhir->user->username}}</td>
                             <td id="row-judul">{{$tugasAkhir->judul}}</td>
 
-                            <td id="row-nama">{{$tugasAkhir->user->nama}}</td>
+                            <!-- <td id="row-nama">{{$tugasAkhir->user->nama}}</td> -->
                             
                             @if($tugasAkhir->dosbing1)
-                                <td id="row-pembimbing1">{{$tugasAkhir->dosbing1->nama_lengkap}}</td>
+                                <!-- <td id="row-pembimbing1">{{$tugasAkhir->dosbing1->nama_lengkap}}</td> -->
                             @else
-                                <td id="row-pembimbing1">-</td>
+                                <!-- <td id="row-pembimbing1">-</td> -->
                             @endif
                             
                             @if($tugasAkhir->dosbing2)
-                                <td id="row-pembimbing2">{{$tugasAkhir->dosbing2->nama_lengkap}}</td>
+                                <!-- <td id="row-pembimbing2">{{$tugasAkhir->dosbing2->nama_lengkap}}</td> -->
                             @else
-                                <td id="row-pembimbing2">-</td>
+                                <!-- <td id="row-pembimbing2">-</td> -->
                             @endif
                         </tr> 
                     @endforeach
@@ -150,7 +150,7 @@ Pencarian Tugas Akhir
                     </div>
                     <hr style="border-top: 1px solid #24292e;">
                     <div class="row">
-                        <button class="btn btn-default pull-right" data-dismiss="modal" style="margin-right: 10px;">close</button>
+                        <button id="close" class="btn btn-default pull-right" data-dismiss="modal" style="margin-right: 10px;">close</button>
                     </div>
                 </div>
             </div>
@@ -162,6 +162,8 @@ Pencarian Tugas Akhir
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        var table = $('#tugasAkhir').DataTable({
+        });
         $('.btn-link').click(function(){
             var nrp = $(this).find('#row-nrp').text();
             var nama = $(this).find('#row-nama').text();
@@ -179,29 +181,14 @@ Pencarian Tugas Akhir
             $('#modal-bidang').text(bidang);
             $('#modal-status').text(status);
         });
+        $('close').click(function(){
+
+        });
     });
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#tugasAkhir').DataTable({
-            /*responsive: true,*/
-            "columnDefs": [
-                {
-                    "targets": 6,
-                    "visible": false
-                },
-                {
-                    "targets": 7,
-                    "visible": false,
-                    "searchable": false
-                },
-                {
-                    "targets": 8,
-                    "visible": false,
-                    "searchable": false
-                }
-            ]
-        });
+        
     });
 </script>
 @endsection

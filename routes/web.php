@@ -31,7 +31,7 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
     Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
     Route::get('/statusproposal', 'FrontendController@statusProposal');
     Route::get('/detailta', 'ProgresController@detail');
-
+    Route::post('/progres/uploadfile', 'ProgresController@uploadFile');
 });
 
 Route::group(['middleware' => ['Dosen']], function(){
