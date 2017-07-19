@@ -29,7 +29,7 @@
             <hr>
         </div>
         <div class="panel-body isi-halaman">
-            <form class="form-horizontal col-md-10 col-md-offset-1" method="POST" action="{{url('/createuser1')}}">
+            <form class="form-horizontal col-md-10 col-md-offset-1" method="POST" action="{{url('/user')}}">
                 <fieldset>
                     <div class="form-group alert alert-dismissable alert-warning" style="margin-bottom: 0;">
                         <button type="button" class="close fade" data-dismiss="alert">&times;</button>

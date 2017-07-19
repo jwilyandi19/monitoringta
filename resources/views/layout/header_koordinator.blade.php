@@ -12,9 +12,10 @@
             <ul class="nav navbar-nav navbar-right">
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-education"></i> User </a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-education"></i> Manage User </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('/manageuser')}}"><i class="glyphicon glyphicon-user"></i> Manage</a></li>
+                        <li><a href="{{url('/user/create')}}"><i class="glyphicon glyphicon-user"></i> Buat User</a></li>
+                        <li><a href="{{url('/user')}}"><i class="glyphicon glyphicon-user"></i> Lihat User</a></li>
                     </ul>
                 </li>
 

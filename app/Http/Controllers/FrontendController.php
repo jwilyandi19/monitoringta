@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TugasAkhir;
+use App\User;
 
 class FrontendController extends Controller
 {
@@ -51,6 +52,12 @@ class FrontendController extends Controller
     public function buatUser()
     {
         return view('buatuser');
+    }
+
+    public function lihatUser()
+    {
+        $data['users'] = User::orderBy('id_user','dsc')->get();
+        return view('lihatuser',$data);
     }
 
     public function pencarianTA(){

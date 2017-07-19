@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash; 
-use Illuminate\Http\Request;    
+use Illuminate\Http\Request;
+use Monolog\Handler\SyslogUdp\UdpSocket;
 use Session;
 use Uuid;
 use DB;
@@ -134,6 +135,50 @@ class AuthController extends Controller
             else
             {
                 return Redirect::to('gantipassword')->withErrors('Password Lama Salah!');
+            }
+        }
+    }
+
+    public function buatUser1(Request $request)
+    {
+        $messagesError = [
+            'username.required' => 'Username tidak boleh kosong.',
+            'role.required' => 'Peran tidak boleh kosong.',
+            'nama.required' => 'Nama tidak boleh kosong',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'role' => 'required',
+            'nama' => 'required',
+        ], $messagesError);
+
+        if($validator->fails())
+        {
+            return Redirect::to('/buatuser')->withErrors($validator)->withInput();
+        }
+        else
+        {
+            $user = User::where('username','=',$request->username);
+            if($user)
+            {
+                return Redirect::to('/buatuser')->withErrors('User dengan Username '.$request->username.' Sudah ada');
+            }
+            else
+            {
+                $baru = new User();
+                $baru->username = $request->username;
+                $baru->password = bcrypt($request->username);
+                $baru->role = $request->role;
+                $baru->nama = $request->nama;
+                if($baru->save())
+                {
+                    return Redirect::to('/buatuser')->with('message','Berhasil Membuat User '.$request->username);
+                }
+                else
+                {
+                    return Redirect::to('/buatuser')->withErrors('Terdapat kesalahan pada server ketika membuat User '.$request->username);
+                }
             }
         }
     }
