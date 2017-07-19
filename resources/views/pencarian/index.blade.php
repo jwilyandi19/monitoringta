@@ -5,7 +5,7 @@ Pencarian Tugas Akhir
 @endsection
 
 @section('moreStyle')
-
+<link rel="stylesheet" type="text/css" href="{{asset('css/jquery.dataTables.min.css')}}">
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@ Pencarian Tugas Akhir
             <hr>
         </div>
         <div class="pencarian">
-            <table id="tugasAkhir" class="table table-striped table-hover">
+            <table id="tugasAkhir" class="table table-striped table-hover" cellspacing="0" width="100%">
                 <thead>
                     <tr class="row">
                         <th class="text-center">No</th>
@@ -38,6 +38,9 @@ Pencarian Tugas Akhir
                         <th class="text-center">Status</th>
                         <th class="text-center">NRP</th>
                         <th class="text-center">Judul</th>
+                        <th >Nama</th>
+                        <th >Pembimbing1</th>
+                        <th >Pembimbing2</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,21 +55,21 @@ Pencarian Tugas Akhir
                             <td id="row-bidang">{{$tugasAkhir->bidang->nama_bidang}}</td>
                             <td id="row-status">{{$tugasAkhir->status->keterangan}}</td>
                             <td id="row-nrp">{{$tugasAkhir->user->username}}</td>
-                            <td id="row-nama" style="display: none;">{{$tugasAkhir->user->nama}}</td>
+                            <td id="row-judul">{{$tugasAkhir->judul}}</td>
+
+                            <td id="row-nama">{{$tugasAkhir->user->nama}}</td>
                             
                             @if($tugasAkhir->dosbing1)
-                                <td id="row-pembimbing1" style="display: none;">{{$tugasAkhir->dosbing1->nama_lengkap}}</td>
+                                <td id="row-pembimbing1">{{$tugasAkhir->dosbing1->nama_lengkap}}</td>
                             @else
-                                <td id="row-pembimbing1" style="display: none;">-</td>
+                                <td id="row-pembimbing1">-</td>
                             @endif
                             
                             @if($tugasAkhir->dosbing2)
-                                <td id="row-pembimbing2" style="display: none;">{{$tugasAkhir->dosbing2->nama_lengkap}}</td>
+                                <td id="row-pembimbing2">{{$tugasAkhir->dosbing2->nama_lengkap}}</td>
                             @else
-                                <td id="row-pembimbing2" style="display: none;">-</td>
+                                <td id="row-pembimbing2">-</td>
                             @endif
-
-                            <td id="row-judul">{{$tugasAkhir->judul}}</td>
                         </tr> 
                     @endforeach
                 </tbody>
@@ -156,9 +159,9 @@ Pencarian Tugas Akhir
 @endsection
 
 @section('moreScript')
+<script type="text/javascript" src="{{asset('js/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#tugasAkhir').DataTable({});
         $('.btn-link').click(function(){
             var nrp = $(this).find('#row-nrp').text();
             var nama = $(this).find('#row-nama').text();
@@ -175,6 +178,29 @@ Pencarian Tugas Akhir
             $('#modal-pembimbing2').text(pembimbing2);
             $('#modal-bidang').text(bidang);
             $('#modal-status').text(status);
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#tugasAkhir').DataTable({
+            /*responsive: true,*/
+            "columnDefs": [
+                {
+                    "targets": 6,
+                    "visible": false
+                },
+                {
+                    "targets": 7,
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": 8,
+                    "visible": false,
+                    "searchable": false
+                }
+            ]
         });
     });
 </script>
