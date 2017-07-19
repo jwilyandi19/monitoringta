@@ -183,7 +183,7 @@ class ProgresController extends Controller
         }
         else
         {
-            return view('home');
+            return view('progres.error_detail');
         }
     }
 }

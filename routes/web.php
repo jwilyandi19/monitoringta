@@ -47,5 +47,5 @@ Route::group(['middleware' => ['Dosen']], function(){
 
 Route::group(['middleware' => ['Koordinator']], function(){
 
-    Route::get('/buatuser', 'FrontendController@buatUser');
+    Route::get('/manageuser', 'FrontendController@buatUser');
 });
