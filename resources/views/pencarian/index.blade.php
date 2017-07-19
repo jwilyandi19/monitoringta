@@ -69,17 +69,6 @@ Pencarian Tugas Akhir
                             <td id="row-judul">{{$tugasAkhir->judul}}</td>
                         </tr> 
                     @endforeach
-                    <!-- <tr class="row btn-link" data-toggle="modal" data-target="#cobaModal">
-                        <td>1</td>
-                        <td>1</td>
-                        <td id="row-bidang">Metalurgi</td>
-                        <td id="row-status">Mengajukan Judul</td>
-                        <td id="row-nrp">5114100109</td>
-                        <td id="row-nama" style="display: none;">Nafiar Rahmansyah</td>
-                        <td id="row-pembimbing1" style="display: none;">Pembimbing 1</td>
-                        <td id="row-pembimbing2" style="display: none;">Pembimbing 2</td>
-                        <td id="row-judul">Rancang Bangun Simulasi Tertib Lalu Lintas Sesuai Dengan Peraturan Pemerintah Nomor 79 Tahun 2013 Menggunakan Steering Wheel dan Oculus Rift</td>
-                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -169,6 +158,7 @@ Pencarian Tugas Akhir
 @section('moreScript')
 <script type="text/javascript">
     $(document).ready(function(){
+        $('#tugasAkhir').DataTable({});
         $('.btn-link').click(function(){
             var nrp = $(this).find('#row-nrp').text();
             var nama = $(this).find('#row-nama').text();

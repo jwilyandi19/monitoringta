@@ -24,9 +24,8 @@ class BimbinganController extends Controller
                 $query->where('id_status','>=','0')->with('user');
             }])->get();
         
-        $data['bimbingans'] = TugasAkhir::where([['id_status', '>=', '0'], ['id_dosbing1', session('user')['id_dosen']]])->orWhere('id_dosbing2', session('user')['id_dosen'])->orderBy('tanggalBuat', 'desc')->with('user')->paginate(8);
-        //dd($data);
-
+        $data['bimbingans'] = TugasAkhir::where([['id_status', '>=', '0'], ['id_dosbing1', session('user')['id_dosen']]])->orWhere([['id_status', '>=', '0'], ['id_dosbing2', session('user')['id_dosen']]])->orderBy('tanggalBuat', 'desc')->with('user')->paginate(8);
+        
         return view('bimbingan.index', $data);
     }
 

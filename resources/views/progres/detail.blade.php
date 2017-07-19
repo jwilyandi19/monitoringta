@@ -171,11 +171,26 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                    <button type="button" class="close" data-dismiss="modal" style="color: #ffffff;">&times;</button>
                     <h4 class="modal-title" style="color: #ffffff;"> Upload File TA</h4>
                 </div>
-                <div class="modal-body">
-                    <label class="control-label">Select File</label>
-                    <input id="input-1a" type="file" class="file" data-show-preview="false">
+                <div class="modal-body panel panel-body" style="margin-bottom: 0px;">
+                    <form>
+                        <div class="form-group alert alert-warning">
+                            <h4>Perhatian</h4>
+                            <p>File yag dapat diupload adalah file dengan ekstensi .zip</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Select File</label>
+                            <input id="input-1a" type="file" class="file" data-show-preview="false">
+                        </div>
+                        <hr style="border-top: 1px solid #24292e;">
+                        <div class="form-group" style="height: 30px;">
+                            <button class="btn btn-primary pull-right">Tambahkan File</button>
+                            <button class="btn btn-default pull-right" style="margin-right: 10px;">Batal</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
