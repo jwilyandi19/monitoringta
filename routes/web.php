@@ -46,7 +46,6 @@ Route::group(['middleware' => ['Dosen']], function(){
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){
-    Route::resource('/user/create', 'UserController');
     Route::resource('/user', 'UserController');
     Route::post('/createuser1','AuthController@buatUser1');
 });

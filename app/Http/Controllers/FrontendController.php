@@ -49,17 +49,6 @@ class FrontendController extends Controller
         return view('tambahkanjadwal');
     }
 
-    public function buatUser()
-    {
-        return view('buatuser');
-    }
-
-    public function lihatUser()
-    {
-        $data['users'] = User::orderBy('id_user','dsc')->get();
-        return view('lihatuser',$data);
-    }
-
     public function pencarianTA(){
         $data['tugasAkhirs'] = TugasAkhir::with(['bidang', 'status', 'user', 'dosbing1', 'dosbing2'])->get();
 

@@ -91,7 +91,26 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::where('id_user',$id)->first();
+        //dd($user);
+        if($user!=null)
+        {
+            if($user->role == 2)
+            {
+                $data['user'] = User::where('id_user',$id)->with('akunDosen')->first();
+            }
+            else
+            {
+                $data['user'] = $user;
+            }
+            //dd($data);
+            return view('user.show',$data);
+        }
+        else
+        {
+            return Redirect::to('/user')->withErrors('User Tidak Ditemukan');
+        }
+
     }
 
     /**
@@ -125,6 +144,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd($id);
+        if(User::where('id_user',$id)->delete())
+        {
+            return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
+        }
+        else
+        {
+            return Redirect::to('/user')->withErrors('User Tidak Ditemukan');
+        }
     }
 }

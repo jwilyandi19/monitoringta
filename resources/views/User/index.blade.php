@@ -53,7 +53,7 @@
                             @else
                                 <td class="text-center">Koordinator TA</th>
                             @endif
-                            <td><a class="btn btn-info btn-sm" href="{{url('/home')}}">Detail</a></td>
+                            <td><a class="btn btn-info btn-sm" href="{{url('/user/'.$user->id_user)}}">Detail</a></td>
                         </tr>
                     @endforeach
                 @endif
