@@ -5,7 +5,7 @@ Pencarian Tugas Akhir
 @endsection
 
 @section('moreStyle')
-<link rel="stylesheet" type="text/css" href="{{asset('css/jquery.dataTables.min.css')}}">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 @endsection
 
 @section('content')
@@ -159,7 +159,7 @@ Pencarian Tugas Akhir
 @endsection
 
 @section('moreScript')
-<script type="text/javascript" src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('.btn-link').click(function(){
