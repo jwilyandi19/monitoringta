@@ -81,10 +81,9 @@
             @endif
             <div class="form-group">
                 <div class="pull-right">
-                    <button class="btn btn-default"><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali </button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit User</button>
-                    <button class="btn btn-danger" id="hapus"><i class="glyphicon glyphicon-trash"></i> Hapus User</button>
-
+                    <button class="btn btn-default"style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali </button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#editModal" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-edit"></i> Edit User</button>
+                    <button class="btn btn-danger" id="hapus" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-trash"></i> Hapus User</button>
                 </div>
             </div>
             <form id="hapus-user" action="{{url('/user/'.$user->id_user)}}" method="POST" >
