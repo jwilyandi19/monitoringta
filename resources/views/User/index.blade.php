@@ -59,7 +59,9 @@
                 @endif
                 </tbody>
             </table>
-
+            <div class="text-right">
+                {{$users->links()}}
+            </div>
         </div>
     </div>
 @endsection
