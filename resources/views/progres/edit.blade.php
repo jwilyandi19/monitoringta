@@ -86,8 +86,8 @@ Ubah Detail Tugas Akhir
                     {{csrf_field()}}
                     {{method_field('PUT')}}                
                     <div class="form-group has-warning">
-                        <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ubah Detail TA</button>
-                        <a href="{{url('/progres')}}" class="btn btn-default pull-right" style="margin-right: 10px;">Kembali</a>
+                        <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-pencil"></i> Ubah Detail TA</button>
+                        <a href="{{url('/progres')}}" class="btn btn-default pull-right" style="margin-right: 15px;">Kembali</a>
                     </div>
                 </fieldset>
             </form>

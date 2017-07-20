@@ -13,6 +13,7 @@ class Asistensi extends Model
     protected $fillable = [
     'id_asistensi',
     'id_ta',
+    'id_dosen',
     'tanggal',
     'materi',
     'created_at',
@@ -21,5 +22,9 @@ class Asistensi extends Model
 
     public function tugasAkhirs(){
     	return $this->belongsTo('App\TugasAkhir', 'id_ta', 'id_ta');
+    }
+
+    public function dosen(){
+        return $this->belongsTo('App\Dosen', 'id_dosen', 'id_dosen');
     }
 }

@@ -25,13 +25,15 @@ DROP TABLE IF EXISTS `asistensi`;
 CREATE TABLE `asistensi` (
   `id_asistensi` int(11) NOT NULL AUTO_INCREMENT,
   `id_ta` int(11) NOT NULL,
+  `id_dosen` int(11) DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `materi` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_asistensi`),
-  KEY `id_ta` (`id_ta`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `id_ta` (`id_ta`),
+  KEY `id_dosen` (`id_dosen`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +42,7 @@ CREATE TABLE `asistensi` (
 
 LOCK TABLES `asistensi` WRITE;
 /*!40000 ALTER TABLE `asistensi` DISABLE KEYS */;
+INSERT INTO `asistensi` VALUES (1,1,2,'2017-07-20','Paradigma Reactive Programming','2017-07-20 02:13:56','2017-07-20 02:13:56'),(2,1,1,'2017-07-13','Mobile Programming','2017-07-20 02:17:28','2017-07-20 02:17:28');
 /*!40000 ALTER TABLE `asistensi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,6 +83,7 @@ CREATE TABLE `dosen` (
   `nip` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nama` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nama_lengkap` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pembimbing1` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_dosen`),
   KEY `id_user` (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -91,7 +95,7 @@ CREATE TABLE `dosen` (
 
 LOCK TABLES `dosen` WRITE;
 /*!40000 ALTER TABLE `dosen` DISABLE KEYS */;
-INSERT INTO `dosen` VALUES (1,4,'5110100001','RIZKY JANUAR AKBAR','RIZKY JANUAR AKBAR, S.Kom., M.Eng.'),(2,5,'5110100002','WIJAYANTI NURUL K.','WIJAYANTI NURUL K.,S.Kom., M.Sc.'),(3,6,'5110100003','DOSEN 3','DOSEN 3 S.KOM');
+INSERT INTO `dosen` VALUES (1,4,'5110100001','RIZKY JANUAR AKBAR','RIZKY JANUAR AKBAR, S.Kom., M.Eng.',NULL),(2,5,'5110100002','WIJAYANTI NURUL K.','WIJAYANTI NURUL K.,S.Kom., M.Sc.',NULL),(3,6,'5110100003','DOSEN 3','DOSEN 3 S.KOM',NULL);
 /*!40000 ALTER TABLE `dosen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +126,7 @@ CREATE TABLE `dosen_pembimbing` (
 
 LOCK TABLES `dosen_pembimbing` WRITE;
 /*!40000 ALTER TABLE `dosen_pembimbing` DISABLE KEYS */;
-INSERT INTO `dosen_pembimbing` VALUES (1,1,1,1,0,'2017-07-18 02:14:17','2017-07-18 02:14:17'),(2,2,1,2,0,'2017-07-18 02:14:17','2017-07-18 02:21:02');
+INSERT INTO `dosen_pembimbing` VALUES (1,2,1,1,0,'2017-07-20 02:02:38','2017-07-20 02:14:23'),(2,1,1,2,1,'2017-07-20 02:14:56','2017-07-20 02:16:57'),(3,1,2,1,0,'2017-07-20 02:22:59','2017-07-20 02:22:59');
 /*!40000 ALTER TABLE `dosen_pembimbing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,10 +190,12 @@ DROP TABLE IF EXISTS `ketersediaan_seminar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ketersediaan_seminar` (
+  `id_ks` int(11) NOT NULL AUTO_INCREMENT,
   `id_js` int(11) DEFAULT NULL,
   `id_dosen` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_ks`),
   KEY `id_dosen` (`id_dosen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -211,10 +217,12 @@ DROP TABLE IF EXISTS `ketersediaan_ujian`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ketersediaan_ujian` (
+  `id_ku` int(11) NOT NULL AUTO_INCREMENT,
   `id_ju` int(11) DEFAULT NULL,
   `id_dosen` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_ku`),
   KEY `id_dosen` (`id_dosen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -229,163 +237,55 @@ LOCK TABLES `ketersediaan_ujian` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `konfirmasi_seminar`
+-- Table structure for table `penguji_seminar`
 --
 
-DROP TABLE IF EXISTS `konfirmasi_seminar`;
+DROP TABLE IF EXISTS `penguji_seminar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `konfirmasi_seminar` (
-  `id_penilaian_s` int(11) DEFAULT NULL,
-  `id_dosen_uji` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
+CREATE TABLE `penguji_seminar` (
+  `id_penguji_s` int(11) NOT NULL AUTO_INCREMENT,
+  `id_seminar_ta` int(11) DEFAULT NULL,
+  `id_dosen` int(11) DEFAULT NULL,
+  `konfirmasi` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_penguji_s`),
+  KEY `id_seminar_ta` (`id_seminar_ta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `konfirmasi_seminar`
+-- Dumping data for table `penguji_seminar`
 --
 
-LOCK TABLES `konfirmasi_seminar` WRITE;
-/*!40000 ALTER TABLE `konfirmasi_seminar` DISABLE KEYS */;
-/*!40000 ALTER TABLE `konfirmasi_seminar` ENABLE KEYS */;
+LOCK TABLES `penguji_seminar` WRITE;
+/*!40000 ALTER TABLE `penguji_seminar` DISABLE KEYS */;
+/*!40000 ALTER TABLE `penguji_seminar` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `konfirmasi_ujian`
+-- Table structure for table `penguji_ujian`
 --
 
-DROP TABLE IF EXISTS `konfirmasi_ujian`;
+DROP TABLE IF EXISTS `penguji_ujian`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `konfirmasi_ujian` (
-  `id_penilaian_u` int(11) DEFAULT NULL,
-  `id_dosen_uji` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
+CREATE TABLE `penguji_ujian` (
+  `id_penguji_u` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ujian_ta` int(11) DEFAULT NULL,
+  `id_dosen` int(11) DEFAULT NULL,
+  `konfirmasi` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_penguji_u`),
+  KEY `id_ujian_ta` (`id_ujian_ta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `konfirmasi_ujian`
+-- Dumping data for table `penguji_ujian`
 --
 
-LOCK TABLES `konfirmasi_ujian` WRITE;
-/*!40000 ALTER TABLE `konfirmasi_ujian` DISABLE KEYS */;
-/*!40000 ALTER TABLE `konfirmasi_ujian` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pengajuan_seminar`
---
-
-DROP TABLE IF EXISTS `pengajuan_seminar`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pengajuan_seminar` (
-  `id_ps` int(11) NOT NULL AUTO_INCREMENT,
-  `id_js` int(11) DEFAULT NULL,
-  `id_ta` int(11) DEFAULT NULL,
-  `id_dosbing1` int(11) DEFAULT NULL,
-  `id_dosbing2` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_ps`),
-  KEY `id_ta` (`id_ta`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pengajuan_seminar`
---
-
-LOCK TABLES `pengajuan_seminar` WRITE;
-/*!40000 ALTER TABLE `pengajuan_seminar` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pengajuan_seminar` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pengajuan_ujian`
---
-
-DROP TABLE IF EXISTS `pengajuan_ujian`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pengajuan_ujian` (
-  `id_pu` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ju` int(11) DEFAULT NULL,
-  `id_ta` int(11) DEFAULT NULL,
-  `id_dosbing1` int(11) DEFAULT NULL,
-  `id_dosbing2` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_pu`),
-  KEY `id_ta` (`id_ta`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pengajuan_ujian`
---
-
-LOCK TABLES `pengajuan_ujian` WRITE;
-/*!40000 ALTER TABLE `pengajuan_ujian` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pengajuan_ujian` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `penilaian_seminar`
---
-
-DROP TABLE IF EXISTS `penilaian_seminar`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `penilaian_seminar` (
-  `id_penilaian_s` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ps` int(11) DEFAULT NULL,
-  `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `evaluasi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_penilaian_s`),
-  KEY `id_ps` (`id_ps`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `penilaian_seminar`
---
-
-LOCK TABLES `penilaian_seminar` WRITE;
-/*!40000 ALTER TABLE `penilaian_seminar` DISABLE KEYS */;
-/*!40000 ALTER TABLE `penilaian_seminar` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `penilaian_ujian`
---
-
-DROP TABLE IF EXISTS `penilaian_ujian`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `penilaian_ujian` (
-  `id_penilaian_u` int(11) NOT NULL AUTO_INCREMENT,
-  `id_pu` int(11) DEFAULT NULL,
-  `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `evaluasi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_penilaian_u`),
-  KEY `id_pu` (`id_pu`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `penilaian_ujian`
---
-
-LOCK TABLES `penilaian_ujian` WRITE;
-/*!40000 ALTER TABLE `penilaian_ujian` DISABLE KEYS */;
-/*!40000 ALTER TABLE `penilaian_ujian` ENABLE KEYS */;
+LOCK TABLES `penguji_ujian` WRITE;
+/*!40000 ALTER TABLE `penguji_ujian` DISABLE KEYS */;
+/*!40000 ALTER TABLE `penguji_ujian` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -409,6 +309,37 @@ CREATE TABLE `seminar_final` (
 LOCK TABLES `seminar_final` WRITE;
 /*!40000 ALTER TABLE `seminar_final` DISABLE KEYS */;
 /*!40000 ALTER TABLE `seminar_final` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `seminar_ta`
+--
+
+DROP TABLE IF EXISTS `seminar_ta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `seminar_ta` (
+  `id_seminar_ta` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ta` int(11) DEFAULT NULL,
+  `id_jadwal` int(11) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nilai_angka` int(11) DEFAULT NULL,
+  `evaluasi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_seminar_ta`),
+  KEY `id_ps` (`id_ta`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seminar_ta`
+--
+
+LOCK TABLES `seminar_ta` WRITE;
+/*!40000 ALTER TABLE `seminar_ta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `seminar_ta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -450,8 +381,9 @@ CREATE TABLE `tugas_akhir` (
   `id_status` int(11) DEFAULT NULL,
   `id_bidang_mk` int(11) DEFAULT NULL,
   `judul` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tanggalBuat` date DEFAULT NULL,
-  `file` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_ta`),
   KEY `nrp` (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -463,7 +395,7 @@ CREATE TABLE `tugas_akhir` (
 
 LOCK TABLES `tugas_akhir` WRITE;
 /*!40000 ALTER TABLE `tugas_akhir` DISABLE KEYS */;
-INSERT INTO `tugas_akhir` VALUES (1,'3',NULL,0,0,2,'Rancang Bangun Aplikasi e-Learning pada Fitur Manajemen Perkuliahan Berbasis Perangkat Bergerak Android Menggunakan Paradigma Reactive Programming','2017-07-18',NULL),(2,'8',NULL,NULL,0,1,'Sinkronisasi Basis Data Relasional menggunakan Paradigma Publish/Subscribe pada Studi Kasus Sistem Informasi Berbasis Web di ITS','2017-07-18',NULL);
+INSERT INTO `tugas_akhir` VALUES (1,'3',2,1,0,1,'Rancang Bangun Aplikasi e-Learning Berbasis Perangkat Bergerak Android pada Fitur Manajemen Quiz dan Tanya Jawab Menggunakan Paradigma Reactive Programming',1,'2017-07-20 02:02:38','2017-07-20 02:16:57'),(2,'8',NULL,NULL,0,1,'Rancang Bangun Simulasi Tertib Lalu Lintas Sesuai Dengan Peraturan Pemerintah Nomor 79 Tahun 2013 Menggunakan Steering Wheel dan Oculus Rift',NULL,'2017-07-20 02:22:59','2017-07-20 02:22:59');
 /*!40000 ALTER TABLE `tugas_akhir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -488,6 +420,36 @@ CREATE TABLE `ujian_final` (
 LOCK TABLES `ujian_final` WRITE;
 /*!40000 ALTER TABLE `ujian_final` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ujian_final` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ujian_ta`
+--
+
+DROP TABLE IF EXISTS `ujian_ta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ujian_ta` (
+  `id_ujian_ta` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ta` int(11) DEFAULT NULL,
+  `id_ju` int(11) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `evaluasi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_ujian_ta`),
+  KEY `id_pu` (`id_ta`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ujian_ta`
+--
+
+LOCK TABLES `ujian_ta` WRITE;
+/*!40000 ALTER TABLE `ujian_ta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ujian_ta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -526,4 +488,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-18  9:41:42
+-- Dump completed on 2017-07-20  9:33:22
