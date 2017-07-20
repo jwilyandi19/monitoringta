@@ -47,6 +47,7 @@ Route::group(['middleware' => ['Dosen']], function(){
 
 Route::group(['middleware' => ['Koordinator']], function(){
     Route::resource('/user', 'UserController');
+    Route::post('/user/uploadfile', 'UserController@uploadFile');
     Route::post('/createuser1','AuthController@buatUser1');
     Route::resource('/jadwal', 'JadwalController');
     Route::get('/jadwalseminar', 'JadwalController@jadwalSeminar');

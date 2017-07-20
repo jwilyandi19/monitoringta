@@ -216,4 +216,34 @@ class UserController extends Controller
             return Redirect::to('/user')->withErrors('User Tidak Ditemukan');
         }
     }
+
+    public function uploadFile(Request $request){
+        if($request->hasFile('fileUser') && $request->file('fileUser')->isValid()){
+            $file = $request->fileUser;
+            $path = 'public/generate_user';
+            $flag = $request->fileUser->storeAs($path, $file->getClientOriginalName());
+            if($flag){
+                $storagePath = storage_path('app/'.$flag);
+                $handle = fopen($storagePath, "r");
+                while(($data = fgetcsv($handle)) !== FALSE){
+                    $username = $data[1];
+                    $nama = $data[2];
+                    $user = new User();
+                    $user->username = $username;
+                    $user->password = bcrypt($username);
+                    $user->role = 1;
+                    $user->nama = $nama;
+                    $user->save();
+                    unset($user);
+                }
+                return Redirect::to('/user/create')->with('message', 'Berhasil upload file csv dan generate user baru');
+            }
+            else{
+                return Redirect::to('/user/create')->withErrors('Gagal generate user, terjadi kesalahan dalam proses upload file, silahkan coba lagi');
+            }
+        }
+        else{
+            return Redirect::to('/user/create')->withErrors('Gagal generate user, terjadi kesalahan dalam proses upload file, silahkan coba lagi');
+        }
+    }
 }
