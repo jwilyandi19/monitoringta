@@ -44,7 +44,7 @@ Pengajuan TA
                         <select class="form-control" name="bidangMk">
                             <option value="" selected >Bidang Matakuliah</option>
                             @foreach($bidang_mks as $bidang_mk)
-                                <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->keterangan}}</option>
+                                <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->nama_bidang}}</option>
                             @endforeach
                         </select>
                     </div>

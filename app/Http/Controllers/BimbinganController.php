@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Dosen;
 use App\DosenPembimbing;
 use App\TugasAkhir;
-use Redirect;
 use App\Asistensi;
+use App\Dosen;
+use Redirect;
 
 class BimbinganController extends Controller
 {
@@ -24,8 +24,8 @@ class BimbinganController extends Controller
                 $query->where('id_status','>=','0')->with('user');
             }])->get();
         
-        $data['bimbingans'] = TugasAkhir::where([['id_status', '>=', '0'], ['id_dosbing1', session('user')['id_dosen']]])->orWhere([['id_status', '>=', '0'], ['id_dosbing2', session('user')['id_dosen']]])->orderBy('tanggalBuat', 'desc')->with('user')->paginate(8);
-        
+        $data['bimbingans'] = TugasAkhir::where([['id_status', '>=', '0'], ['id_dosbing1', session('user')['id_dosen']]])->orWhere([['id_status', '>=', '0'], ['id_dosbing2', session('user')['id_dosen']]])->orderBy('created_at', 'desc')->with('user')->paginate(8);
+        //dd($data);
         return view('bimbingan.index', $data);
     }
 
@@ -57,10 +57,10 @@ class BimbinganController extends Controller
      */
     public function show($id_ta)
     {
-        $detailta = TugasAkhir::find($id_ta)->with(['user','dosbing1','dosbing2','status','bidang'])->first();
+        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','bidang'])->first();
         if($detailta){
             $data['detailta'] = $detailta;
-            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->get();
+            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
             //dd($data);
             return view('progres.detail_dosbing',$data);
         }
@@ -111,7 +111,7 @@ class BimbinganController extends Controller
         $bimbingan->status = 1;
         //dd($bimbingan); 
         if($bimbingan->save()){
-            $tugasAkhir = TugasAkhir::find($bimbingan->id_ta)->first();
+            $tugasAkhir = TugasAkhir::where('id_ta', $bimbingan->id_ta)->first();
             if($bimbingan->peran == 1){
                 $tugasAkhir->id_dosbing1 = session('user')['id_dosen'];   
             }
@@ -143,6 +143,7 @@ class BimbinganController extends Controller
     {
         $asistensi = new Asistensi();
         $asistensi->id_ta = $request->id_ta;
+        $asistensi->id_dosen = session('user')['id_dosen'];
         $asistensi->tanggal = $request->tanggal;
         $asistensi->materi = $request->materi;
         if($asistensi->save())
