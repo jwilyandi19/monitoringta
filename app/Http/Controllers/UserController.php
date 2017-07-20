@@ -121,9 +121,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::where('id_user',$id)->first();
+        $data['user'] = $user;
+        return
     }
-
     /**
      * Update the specified resource in storage.
      *
