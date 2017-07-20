@@ -86,11 +86,11 @@ class ProgresController extends Controller
         //dd($request);
         $tugasAkhir = TugasAkhir::where('id_ta',$id_ta)->first();
         $tugasAkhir->judul = $request->judulTA;
-        $tugasAkhir->id_bidang_mk = $request->bidangMK;
+        $tugasAkhir->id_bidang_mk = $request->bidangMk;
         if($tugasAkhir->id_dosbing1){
             if($request->pembimbing1){
-                if($tugasAkhir->id_pembimbing1 != $request->pembimbing1){
-                    $tugasAkhir->id_pembimbing1 = null;
+                if($tugasAkhir->id_dosbing1 != $request->pembimbing1){
+                    $tugasAkhir->id_dosbing1 = null;
                     $dosenPembimbing = DosenPembimbing::where([['id_ta', '=', $id_ta], ['peran', '=', '1']])->first();
                     $dosenPembimbing->id_dosen = $request->pembimbing1;
                     $dosenPembimbing->status = 0;
@@ -116,6 +116,7 @@ class ProgresController extends Controller
                     $dosenPembimbing->id_ta = $id_ta;
                     $dosenPembimbing->id_dosen = $request->pembimbing1;
                     $dosenPembimbing->status = 0;
+                    $dosenPembimbing->peran = 1;
                     $dosenPembimbing->save();
                 }
             }
@@ -123,8 +124,8 @@ class ProgresController extends Controller
 
         if($tugasAkhir->id_dosbing2){
             if($request->pembimbing2){
-                if($tugasAkhir->id_pembimbing2 != $request->pembimbing2){
-                    $tugasAkhir->id_pembimbing2 = null;
+                if($tugasAkhir->id_dosbing2 != $request->pembimbing2){
+                    $tugasAkhir->id_dosbing2 = null;
                     $dosenPembimbing = DosenPembimbing::where([['id_ta', '=', $id_ta], ['peran', '=', '2']])->first();
                     $dosenPembimbing->id_dosen = $request->pembimbing2;
                     $dosenPembimbing->status = 0;
@@ -148,20 +149,22 @@ class ProgresController extends Controller
                 else{
                     $dosenPembimbing = new DosenPembimbing();
                     $dosenPembimbing->id_ta = $id_ta;
-                    $dosenPembimbing->id_dosen = $request-pembimbing2;
+                    $dosenPembimbing->id_dosen = $request->pembimbing2;
                     $dosenPembimbing->status = 0;
+                    $dosenPembimbing->peran = 2;
                     $dosenPembimbing->save();
                 }
             }
         }
 
+
         if($tugasAkhir->save()){
-            $url = url('/progres')."/".$id_ta;
-            return Redirect::to($request->url)->with('message', 'Perubahan data Tugas Akhir anda berhasil disimpan');
+            $url = url('/progres')."/".$id_ta."/edit";
+            return Redirect::to($url)->with('message', 'Perubahan data Tugas Akhir anda berhasil disimpan');
         }
         else{
-            $url = url('/progres')."/".$id_ta;
-            return Redirect::to($request->url)->withErrors('Perubahan data Tugas Akhir anda gagal disimpan');
+            $url = url('/progres')."/".$id_ta."/edit";
+            return Redirect::to($url)->withErrors('Perubahan data Tugas Akhir anda gagal disimpan');
         }
     }
 
@@ -181,7 +184,7 @@ class ProgresController extends Controller
         $detailta = TugasAkhir::where([['id_user', '=', session('user')['id']],['id_status','>=','0']])->with(['user','dosbing1','dosbing2','status','bidang'])->first();
         if($detailta){
             $data['detailta'] = $detailta;
-            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->get();
+            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
             return view('progres.detail',$data);
         }
         else

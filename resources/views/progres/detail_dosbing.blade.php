@@ -30,65 +30,89 @@
         </div>
         <div class="panel-body isi-halaman">
             <div >
-                <div class="alert alert-warning">
-                    <h4>Perhatian</h4>
-                    <p><strong>Anda belum pernah mengupload file proposal</strong></p>
-                </div>
                 <div class="row" >
                     <label class="col-md-2"><h6 class="pull-left">NRP</h6></label>
-                    <div class="col-md-10">
-                        <h6>: {{$detailta->user->username}}</h6>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        <h6>{{$detailta->user->username}}</h6>
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-md-2"><h6 class="pull-left">Nama</h6></label>
-                    <div class="col-md-10">
-                        <h6>: {{$detailta->user->nama}}</h6>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        <h6>{{$detailta->user->nama}}</h6>
                     </div>
                 </div>
                 <div class="row">
                     <label class="col-md-2"><h6 class="pull-left">Judul Tugas Akhir</h6></label>
-                    <div class="col-md-10">
-                        <h6>: {{$detailta->judul}}</h6>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        <h6>{{$detailta->judul}}</h6>
                     </div>
                 </div>
                 <div class="row">
                     <label class=" col-md-2"><h6 class="pull-left">Pembimbing 1</h6></label>
-                    <div class="col-md-10">
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
                         @if($detailta->id_dosbing1!=null)
-                            <h6>: {{$detailta->dosbing1->nama_lengkap}}</h6>
+                            <h6>{{$detailta->dosbing1->nama_lengkap}}</h6>
                         @else
-                            <h6>: -</h6>
+                            <h6>-</h6>
                         @endif
 
                     </div>
                 </div>
                 <div class="row">
                     <label class=" col-md-2"><h6 class="pull-left">Pembimbing 2</h6></label>
-                    <div class="col-md-10">
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
                         @if($detailta->id_dosbing2!=null)
-                            <h6>: {{$detailta->dosbing2->nama_lengkap}}</h6>
+                            <h6>{{$detailta->dosbing2->nama_lengkap}}</h6>
                         @else
-                            <h6>: -</h6>
+                            <h6>-</h6>
                         @endif
                     </div>
                 </div>
                 <div class="row">
                     <label class=" col-md-2"><h6 class="pull-left">RMK</h6></label>
-                    <div class="col-md-10">
-                        <h6>: {{$detailta->bidang->nama_bidang}}</h6>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        <h6>{{$detailta->bidang->nama_bidang}}</h6>
                     </div>
                 </div>
                 <div class="row">
                     <label class=" col-md-2"><h6 class="pull-left">Status</h6></label>
-                    <div class="col-md-10">
-                        <h6>: {{$detailta->status->keterangan}}</h6>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        <h6>{{$detailta->status->keterangan}}</h6>
                     </div>
                 </div>
                 <div class="row">
                     <label class=" col-md-2"><h6 class="pull-left">File Proposal</h6></label>
-                    <div class="col-md-10">
-                        <h6>: -</h6>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->file)
+                            <h6><a href="{{url(asset('storage/file_ta/'.$detailta->user->username.'_'.$detailta->id_ta.'/'.$detailta->user->username.'_'.$detailta->id_ta.'.zip'))}}">{{$detailta->user->username.'_'.$detailta->id_ta}}</a></h6>
+                        @else
+                            <h6>-</h6>
+                        @endif
                     </div>
                 </div>
                 <br>
@@ -104,6 +128,7 @@
                             <th>No</th>
                             <th>Tanggal</th>
                             <th>Materi Asistensi</th>
+                            <th>Dosen</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -113,6 +138,7 @@
                                     <td>{{$key+1}}</td>
                                     <td>{{$asistensi->tanggal}}</td>
                                     <td>{{$asistensi->materi}}</td>
+                                    <td>{{$asistensi->dosen->nama_lengkap}}</td>
                                 </tr>
                             @endforeach
                         @endif
@@ -132,14 +158,20 @@
             </div>
             <div class="col-md-12">
                 <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
-                <div class="col-md-10">
-                    <h6>: -</h6>
+                <div class="col-md-1" style="text-align: right;">
+                    <h6>:</h6>
+                </div>
+                <div class="col-md-9">
+                    <h6>-</h6>
                 </div>
             </div>
             <div class="col-md-12">
                 <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
-                <div class="col-md-10">
-                    <h6>: -</h6>
+                <div class="col-md-1" style="text-align: right;">
+                    <h6>:</h6>
+                </div>
+                <div class="col-md-9">
+                    <h6>-</h6>
                 </div>
             </div>
             <br>
@@ -152,14 +184,20 @@
             </div>
             <div class="col-md-12">
                 <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
-                <div class="col-md-10">
-                    <h6>: -</h6>
+                <div class="col-md-1" style="text-align: right;">
+                    <h6>:</h6>
+                </div>
+                <div class="col-md-9">
+                    <h6>-</h6>
                 </div>
             </div>
             <div class="col-md-12">
                 <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
-                <div class="col-md-10">
-                    <h6>: -</h6>
+                <div class="col-md-1" style="text-align: right;">
+                    <h6>:</h6>
+                </div>
+                <div class="col-md-9">
+                    <h6>-</h6>
                 </div>
             </div>
             <br>

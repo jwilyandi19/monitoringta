@@ -30,13 +30,17 @@
         </div>
         <div class="panel-body isi-halaman">
             <div >
-                <div class="alert alert-warning">
-                    <h4>Perhatian</h4>
-                    <p><strong>Anda belum pernah mengupload file proposal</strong></p>
-                    @if($asistensis==null)
-                        <p><strong>Anda belum pernah melakukan bimbingan</strong></p>
-                    @endif
-                </div>
+                @if(!$detailta->file || count($asistensis) == 0)
+                    <div class="alert alert-warning">
+                        <h4>Perhatian</h4>
+                        @if(!$detailta->file)
+                            <p><strong>Anda belum pernah mengupload file proposal</strong></p>
+                        @endif
+                        @if(count($asistensis) == 0)
+                            <p><strong>Anda belum pernah melakukan bimbingan</strong></p>
+                        @endif
+                    </div>
+                @endif
                 <div class="row" >
                     <label class="col-md-2"><h6 class="pull-left">NRP</h6></label>
                     <div class="col-md-1" style="text-align: right;">
@@ -140,15 +144,17 @@
                             <th>No</th>
                             <th>Tanggal</th>
                             <th>Materi Asistensi</th>
+                            <th>Dosen</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if($asistensis)
+                        @if(count($asistensis) != 0)
                             @foreach($asistensis as $key => $asistensi)
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$asistensi->tanggal}}</td>
                                     <td>{{$asistensi->materi}}</td>
+                                    <td>{{$asistensi->dosen->nama_lengkap}}</td>
                                 </tr>
                             @endforeach
                         @endif

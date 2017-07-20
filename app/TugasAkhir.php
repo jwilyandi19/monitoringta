@@ -9,7 +9,7 @@ class TugasAkhir extends Model
     protected $table = 'tugas_akhir';
     protected $primaryKey='id_ta';
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
     'id_ta',
     'id_user',
@@ -18,7 +18,6 @@ class TugasAkhir extends Model
     'id_status',
     'id_bidang_mk',
     'judul',
-    'tanggalBuat',
     'file',
     'created_at',
     'updated_at',
