@@ -11,28 +11,11 @@
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="{{url('/pencarianta')}}"><i class="glyphicon glyphicon-search"></i> Pencarian TA </a></li>
-
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-education"></i> User </a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-education"></i> Manage User </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('/manageuser')}}"><i class="glyphicon glyphicon-user"></i> Manage</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-blackboard"></i> Seminar TA </a>
-                    <ul class="dropdown-menu">
-                        <li><a href=""><i class="glyphicon glyphicon-list-alt"></i> Jadwal Seminar</a></li>
-                        <li><a href=""><i class="glyphicon glyphicon-calendar"></i> Pengajuan Jadwal Seminar</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-book"></i> Sidang TA </a>
-                    <ul class="dropdown-menu">
-                        <li><a href=""><i class="glyphicon glyphicon-list-alt"></i> Jadwal Sidang</a></li>
-                        <li><a href=""><i class="glyphicon glyphicon-calendar"></i> Pengajuan Jadwal Sidang</a></li>
+                        <li><a href="{{url('/user/create')}}"><i class="glyphicon glyphicon-user"></i> Buat User</a></li>
+                        <li><a href="{{url('/user')}}"><i class="glyphicon glyphicon-user"></i> Lihat User</a></li>
                     </ul>
                 </li>
 
