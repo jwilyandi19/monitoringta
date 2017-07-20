@@ -6,6 +6,7 @@ use DB;
 use Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Dosen;
 use App\User;
 
 class UserController extends Controller
@@ -66,19 +67,49 @@ class UserController extends Controller
             }
             else
             {
-                $baru = new User();
-                $baru->username = $request->username;
-                $baru->password = bcrypt($request->username);
-                $baru->role = $request->role;
-                $baru->nama = $request->nama;
-                if($baru->save())
+                $user = new User();
+                $user->username = $request->username;
+                $user->password = bcrypt($request->username);
+                $user->role = $request->role;
+                $user->nama = $request->nama;
+                if($request->role == 2)
                 {
-                    return Redirect::to('/user/create')->with('message','Berhasil Membuat User '.$request->username);
+                    if($user->save())
+                    {
+                        $get = User::where('username',$request->username)->first();
+                        //dd($get);
+                        $dosen = new Dosen();
+                        $dosen->id_user = $get->id_user;
+                        $dosen->nip = $request->username;
+                        $dosen->nama = $request->nama;
+                        $dosen->nama_lengkap = $request->nama;
+                        if($dosen->save())
+                        {
+                            return Redirect::to('/user/create')->with('message','Berhasil Membuat User '.$request->username);
+                        }
+                        else
+                        {
+                            return Redirect::to('/user/create')->withErrors('Terdapat kesalahan pada server ketika membuat User '.$request->username);
+                        }
+
+                    }
+                    else
+                    {
+                        return Redirect::to('/user/create')->withErrors('Gagal membuat User '.$request->username);
+                    }
                 }
                 else
                 {
-                    return Redirect::to('/user/create')->withErrors('Terdapat kesalahan pada server ketika membuat User '.$request->username);
+                    if($user->save())
+                    {
+                        return Redirect::to('/user/create')->with('message','Berhasil Membuat User '.$request->username);
+                    }
+                    else
+                    {
+                        return Redirect::to('/user/create')->withErrors('Gagal membuat User '.$request->username);
+                    }
                 }
+
             }
         }
     }
@@ -121,9 +152,19 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::where('id_user',$id)->first();
+        if($user->role == 2)
+        {
+            $data['user'] = User::where('id_user',$id)->with('akunDosen')->first();
+            dd($data);
+            return view('user.edit',$data);
+        }
+        else
+        {
+            $data['user'] = $user;
+            return view('user.edit',$data);
+        }
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -133,7 +174,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+       if($request->nama_lengkap!= null) {
+           $dosen = Dosen::where('id_user', $id)->first();
+           $dosen->nip = $request->username;
+           $dosen->nama = $request->nama;
+           $dosen->nama_lengkap = $request->nama_lengkap;
+           if(!$dosen->save())
+           {
+               return Redirect::to('/user/'.$id)->withErrors('Gagal Melakukan Update');
+           }
+       }
+       $user = User::where('id_user',$id)->first();
+       $user->username = $request->username;
+       $user->password = bcrypt($request->username);
+       $user->nama = $request->nama;
+       if(!$user->save())
+       {
+           return Redirect::to('/user/'.$id)->withErrors('Gagal Melakukan Update');
+       }
+       else
+       {
+           return Redirect::to('/user/'.$id)->with('message','Berhasil Melakukan Update');
+       }
     }
 
     /**
