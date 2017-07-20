@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group has-warning">
                         <label class="control-label" for="bidang"><h5>Peran *</h5></label>
-                        <select id="peran" class="form-control" name="role">
+                        <select onchange="hideFunction()" id="peran" class="form-control" name="role">
                             @if($user->role == 1)
                                 <option value="1" selected>Mahasiswa</option>
                                 <option value="2">Dosen</option>
@@ -62,9 +62,9 @@
                         <label class="control-label" for="judulta"><h5>Nama *</h5></label>
                         <input type="text" name="nama" class="form-control col-md-10" value="{{$user->nama}}">
                     </div>
-                    <div id="nama-lengkap" class="form-group has-warning">
+                    <div id="nama-lengkap" class="form-group has-warning" style="display: none;">
                         <label class="control-label" for="judulta"><h5>Nama Lengkap *</h5></label>
-                        @if(!$user->akunDosen)
+                        @if($user->akunDosen!=null)
                             <input type="text" name="nama_lengkap" class="form-control col-md-10" value="{{$user->akunDosen->nama_lengkap}}">
                         @else
                             <input type="text" name="nama_lengkap" class="form-control col-md-10" placeholder="Nama Lengkap..">
@@ -88,9 +88,9 @@
 @section('moreScript')
     <script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
     <script type="text/javascript">
-        $(document).on('click', '#edit', function(){
-            $('#edit-user').submit();
-        });
+        function hideFunction() {
+
+        }
         $(document).on('click', '#kembali', function(){
             $('#kembali-user').submit();
         });
