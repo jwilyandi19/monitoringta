@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Jadwal;
+use App\JadwalSeminar;
 
 class JadwalController extends Controller
 {
@@ -87,10 +88,14 @@ class JadwalController extends Controller
     }
 
     public function jadwalSeminar(){
-        return view('jadwal.seminar');
+        $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first();
+        //dd($tanggalTutup);
+        $data['jadwal_seminars'] = JadwalSeminar::where('tanggal', '>', $tanggalTutup->tanggal)->get();
+        //dd($data);
+        return view('jadwal.seminar', $data);
     }
 
-    public function jadwalSeminar($id){
+    public function tambahJadwalSeminar($id){
         return view('jadwal.seminar');
     }
 
@@ -98,7 +103,7 @@ class JadwalController extends Controller
         return view('jadwal.ujian');
     }
 
-    public function jadwalUjian($id){
+    public function tambahJadwalUjian($id){
         return view('jadwal.ujian');
     }
 }
