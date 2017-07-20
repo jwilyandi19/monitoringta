@@ -83,10 +83,9 @@
             @endif
             <div class="form-group">
                 <div class="pull-right">
-                    <button class="btn btn-default"><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali </button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit User</button>
-                    <button class="btn btn-danger" id="hapus"><i class="glyphicon glyphicon-trash"></i> Hapus User</button>
-
+                    <button class="btn btn-default"style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali </button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#editModal" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-edit"></i> Edit User</button>
+                    <button class="btn btn-danger" id="hapus" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-trash"></i> Hapus User</button>
                 </div>
             </div>
             <form id="hapus-user" action="{{url('/user/'.$user->id_user)}}" method="POST" >
@@ -102,7 +101,7 @@
                     <h4 class="modal-title" style="color: #ffffff;"> Edit Data User </h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" method="POST" action="{{url('/login')}}">
+                    <form class="form-horizontal" method="POST" action="{{url('/user/'.$user->id_user)}}">
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Username</label>
                             <div class="col-md-10">
@@ -146,7 +145,8 @@
                         @endif
                         <div class="form-group">
                             {{csrf_field()}}
-                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Login</button>
+                            {{method_field('PUT')}}
+                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Update</button>
                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
                         </div>
                     </form>
