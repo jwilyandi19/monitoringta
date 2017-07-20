@@ -55,6 +55,6 @@ class Dosen extends Model
     }
 
     public function seminarFinals(){
-        return $this->hasMany('App\SeminarFinal', 'id_dosen', 'id_dosen')
+        return $this->hasMany('App\SeminarFinal', 'id_dosen', 'id_dosen');
     }
 }
