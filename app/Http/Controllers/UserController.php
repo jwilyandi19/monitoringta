@@ -244,7 +244,6 @@ class UserController extends Controller
                     }
                     unset($user);
                 }
-                //dd($flag);  
                 return Redirect::to('/user/create')->with('message', 'Berhasil upload file csv dan generate user baru');
             }
             else{

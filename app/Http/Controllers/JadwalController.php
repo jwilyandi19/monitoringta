@@ -90,10 +90,10 @@ class JadwalController extends Controller
     public function jadwalSeminar(){
         $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first();
         //dd($tanggalTutup);
-        $data['jadwal_seminars'] = JadwalSeminar::where('tanggal', '>', $tanggalTutup->tanggal)->get();
+        $data['jadwal_seminars'] = JadwalSeminar::where([['tanggal', '>', $tanggalTutup->tanggal],['sesi', '=', '1']])->paginate(10);
         //dd($data);
         return view('jadwal.seminar', $data);
-    }
+    }   
 
     public function tambahJadwalSeminar($id){
         return view('jadwal.seminar');

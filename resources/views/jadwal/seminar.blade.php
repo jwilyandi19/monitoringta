@@ -28,6 +28,10 @@
             <h4><strong>List Jadwal Seminar</strong></h4>
             <hr>
         </div>
+        <div class="alert alert-warning center" style="text-align: center;">
+            <h5>Tambahkan Tanggal Seminar Baru</h5>
+            <button class="btn btn-primary" data-toggle="modal" data-target="tambahSeminar">Tambahkan Jadwal</button>
+        </div>
         <div class="data-user">
             <table class="table table-striped">
                 <thead>
@@ -50,6 +54,9 @@
                 </tbody>
             </table>
 
+        </div>
+        <div class="text-right">
+            {{$jadwal_seminars->links()}}
         </div>
     </div>
 @endsection
