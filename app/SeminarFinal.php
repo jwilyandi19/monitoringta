@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class KetersediaanSeminar extends Model
+class SeminarFinal extends Model
 {
-    protected $table = 'ketersediaan_seminar';
-    protected $primaryKey='id_ks';
+    protected $table = 'seminar_final';
+    protected $primaryKey='id_sf';
     public $incrementing = true;
     public $timestamps = true;
     protected $fillable = [
-    'id_ks',
+    'id_sf',
     'id_js',
     'id_dosen',
     'created_at',

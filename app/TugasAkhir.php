@@ -51,4 +51,11 @@ class TugasAkhir extends Model
         return $this->hasMany('App\DosenPembimbing', 'id_ta', 'id_ta');
     }
 
+    public function seminarTA(){
+        return $this->hasOne('App\SeminarTA', 'id_ta', 'id_ta');
+    }
+
+    public function ujianTA(){
+        return $this->hasOne('App\UjianTA', 'id_ta', 'id_ta');
+    }
 }

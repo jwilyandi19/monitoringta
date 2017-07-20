@@ -26,6 +26,10 @@ class SeminarTA extends Model
     }
 
     public function konfirmasis(){
-    	return $this->hasMany('App\KonfirmasiSeminar', 'id_seminar_ta', 'id_seminar_ta');
+    	return $this->hasMany('App\PengujiSeminar', 'id_seminar_ta', 'id_seminar_ta');
+    }
+
+    public function jadwalSeminar(){
+        return $this->belongsTo('App\jadwalSeminar', 'id_js', 'id_js');
     }
 }

@@ -27,6 +27,10 @@ class UjianTA extends Model
     }
 
     public function konfirmasis(){
-    	return $this->hasMany('App\KonfirmasiUjian', 'id_ujian_ta', 'id_ujian_ta');
+    	return $this->hasMany('App\PengujiUjian', 'id_ujian_ta', 'id_ujian_ta');
+    }
+
+    public function jadwalUjian(){
+        return $this->belongsTo('App\JadwalUjian', 'id_ju', 'id_ju');
     }
 }

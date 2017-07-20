@@ -25,7 +25,6 @@ class BimbinganController extends Controller
             }])->get();
         
         $data['bimbingans'] = TugasAkhir::where([['id_status', '>=', '0'], ['id_dosbing1', session('user')['id_dosen']]])->orWhere([['id_status', '>=', '0'], ['id_dosbing2', session('user')['id_dosen']]])->orderBy('created_at', 'desc')->with('user')->paginate(8);
-        //dd($data);
         return view('bimbingan.index', $data);
     }
 
@@ -61,7 +60,6 @@ class BimbinganController extends Controller
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
-            //dd($data);
             return view('progres.detail_dosbing',$data);
         }
         else
@@ -105,11 +103,9 @@ class BimbinganController extends Controller
     }
 
     public function konfirmasiTA(Request $request){
-        //dd($request);
+        
         $bimbingan = DosenPembimbing::where([['id_ta', '=', $request->idTugasAkhir],['id_dosen', '=', session('user')['id_dosen']]])->first();
-        //dd($bimbingan);
         $bimbingan->status = 1;
-        //dd($bimbingan); 
         if($bimbingan->save()){
             $tugasAkhir = TugasAkhir::where('id_ta', $bimbingan->id_ta)->first();
             if($bimbingan->peran == 1){
@@ -129,7 +125,6 @@ class BimbinganController extends Controller
     }
 
     public function tolakTA(Request $request){
-        //dd($request);
         $bimbingan = DosenPembimbing::where([['id_ta', '=', $request->idTugasAkhir],['id_dosen', '=', session('user')['id_dosen']]])->first();
         if($bimbingan->delete()){
             return Redirect::to('/bimbingan')->with('message', 'Berhasil menolak permintaan bimbingan');

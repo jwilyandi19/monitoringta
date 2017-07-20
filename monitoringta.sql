@@ -131,6 +131,30 @@ INSERT INTO `dosen_pembimbing` VALUES (1,2,1,1,0,'2017-07-20 02:02:38','2017-07-
 UNLOCK TABLES;
 
 --
+-- Table structure for table `jadwal`
+--
+
+DROP TABLE IF EXISTS `jadwal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jadwal` (
+  `id_jadwal` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tanggal` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_jadwal`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jadwal`
+--
+
+LOCK TABLES `jadwal` WRITE;
+/*!40000 ALTER TABLE `jadwal` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jadwal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `jadwal_seminar`
 --
 
@@ -435,6 +459,7 @@ CREATE TABLE `ujian_ta` (
   `id_ju` int(11) DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nilai_angka` int(11) DEFAULT NULL,
   `evaluasi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -488,4 +513,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-20  9:33:22
+-- Dump completed on 2017-07-20 11:04:06
