@@ -228,14 +228,23 @@ class UserController extends Controller
                 while(($data = fgetcsv($handle)) !== FALSE){
                     $username = $data[1];
                     $nama = $data[2];
-                    $user = new User();
-                    $user->username = $username;
-                    $user->password = bcrypt($username);
-                    $user->role = 1;
-                    $user->nama = $nama;
-                    $user->save();
+                    $user = User::where('username', $username)->first();
+                    if($user){
+                        echo "onok bos"."\n";
+                        continue;
+                    }
+                    else{
+                        $user = new User();
+                        $user->username = $username;
+                        $user->password = bcrypt($username);
+                        $user->role = 1;
+                        $user->nama = $nama;
+                        $user->save();
+                        unset($user);
+                    }
                     unset($user);
                 }
+                //dd($flag);  
                 return Redirect::to('/user/create')->with('message', 'Berhasil upload file csv dan generate user baru');
             }
             else{
