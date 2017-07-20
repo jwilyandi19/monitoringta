@@ -81,11 +81,17 @@
             @endif
             <div class="form-group">
                 <div class="pull-right">
-                    <button class="btn btn-default"style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali </button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#editModal" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-edit"></i> Edit User</button>
+                    <button class="btn btn-default" id="kembali" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali </button>
+                    <button class="btn btn-info" id="edit" data-toggle="modal" data-target="#editModal" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-edit"></i> Edit User</button>
                     <button class="btn btn-danger" id="hapus" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-trash"></i> Hapus User</button>
                 </div>
             </div>
+            <form id="kembali-user" action="{{url('/user')}}" method="GET" >
+                {{csrf_field()}}
+            </form>
+            <form id="edit-user" action="{{url('/user/'.$user->id_user.'/edit')}}" method="GET" >
+                {{csrf_field()}}
+            </form>
             <form id="hapus-user" action="{{url('/user/'.$user->id_user)}}" method="POST" >
                 {{csrf_field()}}
                 {{method_field('DELETE')}}
@@ -98,6 +104,12 @@
 @section('moreScript')
     <script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
     <script type="text/javascript">
+        $(document).on('click', '#edit', function(){
+            $('#edit-user').submit();
+        });
+        $(document).on('click', '#kembali', function(){
+            $('#kembali-user').submit();
+        });
         $(document).on('click', '#hapus', function(){
             var idUserHapus = $(this).attr('value');
             console.log(idUserHapus);

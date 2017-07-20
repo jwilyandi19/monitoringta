@@ -153,8 +153,17 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('id_user',$id)->first();
-        $data['user'] = $user;
-        return
+        if($user->role == 2)
+        {
+            $data['user'] = User::where('id_user',$id)->with('akunDosen')->first();
+            dd($data);
+            return view('user.edit',$data);
+        }
+        else
+        {
+            $data['user'] = $user;
+            return view('user.edit',$data);
+        }
     }
     /**
      * Update the specified resource in storage.
