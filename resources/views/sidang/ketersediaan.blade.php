@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    Ketersediaan Seminar Dosen
+    Ketersediaan Sidang Dosen
 @endsection
 
 @section('moreStyle')
@@ -25,7 +25,7 @@
     @endif
 	<div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
 		<div class="judul-halaman">
-            <h4><strong>Ketersediaan Jadwal Seminar</strong></h4>
+            <h4><strong>Ketersediaan Jadwal Ujian</strong></h4>
             <hr>
         </div>
         <div class="alert alert-warning">
@@ -38,15 +38,15 @@
             </div>
         </div>
         <div class="">
-            <div class="" style="height: <?php echo 170*((int)(count($tanggalSeminars)/5) + 1)?>px; width: 100%;">
-                @foreach($tanggalSeminars as $key => $tanggalSeminar)
+            <div class="" style="height: <?php echo 170*((int)(count($tanggalUjians)/5) + 1)?>px; width: 100%;">
+                @foreach($tanggalUjians as $key => $tanggalUjian)
                     <div class="kotak-tanggal">
                         <div class="panel tanggal">
-                            <p><strong>{{$tanggalSeminar['hari'].", ".$tanggalSeminar['tanggal']}}</strong></p>
+                            <p><strong>{{$tanggalUjian['hari'].", ".$tanggalUjian['tanggal']}}</strong></p>
                         </div>
                         <div class="panel sesi-tanggal">
-                            @foreach($tanggalSeminar['sesi'] as $key => $sesi)
-                                @if(isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$key]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$key] == 1)
+                            @foreach($tanggalUjian['sesi'] as $key => $sesi)
+                                @if(isset($ketersediaanDosen[$tanggalUjian['tanggal']][$key]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$key] == 1)
                                     <button id="tombolBersedia" class="btn btn-default btn-xs btn-block sesi sesi-success" value="{{$sesi}}"><p>sesi {{$key}}</p></button>
                                 @else
                                     <button id="tidakBersedia" class="btn btn-default btn-xs btn-block sesi" value="{{$sesi}}"><p>sesi {{$key}}</p></button>
@@ -58,15 +58,15 @@
             </div>
         </div>
 	</div>	
-    <form id="mengisiKetersediaan" action="{{url('/mengisiketersediaanseminar')}}" method="POST" style="display: none;">
+    <form id="mengisiKetersediaan" action="{{url('/mengisiketersediaanujian')}}" method="POST" style="display: none;">
         {{csrf_field()}}
         {{method_field('POST')}}
-        <input type="text" name="idJadwalSeminar" id="inp-idJadwalMengisi">
+        <input type="text" name="idJadwalUjian" id="inp-idJadwalMengisi">
     </form>
-    <form id="batalkanKetersediaan" action="{{url('/batalkanketersediaanseminar')}}" method="POST" style="display: none;">
+    <form id="batalkanKetersediaan" action="{{url('/batalkanketersediaanujian')}}" method="POST" style="display: none;">
         {{csrf_field()}}
         {{method_field('POST')}}
-        <input type="text" name="idJadwalSeminar" id="inp-idJadwalBatal">
+        <input type="text" name="idJadwalUjian" id="inp-idJadwalBatal">
     </form>
 @endsection
 

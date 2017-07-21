@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Jadwal;
 use App\JadwalSeminar;
 use App\KetersediaanSeminar;
+use Redirect;
 
 class SeminarController extends Controller
 {
@@ -101,7 +102,7 @@ class SeminarController extends Controller
         
         $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
         $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
-        $dosens = KetersediaanSeminar::with(['jadwalSeminar' => function($query) use ($tanggalTutup){
+        $dosens = KetersediaanSeminar::where('id_dosen', session('user')['id_dosen'])->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
             $query->where('tanggal', '>', $tanggalTutup);
         }])->get();
         
@@ -113,7 +114,6 @@ class SeminarController extends Controller
         }
 
         $dates = array_keys($jadwalSeminar);
-        //print_r($dates);
         foreach ($dates as $key => $date) {
             $tanggalSeminars[$key]['tanggal'] = $date;
             $day = date('D', strtotime($date));
@@ -123,16 +123,20 @@ class SeminarController extends Controller
         $data['tanggalSeminars'] = $tanggalSeminars;
         $data['ketersediaanDosen'] = $ketersediaanDosen;
 
-        /*foreach ($tanggalSeminars as $key => $tanggalSeminar) {
-            //echo $tanggalSeminar['hari'].", ".$tanggalSeminar['tanggal']."\n";
-            //print_r($tanggalSeminar['sesi']);
-            foreach ($tanggalSeminar['sesi'] as $key => $sesi) {
-                if(isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$key]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$key] == 1){
-                    echo $sesi.", ".$key."\n";
-                }
-            }
-        }*/
-        //dd($data);
         return view('seminar.ketersediaan', $data);
+    }
+
+    public function mengisiKetersediaan(Request $request){
+        $ketersediaan = new KetersediaanSeminar();
+        $ketersediaan->id_dosen = session('user')['id_dosen'];
+        $ketersediaan->id_js = $request->idJadwalSeminar;
+        $ketersediaan->save();
+
+        return Redirect::to('/ketersediaanseminar');
+    }
+
+    public function batalkanKetersediaan(Request $request){
+        $ketersediaan = KetersediaanSeminar::where([['id_dosen', '=', session('user')['id_dosen']],['id_js', '=', $request->idJadwalSeminar]])->delete();
+        return Redirect::to('/ketersediaanseminar');
     }
 }

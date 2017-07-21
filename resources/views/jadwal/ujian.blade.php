@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-    <form id="hapusujian" action="{{url('/jadwal/ujianhapus')}}" method="POST" style="display: none;">
+    <form id="hapusUjian" action="{{url('/jadwal/ujianhapus')}}" method="POST" style="display: none;">
         {{csrf_field()}}
         {{method_field('POST')}}
         <input type="date" name="tanggalPilihan" id="inpTanggalPilihan">

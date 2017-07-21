@@ -36,14 +36,17 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
 
 Route::group(['middleware' => ['Dosen']], function(){
     Route::get('/ketersediaanseminar', 'SeminarController@ketersediaanSeminar');
-    Route::get('/ketersediaanujian', 'UjianController@ketersediaanUjian');
+    Route::post('/mengisiketersediaanseminar', 'SeminarController@mengisiKetersediaan');
+    Route::post('/batalkanketersediaanseminar', 'SeminarController@batalkanKetersediaan');
+    Route::get('/ketersediaanujian', 'SidangController@ketersediaanUjian');
+    Route::post('/mengisiketersediaanujian', 'SidangController@mengisiKetersediaan');
+    Route::post('/batalkanketersediaanujian', 'SidangController@batalkanKetersediaan');
     Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
     Route::post('/bimbingan/konfirmasitugasakhir', 'BimbinganController@konfirmasiTA');
     Route::post('/bimbingan/tolaktugasakhir', 'BimbinganController@tolakTA');
     Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
     Route::resource('/bimbingan', 'BimbinganController');
     Route::get('/detailta2', 'FrontendController@detailTa2');
-
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){
