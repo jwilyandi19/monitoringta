@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash; 
-use Illuminate\Http\Request;    
+use Illuminate\Http\Request;
+use Monolog\Handler\SyslogUdp\UdpSocket;
 use Session;
 use Uuid;
 use DB;

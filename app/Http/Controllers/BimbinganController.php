@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Dosen;
 use App\DosenPembimbing;
 use App\TugasAkhir;
-use Redirect;
 use App\Asistensi;
+use App\Dosen;
+use Redirect;
+Use App\SeminarTA;
+Use App\UjianTA;
 
 class BimbinganController extends Controller
 {
@@ -24,8 +26,7 @@ class BimbinganController extends Controller
                 $query->where('id_status','>=','0')->with('user');
             }])->get();
         
-        $data['bimbingans'] = TugasAkhir::where([['id_status', '>=', '0'], ['id_dosbing1', session('user')['id_dosen']]])->orWhere([['id_status', '>=', '0'], ['id_dosbing2', session('user')['id_dosen']]])->orderBy('tanggalBuat', 'desc')->with('user')->paginate(8);
-        
+        $data['bimbingans'] = TugasAkhir::where([['id_status', '>=', '0'], ['id_dosbing1', session('user')['id_dosen']]])->orWhere([['id_status', '>=', '0'], ['id_dosbing2', session('user')['id_dosen']]])->orderBy('created_at', 'desc')->with('user')->paginate(8);
         return view('bimbingan.index', $data);
     }
 
@@ -57,10 +58,10 @@ class BimbinganController extends Controller
      */
     public function show($id_ta)
     {
-        $detailta = TugasAkhir::find($id_ta)->with(['user','dosbing1','dosbing2','status','bidang'])->first();
+        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','bidang','seminarTA','ujianTA'])->first();
         if($detailta){
             $data['detailta'] = $detailta;
-            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->get();
+            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
             //dd($data);
             return view('progres.detail_dosbing',$data);
         }
@@ -105,13 +106,11 @@ class BimbinganController extends Controller
     }
 
     public function konfirmasiTA(Request $request){
-        //dd($request);
+        
         $bimbingan = DosenPembimbing::where([['id_ta', '=', $request->idTugasAkhir],['id_dosen', '=', session('user')['id_dosen']]])->first();
-        //dd($bimbingan);
         $bimbingan->status = 1;
-        //dd($bimbingan); 
         if($bimbingan->save()){
-            $tugasAkhir = TugasAkhir::find($bimbingan->id_ta)->first();
+            $tugasAkhir = TugasAkhir::where('id_ta', $bimbingan->id_ta)->first();
             if($bimbingan->peran == 1){
                 $tugasAkhir->id_dosbing1 = session('user')['id_dosen'];   
             }
@@ -129,7 +128,6 @@ class BimbinganController extends Controller
     }
 
     public function tolakTA(Request $request){
-        //dd($request);
         $bimbingan = DosenPembimbing::where([['id_ta', '=', $request->idTugasAkhir],['id_dosen', '=', session('user')['id_dosen']]])->first();
         if($bimbingan->delete()){
             return Redirect::to('/bimbingan')->with('message', 'Berhasil menolak permintaan bimbingan');
@@ -143,6 +141,7 @@ class BimbinganController extends Controller
     {
         $asistensi = new Asistensi();
         $asistensi->id_ta = $request->id_ta;
+        $asistensi->id_dosen = session('user')['id_dosen'];
         $asistensi->tanggal = $request->tanggal;
         $asistensi->materi = $request->materi;
         if($asistensi->save())
@@ -154,6 +153,66 @@ class BimbinganController extends Controller
         else
         {
             return Redirect::to('/bimbingan')->withError('Gagal Mengisi Asistensi');
+        }
+    }
+
+    public function nilaiSeminar(Request $request)
+    {
+        //dd($request);
+        $seminar = new SeminarTA();
+        $seminar->id_ta = $request->id_ta;
+        $seminar->nilai = $request->nilai;
+        $seminar->evaluasi = $request->evaluasi;
+        $seminar->id_js = null;
+        $seminar->tanggal = null;
+        if($seminar->save())
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->with('message', 'Berhasil Menginputkan Nilai Seminar');
+        }
+        else
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withError('Terjadi Error Ketika Menginputkan Nilai Seminar');
+        }
+    }
+
+    public function nilaiUjian(Request $request)
+    {
+        //dd($request);
+        $ujian = new UjianTA();
+        $ujian->id_ta = $request->id_ta;
+        $ujian->nilai_angka = $request->nilai;
+        if($request->nilai>=88)
+        {
+            $ujian->nilai = 'A';
+        }
+        else if($request->nilai>=80)
+        {
+            $ujian->nilai = 'AB';
+        }
+        else if($request->nilai>=70)
+        {
+            $ujian->nilai = 'B';
+        }
+        else if($request->nilai>=60)
+        {
+            $ujian->nilai = 'BC';
+        }
+        else if($request->nilai>=50)
+        {
+            $ujian->nilai = 'C';
+        }
+        else
+        {
+            $ujian->nilai = 'E';
+        }
+        $ujian->evaluasi = $request->evaluasi;
+        if($ujian->save())
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->with('message', 'Berhasil Menginputkan Nilai Ujian');
+        }
+        else
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withError('Terjadi Error Ketika Menginputkan Nilai Ujian');
         }
     }
 }

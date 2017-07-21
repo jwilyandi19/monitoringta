@@ -4,22 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class KetersediaanSeminar extends Model
+class UjianFinal extends Model
 {
-    protected $table = 'ketersediaan_seminar';
-    protected $primaryKey='id_ks';
+    protected $table = 'ujian_final';
+    protected $primaryKey='id_uf';
     public $incrementing = true;
     public $timestamps = true;
     protected $fillable = [
-    'id_ks',
-    'id_js',
+    'id_uf',
+    'id_ju',
     'id_dosen',
     'created_at',
     'updated_at',
     ];
 
     public function jadwalSeminar(){
-    	return $this->belongsTo('App\JadwalSeminar', 'id_js', 'id_js');
+    	return $this->belongsTo('App\JadwalSeminar', 'id_ju', 'id_ju');
     }
 
     public function dosen(){

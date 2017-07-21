@@ -41,7 +41,8 @@ class PengajuanController extends Controller
         }
         else{
             $data['bidang_mks'] = BidangMK::all();
-            $data['dosens'] = Dosen::all();
+            $data['pembimbing1s'] = Dosen::where('pembimbing1', 1)->get();
+            $data['pembimbing2s'] = Dosen::all();
             return view('pengajuan.index', $data);
         }
     }
@@ -71,12 +72,12 @@ class PengajuanController extends Controller
             return Redirect::to(url('pengajuan/create'))->withErrors($validator)->withInput();
         }
         else{
-            $statusTA = StatusTA::find(0);
+            $statusTA = StatusTA::where('id_status', 0)->first();
             $taBaru = new TugasAkhir();
             $taBaru->id_user = session('user')['id'];
             $taBaru->id_bidang_mk = $request->bidangMk;
             $taBaru->judul = $request->judulTA;
-            $taBaru->tanggalBuat = date('Y-m-d');
+            //dd($taBaru);
             if(!$statusTA->tugasAkhirs()->save($taBaru)){
                 return Redirect::to(url('pengajuan/create'))->withErrors('Gagal Menyimpan Data');
             }
@@ -87,8 +88,6 @@ class PengajuanController extends Controller
             $dosbing1->id_ta = $taUser->id_ta;
             $dosbing1->peran = 1;
             $dosbing1->status = 0;
-            //$dosbing1->created_at->timezone('Asia/Jakarta');
-            //$dosbing2->updated_at->timezone('Asia/Jakarta');
             if(!$dosbing1->save()){
                 return Redirect::to(str_replace('/create', '', $request->url()))->withErrors('Gagal Menyimpan Data');
             }

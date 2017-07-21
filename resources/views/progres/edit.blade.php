@@ -43,7 +43,7 @@ Ubah Detail Tugas Akhir
                     <div class="form-group has-warning">
                         <label class="control-label" for="bidang"><h5>Bidang Matakuliah</h5></label>
                         <select class="form-control" name="bidangMk">
-                            @foreach($bidang_mks as $bidang_mk)
+                            @foreach($bidang_mks as $key => $bidang_mk)
                                 @if($bidang_mk->id_bidang_mk == $tugasAkhir->id_bidang_mk)
                                     <option value="{{$bidang_mk->id_bidang_mk}}" selected>{{$bidang_mk->nama_bidang}}</option>
                                 @else
@@ -58,11 +58,11 @@ Ubah Detail Tugas Akhir
                             @if(!$tugasAkhir->id_dosbing1)
                                 <option value="" selected >Pilih Dosen Pembimbing 1</option>
                             @endif
-                            @foreach($dosens as $dosen)
-                                @if($tugasAkhir->id_dosbing1 && $dosen->id_dosen == $tugasAkhir->id_dosbing1)
-                                    <option value="{{$dosen->id_dosen}}" selected>{{$dosen->nama}}</option>
+                            @foreach($pembimbing1s as $key => $pembimbing1)
+                                @if($tugasAkhir->id_dosbing1 && $pembimbing1->id_dosen == $tugasAkhir->id_dosbing1)
+                                    <option value="{{$pembimbing1->id_dosen}}" selected>{{$pembimbing1->nama}}</option>
                                 @else
-                                    <option value="{{$dosen->id_dosen}}">{{$dosen->nama}}</option>
+                                    <option value="{{$pembimbing1->id_dosen}}">{{$pembimbing1->nama}}</option>
                                 @endif
                             @endforeach
                         </select> 
@@ -73,11 +73,11 @@ Ubah Detail Tugas Akhir
                             @if(!$tugasAkhir->id_dosbing2)
                                 <option value="" selected >Pilih Dosen Pembimbing 2</option>
                             @endif
-                            @foreach($dosens as $dosen)
-                                @if($tugasAkhir->id_dosbing2 && $dosen->id_dosen == $tugasAkhir->id_dosbing2)
-                                    <option value="{{$dosen->id_dosen}}" selected>{{$dosen->nama}}</option>
+                            @foreach($pembimbing2s as $pembimbing2)
+                                @if($tugasAkhir->id_dosbing2 && $pembimbing2->id_dosen == $tugasAkhir->id_dosbing2)
+                                    <option value="{{$pembimbing2->id_dosen}}" selected>{{$pembimbing2->nama}}</option>
                                 @else
-                                    <option value="{{$dosen->id_dosen}}">{{$dosen->nama}}</option>
+                                    <option value="{{$pembimbing2->id_dosen}}">{{$pembimbing2->nama}}</option>
                                 @endif
                             @endforeach
                         </select> 
@@ -86,8 +86,8 @@ Ubah Detail Tugas Akhir
                     {{csrf_field()}}
                     {{method_field('PUT')}}                
                     <div class="form-group has-warning">
-                        <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ubah Detail TA</button>
-                        <a href="{{url('/progres')}}" class="btn btn-default pull-right" style="margin-right: 10px;">Kembali</a>
+                        <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-pencil"></i> Ubah Detail TA</button>
+                        <a href="{{url('/progres')}}" class="btn btn-default pull-right" style="margin-right: 15px;">Kembali</a>
                     </div>
                 </fieldset>
             </form>

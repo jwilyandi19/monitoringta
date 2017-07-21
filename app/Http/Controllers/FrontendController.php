@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TugasAkhir;
+use App\User;
 
 class FrontendController extends Controller
 {
@@ -46,11 +47,6 @@ class FrontendController extends Controller
 
     public function tambahkanJadwal(){
         return view('tambahkanjadwal');
-    }
-
-    public function buatUser()
-    {
-        return view('buatuser');
     }
 
     public function pencarianTA(){

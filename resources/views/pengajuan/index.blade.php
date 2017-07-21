@@ -43,8 +43,8 @@ Pengajuan TA
                         <label class="control-label" for="bidang"><h5>Bidang Matakuliah *</h5></label>
                         <select class="form-control" name="bidangMk">
                             <option value="" selected >Bidang Matakuliah</option>
-                            @foreach($bidang_mks as $bidang_mk)
-                                <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->keterangan}}</option>
+                            @foreach($bidang_mks as $key => $bidang_mk)
+                                <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->nama_bidang}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -52,8 +52,8 @@ Pengajuan TA
                         <label class="control-label" for="pembimbing1"><h5>Dosen Pembiming 1 *</h5></label>
                         <select class="form-control" name="pembimbing1">
                             <option value="" selected >Pilih Dosen Pembimbing 1</option>
-                            @foreach($dosens as $dosen)
-                                <option value="{{$dosen->id_dosen}}">{{$dosen->nama}}</option>
+                            @foreach($pembimbing1s as $key => $pembimbing1)
+                                <option value="{{$pembimbing1->id_dosen}}">{{$pembimbing1->nama}}</option>
                             @endforeach
                         </select> 
                     </div>
@@ -61,8 +61,8 @@ Pengajuan TA
                         <label class="control-label" for="pembimbing2"><h5>Dosen Pembiming 2</h5></label>
                         <select class="form-control" name="pembimbing2">
                             <option value="" selected >Pilih Dosen Pembimbing 2</option>
-                            @foreach($dosens as $dosen)
-                                <option value="{{$dosen->id_dosen}}">{{$dosen->nama}}</option>
+                            @foreach($pembimbing2s as $key => $pembimbing2)
+                                <option value="{{$pembimbing2->id_dosen}}">{{$pembimbing2->nama}}</option>
                             @endforeach
                         </select> 
                     </div>

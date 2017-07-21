@@ -45,7 +45,7 @@ Status TA
                     @foreach($tugasAkhirs as $keys => $tugasAkhir)
                         <tr>
                             <td class="text-center">{{$tugasAkhir->id_ta}}</td>
-                            <td>{{$tugasAkhir->tanggalBuat}}</td>
+                            <td>{{date('Y-m-d',strtotime($tugasAkhir->created_at))}}</td>
                             <td>{{$tugasAkhir->judul}}</td>
                             @if($tugasAkhir->dosbing1)
                                 <td>{{$tugasAkhir->dosbing1->nama_lengkap}}</td>
