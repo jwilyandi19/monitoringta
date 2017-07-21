@@ -29,7 +29,7 @@
             <hr>
         </div>
         <div class="panel-body isi-halaman">
-            <div >
+            <div class="form-group">
                 <div class="row" >
                     <label class="col-md-2"><h6 class="pull-left">NRP</h6></label>
                     <div class="col-md-1" style="text-align: right;">
@@ -153,53 +153,83 @@
             </div>
             <br>
             <hr>
-            <div>
-                <h4>Seminar Tugas Akhir</h4>
+            <div class="form-group">
+                <div>
+                    <h4>Seminar Tugas Akhir</h4>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->seminarTA == null)
+                            <h6>-</h6>
+                        @else
+                            <h6>{{$detailta->seminarTA->nilai}}</h6>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->seminarTA == null)
+                            <h6>-</h6>
+                        @else
+                            <h6>{{$detailta->seminarTA->evaluasi}}</h6>
+                        @endif
+                    </div>
+                </div>
+                @if($detailta->seminarTA==null)
+                    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#seminarModal">Beri Penilaian</button>
+                @endif
             </div>
-            <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
-                <div class="col-md-1" style="text-align: right;">
-                    <h6>:</h6>
-                </div>
-                <div class="col-md-9">
-                    <h6>-</h6>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
-                <div class="col-md-1" style="text-align: right;">
-                    <h6>:</h6>
-                </div>
-                <div class="col-md-9">
-                    <h6>-</h6>
-                </div>
-            </div>
+
+            <br>
             <br>
             <br>
             <br>
             <br>
             <hr>
-            <div>
-                <h4>Sidang Tugas Akhir</h4>
+            <div class="form-control">
+                <div>
+                    <h4>Sidang Tugas Akhir</h4>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->ujianTA == null)
+                            <h6>-</h6>
+                        @else
+                            <h6>{{$detailta->ujianTA->nilai}}</h6>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->ujianTA == null)
+                            <h6>-</h6>
+                        @else
+                            <h6>{{$detailta->ujianTA->evaluasi}}</h6>
+                        @endif
+                    </div>
+                </div>
             </div>
-            <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
-                <div class="col-md-1" style="text-align: right;">
-                    <h6>:</h6>
-                </div>
-                <div class="col-md-9">
-                    <h6>-</h6>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
-                <div class="col-md-1" style="text-align: right;">
-                    <h6>:</h6>
-                </div>
-                <div class="col-md-9">
-                    <h6>-</h6>
-                </div>
-            </div>
+
+            @if($detailta->ujianTA==null)
+                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ujianModal">Beri Penilaian</button>
+            @endif
             <br>
 
         </div>
@@ -236,6 +266,94 @@
                             {{csrf_field()}}
                             {{method_field('POST')}}
                             <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Tambahkan</button>
+                            {{--<button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Tambahkan</button>--}}
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="seminarModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+                    <h4 class="modal-title" style="color: #ffffff;">Nilai Seminar Tugas Akhir</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="POST" action="{{url('/seminar/nilai')}}">
+                        <div class="form-group" >
+                            <label class="col-md-2 control-label">Nilai</label>
+                            <div class="col-md-10">
+                                <select class="form-control" name="nilai">
+                                    <option value="" selected >Nilai Seminar</option>
+                                    <option value="A" > A (Ket)</option>
+                                    <option value="B" > B (Ket)</option>
+                                    <option value="C" > C (Ket)</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none;">
+                            <label class="col-md-2 control-label">Nilai</label>
+                            <div class="col-md-10">
+                                <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Evaluasi</label>
+                            <div class="col-md-10">
+                                <textarea type="text" name="evaluasi" class="form-control" placeholder="Evaluasi Seminar"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{csrf_field()}}
+                            {{method_field('POST')}}
+                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Nilai</button>
+                            {{--<button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Tambahkan</button>--}}
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ujianModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+                    <h4 class="modal-title" style="color: #ffffff;">Nilai Ujian Tugas Akhir</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="POST" action="{{url('/ujian/nilai')}}">
+                        <div class="form-group" >
+                            <label class="col-md-2 control-label">Nilai</label>
+                            <div class="col-md-10">
+                                <input type="text" name="nilai" class="form-control" placeholder="Angka Nilai Ujian">
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none;">
+                            <label class="col-md-2 control-label">Nilai</label>
+                            <div class="col-md-10">
+                                <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Evaluasi</label>
+                            <div class="col-md-10">
+                                <textarea type="text" name="evaluasi" class="form-control" placeholder="Evaluasi Seminar"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{csrf_field()}}
+                            {{method_field('POST')}}
+                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Nilai</button>
                             {{--<button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Tambahkan</button>--}}
                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
                         </div>

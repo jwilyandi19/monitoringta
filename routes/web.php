@@ -42,7 +42,8 @@ Route::group(['middleware' => ['Dosen']], function(){
     Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
     Route::resource('/bimbingan', 'BimbinganController');
     Route::get('/detailta2', 'FrontendController@detailTa2');
-
+    Route::post('/seminar/nilai', 'BimbinganController@nilaiSeminar');
+    Route::post('/ujian/nilai', 'BimbinganController@nilaiUjian');
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){

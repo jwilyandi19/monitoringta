@@ -8,6 +8,8 @@ use App\TugasAkhir;
 use App\Asistensi;
 use App\Dosen;
 use Redirect;
+Use App\SeminarTA;
+Use App\UjianTA;
 
 class BimbinganController extends Controller
 {
@@ -56,10 +58,11 @@ class BimbinganController extends Controller
      */
     public function show($id_ta)
     {
-        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','bidang'])->first();
+        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','bidang','seminarTA','ujianTA'])->first();
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
+            //dd($data);
             return view('progres.detail_dosbing',$data);
         }
         else
@@ -150,6 +153,66 @@ class BimbinganController extends Controller
         else
         {
             return Redirect::to('/bimbingan')->withError('Gagal Mengisi Asistensi');
+        }
+    }
+
+    public function nilaiSeminar(Request $request)
+    {
+        //dd($request);
+        $seminar = new SeminarTA();
+        $seminar->id_ta = $request->id_ta;
+        $seminar->nilai = $request->nilai;
+        $seminar->evaluasi = $request->evaluasi;
+        $seminar->id_js = null;
+        $seminar->tanggal = null;
+        if($seminar->save())
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->with('message', 'Berhasil Menginputkan Nilai Seminar');
+        }
+        else
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withError('Terjadi Error Ketika Menginputkan Nilai Seminar');
+        }
+    }
+
+    public function nilaiUjian(Request $request)
+    {
+        //dd($request);
+        $ujian = new UjianTA();
+        $ujian->id_ta = $request->id_ta;
+        $ujian->nilai_angka = $request->nilai;
+        if($request->nilai>=88)
+        {
+            $ujian->nilai = 'A';
+        }
+        else if($request->nilai>=80)
+        {
+            $ujian->nilai = 'AB';
+        }
+        else if($request->nilai>=70)
+        {
+            $ujian->nilai = 'B';
+        }
+        else if($request->nilai>=60)
+        {
+            $ujian->nilai = 'BC';
+        }
+        else if($request->nilai>=50)
+        {
+            $ujian->nilai = 'C';
+        }
+        else
+        {
+            $ujian->nilai = 'E';
+        }
+        $ujian->evaluasi = $request->evaluasi;
+        if($ujian->save())
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->with('message', 'Berhasil Menginputkan Nilai Ujian');
+        }
+        else
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withError('Terjadi Error Ketika Menginputkan Nilai Ujian');
         }
     }
 }

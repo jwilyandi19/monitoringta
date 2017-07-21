@@ -181,7 +181,7 @@ class ProgresController extends Controller
 
     public function detail()
     {
-        $detailta = TugasAkhir::where([['id_user', '=', session('user')['id']],['id_status','>=','0']])->with(['user','dosbing1','dosbing2','status','bidang'])->first();
+        $detailta = TugasAkhir::where([['id_user', '=', session('user')['id']],['id_status','>=','0']])->with(['user','dosbing1','dosbing2','status','bidang', 'seminarTA', 'ujianTA'])->first();
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();

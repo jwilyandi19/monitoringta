@@ -165,51 +165,74 @@
             </div>
             <br>
             <hr>
-            <div>
-                <h4>Seminar Tugas Akhir</h4>
+            <div class="form-group">
+                <div>
+                    <h4>Seminar Tugas Akhir</h4>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->seminarTA == null)
+                            <h6>-</h6>
+                        @else
+                            <h6>{{$detailta->seminarTA->nilai}}</h6>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->seminarTA == null)
+                            <h6>-</h6>
+                        @else
+                            <h6>{{$detailta->seminarTA->evaluasi}}</h6>
+                        @endif
+                    </div>
+                </div>
             </div>
-            <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
-                <div class="col-md-1" style="text-align: right;">
-                    <h6>:</h6>
-                </div>
-                <div class="col-md-9">
-                    <h6>-</h6>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
-                <div class="col-md-1" style="text-align: right;">
-                    <h6>:</h6>
-                </div>
-                <div class="col-md-9">
-                    <h6>-</h6>
-                </div>
-            </div>
+
+            <br>
             <br>
             <br>
             <br>
             <br>
             <hr>
-            <div>
-                <h4>Sidang Tugas Akhir</h4>
-            </div>
-            <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
-                <div class="col-md-1" style="text-align: right;">
-                    <h6>:</h6>
+            <div class="form-control">
+                <div>
+                    <h4>Sidang Tugas Akhir</h4>
                 </div>
-                <div class="col-md-9">
-                    <h6>-</h6>
+                <div class="col-md-12">
+                    <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->ujianTA == null)
+                            <h6>-</h6>
+                        @else
+                            <h6>{{$detailta->ujianTA->nilai}}</h6>
+                        @endif
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
-                <div class="col-md-1" style="text-align: right;">
-                    <h6>:</h6>
-                </div>
-                <div class="col-md-9">
-                    <h6>-</h6>
+                <div class="col-md-12">
+                    <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->ujianTA == null)
+                            <h6>-</h6>
+                        @else
+                            <h6>{{$detailta->ujianTA->evaluasi}}</h6>
+                        @endif
+                    </div>
                 </div>
             </div>
             <br>
