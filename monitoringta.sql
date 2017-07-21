@@ -223,7 +223,8 @@ CREATE TABLE `ketersediaan_seminar` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_ks`),
-  KEY `id_dosen` (`id_dosen`)
+  KEY `id_dosen` (`id_dosen`),
+  KEY `id_js` (`id_js`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -251,7 +252,8 @@ CREATE TABLE `ketersediaan_ujian` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_ku`),
-  KEY `id_dosen` (`id_dosen`)
+  KEY `id_dosen` (`id_dosen`),
+  KEY `id_ju` (`id_ju`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -277,7 +279,8 @@ CREATE TABLE `penguji_seminar` (
   `id_dosen` int(11) DEFAULT NULL,
   `konfirmasi` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_penguji_s`),
-  KEY `id_seminar_ta` (`id_seminar_ta`)
+  KEY `id_seminar_ta` (`id_seminar_ta`),
+  KEY `id_dosen` (`id_dosen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -303,7 +306,8 @@ CREATE TABLE `penguji_ujian` (
   `id_dosen` int(11) DEFAULT NULL,
   `konfirmasi` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_penguji_u`),
-  KEY `id_ujian_ta` (`id_ujian_ta`)
+  KEY `id_ujian_ta` (`id_ujian_ta`),
+  KEY `id_dosen` (`id_dosen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -349,7 +353,7 @@ DROP TABLE IF EXISTS `seminar_ta`;
 CREATE TABLE `seminar_ta` (
   `id_seminar_ta` int(11) NOT NULL AUTO_INCREMENT,
   `id_ta` int(11) DEFAULT NULL,
-  `id_jadwal` int(11) DEFAULT NULL,
+  `id_js` int(11) DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nilai_angka` int(11) DEFAULT NULL,
@@ -357,7 +361,8 @@ CREATE TABLE `seminar_ta` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_seminar_ta`),
-  KEY `id_ps` (`id_ta`)
+  KEY `id_ps` (`id_ta`),
+  KEY `id_js` (`id_js`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -413,7 +418,9 @@ CREATE TABLE `tugas_akhir` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_ta`),
-  KEY `nrp` (`id_user`)
+  KEY `nrp` (`id_user`),
+  KEY `id_dosbing1` (`id_dosbing1`),
+  KEY `id_dosbing2` (`id_dosbing2`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -468,7 +475,8 @@ CREATE TABLE `ujian_ta` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_ujian_ta`),
-  KEY `id_pu` (`id_ta`)
+  KEY `id_pu` (`id_ta`),
+  KEY `id_ju` (`id_ju`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -494,7 +502,8 @@ CREATE TABLE `user` (
   `password` varchar(65) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` int(11) NOT NULL,
   `nama` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id_user`)
+  PRIMARY KEY (`id_user`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=435 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -504,7 +513,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'admin','$2y$10$cj0gfEEVI7AG0TO1tih4j.T0z9RxUwwg6i9mJvC.uW6gTdS5QkMwm',1,'Admin'),(3,'5114100109','$2y$10$l73YkuQpTcnbRiVwmyeNbuqTpmFgVKlS5bNtdjjXhlCAp8IEHAVLi',1,'Nafiar Rahmansyah'),(4,'5110100001','$2y$10$VcrpSk5qgk7rA73PQlououx7F8TgRy7YfHC4ME2pr0Xe9kBbzF6xC',2,'RIZKY JANUAR AKBAR'),(5,'5110100002','$2y$10$PbJJo0rzA2neQV.gKEFeguTQbn8IFwI/33QtcdzozzpMxH/A2lV6q',2,'WIJAYANTI NURUL K.'),(6,'5110100003','$2y$10$JNAEF7q43bO7GfRbx5C2JOM34utercBDs/WwTTlzMIyBCqC0RU66m',2,'dosen3'),(7,'admin1','$2y$10$vN6d6qcVvU6AkjZ2IRUAeOOjSR1Z/pGFzx2.JwXiSNfqAlF76wKhi',3,'nafiar'),(8,'5114100110','$2y$10$r90OX3LLyZdNIFMH7YUiEuk29xmRzvy.PmpxtBfacjApiKlPKqoTu',1,'Rafiar Rahmansyah'),(411,'196203261987011001','$2y$10$1qjThG1M7O.FXiFz7A/Bae/dom530n3kXvJrE2/fY/pSfkO7glLI6',2,'Prof. Dr. Ir. Sulistijono, DEA'),(412,'195709241986031002','$2y$10$YQIXDU9EaQNIc4oG2fRx3uwM0nqCwO8ytzNXstpuDio8T4BxbqCLm',2,'Ir. Moh. Farid, DEA'),(413,'195809101986031002','$2y$10$RiqRFbjwUItQmd19Bl6RT.cXNgaBalmJDumDeCD5DA.ZsjtGhvnQe',2,'Ir. Rochman Rochiem, MSc.'),(414,'196809302000031001','$2y$10$.WWweNURU3tltoZ4ouSz2uCS7UZqMC69FQrMpk5IwM//XxvVPr4GW',2,'Dr. Sungging Pintowantoro, S.T., M.T.'),(415,'197701162003122007','$2y$10$CcgcegHFX/AY4hF6RyZZMOAzJqn9LNcbjMgsz4fA09ZtDHVqSZIaq',2,'Dr. Diah Susanti, S.T., M.T.'),(416,'197801132002121003','$2y$10$OlmrJJyQadWssFWKJAuB1egsJd.jA3xfD.D6N.G.7YxGiumbcpR12',2,'Dr. Sigit Tri Wicasono, S.Si., M.Si.'),(417,'197605282002121003','$2y$10$qqejXLtkmlPf7v9WQDwxXeKHbsUY4MAtVsrZzo2IC09VHpS64nVA6',2,'Dr. Agung Purniawan, S.T., M.Eng.'),(418,'197604102002121002','$2y$10$.etHTI5xfsbqbyee9OEGgO6O1ZIxJjRjz6urQ9zY9MRu.LzpReew.',2,'Budi Agung Kurniawan, S.T., M.Sc.'),(419,'197703132003121001','$2y$10$BNl3oRD2xwhQ8/7oW85j6.5AWOTSOHKmkftAOrEi8Z61ZfeHV9HWi',2,'Dr. Lukman Neorochiem, S.T., M.Sc.Eng.'),(420,'197610272003121001','$2y$10$5.QJNb8HQO/oqBxK8R.5ZOCD8.WPLCz9.r/FOqauV5UeWYfn8MKe2',2,'Mas Irfan P. Hidayat, S.T., M.Sc., Ph.D.'),(421,'197708172005011004','$2y$10$oJg.f5mbm1WwXK8S80OnTuOvolrf.2uCzA/WhMsiOKyCJs4qobTdm',2,'Sutarsis, S.T., M.Sc.'),(422,'197907242005012003','$2y$10$nGwHmyHNIFkzLn1YodmtpO3ZHTkMWrESVspv7uztANJ79dAvKuH7W',2,'Yuli Setiyorini, S.T., M.Phil.'),(423,'198012072005011004','$2y$10$5YFH.Es0nkBpm/DN5hGVwers.iE2dIs9BeReeu7Yr0y.wALhsibMC',2,'Dr. Eng. Hosta Ardhyananta, S.T., M.Sc.'),(424,'197410172006042001','$2y$10$mkPswMi6tSHt0P08wX2qFOb0ZURoMPOZn9XYIxPfD1lKhzhTEYIoe',2,'Hariyati Purwaningsih, S.Si., M.Si.'),(425,'198302012008122002','$2y$10$/ZFm6OMImOIvu0xqs/Eyv..wB0yTvybxSRDspWg2Af/il/30qzeoe',2,'Dr. Widyastuti, S.Si., M.Si.'),(426,'198302012008122002','$2y$10$JhQqRgWCm.gsESWFdEdofebkI2RxoxFk9XIakbGDdxD4qdtmrU5Wa',2,'Rindang Fajarin, S.Si., M.Si.'),(427,'198205262012121002','$2y$10$1kKLCeh4AV1jJ4e.IWTuLOYhCwpbLXQ1Y.UFURpIPw9S4TT0Qgvxe',2,'Tubagus Noor R., S.T., M.Sc.'),(428,'198303252014042003','$2y$10$wPk3dsuA5piop/YVYCJ39eStCej4InvWywBjZGoTMxQ6kVDPuCZGG',2,'Wikan Jatimurti, S.T., M.Sc.'),(429,'198405152014042003','$2y$10$d9dDXQG5eCZChu3Z//wCh.AbRb4Zv2gl4Jluau2ejAh68SuWYr/vK',2,'Dian Mughni F., S.T., M.Sc.'),(430,'199007262015041002','$2y$10$pkai7BRcSHWF2MgSEsaGm.ZJ5jERevBWdPtzBIY2PCpSChfz5sFi6',2,'Haniffudin Nurdiansah, S.T., M.T.'),(431,'199102172015041002','$2y$10$j8VYBgUo55Npe69vcXcSL.qiY9GHGPByjGswwg/3VeaQjFGQr4C3m',2,'Fakhreza Abdul, S.T., M.T.'),(432,'199106092015041001','$2y$10$DlzXBt3GxmIzur3LdyrT8OTEzxBsAQQOQNer8cELfVnFycIQ.hvvS',2,'Alvian Toto Wibisono, S.T., M.T.'),(433,'dosen01','$2y$10$fX0dstwj35dWkEM/viiV1u8/5B0Upg317ofk1XZUvdFjuTg1lMEvm',2,'Amaliya Rasyida, S.T., M.Sc.'),(434,'dosen02','$2y$10$jR8RUWVcGeZsb05c05jWR.2CpZLQOx4fYkzEvoqXw07GDJr8UZIEq',2,'Vania Mitha Pratiwi, S.T., M.T.');
+INSERT INTO `user` VALUES (2,'admin','$2y$10$cj0gfEEVI7AG0TO1tih4j.T0z9RxUwwg6i9mJvC.uW6gTdS5QkMwm',1,'Admin'),(3,'5114100109','$2y$10$l73YkuQpTcnbRiVwmyeNbuqTpmFgVKlS5bNtdjjXhlCAp8IEHAVLi',1,'Nafiar Rahmansyah'),(4,'5110100001','$2y$10$VcrpSk5qgk7rA73PQlououx7F8TgRy7YfHC4ME2pr0Xe9kBbzF6xC',2,'RIZKY JANUAR AKBAR'),(5,'5110100002','$2y$10$PbJJo0rzA2neQV.gKEFeguTQbn8IFwI/33QtcdzozzpMxH/A2lV6q',2,'WIJAYANTI NURUL K.'),(6,'5110100003','$2y$10$JNAEF7q43bO7GfRbx5C2JOM34utercBDs/WwTTlzMIyBCqC0RU66m',2,'dosen3'),(7,'admin1','$2y$10$vN6d6qcVvU6AkjZ2IRUAeOOjSR1Z/pGFzx2.JwXiSNfqAlF76wKhi',3,'nafiar'),(8,'5114100110','$2y$10$r90OX3LLyZdNIFMH7YUiEuk29xmRzvy.PmpxtBfacjApiKlPKqoTu',1,'Rafiar Rahmansyah'),(411,'196203261987011001','$2y$10$1qjThG1M7O.FXiFz7A/Bae/dom530n3kXvJrE2/fY/pSfkO7glLI6',2,'Prof. Dr. Ir. Sulistijono, DEA'),(412,'195709241986031002','$2y$10$YQIXDU9EaQNIc4oG2fRx3uwM0nqCwO8ytzNXstpuDio8T4BxbqCLm',2,'Ir. Moh. Farid, DEA'),(413,'195809101986031002','$2y$10$RiqRFbjwUItQmd19Bl6RT.cXNgaBalmJDumDeCD5DA.ZsjtGhvnQe',2,'Ir. Rochman Rochiem, MSc.'),(414,'196809302000031001','$2y$10$.WWweNURU3tltoZ4ouSz2uCS7UZqMC69FQrMpk5IwM//XxvVPr4GW',2,'Dr. Sungging Pintowantoro, S.T., M.T.'),(415,'197701162003122007','$2y$10$CcgcegHFX/AY4hF6RyZZMOAzJqn9LNcbjMgsz4fA09ZtDHVqSZIaq',2,'Dr. Diah Susanti, S.T., M.T.'),(416,'197801132002121003','$2y$10$OlmrJJyQadWssFWKJAuB1egsJd.jA3xfD.D6N.G.7YxGiumbcpR12',2,'Dr. Sigit Tri Wicasono, S.Si., M.Si.'),(417,'197605282002121003','$2y$10$qqejXLtkmlPf7v9WQDwxXeKHbsUY4MAtVsrZzo2IC09VHpS64nVA6',2,'Dr. Agung Purniawan, S.T., M.Eng.'),(418,'197604102002121002','$2y$10$.etHTI5xfsbqbyee9OEGgO6O1ZIxJjRjz6urQ9zY9MRu.LzpReew.',2,'Budi Agung Kurniawan, S.T., M.Sc.'),(419,'197703132003121001','$2y$10$BNl3oRD2xwhQ8/7oW85j6.5AWOTSOHKmkftAOrEi8Z61ZfeHV9HWi',2,'Dr. Lukman Neorochiem, S.T., M.Sc.Eng.'),(420,'197610272003121001','$2y$10$5.QJNb8HQO/oqBxK8R.5ZOCD8.WPLCz9.r/FOqauV5UeWYfn8MKe2',2,'Mas Irfan P. Hidayat, S.T., M.Sc., Ph.D.'),(421,'197708172005011004','$2y$10$oJg.f5mbm1WwXK8S80OnTuOvolrf.2uCzA/WhMsiOKyCJs4qobTdm',2,'Sutarsis, S.T., M.Sc.'),(422,'197907242005012003','$2y$10$nGwHmyHNIFkzLn1YodmtpO3ZHTkMWrESVspv7uztANJ79dAvKuH7W',2,'Yuli Setiyorini, S.T., M.Phil.'),(423,'198012072005011004','$2y$10$5YFH.Es0nkBpm/DN5hGVwers.iE2dIs9BeReeu7Yr0y.wALhsibMC',2,'Dr. Eng. Hosta Ardhyananta, S.T., M.Sc.'),(424,'197410172006042001','$2y$10$mkPswMi6tSHt0P08wX2qFOb0ZURoMPOZn9XYIxPfD1lKhzhTEYIoe',2,'Hariyati Purwaningsih, S.Si., M.Si.'),(425,'197906202006042001','$2y$10$/ZFm6OMImOIvu0xqs/Eyv..wB0yTvybxSRDspWg2Af/il/30qzeoe',2,'Dr. Widyastuti, S.Si., M.Si.'),(426,'198302012008122002','$2y$10$JhQqRgWCm.gsESWFdEdofebkI2RxoxFk9XIakbGDdxD4qdtmrU5Wa',2,'Rindang Fajarin, S.Si., M.Si.'),(427,'198205262012121002','$2y$10$1kKLCeh4AV1jJ4e.IWTuLOYhCwpbLXQ1Y.UFURpIPw9S4TT0Qgvxe',2,'Tubagus Noor R., S.T., M.Sc.'),(428,'198303252014042003','$2y$10$wPk3dsuA5piop/YVYCJ39eStCej4InvWywBjZGoTMxQ6kVDPuCZGG',2,'Wikan Jatimurti, S.T., M.Sc.'),(429,'198405152014042003','$2y$10$d9dDXQG5eCZChu3Z//wCh.AbRb4Zv2gl4Jluau2ejAh68SuWYr/vK',2,'Dian Mughni F., S.T., M.Sc.'),(430,'199007262015041002','$2y$10$pkai7BRcSHWF2MgSEsaGm.ZJ5jERevBWdPtzBIY2PCpSChfz5sFi6',2,'Haniffudin Nurdiansah, S.T., M.T.'),(431,'199102172015041002','$2y$10$j8VYBgUo55Npe69vcXcSL.qiY9GHGPByjGswwg/3VeaQjFGQr4C3m',2,'Fakhreza Abdul, S.T., M.T.'),(432,'199106092015041001','$2y$10$DlzXBt3GxmIzur3LdyrT8OTEzxBsAQQOQNer8cELfVnFycIQ.hvvS',2,'Alvian Toto Wibisono, S.T., M.T.'),(433,'dosen01','$2y$10$fX0dstwj35dWkEM/viiV1u8/5B0Upg317ofk1XZUvdFjuTg1lMEvm',2,'Amaliya Rasyida, S.T., M.Sc.'),(434,'dosen02','$2y$10$jR8RUWVcGeZsb05c05jWR.2CpZLQOx4fYkzEvoqXw07GDJr8UZIEq',2,'Vania Mitha Pratiwi, S.T., M.T.');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -517,4 +526,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-21  8:35:24
+-- Dump completed on 2017-07-21  8:45:19
