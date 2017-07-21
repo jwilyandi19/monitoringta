@@ -69,7 +69,8 @@ class ProgresController extends Controller
         //dd($id_ta);
         $data['tugasAkhir'] = TugasAkhir::where('id_ta',$id_ta)->with(['dosbing1', 'dosbing2', 'bidang'])->first();
         $data['bidang_mks'] = BidangMK::all();
-        $data['dosens'] = Dosen::all();
+        $data['pembimbing1s'] = Dosen::where('pembimbing1', 1)->get();
+        $data['pembimbing2s'] = Dosen::all();
         //dd($data);
         return view('progres.edit', $data);
     }

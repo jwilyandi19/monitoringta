@@ -41,7 +41,8 @@ class PengajuanController extends Controller
         }
         else{
             $data['bidang_mks'] = BidangMK::all();
-            $data['dosens'] = Dosen::all();
+            $data['pembimbing1s'] = Dosen::where('pembimbing1', 1)->get();
+            $data['pembimbing2s'] = Dosen::all();
             return view('pengajuan.index', $data);
         }
     }
