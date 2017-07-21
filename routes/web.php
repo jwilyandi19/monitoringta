@@ -35,7 +35,12 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
 });
 
 Route::group(['middleware' => ['Dosen']], function(){
-
+    Route::get('/ketersediaanseminar', 'SeminarController@ketersediaanSeminar');
+    Route::post('/mengisiketersediaanseminar', 'SeminarController@mengisiKetersediaan');
+    Route::post('/batalkanketersediaanseminar', 'SeminarController@batalkanKetersediaan');
+    Route::get('/ketersediaanujian', 'SidangController@ketersediaanUjian');
+    Route::post('/mengisiketersediaanujian', 'SidangController@mengisiKetersediaan');
+    Route::post('/batalkanketersediaanujian', 'SidangController@batalkanKetersediaan');
     Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
     Route::post('/bimbingan/konfirmasitugasakhir', 'BimbinganController@konfirmasiTA');
     Route::post('/bimbingan/tolaktugasakhir', 'BimbinganController@tolakTA');
@@ -52,5 +57,9 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::post('/createuser1','AuthController@buatUser1');
     Route::resource('/jadwal', 'JadwalController');
     Route::get('/jadwalseminar', 'JadwalController@jadwalSeminar');
+    Route::post('/jadwal/seminarhapus', 'JadwalController@hapusJadwalSeminar');
+    Route::post('/jadwal/tambahseminar', 'JadwalController@tambahJadwalSeminar');
     Route::get('/jadwalujian', 'JadwalController@jadwalUjian');
+    Route::post('/jadwal/ujianhapus', 'JadwalController@hapusJadwalUjian');
+    Route::post('/jadwal/tambahujian', 'JadwalController@tambahJadwalUjian');
 });

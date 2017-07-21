@@ -44,7 +44,7 @@ Ganti Password
                     <div class="form-group has-warning">
                         <label class="control-label col-md-3" for="judulta" style="text-align: left"><h6>Password Baru</h6></label>
                         <div class="col-md-8">
-                            <input id="inputPasswordBaru" type="password" name="passwordBaru" class="form-control" placeholder="Password lama">
+                            <input id="inputPasswordBaru" type="password" name="passwordBaru" class="form-control" placeholder="Password Baru">
                         </div>
                         <div id="show-password" class="col-md-1 pull-right">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"
@@ -54,7 +54,7 @@ Ganti Password
                     <div class="form-group has-warning">
                         <label class="control-label col-md-3" for="judulta" style="text-align: left"><h6>Konfirmasi Password</h6></label>
                         <div class="col-md-8">
-                            <input type="password" name="konfirmasiPassword" class="form-control" placeholder="Password lama">
+                            <input type="password" name="konfirmasiPassword" class="form-control" placeholder="Konfirmasi Password">
                         </div>
                     </div>
                     <br>
