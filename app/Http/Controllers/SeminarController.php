@@ -139,4 +139,67 @@ class SeminarController extends Controller
         $ketersediaan = KetersediaanSeminar::where([['id_dosen', '=', session('user')['id_dosen']],['id_js', '=', $request->idJadwalSeminar]])->delete();
         return Redirect::to('/ketersediaanseminar');
     }
+
+    public function pengajuanJadwal(){
+        $tugasAkhir = TugasAkhir::where([['id_user', $session('user')['id']],['status', '>=', '0']])->first();
+        $dayList = array(
+            'Sun' => 'Minggu',
+            'Mon' => 'Senin',
+            'Tue' => 'Selasa',
+            'Wed' => 'Rabu',
+            'Thu' => 'Kamis',
+            'Fri' => 'Jumat',
+            'Sat' => 'Sabtu'
+        );
+        $ketersediaanDosen = array();
+        $jadwalSeminar = array();
+        $tanggalSeminars = array();
+        
+        $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
+        $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
+        if($tugasAkhir->id_dosbing1 && $tugasAkhir->id_dosbing2){
+            $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->orWhere('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
+                $query->where('tanggal', '>', $tanggalTutup);
+            }])->get();
+        }
+        elseif(!$tugasAkhir->id_dosbing2 || !$tugasAkhir->id_dosbing1){
+            if($tugasAkhir->id_dosbing1){
+                $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
+                    $query->where('tanggal', '>', $tanggalTutup);
+                }])->get();
+            }
+            else{
+                $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
+                    $query->where('tanggal', '>', $tanggalTutup);
+                }])->get();
+            }
+        }
+        else{
+            return Redirect::to('/home')->withError('Tidak dapat mengajukan jadwal semminar karena anda tidak memiliki dosen pembimbing');
+        }
+        
+        $dosens = KetersediaanSeminar::where('id_dosen', session('user')['id_dosen'])->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
+            $query->where('tanggal', '>', $tanggalTutup);
+        }])->get();
+        
+        foreach ($dosens as $key => $dosen) {
+            //if($tugasAkhir->)
+            $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi] = 1;
+        }
+        foreach ($jadwals as $key => $jadwal) {
+            $jadwalSeminar[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_js;
+        }
+
+        $dates = array_keys($jadwalSeminar);
+        foreach ($dates as $key => $date) {
+            $tanggalSeminars[$key]['tanggal'] = $date;
+            $day = date('D', strtotime($date));
+            $tanggalSeminars[$key]['hari'] = $dayList[$day];
+            $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$date];
+        }
+        $data['tanggalSeminars'] = $tanggalSeminars;
+        $data['ketersediaanDosen'] = $ketersediaanDosen;
+
+        return view('seminar.ketersediaan', $data);
+    }
 }
