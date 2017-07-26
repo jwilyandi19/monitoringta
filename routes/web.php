@@ -26,12 +26,13 @@ Route::get('/tambahkanjadwal', 'FrontendController@tambahkanJadwal');
 Route::get('/pencarianta', 'PencarianController@pencarianTA');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
-    Route::resource('/pengajuan', 'PengajuanController');
     Route::resource('/progres', 'ProgresController');
     Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
     Route::get('/statusproposal', 'FrontendController@statusProposal');
     Route::get('/detailta', 'ProgresController@detail');
     Route::post('/progres/uploadfile', 'ProgresController@uploadFile');
+    Route::get('/pengajuan/create', 'PengajuanController@create');
+    Route::post('/pengajuan', 'PengajuanController@store');
 });
 
 Route::group(['middleware' => ['Dosen']], function(){
