@@ -101,7 +101,7 @@
                         <h6>:</h6>
                     </div>
                     <div class="col-md-9">
-                        <h6>{{$detailta->bidang->nama_bidang}}</h6>
+                        <h6>{{$detailta->rmk->nama_rumpun}}</h6>
                     </div>
                 </div>
                 <div class="row">

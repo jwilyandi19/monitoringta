@@ -14,7 +14,7 @@ class SeminarTA extends Model
     'id_seminar_ta',
     'id_ta',
     'id_js',
-    'tanggal',
+    'status',
     'nilai',
     'evaluasi',
     'created_at',

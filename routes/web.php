@@ -24,14 +24,23 @@ Route::get('/pengajuanjadwal', 'FrontendController@pengajuanJadwal');
 Route::get('/statusta', 'FrontendController@statusTa');
 Route::get('/tambahkanjadwal', 'FrontendController@tambahkanJadwal');
 Route::get('/pencarianta', 'PencarianController@pencarianTA');
+Route::get('/error', 'FrontendController@error');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
     Route::resource('/pengajuan', 'PengajuanController');
     Route::resource('/progres', 'ProgresController');
-    Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
     Route::get('/statusproposal', 'FrontendController@statusProposal');
     Route::get('/detailta', 'ProgresController@detail');
     Route::post('/progres/uploadfile', 'ProgresController@uploadFile');
+    Route::get('/pengajuanseminar', 'SeminarController@pengajuanJadwal');
+    Route::post('/pengajuanseminar', 'SeminarController@doPengajuan');
+    Route::get('/formpengajuanseminar/{id}', 'SeminarController@formPengajuan');
+    Route::post('/batalkanpengajuanseminar', 'SeminarController@pembatalanJadwal');
+    Route::get('/pengajuanujian', 'SidangController@pengajuanJadwal');
+    Route::post('/pengajuanujian', 'SidangController@doPengajuan');
+    Route::get('/formpengajuanujian/{id}', 'SidangController@formPengajuan');
+    Route::post('/batalkanpengajuanujian', 'SidangController@pembatalanJadwal');
+    Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
 });
 
 Route::group(['middleware' => ['Dosen']], function(){
@@ -62,4 +71,7 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::get('/jadwalujian', 'JadwalController@jadwalUjian');
     Route::post('/jadwal/ujianhapus', 'JadwalController@hapusJadwalUjian');
     Route::post('/jadwal/tambahujian', 'JadwalController@tambahJadwalUjian');
+    Route::get('/pengujiseminar', 'PengujiController@pengujiSeminar');
+    Route::get('/formpengujiseminar/{id}', 'PengujiController@formSeminar');
+    Route::get('/pengujiujian', 'PengujiController@pengujiUjian');
 });

@@ -10,6 +10,7 @@ use App\TugasAkhir;
 use App\BidangMK;
 use App\StatusTA;
 use App\Dosen;
+use App\RumpunMK;
 use Carbon\Carbon;
 use Response;
 use Redirect;
@@ -40,7 +41,7 @@ class PengajuanController extends Controller
             return view('pengajuan.sudah');
         }
         else{
-            $data['bidang_mks'] = BidangMK::all();
+            $data['rumpun_mks'] = RumpunMK::all();
             $data['pembimbing1s'] = Dosen::where('pembimbing1', 1)->get();
             $data['pembimbing2s'] = Dosen::all();
             return view('pengajuan.index', $data);
@@ -55,15 +56,16 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $messagesError = [ 
             'judulTA.required' => 'Judul Tugas Akhir tidak boleh kosong',
-            'bidangMk.required' => 'Bidang Matakuliah tidak boleh kosong',
+            'rumpunMK.required' => 'Rumpun Matakuliah tdak boleh kosong',
             'pembimbing1.required' => 'Dosen Pembimbing 1 tidak boleh kosong'
             ];
 
         $validator = Validator::make($request->all(), [ 
                 'judulTA' => 'required',
-                'bidangMk' => 'required',
+                'rumpunMK' => 'required',
                 'pembimbing1' => 'required',
             ], $messagesError);
 
@@ -75,7 +77,7 @@ class PengajuanController extends Controller
             $statusTA = StatusTA::where('id_status', 0)->first();
             $taBaru = new TugasAkhir();
             $taBaru->id_user = session('user')['id'];
-            $taBaru->id_bidang_mk = $request->bidangMk;
+            $taBaru->id_rumpun_mk = $request->rumpunMK;
             $taBaru->judul = $request->judulTA;
             //dd($taBaru);
             if(!$statusTA->tugasAkhirs()->save($taBaru)){
@@ -98,8 +100,6 @@ class PengajuanController extends Controller
                 $dosbing2->id_ta = $taUser->id_ta;
                 $dosbing2->peran = 2;
                 $dosbing2->status = 0;
-                //$dosbing1->created_at->timezone('Asia/Jakarta');
-                //$dosbing2->updated_at->timezone('Asia/Jakarta');
                 if(!$dosbing2->save()){
                     return Redirect::to(url('pengajuan/create'))->withErrors('Gagal Menyimpan Data');
                 }

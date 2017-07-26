@@ -14,6 +14,7 @@ class PengujiSeminar extends Model
     'id_penguji_s',
     'id_seminar_ta',
     'id_dosen',
+    'peran',
     'konfirmasi',
     ];
 

@@ -14,7 +14,7 @@ class UjianTA extends Model
     'id_ujian_ta',
     'id_ta',
     'id_ju',
-    'tanggal',
+    'status',
     'nilai',
     'nilai_angka',
     'evaluasi',
