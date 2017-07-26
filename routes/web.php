@@ -27,7 +27,6 @@ Route::get('/pencarianta', 'PencarianController@pencarianTA');
 Route::get('/error', 'FrontendController@error');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
-    Route::resource('/pengajuan', 'PengajuanController');
     Route::resource('/progres', 'ProgresController');
     Route::get('/statusproposal', 'FrontendController@statusProposal');
     Route::get('/detailta', 'ProgresController@detail');
@@ -41,6 +40,8 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
     Route::get('/formpengajuanujian/{id}', 'SidangController@formPengajuan');
     Route::post('/batalkanpengajuanujian', 'SidangController@pembatalanJadwal');
     Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
+    Route::get('/pengajuan/create', 'PengajuanController@create');
+    Route::post('/pengajuan', 'PengajuanController@store');
 });
 
 Route::group(['middleware' => ['Dosen']], function(){
