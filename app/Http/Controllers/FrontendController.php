@@ -50,8 +50,12 @@ class FrontendController extends Controller
     }
 
     public function pencarianTA(){
-        $data['tugasAkhirs'] = TugasAkhir::with(['bidang', 'status', 'user', 'dosbing1', 'dosbing2'])->get();
+        $data['tugasAkhirs'] = TugasAkhir::with(['rmk', 'status', 'user', 'dosbing1', 'dosbing2'])->get();
 
         return view('pencarianta', $data);
+    }
+
+    public function error(){
+        return view('error.index');
     }
 }

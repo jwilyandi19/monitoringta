@@ -44,19 +44,21 @@ Mahasiswa Bimbingan
                 <tbody>
                     @if($konfirmasis)
                         @foreach($konfirmasis as $key => $konfirmasi)
-                            <tr>
-                                <td>{{$key+1}}</td>
-                                <td>{{$konfirmasi->tugasAkhir->user->username}}</td>
-                                <td>{{$konfirmasi->tugasAkhir->user->nama}}</td>
-                                <td>{{$konfirmasi->tugasAkhir->judul}}</td>
-                                <td class="text-center">Pembimbing {{$konfirmasi->peran}}</th>
-                                <td>
-                                    <div class="text-center">
-                                        <button value="{{$konfirmasi->tugasAkhir->id_ta}}" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button value="{{$konfirmasi->tugasAkhir->id_ta}}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-ban-circle"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @if($konfirmasi->tugasAkhir)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$konfirmasi->tugasAkhir->user->username}}</td>
+                                    <td>{{$konfirmasi->tugasAkhir->user->nama}}</td>
+                                    <td>{{$konfirmasi->tugasAkhir->judul}}</td>
+                                    <td class="text-center">Pembimbing {{$konfirmasi->peran}}</th>
+                                    <td>
+                                        <div class="text-center">
+                                            <button value="{{$konfirmasi->tugasAkhir->id_ta}}" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button>
+                                            <button value="{{$konfirmasi->tugasAkhir->id_ta}}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-ban-circle"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     @endif
                 </tbody>

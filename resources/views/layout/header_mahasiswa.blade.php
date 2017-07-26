@@ -17,7 +17,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-blackboard"></i> Seminar TA </a>
                     <ul class="dropdown-menu">
                         <li><a href=""><i class="glyphicon glyphicon-list-alt"></i> Jadwal Seminar</a></li>
-                        <li><a href=""><i class="glyphicon glyphicon-calendar"></i> Pengajuan Jadwal Seminar</a></li>
+                        <li><a href="{{url('/pengajuanseminar')}}"><i class="glyphicon glyphicon-calendar"></i> Pengajuan Jadwal Seminar</a></li>
                     </ul>
                 </li>
                 
@@ -25,7 +25,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-book"></i> Sidang TA </a>
                     <ul class="dropdown-menu">
                         <li><a href=""><i class="glyphicon glyphicon-list-alt"></i> Jadwal Sidang</a></li>
-                        <li><a href=""><i class="glyphicon glyphicon-calendar"></i> Pengajuan Jadwal Sidang</a></li>
+                        <li><a href="{{url('/pengajuanujian')}}"><i class="glyphicon glyphicon-calendar"></i> Pengajuan Jadwal Sidang</a></li>
                     </ul>
                 </li>
                 

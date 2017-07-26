@@ -34,7 +34,7 @@ Pencarian Tugas Akhir
                     <tr class="row">
                         <th class="text-center">No</th>
                         <th class="text-center">ID</th>
-                        <th class="text-center">Bidang</th>
+                        <th class="text-center">RMK</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">NRP</th>
                         <th class="text-center">Judul</th>
@@ -52,7 +52,7 @@ Pencarian Tugas Akhir
                         @endif
                             <td>{{$key+1}}</td>
                             <td>{{$tugasAkhir->id_ta}}</td>
-                            <td id="row-bidang">{{$tugasAkhir->bidang->nama_bidang}}</td>
+                            <td id="row-rumpun">{{$tugasAkhir->rmk->nama_rumpun}}</td>
                             <td id="row-status">{{$tugasAkhir->status->keterangan}}</td>
                             <td id="row-nrp">{{$tugasAkhir->user->username}}</td>
                             <td id="row-judul">{{$tugasAkhir->judul}}</td>
@@ -136,7 +136,7 @@ Pencarian Tugas Akhir
                             <h6>: </h6>
                         </div>
                         <div class="col-md-8">
-                            <h6 id="modal-bidang"></h6>
+                            <h6 id="modal-rumpun"></h6>
                         </div>
                     </div>
                     <div class="row">
@@ -170,7 +170,7 @@ Pencarian Tugas Akhir
             var judul = $(this).find('#row-judul').text();
             var pembimbing1 = $(this).find('#row-pembimbing1').text();
             var pembimbing2 = $(this).find('#row-pembimbing2').text();
-            var bidang = $(this).find('#row-bidang').text();
+            var rumpun = $(this).find('#row-rumpun').text();
             var status = $(this).find('#row-status').text();
             console.log(pembimbing1);
             $('#modal-nrp').text(nrp);
@@ -178,7 +178,7 @@ Pencarian Tugas Akhir
             $('#modal-judul').text(judul);
             $('#modal-pembimbing1').text(pembimbing1);
             $('#modal-pembimbing2').text(pembimbing2);
-            $('#modal-bidang').text(bidang);
+            $('#modal-rumpun').text(rumpun);
             $('#modal-status').text(status);
         });
         $('close').click(function(){
