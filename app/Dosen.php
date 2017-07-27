@@ -61,4 +61,44 @@ class Dosen extends Model
     public function rmks(){
         return $this->hasMany('App\RmkDosen', 'id_dosen', 'id_dosen');
     }
+
+    public function penguji1s(){
+        return $this->hasMany('App\SeminarTA', 'id_penguji1', 'id_dosen');
+    }
+
+    public function penguji2s(){
+        return $this->hasMany('App\SeminarTA', 'id_penguji2', 'id_dosen');
+    }
+
+    public function penguji3s(){
+        return $this->hasMany('App\SeminarTA', 'id_penguji3', 'id_dosen');
+    }
+
+    public function penguji4s(){
+        return $this->hasMany('App\SeminarTA', 'id_penguji4', 'id_dosen');
+    }
+
+    public function penguji5s(){
+        return $this->hasMany('App\SeminarTA', 'id_penguji5', 'id_dosen');
+    }
+
+    public function pegnuji1Ujians(){
+        return $this->hasMany('App\UjianTA', 'id_penguji1', 'id_dosen');
+    }
+
+    public function pegnuji2Ujians(){
+        return $this->hasMany('App\UjianTA', 'id_penguji2', 'id_dosen');
+    }
+
+    public function pegnuji3Ujians(){
+        return $this->hasMany('App\UjianTA', 'id_penguji3', 'id_dosen');
+    }
+
+    public function pegnuji4Ujians(){
+        return $this->hasMany('App\UjianTA', 'id_penguji4', 'id_dosen');
+    }
+
+    public function pegnuji5Ujians(){
+        return $this->hasMany('App\UjianTA', 'id_penguji5', 'id_dosen');
+    }
 }

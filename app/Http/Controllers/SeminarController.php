@@ -19,7 +19,7 @@ class SeminarController extends Controller
      */
     public function index()
     {
-        //
+        //$seminarTAs = SeminarTA::where('status' = 1)->with(['','penguji1', 'penguji2'])
     }
 
     /**

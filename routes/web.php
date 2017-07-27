@@ -20,6 +20,7 @@ Route::get('/gantipassword', 'AuthController@gantiPass');
 Route::post('/gantipassword', 'AuthController@gantiPassword');
 
 Route::get('/ketersediaandosen', 'FrontendController@ketersediaanDosen');
+Route::get('/seminar', 'SeminarController@index');
 Route::get('/pengajuanjadwal', 'FrontendController@pengajuanJadwal');
 Route::get('/statusta', 'FrontendController@statusTa');
 Route::get('/tambahkanjadwal', 'FrontendController@tambahkanJadwal');
@@ -73,5 +74,7 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::post('/jadwal/tambahujian', 'JadwalController@tambahJadwalUjian');
     Route::get('/pengujiseminar', 'PengujiController@pengujiSeminar');
     Route::get('/formpengujiseminar/{id}', 'PengujiController@formSeminar');
-    Route::get('/pengujiujian', 'PengujiController@pengujiUjian');
+    Route::post('/pengujiseminar/{id}', 'PengujiController@formPengujiSeminar');
+    Route::post('/terimapengajuanseminar', 'PengujiController@terimaSeminar');
+    Route::get('/pengujiujian', 'PengujiController@pengujiUjian');  
 });
