@@ -35,26 +35,26 @@ class SeminarTA extends Model
     }
 
     public function jadwalSeminar(){
-        return $this->belongsTo('App\jadwalSeminar', 'id_js', 'id_js');
+        return $this->belongsTo('App\JadwalSeminar', 'id_js', 'id_js');
     }
 
     public function penguji1(){
         return $this->belongsTo('App\Dosen', 'id_penguji1', 'id_dosen');
     }
 
-    public function dosbing2(){
+    public function penguji2(){
         return $this->belongsTo('App\Dosen', 'id_penguji2', 'id_dosen');
     }
 
-    public function dosbing3(){
+    public function penguji3(){
         return $this->belongsTo('App\Dosen', 'id_penguji3', 'id_dosen');
     }
 
-    public function dosbing4(){
+    public function penguji4(){
         return $this->belongsTo('App\Dosen', 'id_penguji4', 'id_dosen');
     }
 
-    public function dosbing5(){
+    public function penguji5(){
         return $this->belongsTo('App\Dosen', 'id_penguji5', 'id_dosen');
     }
 }

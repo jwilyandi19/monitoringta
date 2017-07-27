@@ -1,7 +1,7 @@
 @extends('layout.khusus')
 
 @section('title')
-    Jadwal Seminar Tugas Akhir
+    Jadwal Sidang Tugas Akhir
 @endsection
 
 @section('moreStyle')
@@ -29,7 +29,7 @@
             <hr>
         </div>
         <div class="pencarian">
-            <table id="seminar" class="table table-striped table-hover" cellspacing="0" width="100%">
+            <table id="ujian" class="table table-striped table-hover" cellspacing="0" width="100%">
                 <thead>
                     <tr class="success">
                         <th >Waktu</th>
@@ -45,49 +45,49 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($seminars as $key => $seminar)
+                    @foreach($ujians as $key => $ujian)
                         <tr>
                             <td style="white-space: nowrap;">
-                            @if(date('D',strtotime($seminar->jadwalSeminar->tanggal)) == 'Sun')
+                            @if(date('D',strtotime($ujian->jadwalUjian->tanggal)) == 'Sun')
                                 {{' Minggu '}}
-                            @elseif(date('D',strtotime($seminar->jadwalSeminar->tanggal)) == 'Mon')
+                            @elseif(date('D',strtotime($ujian->jadwalUjian->tanggal)) == 'Mon')
                                 {{' Senin '}}
-                            @elseif(date('D',strtotime($seminar->jadwalSeminar->tanggal)) == 'Tue')
+                            @elseif(date('D',strtotime($ujian->jadwalUjian->tanggal)) == 'Tue')
                                 {{' Selasa '}}
-                            @elseif(date('D',strtotime($seminar->jadwalSeminar->tanggal)) == 'Wed')
+                            @elseif(date('D',strtotime($ujian->jadwalUjian->tanggal)) == 'Wed')
                                 {{' Rabu '}}
-                            @elseif(date('D',strtotime($seminar->jadwalSeminar->tanggal)) == 'Thu')
+                            @elseif(date('D',strtotime($ujian->jadwalUjian->tanggal)) == 'Thu')
                                 {{' Kamis '}}
-                            @elseif(date('D',strtotime($seminar->jadwalSeminar->tanggal)) == 'Fri')
+                            @elseif(date('D',strtotime($ujian->jadwalUjian->tanggal)) == 'Fri')
                                 {{' Jumat '}}
-                            @elseif(date('D',strtotime($seminar->jadwalSeminar->tanggal)) == 'Sat')
+                            @elseif(date('D',strtotime($ujian->jadwalUjian->tanggal)) == 'Sat')
                                 {{' Sabtu '}}
-                            @endif, {{date('d/m/Y',strtotime($seminar->jadwalSeminar->tanggal)).' Sesi '.$seminar->jadwalSeminar->sesi}}
+                            @endif, {{date('d/m/Y',strtotime($ujian->jadwalUjian->tanggal)).' Sesi '.$ujian->jadwalUjian->sesi}}
                             </td>
-                            <td style="white-space: nowrap;">{{$seminar->tugasAkhir->rmk->nama_rumpun}}</td>
-                            <td style="white-space: nowrap;">{{$seminar->tugasAkhir->user->username}}</td>
-                            <td style="white-space: nowrap;">{{$seminar->tugasAkhir->user->nama}}</td>
-                            <td style="white-space: nowrap;">{{$seminar->penguji1->nama_lengkap}}</td>
-                            <td style="white-space: nowrap;">{{$seminar->penguji2->nama_lengkap}}</td>
+                            <td style="white-space: nowrap;">{{$ujian->tugasAkhir->rmk->nama_rumpun}}</td>
+                            <td style="white-space: nowrap;">{{$ujian->tugasAkhir->user->username}}</td>
+                            <td style="white-space: nowrap;">{{$ujian->tugasAkhir->user->nama}}</td>
+                            <td style="white-space: nowrap;">{{$ujian->penguji1Ujian->nama_lengkap}}</td>
+                            <td style="white-space: nowrap;">{{$ujian->penguji2Ujian->nama_lengkap}}</td>
                             
-                            @if($seminar->penguji3)
-                                <td style="white-space: nowrap;">{{$seminar->penguji3->nama_lengkap}}</td>
+                            @if($ujian->penguji3Ujian)
+                                <td style="white-space: nowrap;">{{$ujian->penguji3Ujian->nama_lengkap}}</td>
                             @else
                                 <td style="white-space: nowrap;">-</td>
                             @endif
 
-                            @if($seminar->penguji4)
-                                <td style="white-space: nowrap;">{{$seminar->penguji4->nama_lengkap}}</td>
+                            @if($ujian->penguji4Ujian)
+                                <td style="white-space: nowrap;">{{$ujian->penguji4Ujian->nama_lengkap}}</td>
                             @else
                                 <td style="white-space: nowrap;">-</td>
                             @endif
 
-                            @if($seminar->penguji5)
-                                <td style="white-space: nowrap;">{{$seminar->penguji5->nama_lengkap}}</td>
+                            @if($ujian->penguji5Ujian)
+                                <td style="white-space: nowrap;">{{$ujian->penguji5Ujian->nama_lengkap}}</td>
                             @else
                                 <td >-</td>
                             @endif
-                            <td style="white-space: nowrap;">{{$seminar->tugasAkhir->judul}}</td>
+                            <td style="white-space: nowrap;">{{$ujian->tugasAkhir->judul}}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -101,9 +101,9 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#seminar').DataTable({
+        $('#ujian').DataTable({
             "scrollX" : true,
-            "autoWidth" : true,
+            "autoWidth" : false,
             "scrollCollapse" : true,
         });
     });
