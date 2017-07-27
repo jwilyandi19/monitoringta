@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    Form Penguji Seminar
+    Form Penguji Ujian
 @endsection
 
 @section('moreStyle')
@@ -26,15 +26,15 @@
     @endif
 	<div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
 		<div class="judul-halaman">
-            <a class="btn btn-default pull-right" href="{{url('/pengujiseminar')}}">Kembali</a>
-            <h4><strong>Pengajuan Penguji Seminar</strong></h4>
+            <a class="btn btn-default pull-right" href="{{url('/pengujiujian')}}">Kembali</a>
+            <h4><strong>Pengajuan Penguji Ujian</strong></h4>
             <hr>
         </div>
         <div class="alert alert-warning">
             <div class="col-md-12">
                 @if($jadwal->sesi > 1)
                     <div class="col-md-3 text-left">
-                        <a href="{{url('/formpengujiseminar/'.($jadwal->id_js - 1))}}" class="btn btn-primary">Sesi {{$jadwal->sesi - 1}}</a>
+                        <a href="{{url('/formpengujiujian/'.($jadwal->id_ju - 1))}}" class="btn btn-primary">Sesi {{$jadwal->sesi - 1}}</a>
                     </div>
                     <div class="col-md-6 text-center">
                 @else
@@ -44,7 +44,7 @@
                 </div>
                 @if($jadwal->sesi < 3)
                     <div class="col-md-3 text-right" style="vertical-align: center;">
-                        <a href="{{url('/formpengujiseminar/'.($jadwal->id_js + 1))}}" class="btn btn-primary"> Sesi {{$jadwal->sesi + 1}}</a>
+                        <a href="{{url('/formpengujiujian/'.($jadwal->id_ju + 1))}}" class="btn btn-primary"> Sesi {{$jadwal->sesi + 1}}</a>
                     </div>
                 @endif
             </div>
@@ -93,9 +93,9 @@
                         <th class="text-center">Aksi</th>
                     </thead>
                     <tbody>
-                        @if($seminars)
-                            @foreach($seminars as $keys => $seminar)
-                                @if($seminar->status == 1)
+                        @if($ujians)
+                            @foreach($ujians as $keys => $ujian)
+                                @if($ujian->status == 1)
                                     <tr class="success">
                                 @elseif($keys < 6)
                                     <tr class="warning">
@@ -103,25 +103,25 @@
                                     <tr>
                                 @endif
                                     <td class="text-center">{{$keys+1}}</td>
-                                    <td>{{$seminar->tugasAkhir->user->username}}</td>
-                                    <td>{{$seminar->tugasAkhir->rmk->nama_rumpun}}</td>
-                                    <td>{{$seminar->tugasAkhir->judul}}</td>
+                                    <td>{{$ujian->tugasAkhir->user->username}}</td>
+                                    <td>{{$ujian->tugasAkhir->rmk->nama_rumpun}}</td>
+                                    <td>{{$ujian->tugasAkhir->judul}}</td>
                                     
-                                    @if($seminar->tugasAkhir->dosbing1)
-                                        <td>{{$seminar->tugasAkhir->dosbing1->nama}}</td>
+                                    @if($ujian->tugasAkhir->dosbing1)
+                                        <td>{{$ujian->tugasAkhir->dosbing1->nama}}</td>
                                     @else
                                         <td style="text-align: center;">-</td>
                                     @endif
                                     
-                                    @if($seminar->tugasAkhir->dosbing2)
-                                        <td>{{$seminar->tugasAkhir->dosbing2->nama}}</td>
+                                    @if($ujian->tugasAkhir->dosbing2)
+                                        <td>{{$ujian->tugasAkhir->dosbing2->nama}}</td>
                                     @else
                                         <td style="text-align: center;">-</td>
                                     @endif
                                     
                                     <td>
-                                        @if($seminar->status == 0)
-                                            <a class="btn btn-success btn-sm" value="{{$seminar->id_seminar_ta}}">Terima</a>
+                                        @if($ujian->status == 0)
+                                            <a class="btn btn-success btn-sm" value="{{$ujian->id_ujian_ta}}">Terima</a>
                                         @else
                                             -
                                         @endif
@@ -151,24 +151,24 @@
                         <th class="">Aksi</th>
                     </thead>
                     <tbody>
-                        @if($seminarDiterimas)
-                            @foreach($seminarDiterimas as $index => $seminarDiterima)
+                        @if($ujianDiterimas)
+                            @foreach($ujianDiterimas as $index => $ujianDiterima)
                                 <tr>
-                                    <form  action="{{url('/pengujiseminar/'.$seminarDiterima->id_seminar_ta)}}" method="POST">
+                                    <form  action="{{url('/pengujiujian/'.$ujianDiterima->id_ujian_ta)}}" method="POST">
                                         {{csrf_field()}}
                                         {{method_field('POST')}}
                                         
                                         <td>{{$index+1}}</td>
-                                        <td>{{$seminarDiterima->tugasAkhir->user->username}}</td>
-                                        <td>{{$seminarDiterima->tugasAkhir->rmk->nama_rumpun}}</td>
-                                        <td>{{$seminarDiterima->tugasAkhir->judul}}</td>
+                                        <td>{{$ujianDiterima->tugasAkhir->user->username}}</td>
+                                        <td>{{$ujianDiterima->tugasAkhir->rmk->nama_rumpun}}</td>
+                                        <td>{{$ujianDiterima->tugasAkhir->judul}}</td>
                                         <td>
                                             <select name="penguji1">
-                                                @if(!$seminarDiterima->id_penguji1)
+                                                @if(!$ujianDiterima->id_penguji1)
                                                     <option value="" selected="">Pilih Penguji 2</option>
                                                 @endif
                                                 @foreach($dosenBersedias as $key => $dosenBersedia)
-                                                    @if($seminarDiterima->id_penguji1 == $dosenBersedia['id'])
+                                                    @if($ujianDiterima->id_penguji1 == $dosenBersedia['id'])
                                                         <option value="{{$dosenBersedia['id']}}" selected>{{$dosenBersedia['nama']}}</option>
                                                     @else
                                                         
@@ -178,11 +178,11 @@
                                         </td>
                                         <td>
                                             <select name="penguji2">
-                                                @if(!$seminarDiterima->id_penguji2)
+                                                @if(!$ujianDiterima->id_penguji2)
                                                     <option value="" selected="">Pilih Penguji 2</option>
                                                 @endif
                                                 @foreach($dosenBersedias as $key => $dosenBersedia)
-                                                    @if($seminarDiterima->id_penguji2 == $dosenBersedia['id'])
+                                                    @if($ujianDiterima->id_penguji2 == $dosenBersedia['id'])
                                                         <option value="{{$dosenBersedia['id']}}" selected>{{$dosenBersedia['nama']}}</option>
                                                     @else
                                                         
@@ -192,11 +192,11 @@
                                         </td>
                                         <td>
                                             <select name="penguji3">
-                                                @if(!$seminarDiterima->id_penguji3)
+                                                @if(!$ujianDiterima->id_penguji3)
                                                     <option value="" selected="">Pilih Penguji 3</option>
                                                 @endif
                                                 @foreach($dosenBersedias as $key => $dosenBersedia)
-                                                    @if($seminarDiterima->id_penguji3 == $dosenBersedia['id'])
+                                                    @if($ujianDiterima->id_penguji3 == $dosenBersedia['id'])
                                                         <option value="{{$dosenBersedia['id']}}" selected>{{$dosenBersedia['nama']}}</option>
                                                     @else
                                                         <option value="{{$dosenBersedia['id']}}">{{$dosenBersedia['nama']}}</option>
@@ -206,11 +206,11 @@
                                         </td>
                                         <td>
                                             <select name="penguji4">
-                                                @if(!$seminarDiterima->id_penguji4)
+                                                @if(!$ujianDiterima->id_penguji4)
                                                     <option value="" selected="">Pilih Penguji 4</option>
                                                 @endif
                                                 @foreach($dosenBersedias as $key => $dosenBersedia)
-                                                    @if($seminarDiterima->id_penguji4 == $dosenBersedia['id'])
+                                                    @if($ujianDiterima->id_penguji4 == $dosenBersedia['id'])
                                                         <option value="{{$dosenBersedia['id']}}" selected>{{$dosenBersedia['nama']}}</option>
                                                     @else
                                                         <option value="{{$dosenBersedia['id']}}">{{$dosenBersedia['nama']}}</option>
@@ -220,11 +220,11 @@
                                         </td>
                                         <td>
                                             <select name="penguji5">
-                                                @if(!$seminarDiterima->id_penguji5)
+                                                @if(!$ujianDiterima->id_penguji5)
                                                     <option value="" selected="">Pilih Penguji 5</option>
                                                 @endif
                                                 @foreach($dosenBersedias as $key => $dosenBersedia)
-                                                    @if($seminarDiterima->id_penguji5 == $dosenBersedia['id'])
+                                                    @if($ujianDiterima->id_penguji5 == $dosenBersedia['id'])
                                                         <option value="{{$dosenBersedia['id']}}" selected>{{$dosenBersedia['nama']}}</option>
                                                     @else
                                                         <option value="{{$dosenBersedia['id']}}">{{$dosenBersedia['nama']}}</option>
@@ -235,7 +235,7 @@
                                         <td>
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-block btn-info btn-sm">Simpan</button>
-                                                <a class="btn btn-block btn-danger btn-sm" value="{{$seminarDiterima->id_seminar_ta}}">Batalkan</a>
+                                                <a class="btn btn-block btn-danger btn-sm" value="{{$ujianDiterima->id_ujian_ta}}">Batalkan</a>
                                             </div>
                                         </td>
                                     </form>
@@ -247,21 +247,21 @@
             </div>
             <div class="text-right">
                 <hr>
-                <a class="btn btn-default" href="{{url('/pengujiseminar')}}">Kembali</a>
+                <a class="btn btn-default" href="{{url('/pengujiujian')}}">Kembali</a>
             </div>
         </div>
 	</div>
-    <form id="terimaSeminar" action="{{url('/terimapengajuanseminar')}}" method="POST" style="display: none;">
+    <form id="terimaUjian" action="{{url('/terimapengajuanujian')}}" method="POST" style="display: none;">
         {{csrf_field()}}
         {{method_field('POST')}}
-        <input type="text" name="idJadwalSeminar" value="{{$jadwal->id_js}}">
-        <input type="text" name="idSeminarTA" id="inpSeminarDiterima">
+        <input type="text" name="idJadwalUjian" value="{{$jadwal->id_ju}}">
+        <input type="text" name="idUjianTA" id="inpUjianDiterima">
     </form>
-    <form id="batalkanSeminar" action="{{url('/batalkanseminar')}}" method="POST" style="display: none;">
+    <form id="batalkanUjian" action="{{url('/batalkanujian')}}" method="POST" style="display: none;">
         {{csrf_field()}}
         {{method_field('POST')}}
-        <input type="text" name="idJadwalSeminar" value="{{$jadwal->id_js}}">
-        <input type="text" name="idSeminarTA" id="inpSeminarDitolak">
+        <input type="text" name="idJadwalUjian" value="{{$jadwal->id_ju}}">
+        <input type="text" name="idUjianTA" id="inpUjianDitolak">
     </form>
 @endsection
 
@@ -285,23 +285,22 @@
             "ordering" : false,
         });
         $('.btn-success').click(function(){
-            var idSeminarTA = $(this).attr('value');
-
+            var idUjianTA = $(this).attr('value');
             swal({
                 title: "Perhatian",
-                text: "Apakah anda yakin ingin menerima pengajuan jadwal seminar dari TA berikut ?",
+                text: "Apakah anda yakin ingin menerima pengajuan jadwal sidang dari TA berikut ?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Ya, Terima",
                 cancelButtonText: "Batal"
             },
             function(){
-                $('#inpSeminarDiterima').val(idSeminarTA);
-                $('#terimaSeminar').submit();
+                $('#inpUjianDiterima').val(idUjianTA);
+                $('#terimaUjian').submit();
             });
         });
         $('.btn-danger').click(function(){
-            var idSeminarTA = $(this).attr('value');
+            var idUjianTA = $(this).attr('value');
 
             swal({
                 title: "Perhatian",
@@ -312,8 +311,8 @@
                 cancelButtonText: "Batal"
             },
             function(){
-                $('#inpSeminarDitolak').val(idSeminarTA);
-                $('#batalkanSeminar').submit();
+                $('#inpUjianDitolak').val(idUjianTA);
+                $('#batalkanUjian').submit();
             });
         });
     });

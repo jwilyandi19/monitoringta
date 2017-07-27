@@ -70,7 +70,7 @@ class AuthController extends Controller
         }
         else{
             $request->session()->flush();
-            return Redirect::to('/home')->with('message', 'Berhasil Logout');
+            return Redirect::to('/home');
         }
     }
 

@@ -21,7 +21,7 @@ class UjianTA extends Model
     'id_penguji3',
     'nilai_penguji3',
     'id_penguji4',
-    'nilai_penguji4'
+    'nilai_penguji4',
     'id_penguji5',
     'nilai_penguji5',
     'status',
@@ -44,23 +44,23 @@ class UjianTA extends Model
         return $this->belongsTo('App\JadwalUjian', 'id_ju', 'id_ju');
     }
 
-    public function penguji1(){
+    public function penguji1Ujian(){
         return $this->belongsTo('App\Dosen', 'id_penguji1', 'id_dosen');
     }
 
-    public function dosbing2(){
+    public function penguji2Ujian(){
         return $this->belongsTo('App\Dosen', 'id_penguji2', 'id_dosen');
     }
 
-    public function dosbing3(){
+    public function penguji3Ujian(){
         return $this->belongsTo('App\Dosen', 'id_penguji3', 'id_dosen');
     }
 
-    public function dosbing4(){
+    public function penguji4Ujian(){
         return $this->belongsTo('App\Dosen', 'id_penguji4', 'id_dosen');
     }
 
-    public function dosbing5(){
+    public function penguji5Ujian(){
         return $this->belongsTo('App\Dosen', 'id_penguji5', 'id_dosen');
     }
 }

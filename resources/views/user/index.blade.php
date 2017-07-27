@@ -1,11 +1,11 @@
 @extends('layout.main')
 
 @section('title')
-    Home
+    List Data User
 @endsection
 
 @section('moreStyle')
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 @endsection
 
 @section('content')
@@ -29,21 +29,21 @@
             <hr>
         </div>
         <div class="data-user">
-            <table class="table table-striped">
+            <table id="listUser" class="table table-striped">
                 <thead>
                 <tr>
                     <th class="col-md-1 text-center"><strong>id user</strong></th>
-                    <th class="col-md-3 text-center"><strong>Username</strong></th>
-                    <th class="col-md-6 text-center"><strong>Nama</strong></th>
-                    <th class="col-md-2 text-center"><strong>Peran</strong></th>
-                    <th class="text-center"><strong>Aksi</strong></th>
+                    <th class="col-md-3"><strong>Username</strong></th>
+                    <th class="col-md-5"><strong>Nama</strong></th>
+                    <th class="col-md-1 text-center"><strong>Peran</strong></th>
+                    <th class="col-md-1 text-center"><strong>Aksi</strong></th>
                 </tr>
                 </thead>
                 <tbody>
                 @if($users)
                     @foreach($users as $key => $user)
                         <tr>
-                            <td>{{$user->id_user}}</td>
+                            <td class="text-center">{{$key+1}}</td>
                             <td>{{$user->username}}</td>
                             <td>{{$user->nama}}</td>
                             @if($user->role == 1)
@@ -59,13 +59,15 @@
                 @endif
                 </tbody>
             </table>
-            <div class="text-right">
-                {{$users->links()}}
-            </div>
         </div>
     </div>
 @endsection
 
 @section('moreScript')
-
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#listUser').DataTable({});
+    })
+</script>
 @endsection

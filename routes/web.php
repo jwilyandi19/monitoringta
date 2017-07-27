@@ -72,9 +72,16 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::get('/jadwalujian', 'JadwalController@jadwalUjian');
     Route::post('/jadwal/ujianhapus', 'JadwalController@hapusJadwalUjian');
     Route::post('/jadwal/tambahujian', 'JadwalController@tambahJadwalUjian');
+    
     Route::get('/pengujiseminar', 'PengujiController@pengujiSeminar');
     Route::get('/formpengujiseminar/{id}', 'PengujiController@formSeminar');
     Route::post('/pengujiseminar/{id}', 'PengujiController@formPengujiSeminar');
     Route::post('/terimapengajuanseminar', 'PengujiController@terimaSeminar');
-    Route::get('/pengujiujian', 'PengujiController@pengujiUjian');  
+    Route::post('/batalkanseminar', 'PengujiController@batalkanSeminar');
+
+    Route::get('/pengujiujian', 'PengujiController@pengujiUjian');
+    Route::get('/formpengujiujian/{id}', 'PengujiController@formUjian');
+    Route::post('/pengujiujian/{id}', 'PengujiController@formPengujiUjian');  
+    Route::post('/terimapengajuanujian', 'PengujiController@terimaUjian');
+    Route::post('/batalkanujian', 'PengujiController@batalkanUjian');
 });

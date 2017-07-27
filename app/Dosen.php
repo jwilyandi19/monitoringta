@@ -82,23 +82,23 @@ class Dosen extends Model
         return $this->hasMany('App\SeminarTA', 'id_penguji5', 'id_dosen');
     }
 
-    public function pegnuji1Ujians(){
+    public function penguji1Ujians(){
         return $this->hasMany('App\UjianTA', 'id_penguji1', 'id_dosen');
     }
 
-    public function pegnuji2Ujians(){
+    public function penguji2Ujians(){
         return $this->hasMany('App\UjianTA', 'id_penguji2', 'id_dosen');
     }
 
-    public function pegnuji3Ujians(){
+    public function penguji3Ujians(){
         return $this->hasMany('App\UjianTA', 'id_penguji3', 'id_dosen');
     }
 
-    public function pegnuji4Ujians(){
+    public function penguji4Ujians(){
         return $this->hasMany('App\UjianTA', 'id_penguji4', 'id_dosen');
     }
 
-    public function pegnuji5Ujians(){
+    public function penguji5Ujians(){
         return $this->hasMany('App\UjianTA', 'id_penguji5', 'id_dosen');
     }
 }
