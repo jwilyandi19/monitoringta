@@ -31,44 +31,44 @@ Pencarian Tugas Akhir
         <div class="pencarian">
             <table id="tugasAkhir" class="table table-striped table-hover" cellspacing="0" width="100%">
                 <thead>
-                    <tr class="row">
+                    <tr class="">
                         <th class="text-center">No</th>
                         <th class="text-center">ID</th>
                         <th class="text-center">RMK</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">NRP</th>
-                        <th class="text-center">Judul</th>
-                        <!-- <th class="text-center">Nama</th>
-                        <th class="text-center">Pembimbing1</th>
-                        <th class="text-center">Pembimbing2</th> -->
+                        <th class="text-center">Nama</th>
+                        <th>Judul</th>
+                        <th>Pembimbing1</th>
+                        <th>Pembimbing2</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($tugasAkhirs as $key => $tugasAkhir)
                         @if($key%2 == 0)
-                            <tr class="row btn-link warning" data-toggle="modal" data-target="#modalDataTA">
+                            <tr class="btn-link warning" data-toggle="modal" data-target="#modalDataTA">
                         @else
-                            <tr class="row btn-link" data-toggle="modal" data-target="#modalDataTA">
+                            <tr class="btn-link" data-toggle="modal" data-target="#modalDataTA">
                         @endif
                             <td>{{$key+1}}</td>
                             <td>{{$tugasAkhir->id_ta}}</td>
-                            <td id="row-rumpun">{{$tugasAkhir->rmk->nama_rumpun}}</td>
-                            <td id="row-status">{{$tugasAkhir->status->keterangan}}</td>
-                            <td id="row-nrp">{{$tugasAkhir->user->username}}</td>
-                            <td id="row-judul">{{$tugasAkhir->judul}}</td>
+                            <td id="row-rumpun" style="white-space: nowrap;">{{$tugasAkhir->rmk->nama_rumpun}}</td>
+                            <td id="row-status" style="white-space: nowrap;">{{$tugasAkhir->status->keterangan}}</td>
+                            <td id="row-nrp" style="white-space: nowrap;">{{$tugasAkhir->user->username}}</td>
+                            <td id="row-nama" style="white-space: nowrap;">{{$tugasAkhir->user->nama}}</td>
+                            <td id="row-judul" style="white-space: nowrap;">{{$tugasAkhir->judul}}</td>
 
-                            <!-- <td id="row-nama">{{$tugasAkhir->user->nama}}</td> -->
                             
                             @if($tugasAkhir->dosbing1)
-                                <!-- <td id="row-pembimbing1">{{$tugasAkhir->dosbing1->nama_lengkap}}</td> -->
+                                <td id="row-pembimbing1" style="white-space: nowrap;">{{$tugasAkhir->dosbing1->nama_lengkap}}</td>
                             @else
-                                <!-- <td id="row-pembimbing1">-</td> -->
+                                <td id="row-pembimbing1" style="white-space: nowrap;">-</td>
                             @endif
                             
                             @if($tugasAkhir->dosbing2)
-                                <!-- <td id="row-pembimbing2">{{$tugasAkhir->dosbing2->nama_lengkap}}</td> -->
+                                <td id="row-pembimbing2" style="white-space: nowrap;">{{$tugasAkhir->dosbing2->nama_lengkap}}</td>
                             @else
-                                <!-- <td id="row-pembimbing2">-</td> -->
+                                <td id="row-pembimbing2" style="white-space: nowrap;">-</td>
                             @endif
                         </tr> 
                     @endforeach
@@ -85,7 +85,7 @@ Pencarian Tugas Akhir
                 </div>
                 <div class="modal-body panel panel-body" style="margin-bottom: 0px; padding: 20px;">
                     
-                    <div class="row" style="margin-bottom: 15px;">
+                    <div class="row">
                         <h6 class="col-md-3">NRP</h6>
                         <div class="col-md-1" style="text-align: right;">
                             <h6>: </h6>
@@ -163,6 +163,9 @@ Pencarian Tugas Akhir
 <script type="text/javascript">
     $(document).ready(function(){
         var table = $('#tugasAkhir').DataTable({
+            "scrollX" : true,
+            "autoWidth" : true,
+            "scrollCollapse" : true,
         });
         $('.btn-link').click(function(){
             var nrp = $(this).find('#row-nrp').text();

@@ -18,6 +18,8 @@ Route::post('/login', 'AuthController@doLogin');
 Route::get('/logout', 'AuthController@logOut');
 Route::get('/gantipassword', 'AuthController@gantiPass');
 Route::post('/gantipassword', 'AuthController@gantiPassword');
+Route::get('/seminarjadwal', 'SeminarController@seminarJadwal');
+Route::get('/ujianjadwal', 'SidangController@ujianJadwal');
 
 Route::get('/ketersediaandosen', 'FrontendController@ketersediaanDosen');
 Route::get('/seminar', 'SeminarController@index');

@@ -113,7 +113,7 @@
         {{csrf_field()}}
         {{method_field('POST')}}
         @if($ujianTA)
-            <input type="text" name="idSeminar" value="{{$ujianTA->id_ujian_ta}}">
+            <input type="text" name="idUjian" value="{{$ujianTA->id_ujian_ta}}">
         @endif
     </form>
 @endsection
