@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', 'FrontendController@home');
-Route::get('/home', 'FrontendController@home');
+Route::get('/', 'BeritaController@index');
+Route::get('/home', 'BeritaController@index');
 Route::get('/login', 'AuthController@logIn');
 Route::post('/login', 'AuthController@doLogin');
 Route::get('/logout', 'AuthController@logOut');
@@ -53,6 +53,8 @@ Route::group(['middleware' => ['Dosen']], function(){
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){
+    Route::get('/home/create', 'BeritaController@create');
+    Route::post('/home', 'BeritaController@store');
     Route::resource('/user', 'UserController');
     Route::post('/user/uploadfile', 'UserController@uploadFile');
     Route::post('/createuser1','AuthController@buatUser1');
