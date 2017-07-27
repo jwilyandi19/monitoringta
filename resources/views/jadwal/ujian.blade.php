@@ -37,7 +37,7 @@
                 <thead>
                 <tr>
                     <th class="text-center"><strong>No.</strong></th>
-                    <th><strong>Tanggal</strong></th>
+                    <th class="text-center"><strong>Tanggal</strong></th>
                     <th class="text-center"><strong>Aksi</strong></th>
                 </tr>
                 </thead>
@@ -46,7 +46,7 @@
                     @foreach($jadwal_ujians as $key => $jadwal_ujian)
                         <tr>
                             <td class="text-center">{{$key+1}}</td>
-                            <td>{{$jadwal_ujian->tanggal}}</td>
+                            <td class="text-center">{{date('d-m-Y',strtotime($jadwal_ujian->tanggal))}}</td>
                             <td class="text-center"><button class="btn btn-danger btn-sm" value="{{$jadwal_ujian->tanggal}}"><i class="glyphicon glyphicon-trash"></i> Hapus</button></td>
                         </tr>
                     @endforeach

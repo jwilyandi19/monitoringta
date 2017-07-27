@@ -34,7 +34,7 @@
                 <tr>
                     <th class="text-center"><strong>No.</strong></th>
                     <th><strong>Nama Jadwal</strong></th>
-                    <th><strong>Tanggal</strong></th>
+                    <th class="text-center"><strong>Tanggal</strong></th>
                     <th class="text-center"><strong>Aksi</strong></th>
                 </tr>
                 </thead>
@@ -44,7 +44,7 @@
                         <tr>
                             <td class="text-center">{{$key+1}}</td>
                             <td>{{$jadwal->nama}}</td>
-                            <td>{{$jadwal->tanggal}}</td>
+                            <td class="text-center">{{date('d-m-Y H:i:s',strtotime($jadwal->tanggal))}}</td>
                             <td class="text-center"><a class="btn btn-info btn-sm" href="{{url('/jadwal/'.$jadwal->id_jadwal)}}">Detail</a></td>
                         </tr>
                     @endforeach
