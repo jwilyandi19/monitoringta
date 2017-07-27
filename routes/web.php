@@ -20,17 +20,27 @@ Route::get('/gantipassword', 'AuthController@gantiPass');
 Route::post('/gantipassword', 'AuthController@gantiPassword');
 
 Route::get('/ketersediaandosen', 'FrontendController@ketersediaanDosen');
+Route::get('/seminar', 'SeminarController@index');
 Route::get('/pengajuanjadwal', 'FrontendController@pengajuanJadwal');
 Route::get('/statusta', 'FrontendController@statusTa');
 Route::get('/tambahkanjadwal', 'FrontendController@tambahkanJadwal');
 Route::get('/pencarianta', 'PencarianController@pencarianTA');
+Route::get('/error', 'FrontendController@error');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
     Route::resource('/progres', 'ProgresController');
-    Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
     Route::get('/statusproposal', 'FrontendController@statusProposal');
     Route::get('/detailta', 'ProgresController@detail');
     Route::post('/progres/uploadfile', 'ProgresController@uploadFile');
+    Route::get('/pengajuanseminar', 'SeminarController@pengajuanJadwal');
+    Route::post('/pengajuanseminar', 'SeminarController@doPengajuan');
+    Route::get('/formpengajuanseminar/{id}', 'SeminarController@formPengajuan');
+    Route::post('/batalkanpengajuanseminar', 'SeminarController@pembatalanJadwal');
+    Route::get('/pengajuanujian', 'SidangController@pengajuanJadwal');
+    Route::post('/pengajuanujian', 'SidangController@doPengajuan');
+    Route::get('/formpengajuanujian/{id}', 'SidangController@formPengajuan');
+    Route::post('/batalkanpengajuanujian', 'SidangController@pembatalanJadwal');
+    Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
     Route::get('/pengajuan/create', 'PengajuanController@create');
     Route::post('/pengajuan', 'PengajuanController@store');
 });
@@ -65,4 +75,16 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::get('/jadwalujian', 'JadwalController@jadwalUjian');
     Route::post('/jadwal/ujianhapus', 'JadwalController@hapusJadwalUjian');
     Route::post('/jadwal/tambahujian', 'JadwalController@tambahJadwalUjian');
+    
+    Route::get('/pengujiseminar', 'PengujiController@pengujiSeminar');
+    Route::get('/formpengujiseminar/{id}', 'PengujiController@formSeminar');
+    Route::post('/pengujiseminar/{id}', 'PengujiController@formPengujiSeminar');
+    Route::post('/terimapengajuanseminar', 'PengujiController@terimaSeminar');
+    Route::post('/batalkanseminar', 'PengujiController@batalkanSeminar');
+
+    Route::get('/pengujiujian', 'PengujiController@pengujiUjian');
+    Route::get('/formpengujiujian/{id}', 'PengujiController@formUjian');
+    Route::post('/pengujiujian/{id}', 'PengujiController@formPengujiUjian');  
+    Route::post('/terimapengajuanujian', 'PengujiController@terimaUjian');
+    Route::post('/batalkanujian', 'PengujiController@batalkanUjian');
 });

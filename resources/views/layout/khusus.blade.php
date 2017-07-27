@@ -31,12 +31,7 @@
 		@include('layout.header')
 	@endif
 	<div class="col-md-12 col-lg-12 col-sm-12" style="margin-top: 10px;">
-		<div class="col-md-3 col-lg-3">
-			@include('layout.sidebar')
-		</div>
-		<div class="col-md-9 col-lg-9 col-sm-12">
-			@yield('content')	
-		</div>
+		@yield('content')	
 	</div>
 	@include('layout.footer')
 	

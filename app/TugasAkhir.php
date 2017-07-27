@@ -17,6 +17,7 @@ class TugasAkhir extends Model
     'id-dosbing2',
     'id_status',
     'id_bidang_mk',
+    'id_rumpun_mk',
     'judul',
     'file',
     'created_at',
@@ -41,6 +42,10 @@ class TugasAkhir extends Model
 
     public function bidang(){
         return $this->belongsTo('App\BidangMK', 'id_bidang_mk', 'id_bidang_mk');
+    }
+
+    public function rmk(){
+        return $this->belongsTo('App\RumpunMK', 'id_rumpun_mk', 'id_rumpun_mk');
     }
 
     public function asistensis(){

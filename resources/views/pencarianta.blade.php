@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.khusus')
 
 @section('title')
 Pencarian Tugas Akhir

@@ -1,7 +1,7 @@
 @extends('layout.khusus')
 
 @section('title')
-Pencarian Tugas Akhir
+    Jadwal Seminar Tugas Akhir
 @endsection
 
 @section('moreStyle')
@@ -32,15 +32,13 @@ Pencarian Tugas Akhir
             <table id="tugasAkhir" class="table table-striped table-hover" cellspacing="0" width="100%">
                 <thead>
                     <tr class="row">
-                        <th class="text-center">No</th>
-                        <th class="text-center">ID</th>
+                        <th class="text-center">Waktu</th>
                         <th class="text-center">RMK</th>
-                        <th class="text-center">Status</th>
                         <th class="text-center">NRP</th>
-                        <th class="text-center">Judul</th>
-                        <!-- <th class="text-center">Nama</th>
+                        <th class="text-center">Mahasiswa</th>
                         <th class="text-center">Pembimbing1</th>
-                        <th class="text-center">Pembimbing2</th> -->
+                        <th class="text-center">Pembimbing2</th>
+                        <th class="text-center">Judul</th>
                     </tr>
                 </thead>
                 <tbody>

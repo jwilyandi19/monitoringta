@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-Pengajuan TA
+    Pengajuan TA
 @endsection
 
 @section('moreStyle')
@@ -40,11 +40,11 @@ Pengajuan TA
                         <textarea type="text" name="judulTA" class="form-control col-md-10" placeholder="Judul Tugas Akhir"></textarea>
                     </div>
                     <div class="form-group has-warning">
-                        <label class="control-label" for="bidang"><h5>Bidang Matakuliah *</h5></label>
-                        <select class="form-control" name="bidangMk">
-                            <option value="" selected >Bidang Matakuliah</option>
-                            @foreach($bidang_mks as $key => $bidang_mk)
-                                <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->nama_bidang}}</option>
+                        <label class="control-label" for="rumpun"><h5>Rumpun Matakuliah *</h5></label>
+                        <select class="form-control" name="rumpunMK">
+                            <option value="" selected >Rumpun Matakuliah</option>
+                            @foreach($rumpun_mks as $key => $rumpun_mk)
+                                <option value="{{$rumpun_mk->id_rumpun_mk}}">{{$rumpun_mk->nama_rumpun}}</option>
                             @endforeach
                         </select>
                     </div>
