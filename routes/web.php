@@ -57,17 +57,22 @@ Route::group(['middleware' => ['Dosen']], function(){
     Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
     Route::post('/bimbingan/konfirmasitugasakhir', 'BimbinganController@konfirmasiTA');
     Route::post('/bimbingan/tolaktugasakhir', 'BimbinganController@tolakTA');
-    Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
+
+    //Detail TA
     Route::resource('/bimbingan', 'BimbinganController');
-    Route::get('/detailta2', 'FrontendController@detailTa2');
     Route::post('/seminar/nilai', 'BimbinganController@nilaiSeminar');
     Route::post('/ujian/nilai', 'BimbinganController@nilaiUjian');
     Route::get('/mahasiswauji', 'BimbinganController@mahasiswaUji');
+    Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){
     Route::get('/home/create', 'BeritaController@create');
     Route::post('/home', 'BeritaController@store');
+    Route::get('/home/{id}/edit', 'BeritaCOntroller@edit');
+    Route::put('/home/{id}','BeritaController@update');
+    Route::get('/home/{id}/delete','BeritaController@destroy');
+
     Route::resource('/user', 'UserController');
     Route::post('/user/uploadfile', 'UserController@uploadFile');
     Route::post('/createuser1','AuthController@buatUser1');

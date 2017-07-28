@@ -44,7 +44,8 @@
                     {{csrf_field()}}
                     {{method_field('PUT')}}
                     <div class="form-group has-warning pull-right">
-                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Tambahkan Berita</button>
+                        <a href="{{url('/home')}}" class="btn btn-default" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali</a>
+                        <button type="submit" class="btn btn-primary" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-check"></i> Ubah</button>
                     </div>
                 </fieldset>
             </form>
