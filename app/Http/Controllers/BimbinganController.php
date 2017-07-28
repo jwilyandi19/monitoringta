@@ -10,6 +10,7 @@ use App\Dosen;
 use Redirect;
 Use App\SeminarTA;
 Use App\UjianTA;
+use App\Jadwal;
 
 class BimbinganController extends Controller
 {
@@ -27,7 +28,6 @@ class BimbinganController extends Controller
             }])->get();
         
         $data['bimbingans'] = TugasAkhir::where([['id_status', '>=', '0'], ['id_status', '<=', '5'], ['id_dosbing1', session('user')['id_dosen']]])->orWhere([['id_status', '>=', '0'], ['id_status', '<=', '5'], ['id_dosbing2', session('user')['id_dosen']]])->orderBy('created_at', 'desc')->with('user')->paginate(8);
-
         return view('bimbingan.index', $data);
     }
 
@@ -230,5 +230,16 @@ class BimbinganController extends Controller
         {
             return Redirect::to('/bimbingan/'.$request->id_ta)->withError('Terjadi Error Ketika Menginputkan Nilai Ujian');
         }
+    }
+
+    public function mahasiswaUji(){
+        $data['seminars'] = SeminarTA::where([['id_penguji3', '=',session('user')['id_dosen']],['status', '>=', 1]])->orWhere([['id_penguji4', '=',session('user')['id_dosen']],['status', '>=', 1]])->orWhere([['id_penguji5', '=',session('user')['id_dosen']],['status', '>=', 1]])->with('tugasAkhir.user')->paginate(8);
+        $data['ujians'] = UjianTA::where([['id_penguji3', '=',session('user')['id_dosen']],['status', '>=', 1]])->orWhere([['id_penguji4', '=',session('user')['id_dosen']],['status', '>=', 1]])->orWhere([['id_penguji5', '=',session('user')['id_dosen']],['status', '>=', 1]])->with('tugasAkhir.user')->paginate(8);
+
+        return view('bimbingan.uji', $data);
+    }
+
+    public function detailUji($id){
+        /*$data['detailta'] = TugasAkhir::where('id_ta', $id)*/
     }
 }
