@@ -115,13 +115,11 @@
                         @endif
                     </div>
                 </div>
-                <br>
             </div>
-            <br>
             <hr>
             <div>
                 <h4>Progres Asistensi</h4>
-                <div class="">
+                <div class="row">
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -142,97 +140,322 @@
                                 </tr>
                             @endforeach
                         @endif
-
                         </tbody>
                     </table>
                 </div>
-
-                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#bimbinganModal">Tambahkan Asistensi</button>
-                <br>
-
+                <div class="row">
+                    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#bimbinganModal">Tambahkan Asistensi</button>
+                </div>
             </div>
-            <br>
             <hr>
             <div class="form-group">
                 <div>
                     <h4>Seminar Tugas Akhir</h4>
                 </div>
-                <div class="col-md-12">
+                @if($detailta->seminarTA->status == 1)
+                    <!-- Tanggal Seminar -->
+                    <div class="row">
+                        <label class="col-md-2"><h6 class="pull-left">Tanggal Seminar</h6></label>
+                        <div class="col-md-1" style="text-align: right;">
+                            <h6>:</h6>
+                        </div>
+                        <div class="col-md-9">
+                            <h6>{{$detailta->seminarTA->jadwalSeminar->tanggal}} - Sesi : {{$detailta->seminarTA->jadwalSeminar->sesi}}</h6>
+                        </div>
+                    </div>
+                    @if($detailta->seminarTA->penguji1 != null)
+                        <!-- Penguji 1 -->
+                            <div class="row">
+                                <label class="col-md-2"><h6 class="pull-left">Penguji 1</h6></label>
+                                <div class="col-md-1" style="text-align: right;">
+                                    <h6>:</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <h6>{{$detailta->seminarTA->penguji1->nama}}</h6>
+                                </div>
+                            </div>
+                    @endif
+                    @if($detailta->seminarTA->penguji2 != null)
+                        <!-- Penguji 2 -->
+                            <div class="row">
+                                <label class="col-md-2"><h6 class="pull-left">Penguji 2</h6></label>
+                                <div class="col-md-1" style="text-align: right;">
+                                    <h6>:</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <h6>{{$detailta->seminarTA->penguji2->nama}}</h6>
+                                </div>
+                            </div>
+                    @endif
+                    @if($detailta->seminarTA->penguji3 != null)
+                        <!-- Penguji 3 -->
+                            <div class="row ">
+                                <label class="col-md-2"><h6 class="pull-left">Penguji 3</h6></label>
+                                <div class="col-md-1" style="text-align: right;">
+                                    <h6>:</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <h6>{{$detailta->seminarTA->penguji3->nama}}</h6>
+                                </div>
+                            </div>
+                    @endif
+                    @if($detailta->seminarTA->penguji4 != null)
+                        <!-- Penguji 4 -->
+                            <div class="row">
+                                <label class="col-md-2"><h6 class="pull-left">Penguji 4</h6></label>
+                                <div class="col-md-1" style="text-align: right;">
+                                    <h6>:</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <h6>{{$detailta->seminarTA->penguji4->nama}}</h6>
+                                </div>
+                            </div>
+                        @endif
+                        @if($detailta->seminarTA->penguji5 != null)
+                            <div class="row">
+                                <label class="col-md-2"><h6 class="pull-left">Penguji 5</h6></label>
+                                <div class="col-md-1" style="text-align: right;">
+                                    <h6>:</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <h6>{{$detailta->seminarTA->penguji5->nama}}</h6>
+                                </div>
+                            </div>
+                        @endif
+                @endif
+                <div class="row">
                     <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
                     <div class="col-md-1" style="text-align: right;">
                         <h6>:</h6>
-
                     </div>
                     <div class="col-md-9">
-                        @if($detailta->seminarTA == null)
+                        @if($detailta->seminarTA->nilai == null)
                             <h6>-</h6>
                         @else
                             <h6>{{$detailta->seminarTA->nilai}}</h6>
                         @endif
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="row">
                     <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
                     <div class="col-md-1" style="text-align: right;">
                         <h6>:</h6>
                     </div>
                     <div class="col-md-9">
-                        @if($detailta->seminarTA == null)
+                        @if($detailta->seminarTA->evaluasi == null)
                             <h6>-</h6>
                         @else
                             <h6>{{$detailta->seminarTA->evaluasi}}</h6>
                         @endif
                     </div>
                 </div>
-                @if($detailta->seminarTA==null)
-                    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#seminarModal">Beri Penilaian</button>
+                @if($detailta->seminarTA->status==1)
+                    <div class="row">
+                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#seminarModal">Beri Penilaian</button>
+                    </div>
                 @endif
             </div>
 
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
             <hr>
-            <div class="form-control">
+
+            <div class="form-group">
+
                 <div>
-                    <h4>Sidang Tugas Akhir</h4>
+                    <h4>Ujian Tugas Akhir</h4>
                 </div>
-                <div class="col-md-12">
+
+                @if($detailta->ujianTA->status == 1)
+                    <!-- Tanggal Seminar -->
+                    <div class="row">
+                        <label class="col-md-2"><h6 class="pull-left">Tanggal Seminar</h6></label>
+                        <div class="col-md-1" style="text-align: right;">
+                            <h6>:</h6>
+                        </div>
+                        <div class="col-md-9">
+                            <h6>{{$detailta->ujianTA->jadwalUjian->tanggal}} - Sesi : {{$detailta->ujianTA->jadwalUjian->sesi}}</h6>
+                        </div>
+                    </div>
+                    @if($detailta->ujianTA->penguji1Ujian != null)
+                        <!-- Penguji 1 -->
+                        <div class="row">
+                            <label class="col-md-2"><h6 class="pull-left">Penguji 1</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <h6>{{$detailta->ujianTA->penguji1Ujian->nama}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2"><h6 class="pull-left">Nilai Penguji 1</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                @if($detailta->ujianTA->nilai_penguji1 == null)
+                                    <h6>-</h6>
+                                @else
+                                    <h6>{{$detailta->ujianTA->nilai_penguji1}}</h6>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
+
+                    @if($detailta->ujianTA->penguji2Ujian != null)
+                        <!-- Penguji 2 -->
+                        <div class="row">
+                            <label class="col-md-2"><h6 class="pull-left">Penguji 2</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <h6>{{$detailta->ujianTA->penguji2Ujian->nama}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2"><h6 class="pull-left">Nilai Penguji 2</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                @if($detailta->ujianTA->nilai_penguji2 == null)
+                                    <h6>-</h6>
+                                @else
+                                    <h6>{{$detailta->ujianTA->nilai_penguji2}}</h6>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
+
+                    @if($detailta->ujianTA->penguji3Ujian != null)
+                        <!-- Penguji 3 -->
+                        <div class="row ">
+                            <label class="col-md-2"><h6 class="pull-left">Penguji 3</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <h6>{{$detailta->ujianTA->penguji3Ujian->nama}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2"><h6 class="pull-left">Nilai Penguji 3</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                @if($detailta->ujianTA->nilai_penguji3 == null)
+                                    <h6>-</h6>
+                                @else
+                                    <h6>{{$detailta->ujianTA->nilai_penguji3}}</h6>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
+
+                    @if($detailta->ujianTA->penguji4Ujian != null)
+                        <!-- Penguji 4 -->
+                        <div class="row">
+                            <label class="col-md-2"><h6 class="pull-left">Penguji 4</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <h6>{{$detailta->ujianTA->penguji4Ujian->nama}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2"><h6 class="pull-left">Nilai Penguji 4</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                @if($detailta->ujianTA->nilai_penguji4 == null)
+                                    <h6>-</h6>
+                                @else
+                                    <h6>{{$detailta->ujianTA->nilai_penguji4}}</h6>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
+                    @if($detailta->ujianTA->penguji5Ujian != null)
+                        <div class="row">
+                            <label class="col-md-2"><h6 class="pull-left">Penguji 5</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <h6>{{$detailta->ujianTA->penguji5Ujian->nama}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2"><h6 class="pull-left">Nilai Penguji 5</h6></label>
+                            <div class="col-md-1" style="text-align: right;">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col-md-9">
+                                @if($detailta->ujianTA->nilai_penguji5 == null)
+                                    <h6>-</h6>
+                                @else
+                                    <h6>{{$detailta->ujianTA->nilai_penguji5}}</h6>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
+                @endif
+
+                <div class="row">
+                    <label class="col-md-2"><h6 class="pull-left">Nilai Angka</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->ujianTA->nilai == null)
+                            <h6>-</h6>
+                        @else
+                            <h6>{{$detailta->ujianTA->nilai_angka}}</h6>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row">
                     <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
                     <div class="col-md-1" style="text-align: right;">
                         <h6>:</h6>
                     </div>
                     <div class="col-md-9">
-                        @if($detailta->ujianTA == null)
+                        @if($detailta->ujianTA->nilai == null)
                             <h6>-</h6>
                         @else
                             <h6>{{$detailta->ujianTA->nilai}}</h6>
                         @endif
                     </div>
                 </div>
-                <div class="col-md-12">
+
+                <div class="row">
                     <label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>
                     <div class="col-md-1" style="text-align: right;">
                         <h6>:</h6>
                     </div>
                     <div class="col-md-9">
-                        @if($detailta->ujianTA == null)
+                        @if($detailta->ujianTA->evaluasi == null)
                             <h6>-</h6>
                         @else
                             <h6>{{$detailta->ujianTA->evaluasi}}</h6>
                         @endif
                     </div>
                 </div>
+                @if($detailta->ujianTA->status == 1)
+                    <div class="row">
+                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ujianModal">Beri Penilaian</button>
+                    </div>
+                @endif
             </div>
-
-            @if($detailta->ujianTA==null)
-                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ujianModal">Beri Penilaian</button>
-            @endif
-            <br>
-
-        </div>
     </div>
     <div class="modal fade" id="bimbinganModal">
         <div class="modal-dialog">
@@ -290,17 +513,17 @@
                             <div class="col-md-10">
                                 <select class="form-control" name="nilai">
                                     <option value="" selected >Nilai Seminar</option>
-                                    <option value="A" > A (Ket)</option>
-                                    <option value="B" > B (Ket)</option>
-                                    <option value="C" > C (Ket)</option>
+                                    <option value="A" > A (Diterima dengan perbaikan)</option>
+                                    <option value="B" > B (Diterima dengan perubahan judul)</option>
+                                    <option value="C" > C (Ditolak)</option>
 
                                 </select>
                             </div>
                         </div>
                         <div class="form-group" style="display: none;">
-                            <label class="col-md-2 control-label">Nilai</label>
+                            <label class="col-md-2 control-label">id seminar ta</label>
                             <div class="col-md-10">
-                                <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
+                                <input type="text" name="id_seminar_ta" class="form-control" value="{{$detailta->seminarTA->id_seminar_ta}}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -332,18 +555,51 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="POST" action="{{url('/ujian/nilai')}}">
+
                         <div class="form-group" >
-                            <label class="col-md-2 control-label">Nilai</label>
+                            <label class="col-md-2 control-label">Nilai Penguji 1</label>
                             <div class="col-md-10">
-                                <input type="text" name="nilai" class="form-control" placeholder="Angka Nilai Ujian">
+                                <input type="text" name="nilai1" class="form-control" placeholder="Angka Nilai Ujian">
                             </div>
                         </div>
+
+                        <div class="form-group" >
+                            <label class="col-md-2 control-label">Nilai Penguji 2</label>
+                            <div class="col-md-10">
+                                <input type="text" name="nilai2" class="form-control" placeholder="Angka Nilai Ujian">
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <label class="col-md-2 control-label">Nilai Penguji 3</label>
+                            <div class="col-md-10">
+                                <input type="text" name="nilai3" class="form-control" placeholder="Angka Nilai Ujian">
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <label class="col-md-2 control-label">Nilai Penguji 4</label>
+                            <div class="col-md-10">
+                                <input type="text" name="nilai4" class="form-control" placeholder="Angka Nilai Ujian">
+                            </div>
+                        </div>
+
+                        @if($detailta->ujianTA->penguji5Ujian!=null)
+                            <div class="form-group" >
+                                <label class="col-md-2 control-label">Nilai Penguji 5</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="nilai5" class="form-control" placeholder="Angka Nilai Ujian">
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="form-group" style="display: none;">
-                            <label class="col-md-2 control-label">Nilai</label>
+                            <label class="col-md-2 control-label">Id Ujian TA</label>
                             <div class="col-md-10">
-                                <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
+                                <input type="text" name="id_ujian_ta" class="form-control" value="{{$detailta->ujianTA->id_ujian_ta}}">
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label class="col-md-2 control-label">Evaluasi</label>
                             <div class="col-md-10">

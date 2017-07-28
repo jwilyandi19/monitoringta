@@ -59,7 +59,13 @@ class BimbinganController extends Controller
      */
     public function show($id_ta)
     {
-        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','rmk','seminarTA','ujianTA'])->first();
+        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','rmk',
+            'seminarTA' => function($query){
+                $query->with(['penguji1','penguji2','penguji3','penguji4','penguji5','jadwalSeminar']);
+            },'ujianTA' => function($query){
+                $query->with(['penguji1Ujian','penguji2Ujian','penguji3Ujian','penguji4Ujian','penguji5Ujian','jadwalUjian']);
+            }])->first();
+        //dd($detailta);
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
@@ -159,12 +165,10 @@ class BimbinganController extends Controller
     public function nilaiSeminar(Request $request)
     {
         //dd($request);
-        $seminar = new SeminarTA();
-        $seminar->id_ta = $request->id_ta;
+        $seminar = SeminarTA::where('id_seminar_ta',$request->id_seminar_ta)->first();
+        //dd($seminar);
         $seminar->nilai = $request->nilai;
         $seminar->evaluasi = $request->evaluasi;
-        $seminar->id_js = null;
-        $seminar->tanggal = null;
         if($seminar->save())
         {
             return Redirect::to('/bimbingan/'.$request->id_ta)->with('message', 'Berhasil Menginputkan Nilai Seminar');
@@ -177,27 +181,39 @@ class BimbinganController extends Controller
 
     public function nilaiUjian(Request $request)
     {
+
         //dd($request);
-        $ujian = new UjianTA();
-        $ujian->id_ta = $request->id_ta;
-        $ujian->nilai_angka = $request->nilai;
-        if($request->nilai>=88)
+        $ujian = UjianTA::where('id_ujian_ta',$request->id_ujian_ta)->first();
+        $ujian->nilai_penguji1 = $request->nilai1;
+        $ujian->nilai_penguji2 = $request->nilai2;
+        $ujian->nilai_penguji3 = $request->nilai3;
+        $ujian->nilai_penguji4 = $request->nilai4;
+        $ujian->nilai_penguji5 = $request->nilai5;
+        if($request->nilai5 != null)
+        {
+            $ujian->nilai_angka = ($request->nilai1 * 0.5) + ($request->nilai2 * 0.2) + ($request->nilai3 * 0.1) + ($request->nilai4 * 0.1) + ($request->nilai5 * 0.1);
+        }
+        else
+        {
+            $ujian->nilai_angka = ($request->nilai1 * 0.5) + ($request->nilai2 * 0.2) + ($request->nilai3 * 0.15) + ($request->nilai4 * 0.15);
+        }
+        if($ujian->nilai_angka>=88)
         {
             $ujian->nilai = 'A';
         }
-        else if($request->nilai>=80)
+        else if($ujian->nilai_angka>=80)
         {
             $ujian->nilai = 'AB';
         }
-        else if($request->nilai>=70)
+        else if($ujian->nilai_angka>=70)
         {
             $ujian->nilai = 'B';
         }
-        else if($request->nilai>=60)
+        else if($ujian->nilai_angka>=60)
         {
             $ujian->nilai = 'BC';
         }
-        else if($request->nilai>=50)
+        else if($ujian->nilai_angka>=50)
         {
             $ujian->nilai = 'C';
         }

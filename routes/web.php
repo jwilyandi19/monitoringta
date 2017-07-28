@@ -57,11 +57,12 @@ Route::group(['middleware' => ['Dosen']], function(){
     Route::get('/mahasiswabimbingan', 'FrontendController@mahasiswaBimbingan');
     Route::post('/bimbingan/konfirmasitugasakhir', 'BimbinganController@konfirmasiTA');
     Route::post('/bimbingan/tolaktugasakhir', 'BimbinganController@tolakTA');
-    Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
+
+    //Detail TA
     Route::resource('/bimbingan', 'BimbinganController');
-    Route::get('/detailta2', 'FrontendController@detailTa2');
     Route::post('/seminar/nilai', 'BimbinganController@nilaiSeminar');
     Route::post('/ujian/nilai', 'BimbinganController@nilaiUjian');
+    Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){
