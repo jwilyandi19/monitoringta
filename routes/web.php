@@ -62,6 +62,7 @@ Route::group(['middleware' => ['Dosen']], function(){
     Route::get('/detailta2', 'FrontendController@detailTa2');
     Route::post('/seminar/nilai', 'BimbinganController@nilaiSeminar');
     Route::post('/ujian/nilai', 'BimbinganController@nilaiUjian');
+    Route::get('/mahasiswauji', 'BimbinganController@mahasiswaUji');
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){
