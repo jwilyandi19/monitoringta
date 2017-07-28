@@ -64,6 +64,7 @@ Route::group(['middleware' => ['Dosen']], function(){
     Route::post('/ujian/nilai', 'BimbinganController@nilaiUjian');
     Route::get('/mahasiswauji', 'BimbinganController@mahasiswaUji');
     Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
+    Route::get('/detailuji/{id}', 'BimbinganController@detailUji');
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){
