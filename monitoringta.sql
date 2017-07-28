@@ -146,7 +146,7 @@ CREATE TABLE `dosen_pembimbing` (
   PRIMARY KEY (`id_dosen_pembimbing`),
   KEY `id_dosen` (`id_dosen`),
   KEY `id_ta` (`id_ta`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +155,7 @@ CREATE TABLE `dosen_pembimbing` (
 
 LOCK TABLES `dosen_pembimbing` WRITE;
 /*!40000 ALTER TABLE `dosen_pembimbing` DISABLE KEYS */;
-INSERT INTO `dosen_pembimbing` VALUES (2,1,1,2,1,'2017-07-20 02:14:56','2017-07-20 02:16:57'),(3,1,2,1,1,'2017-07-20 02:22:59','2017-07-20 02:22:59'),(4,7,3,1,1,'2017-07-21 06:41:50','2017-07-21 06:48:46'),(5,23,3,2,1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(6,2,2,2,1,'2017-07-25 01:58:41','2017-07-25 01:59:21'),(9,7,5,1,1,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(10,16,5,2,0,'2017-07-26 01:51:17','2017-07-26 01:51:17'),(11,16,6,1,0,'2017-07-27 01:30:50','2017-07-27 01:30:50'),(12,7,6,2,1,'2017-07-27 01:30:50','2017-07-28 01:32:33');
+INSERT INTO `dosen_pembimbing` VALUES (2,1,1,2,1,'2017-07-20 02:14:56','2017-07-20 02:16:57'),(3,1,2,1,1,'2017-07-20 02:22:59','2017-07-20 02:22:59'),(4,7,3,1,1,'2017-07-21 06:41:50','2017-07-21 06:48:46'),(5,23,3,2,1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(6,2,2,2,1,'2017-07-25 01:58:41','2017-07-25 01:59:21'),(9,7,5,1,1,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(10,16,5,2,0,'2017-07-26 01:51:17','2017-07-26 01:51:17'),(11,16,6,1,0,'2017-07-27 01:30:50','2017-07-27 01:30:50'),(12,7,6,2,1,'2017-07-27 01:30:50','2017-07-28 01:32:33'),(13,7,7,1,1,'2017-07-28 03:23:20','2017-07-28 03:46:23');
 /*!40000 ALTER TABLE `dosen_pembimbing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,7 +457,7 @@ CREATE TABLE `seminar_ta` (
 
 LOCK TABLES `seminar_ta` WRITE;
 /*!40000 ALTER TABLE `seminar_ta` DISABLE KEYS */;
-INSERT INTO `seminar_ta` VALUES (1,3,NULL,NULL,NULL,NULL,NULL,NULL,2,'A',NULL,'Sempurna','2017-07-21 06:51:07','2017-07-21 06:51:07'),(4,1,14,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-07-25 03:02:39','2017-07-27 05:55:54'),(7,2,14,1,2,7,23,NULL,1,NULL,NULL,NULL,'2017-07-25 03:17:44','2017-07-27 07:36:00');
+INSERT INTO `seminar_ta` VALUES (1,3,NULL,NULL,NULL,NULL,NULL,NULL,2,'A',NULL,'Sempurna','2017-07-21 06:51:07','2017-07-21 06:51:07'),(4,1,14,2,1,NULL,7,NULL,1,NULL,NULL,NULL,'2017-07-25 03:02:39','2017-07-28 05:58:47'),(7,2,14,1,2,7,23,NULL,1,NULL,NULL,NULL,'2017-07-25 03:17:44','2017-07-27 07:36:00');
 /*!40000 ALTER TABLE `seminar_ta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,7 +508,7 @@ CREATE TABLE `tugas_akhir` (
   KEY `nrp` (`id_user`),
   KEY `id_dosbing1` (`id_dosbing1`),
   KEY `id_dosbing2` (`id_dosbing2`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -517,7 +517,7 @@ CREATE TABLE `tugas_akhir` (
 
 LOCK TABLES `tugas_akhir` WRITE;
 /*!40000 ALTER TABLE `tugas_akhir` DISABLE KEYS */;
-INSERT INTO `tugas_akhir` VALUES (1,3,2,1,1,1,1,'Rancang Bangun Aplikasi e-Learning Berbasis Perangkat Bergerak Android pada Fitur Manajemen Quiz dan Tanya Jawab Menggunakan Paradigma Reactive Programming',1,'2017-07-20 02:02:38','2017-07-27 04:32:53'),(2,8,1,2,5,1,1,'Rancang Bangun Simulasi Tertib Lalu Lintas Sesuai Dengan Peraturan Pemerintah Nomor 79 Tahun 2013 Menggunakan Steering Wheel dan Oculus Rift',NULL,'2017-07-20 02:22:59','2017-07-27 03:23:41'),(3,443,7,23,0,1,1,'Tugas Akhir',1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(5,442,7,NULL,0,NULL,1,'Implementasi MIR (Musik Information Retrieval) pada Modul Genre Recognition dan Deep Learning Classification untuk Aplikasi Musicmoo',NULL,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(6,444,NULL,7,0,NULL,1,'Coba TA',NULL,'2017-07-27 01:30:50','2017-07-28 01:32:33');
+INSERT INTO `tugas_akhir` VALUES (1,3,2,1,1,1,1,'Rancang Bangun Aplikasi e-Learning Berbasis Perangkat Bergerak Android pada Fitur Manajemen Quiz dan Tanya Jawab Menggunakan Paradigma Reactive Programming',1,'2017-07-20 02:02:38','2017-07-27 04:32:53'),(2,8,1,2,5,1,1,'Rancang Bangun Simulasi Tertib Lalu Lintas Sesuai Dengan Peraturan Pemerintah Nomor 79 Tahun 2013 Menggunakan Steering Wheel dan Oculus Rift',NULL,'2017-07-20 02:22:59','2017-07-27 03:23:41'),(3,443,7,23,0,1,1,'Tugas Akhir',1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(5,442,7,NULL,0,NULL,1,'Implementasi MIR (Musik Information Retrieval) pada Modul Genre Recognition dan Deep Learning Classification untuk Aplikasi Musicmoo',NULL,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(6,444,NULL,7,0,NULL,1,'Coba TA',NULL,'2017-07-27 01:30:50','2017-07-28 01:32:33'),(7,446,7,NULL,0,NULL,1,'Coba judul tugas akhir',NULL,'2017-07-28 03:23:20','2017-07-28 03:46:23'),(8,447,NULL,NULL,0,NULL,1,'Coba coba',NULL,'2017-07-28 04:12:59','2017-07-28 04:12:59');
 /*!40000 ALTER TABLE `tugas_akhir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -624,4 +624,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-28  8:59:55
+-- Dump completed on 2017-07-28 13:10:01
