@@ -239,7 +239,22 @@ class BimbinganController extends Controller
         return view('bimbingan.uji', $data);
     }
 
-    public function detailUji($id){
-        /*$data['detailta'] = TugasAkhir::where('id_ta', $id)*/
+    public function detailUji($id_ta){
+        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','rmk',
+            'seminarTA' => function($query){
+                $query->with(['penguji1','penguji2','penguji3','penguji4','penguji5','jadwalSeminar']);
+            },'ujianTA' => function($query){
+                $query->with(['penguji1Ujian','penguji2Ujian','penguji3Ujian','penguji4Ujian','penguji5Ujian','jadwalUjian']);
+            }])->first();
+        //dd($detailta);
+        if($detailta){
+            $data['detailta'] = $detailta;
+            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
+            return view('bimbingan.detail_penguji',$data);
+        }
+        else
+        {
+            return view('home');
+        }
     }
 }
