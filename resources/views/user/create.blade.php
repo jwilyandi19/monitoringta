@@ -28,6 +28,12 @@
             <h4><strong>Pengajuan Judul Tugas Akhir </strong></h4>
             <hr>
         </div>
+        <div class="center alert alert-warning" style="text-align: center;" >
+            <br>
+            <h4>Tambahkan User Baru Menggunakan File CSV</h4>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#fileUploadModal"><i class="glyphicon glyphicon-file"></i> Upload File</button>
+        </div>
+        <hr>
         <div class="panel-body isi-halaman">
             <form class="form-horizontal col-md-10 col-md-offset-1" method="POST" action="{{url('/user')}}">
                 <fieldset>
@@ -55,14 +61,6 @@
                     </div>
                 </fieldset>
             </form>
-            <div class="col-md-12">
-                <hr>
-            </div>
-            <div class="center col-md-12 alert alert-warning" style="text-align: center;" >
-                <br>
-                <h4>Tambahkan User Baru Menggunakan File CSV</h4>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#fileUploadModal"><i class="glyphicon glyphicon-file"></i> Update File</button>
-            </div>
         </div>
     </div>
     <div class="modal fade" id="fileUploadModal">

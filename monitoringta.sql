@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: monitoringta
 -- ------------------------------------------------------
--- Server version	5.7.18-0ubuntu0.16.04.1
+-- Server version	5.7.19-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -44,6 +44,35 @@ LOCK TABLES `asistensi` WRITE;
 /*!40000 ALTER TABLE `asistensi` DISABLE KEYS */;
 INSERT INTO `asistensi` VALUES (1,1,2,'2017-07-20','Paradigma Reactive Programming','2017-07-20 02:13:56','2017-07-20 02:13:56'),(2,1,1,'2017-07-13','Mobile Programming','2017-07-20 02:17:28','2017-07-20 02:17:28'),(3,1,1,'2017-07-23','Buku TA bab 3','2017-07-21 00:12:07','2017-07-21 00:12:07'),(4,3,7,'2017-07-21','Judul','2017-07-21 06:49:48','2017-07-21 06:49:48'),(5,3,23,'2017-07-22','Abstrak','2017-07-21 07:06:26','2017-07-21 07:06:26');
 /*!40000 ALTER TABLE `asistensi` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `berita`
+--
+
+DROP TABLE IF EXISTS `berita`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `berita` (
+  `id_berita` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) DEFAULT NULL,
+  `judul_berita` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `isi_berita` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_berita`),
+  KEY `id_user` (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `berita`
+--
+
+LOCK TABLES `berita` WRITE;
+/*!40000 ALTER TABLE `berita` DISABLE KEYS */;
+INSERT INTO `berita` VALUES (1,7,'Coba Buat','<p>Tambah aja</p>','2017-07-27 08:50:30','2017-07-27 08:50:30');
+/*!40000 ALTER TABLE `berita` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -117,7 +146,7 @@ CREATE TABLE `dosen_pembimbing` (
   PRIMARY KEY (`id_dosen_pembimbing`),
   KEY `id_dosen` (`id_dosen`),
   KEY `id_ta` (`id_ta`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +155,7 @@ CREATE TABLE `dosen_pembimbing` (
 
 LOCK TABLES `dosen_pembimbing` WRITE;
 /*!40000 ALTER TABLE `dosen_pembimbing` DISABLE KEYS */;
-INSERT INTO `dosen_pembimbing` VALUES (1,2,1,1,0,'2017-07-20 02:02:38','2017-07-20 02:14:23'),(2,1,1,2,1,'2017-07-20 02:14:56','2017-07-20 02:16:57'),(3,1,2,1,0,'2017-07-20 02:22:59','2017-07-20 02:22:59'),(4,7,3,1,1,'2017-07-21 06:41:50','2017-07-21 06:48:46'),(5,23,3,2,1,'2017-07-21 06:41:50','2017-07-21 07:05:59');
+INSERT INTO `dosen_pembimbing` VALUES (2,1,1,2,1,'2017-07-20 02:14:56','2017-07-20 02:16:57'),(3,1,2,1,1,'2017-07-20 02:22:59','2017-07-20 02:22:59'),(4,7,3,1,1,'2017-07-21 06:41:50','2017-07-21 06:48:46'),(5,23,3,2,1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(6,2,2,2,1,'2017-07-25 01:58:41','2017-07-25 01:59:21'),(9,7,5,1,1,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(10,16,5,2,0,'2017-07-26 01:51:17','2017-07-26 01:51:17'),(11,16,6,1,0,'2017-07-27 01:30:50','2017-07-27 01:30:50'),(12,7,6,2,1,'2017-07-27 01:30:50','2017-07-28 01:32:33');
 /*!40000 ALTER TABLE `dosen_pembimbing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +171,7 @@ CREATE TABLE `jadwal` (
   `nama` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal` datetime DEFAULT NULL,
   PRIMARY KEY (`id_jadwal`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +180,7 @@ CREATE TABLE `jadwal` (
 
 LOCK TABLES `jadwal` WRITE;
 /*!40000 ALTER TABLE `jadwal` DISABLE KEYS */;
-INSERT INTO `jadwal` VALUES (1,'Buka Ketersediaan Seminar','2017-07-20 00:01:00'),(2,'Tutup Ketersediaan Seminar','2017-07-30 23:59:00'),(3,'Buka Pengajuan Jadwal Seminar','2017-07-26 00:00:01'),(4,'Tutup Pengajuan Jadwal Seminar','2017-07-30 23:59:00'),(5,'Tutup Ketersediaan Ujian','2017-07-25 00:01:00');
+INSERT INTO `jadwal` VALUES (1,'Awal Semester','2017-02-08 00:00:00'),(2,'Buka Ketersediaan Seminar','2017-07-25 23:59:00'),(3,'Tutup Ketersediaan Seminar','2017-07-26 00:00:01'),(4,'Buka Pengajuan Jadwal Seminar','2017-07-30 23:59:00'),(5,'Tutup Pengajuan Jadwal Seminar','2017-07-25 00:01:00'),(6,'Buka Ketersediaan Ujian','2017-07-27 13:10:28'),(7,'Tutup Ketersediaan Ujian','2017-07-27 13:13:51'),(8,'Buka Pengajuan Jadwal Ujian','2017-07-27 13:14:34'),(9,'Tutup Pengajuan Jadwal Ujian','2017-07-27 13:14:50');
 /*!40000 ALTER TABLE `jadwal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +225,7 @@ CREATE TABLE `jadwal_ujian` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_ju`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +234,7 @@ CREATE TABLE `jadwal_ujian` (
 
 LOCK TABLES `jadwal_ujian` WRITE;
 /*!40000 ALTER TABLE `jadwal_ujian` DISABLE KEYS */;
-INSERT INTO `jadwal_ujian` VALUES (4,'2017-07-22',1,'2017-07-21 02:47:15','2017-07-21 02:47:15'),(5,'2017-07-22',2,'2017-07-21 02:47:15','2017-07-21 02:47:15'),(6,'2017-07-22',3,'2017-07-21 02:47:15','2017-07-21 02:47:15'),(7,'2017-07-26',1,'2017-07-21 02:53:12','2017-07-21 02:53:12'),(8,'2017-07-26',2,'2017-07-21 02:53:12','2017-07-21 02:53:12'),(9,'2017-07-26',3,'2017-07-21 02:53:12','2017-07-21 02:53:12'),(13,'2017-07-27',1,'2017-07-21 02:57:20','2017-07-21 02:57:20'),(14,'2017-07-27',2,'2017-07-21 02:57:20','2017-07-21 02:57:20'),(15,'2017-07-27',3,'2017-07-21 02:57:20','2017-07-21 02:57:20'),(16,'2017-07-28',1,'2017-07-21 02:57:33','2017-07-21 02:57:33'),(17,'2017-07-28',2,'2017-07-21 02:57:33','2017-07-21 02:57:33'),(18,'2017-07-28',3,'2017-07-21 02:57:33','2017-07-21 02:57:33'),(19,'2017-07-29',1,'2017-07-21 02:58:29','2017-07-21 02:58:29'),(20,'2017-07-29',2,'2017-07-21 02:58:29','2017-07-21 02:58:29'),(21,'2017-07-29',3,'2017-07-21 02:58:29','2017-07-21 02:58:29'),(22,'2017-07-30',1,'2017-07-21 02:58:34','2017-07-21 02:58:34'),(23,'2017-07-30',2,'2017-07-21 02:58:34','2017-07-21 02:58:34'),(24,'2017-07-30',3,'2017-07-21 02:58:34','2017-07-21 02:58:34');
+INSERT INTO `jadwal_ujian` VALUES (4,'2017-07-22',1,'2017-07-21 02:47:15','2017-07-21 02:47:15'),(5,'2017-07-22',2,'2017-07-21 02:47:15','2017-07-21 02:47:15'),(6,'2017-07-22',3,'2017-07-21 02:47:15','2017-07-21 02:47:15'),(7,'2017-07-26',1,'2017-07-21 02:53:12','2017-07-21 02:53:12'),(8,'2017-07-26',2,'2017-07-21 02:53:12','2017-07-21 02:53:12'),(9,'2017-07-26',3,'2017-07-21 02:53:12','2017-07-21 02:53:12'),(13,'2017-07-27',1,'2017-07-21 02:57:20','2017-07-21 02:57:20'),(14,'2017-07-27',2,'2017-07-21 02:57:20','2017-07-21 02:57:20'),(15,'2017-07-27',3,'2017-07-21 02:57:20','2017-07-21 02:57:20'),(16,'2017-07-28',1,'2017-07-21 02:57:33','2017-07-21 02:57:33'),(17,'2017-07-28',2,'2017-07-21 02:57:33','2017-07-21 02:57:33'),(18,'2017-07-28',3,'2017-07-21 02:57:33','2017-07-21 02:57:33'),(19,'2017-07-29',1,'2017-07-21 02:58:29','2017-07-21 02:58:29'),(20,'2017-07-29',2,'2017-07-21 02:58:29','2017-07-21 02:58:29'),(21,'2017-07-29',3,'2017-07-21 02:58:29','2017-07-21 02:58:29'),(22,'2017-07-30',1,'2017-07-21 02:58:34','2017-07-21 02:58:34'),(23,'2017-07-30',2,'2017-07-21 02:58:34','2017-07-21 02:58:34'),(24,'2017-07-30',3,'2017-07-21 02:58:34','2017-07-21 02:58:34'),(25,'2017-08-16',1,'2017-07-27 06:06:31','2017-07-27 06:06:31'),(26,'2017-08-16',2,'2017-07-27 06:06:31','2017-07-27 06:06:31'),(27,'2017-08-16',3,'2017-07-27 06:06:31','2017-07-27 06:06:31');
 /*!40000 ALTER TABLE `jadwal_ujian` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +254,7 @@ CREATE TABLE `ketersediaan_seminar` (
   PRIMARY KEY (`id_ks`),
   KEY `id_dosen` (`id_dosen`),
   KEY `id_js` (`id_js`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +263,7 @@ CREATE TABLE `ketersediaan_seminar` (
 
 LOCK TABLES `ketersediaan_seminar` WRITE;
 /*!40000 ALTER TABLE `ketersediaan_seminar` DISABLE KEYS */;
-INSERT INTO `ketersediaan_seminar` VALUES (1,14,2,'2017-07-21 02:29:18','2017-07-21 02:29:18'),(3,19,2,'2017-07-21 02:29:23','2017-07-21 02:29:23'),(4,11,2,'2017-07-21 02:29:28','2017-07-21 02:29:28'),(5,12,2,'2017-07-21 02:29:29','2017-07-21 02:29:29'),(6,14,1,'2017-07-21 02:29:42','2017-07-21 02:29:42'),(7,15,1,'2017-07-21 02:32:26','2017-07-21 02:32:26'),(8,15,2,'2017-07-21 03:07:40','2017-07-21 03:07:40'),(10,17,23,'2017-07-21 07:14:02','2017-07-21 07:14:02'),(11,14,23,'2017-07-21 07:14:22','2017-07-21 07:14:22'),(12,15,23,'2017-07-21 07:14:23','2017-07-21 07:14:23'),(14,12,23,'2017-07-21 07:14:25','2017-07-21 07:14:25'),(15,26,23,'2017-07-21 07:14:26','2017-07-21 07:14:26');
+INSERT INTO `ketersediaan_seminar` VALUES (1,14,2,'2017-07-21 02:29:18','2017-07-21 02:29:18'),(3,19,2,'2017-07-21 02:29:23','2017-07-21 02:29:23'),(4,11,2,'2017-07-21 02:29:28','2017-07-21 02:29:28'),(5,12,2,'2017-07-21 02:29:29','2017-07-21 02:29:29'),(6,14,1,'2017-07-21 02:29:42','2017-07-21 02:29:42'),(7,15,1,'2017-07-21 02:32:26','2017-07-21 02:32:26'),(8,15,2,'2017-07-21 03:07:40','2017-07-21 03:07:40'),(10,17,23,'2017-07-21 07:14:02','2017-07-21 07:14:02'),(11,14,23,'2017-07-21 07:14:22','2017-07-21 07:14:22'),(12,15,23,'2017-07-21 07:14:23','2017-07-21 07:14:23'),(14,12,23,'2017-07-21 07:14:25','2017-07-21 07:14:25'),(15,26,23,'2017-07-21 07:14:26','2017-07-21 07:14:26'),(16,14,7,'2017-07-27 00:24:36','2017-07-27 00:24:36'),(17,15,7,'2017-07-27 00:24:38','2017-07-27 00:24:38'),(18,12,7,'2017-07-27 00:24:40','2017-07-27 00:24:40'),(19,11,7,'2017-07-27 00:24:40','2017-07-27 00:24:40'),(20,13,7,'2017-07-27 00:24:41','2017-07-27 00:24:41');
 /*!40000 ALTER TABLE `ketersediaan_seminar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +283,7 @@ CREATE TABLE `ketersediaan_ujian` (
   PRIMARY KEY (`id_ku`),
   KEY `id_dosen` (`id_dosen`),
   KEY `id_ju` (`id_ju`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,7 +292,7 @@ CREATE TABLE `ketersediaan_ujian` (
 
 LOCK TABLES `ketersediaan_ujian` WRITE;
 /*!40000 ALTER TABLE `ketersediaan_ujian` DISABLE KEYS */;
-INSERT INTO `ketersediaan_ujian` VALUES (1,1,1,'2017-07-21 02:45:20','2017-07-21 02:45:20'),(2,13,2,'2017-07-21 03:00:08','2017-07-21 03:00:08'),(3,19,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(4,17,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(5,20,2,'2017-07-21 03:00:12','2017-07-21 03:00:12');
+INSERT INTO `ketersediaan_ujian` VALUES (1,1,1,'2017-07-21 02:45:20','2017-07-21 02:45:20'),(2,13,2,'2017-07-21 03:00:08','2017-07-21 03:00:08'),(3,19,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(4,17,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(5,20,2,'2017-07-21 03:00:12','2017-07-21 03:00:12'),(6,16,1,'2017-07-25 06:39:57','2017-07-25 06:39:57'),(7,18,1,'2017-07-25 06:39:59','2017-07-25 06:39:59'),(8,17,1,'2017-07-25 06:40:00','2017-07-25 06:40:00'),(9,19,1,'2017-07-25 06:40:00','2017-07-25 06:40:00'),(10,20,1,'2017-07-25 06:40:01','2017-07-25 06:40:01'),(11,13,1,'2017-07-25 06:40:02','2017-07-25 06:40:02'),(12,14,1,'2017-07-25 06:40:03','2017-07-25 06:40:03'),(13,19,7,'2017-07-27 03:25:32','2017-07-27 03:25:32'),(14,20,7,'2017-07-27 03:25:34','2017-07-27 03:25:34'),(15,16,7,'2017-07-27 03:25:36','2017-07-27 03:25:36'),(16,17,7,'2017-07-27 03:25:39','2017-07-27 03:25:39'),(17,21,7,'2017-07-27 03:25:41','2017-07-27 03:25:41');
 /*!40000 ALTER TABLE `ketersediaan_ujian` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,6 +307,8 @@ CREATE TABLE `penguji_seminar` (
   `id_penguji_s` int(11) NOT NULL AUTO_INCREMENT,
   `id_seminar_ta` int(11) DEFAULT NULL,
   `id_dosen` int(11) DEFAULT NULL,
+  `id_js` int(11) DEFAULT NULL,
+  `peran` int(11) DEFAULT NULL,
   `konfirmasi` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_penguji_s`),
   KEY `id_seminar_ta` (`id_seminar_ta`),
@@ -322,6 +353,54 @@ LOCK TABLES `penguji_ujian` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rmk_dosen`
+--
+
+DROP TABLE IF EXISTS `rmk_dosen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rmk_dosen` (
+  `id_rmk_dosen` int(11) NOT NULL AUTO_INCREMENT,
+  `id_dosen` int(11) DEFAULT NULL,
+  `id_rumpun_mk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_rmk_dosen`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rmk_dosen`
+--
+
+LOCK TABLES `rmk_dosen` WRITE;
+/*!40000 ALTER TABLE `rmk_dosen` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rmk_dosen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rumpun_mk`
+--
+
+DROP TABLE IF EXISTS `rumpun_mk`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rumpun_mk` (
+  `id_rumpun_mk` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_rumpun` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_rumpun_mk`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rumpun_mk`
+--
+
+LOCK TABLES `rumpun_mk` WRITE;
+/*!40000 ALTER TABLE `rumpun_mk` DISABLE KEYS */;
+INSERT INTO `rumpun_mk` VALUES (1,'Pengelasan');
+/*!40000 ALTER TABLE `rumpun_mk` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `seminar_final`
 --
 
@@ -355,7 +434,12 @@ CREATE TABLE `seminar_ta` (
   `id_seminar_ta` int(11) NOT NULL AUTO_INCREMENT,
   `id_ta` int(11) DEFAULT NULL,
   `id_js` int(11) DEFAULT NULL,
-  `tanggal` date DEFAULT NULL,
+  `id_penguji1` int(11) DEFAULT NULL,
+  `id_penguji2` int(11) DEFAULT NULL,
+  `id_penguji3` int(11) DEFAULT NULL,
+  `id_penguji4` int(11) DEFAULT NULL,
+  `id_penguji5` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nilai_angka` int(11) DEFAULT NULL,
   `evaluasi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -364,7 +448,7 @@ CREATE TABLE `seminar_ta` (
   PRIMARY KEY (`id_seminar_ta`),
   KEY `id_ps` (`id_ta`),
   KEY `id_js` (`id_js`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -373,7 +457,7 @@ CREATE TABLE `seminar_ta` (
 
 LOCK TABLES `seminar_ta` WRITE;
 /*!40000 ALTER TABLE `seminar_ta` DISABLE KEYS */;
-INSERT INTO `seminar_ta` VALUES (1,3,NULL,NULL,'A',NULL,'Sempurna','2017-07-21 06:51:07','2017-07-21 06:51:07');
+INSERT INTO `seminar_ta` VALUES (1,3,NULL,NULL,NULL,NULL,NULL,NULL,2,'A',NULL,'Sempurna','2017-07-21 06:51:07','2017-07-21 06:51:07'),(4,1,14,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-07-25 03:02:39','2017-07-27 05:55:54'),(7,2,14,1,2,7,23,NULL,1,NULL,NULL,NULL,'2017-07-25 03:17:44','2017-07-27 07:36:00');
 /*!40000 ALTER TABLE `seminar_ta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,7 +481,7 @@ CREATE TABLE `status_ta` (
 
 LOCK TABLES `status_ta` WRITE;
 /*!40000 ALTER TABLE `status_ta` DISABLE KEYS */;
-INSERT INTO `status_ta` VALUES (-1,'Ditolak'),(0,'Mengajukan Judul'),(1,'Menunggu Seminar'),(2,'Revisi'),(3,'OK'),(4,'Batal'),(5,'Maju Sidang'),(6,'Lulus'),(7,'Tidak Lulus');
+INSERT INTO `status_ta` VALUES (-2,'Batal'),(-1,'Ditolak'),(0,'Mengajukan Judul'),(1,'Menunggu Seminar'),(2,'Revisi'),(3,'OK'),(5,'Maju Sidang'),(6,'Lulus'),(7,'Tidak Lulus');
 /*!40000 ALTER TABLE `status_ta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,11 +494,12 @@ DROP TABLE IF EXISTS `tugas_akhir`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tugas_akhir` (
   `id_ta` int(11) NOT NULL AUTO_INCREMENT,
-  `id_user` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_user` int(11) NOT NULL,
   `id_dosbing1` int(11) DEFAULT NULL,
   `id_dosbing2` int(11) DEFAULT NULL,
   `id_status` int(11) DEFAULT NULL,
   `id_bidang_mk` int(11) DEFAULT NULL,
+  `id_rumpun_mk` int(11) DEFAULT NULL,
   `judul` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `file` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -423,7 +508,7 @@ CREATE TABLE `tugas_akhir` (
   KEY `nrp` (`id_user`),
   KEY `id_dosbing1` (`id_dosbing1`),
   KEY `id_dosbing2` (`id_dosbing2`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -432,7 +517,7 @@ CREATE TABLE `tugas_akhir` (
 
 LOCK TABLES `tugas_akhir` WRITE;
 /*!40000 ALTER TABLE `tugas_akhir` DISABLE KEYS */;
-INSERT INTO `tugas_akhir` VALUES (1,'3',2,1,0,1,'Rancang Bangun Aplikasi e-Learning Berbasis Perangkat Bergerak Android pada Fitur Manajemen Quiz dan Tanya Jawab Menggunakan Paradigma Reactive Programming',1,'2017-07-20 02:02:38','2017-07-20 02:16:57'),(2,'8',NULL,NULL,-1,1,'Rancang Bangun Simulasi Tertib Lalu Lintas Sesuai Dengan Peraturan Pemerintah Nomor 79 Tahun 2013 Menggunakan Steering Wheel dan Oculus Rift',NULL,'2017-07-20 02:22:59','2017-07-20 02:22:59'),(3,'443',7,23,0,1,'Tugas Akhir',1,'2017-07-21 06:41:50','2017-07-21 07:05:59');
+INSERT INTO `tugas_akhir` VALUES (1,3,2,1,1,1,1,'Rancang Bangun Aplikasi e-Learning Berbasis Perangkat Bergerak Android pada Fitur Manajemen Quiz dan Tanya Jawab Menggunakan Paradigma Reactive Programming',1,'2017-07-20 02:02:38','2017-07-27 04:32:53'),(2,8,1,2,5,1,1,'Rancang Bangun Simulasi Tertib Lalu Lintas Sesuai Dengan Peraturan Pemerintah Nomor 79 Tahun 2013 Menggunakan Steering Wheel dan Oculus Rift',NULL,'2017-07-20 02:22:59','2017-07-27 03:23:41'),(3,443,7,23,0,1,1,'Tugas Akhir',1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(5,442,7,NULL,0,NULL,1,'Implementasi MIR (Musik Information Retrieval) pada Modul Genre Recognition dan Deep Learning Classification untuk Aplikasi Musicmoo',NULL,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(6,444,NULL,7,0,NULL,1,'Coba TA',NULL,'2017-07-27 01:30:50','2017-07-28 01:32:33');
 /*!40000 ALTER TABLE `tugas_akhir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,7 +555,17 @@ CREATE TABLE `ujian_ta` (
   `id_ujian_ta` int(11) NOT NULL AUTO_INCREMENT,
   `id_ta` int(11) DEFAULT NULL,
   `id_ju` int(11) DEFAULT NULL,
-  `tanggal` date DEFAULT NULL,
+  `id_penguji1` int(11) DEFAULT NULL,
+  `nilai_penguji1` int(11) DEFAULT NULL,
+  `id_penguji2` int(11) DEFAULT NULL,
+  `nilai_penguji2` int(11) DEFAULT NULL,
+  `id_penguji3` int(11) DEFAULT NULL,
+  `nilai_penguji3` int(11) DEFAULT NULL,
+  `id_penguji4` int(11) DEFAULT NULL,
+  `nilai_penguji4` int(11) DEFAULT NULL,
+  `id_penguji5` int(11) DEFAULT NULL,
+  `nilai_penguji5` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nilai_angka` int(11) DEFAULT NULL,
   `evaluasi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -479,7 +574,7 @@ CREATE TABLE `ujian_ta` (
   PRIMARY KEY (`id_ujian_ta`),
   KEY `id_pu` (`id_ta`),
   KEY `id_ju` (`id_ju`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -488,7 +583,7 @@ CREATE TABLE `ujian_ta` (
 
 LOCK TABLES `ujian_ta` WRITE;
 /*!40000 ALTER TABLE `ujian_ta` DISABLE KEYS */;
-INSERT INTO `ujian_ta` VALUES (1,3,NULL,NULL,'AB',80,'Baik','2017-07-21 06:54:16','2017-07-21 06:54:16');
+INSERT INTO `ujian_ta` VALUES (6,1,19,2,NULL,1,NULL,7,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,'2017-07-25 06:52:53','2017-07-27 03:26:11'),(7,2,19,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-07-25 06:53:12','2017-07-27 04:41:29');
 /*!40000 ALTER TABLE `ujian_ta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -529,4 +624,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-24  8:11:02
+-- Dump completed on 2017-07-28  8:59:55
