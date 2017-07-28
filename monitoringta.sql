@@ -155,7 +155,7 @@ CREATE TABLE `dosen_pembimbing` (
 
 LOCK TABLES `dosen_pembimbing` WRITE;
 /*!40000 ALTER TABLE `dosen_pembimbing` DISABLE KEYS */;
-INSERT INTO `dosen_pembimbing` VALUES (2,1,1,2,1,'2017-07-20 02:14:56','2017-07-20 02:16:57'),(3,1,2,1,1,'2017-07-20 02:22:59','2017-07-20 02:22:59'),(4,7,3,1,1,'2017-07-21 06:41:50','2017-07-21 06:48:46'),(5,23,3,2,1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(6,2,2,2,1,'2017-07-25 01:58:41','2017-07-25 01:59:21'),(9,7,5,1,1,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(10,16,5,2,0,'2017-07-26 01:51:17','2017-07-26 01:51:17'),(11,16,6,1,0,'2017-07-27 01:30:50','2017-07-27 01:30:50'),(12,7,6,2,0,'2017-07-27 01:30:50','2017-07-27 01:30:50');
+INSERT INTO `dosen_pembimbing` VALUES (2,1,1,2,1,'2017-07-20 02:14:56','2017-07-20 02:16:57'),(3,1,2,1,1,'2017-07-20 02:22:59','2017-07-20 02:22:59'),(4,7,3,1,1,'2017-07-21 06:41:50','2017-07-21 06:48:46'),(5,23,3,2,1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(6,2,2,2,1,'2017-07-25 01:58:41','2017-07-25 01:59:21'),(9,7,5,1,1,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(10,16,5,2,0,'2017-07-26 01:51:17','2017-07-26 01:51:17'),(11,16,6,1,0,'2017-07-27 01:30:50','2017-07-27 01:30:50'),(12,7,6,2,1,'2017-07-27 01:30:50','2017-07-28 01:32:33');
 /*!40000 ALTER TABLE `dosen_pembimbing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -481,7 +481,7 @@ CREATE TABLE `status_ta` (
 
 LOCK TABLES `status_ta` WRITE;
 /*!40000 ALTER TABLE `status_ta` DISABLE KEYS */;
-INSERT INTO `status_ta` VALUES (-1,'Ditolak'),(0,'Mengajukan Judul'),(1,'Menunggu Seminar'),(2,'Revisi'),(3,'OK'),(4,'Batal'),(5,'Maju Sidang'),(6,'Lulus'),(7,'Tidak Lulus');
+INSERT INTO `status_ta` VALUES (-2,'Batal'),(-1,'Ditolak'),(0,'Mengajukan Judul'),(1,'Menunggu Seminar'),(2,'Revisi'),(3,'OK'),(5,'Maju Sidang'),(6,'Lulus'),(7,'Tidak Lulus');
 /*!40000 ALTER TABLE `status_ta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -517,7 +517,7 @@ CREATE TABLE `tugas_akhir` (
 
 LOCK TABLES `tugas_akhir` WRITE;
 /*!40000 ALTER TABLE `tugas_akhir` DISABLE KEYS */;
-INSERT INTO `tugas_akhir` VALUES (1,3,2,1,1,1,1,'Rancang Bangun Aplikasi e-Learning Berbasis Perangkat Bergerak Android pada Fitur Manajemen Quiz dan Tanya Jawab Menggunakan Paradigma Reactive Programming',1,'2017-07-20 02:02:38','2017-07-27 04:32:53'),(2,8,1,2,5,1,1,'Rancang Bangun Simulasi Tertib Lalu Lintas Sesuai Dengan Peraturan Pemerintah Nomor 79 Tahun 2013 Menggunakan Steering Wheel dan Oculus Rift',NULL,'2017-07-20 02:22:59','2017-07-27 03:23:41'),(3,443,7,23,0,1,1,'Tugas Akhir',1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(5,442,7,NULL,0,NULL,1,'Implementasi MIR (Musik Information Retrieval) pada Modul Genre Recognition dan Deep Learning Classification untuk Aplikasi Musicmoo',NULL,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(6,444,NULL,NULL,0,NULL,1,'Coba TA',NULL,'2017-07-27 01:30:50','2017-07-27 01:30:50');
+INSERT INTO `tugas_akhir` VALUES (1,3,2,1,1,1,1,'Rancang Bangun Aplikasi e-Learning Berbasis Perangkat Bergerak Android pada Fitur Manajemen Quiz dan Tanya Jawab Menggunakan Paradigma Reactive Programming',1,'2017-07-20 02:02:38','2017-07-27 04:32:53'),(2,8,1,2,5,1,1,'Rancang Bangun Simulasi Tertib Lalu Lintas Sesuai Dengan Peraturan Pemerintah Nomor 79 Tahun 2013 Menggunakan Steering Wheel dan Oculus Rift',NULL,'2017-07-20 02:22:59','2017-07-27 03:23:41'),(3,443,7,23,0,1,1,'Tugas Akhir',1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(5,442,7,NULL,0,NULL,1,'Implementasi MIR (Musik Information Retrieval) pada Modul Genre Recognition dan Deep Learning Classification untuk Aplikasi Musicmoo',NULL,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(6,444,NULL,7,0,NULL,1,'Coba TA',NULL,'2017-07-27 01:30:50','2017-07-28 01:32:33');
 /*!40000 ALTER TABLE `tugas_akhir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -624,4 +624,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-28  8:24:20
+-- Dump completed on 2017-07-28  8:59:55
