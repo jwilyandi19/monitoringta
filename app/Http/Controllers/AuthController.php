@@ -15,15 +15,6 @@ use App\User;
 
 class AuthController extends Controller
 {
-    public function logIn(){
-        if(!session('user')['username']){
-            return view('home');
-        }
-        else{
-            return Redirect::to('home');
-        }
-    }
-
     public function doLogin(Request $request){
     	$messagesError = [ 
             'username.required' => 'Username tidak boleh kosong.',

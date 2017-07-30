@@ -69,7 +69,7 @@ class BimbinganController extends Controller
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
-            return view('progres.detail_dosbing',$data);
+            return view('bimbingan.detail.dosbing',$data);
         }
         else
         {
@@ -246,7 +246,7 @@ class BimbinganController extends Controller
             },'ujianTA' => function($query){
                 $query->with(['penguji1Ujian','penguji2Ujian','penguji3Ujian','penguji4Ujian','penguji5Ujian','jadwalUjian']);
             }])->first();
-        //dd($detailta);
+        dd($detailta);
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();

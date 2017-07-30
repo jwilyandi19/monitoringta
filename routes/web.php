@@ -11,22 +11,30 @@
 |
 */
 
+//User Umum (Semua User)
+
+//home
 Route::get('/', 'BeritaController@index');
 Route::get('/home', 'BeritaController@index');
-Route::get('/login', 'AuthController@logIn');
+
+//login
 Route::post('/login', 'AuthController@doLogin');
+
+//logout
 Route::get('/logout', 'AuthController@logOut');
+
+//ganti password
 Route::get('/gantipassword', 'AuthController@gantiPass');
 Route::post('/gantipassword', 'AuthController@gantiPassword');
+
+//jadwal seminar + jadwal
 Route::get('/seminarjadwal', 'SeminarController@seminarJadwal');
 Route::get('/ujianjadwal', 'SidangController@ujianJadwal');
 
-Route::get('/ketersediaandosen', 'FrontendController@ketersediaanDosen');
-Route::get('/seminar', 'SeminarController@index');
-Route::get('/pengajuanjadwal', 'FrontendController@pengajuanJadwal');
-Route::get('/statusta', 'FrontendController@statusTa');
-Route::get('/tambahkanjadwal', 'FrontendController@tambahkanJadwal');
+//Pencarian TA
 Route::get('/pencarianta', 'PencarianController@pencarianTA');
+
+//Halaman Error
 Route::get('/error', 'FrontendController@error');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
