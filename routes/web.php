@@ -96,4 +96,6 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::post('/pengujiujian/{id}', 'PengujiController@formPengujiUjian');  
     Route::post('/terimapengajuanujian', 'PengujiController@terimaUjian');
     Route::post('/batalkanujian', 'PengujiController@batalkanUjian');
+
+    Route::post('/resetpass', 'UserController@resetPassword');
 });

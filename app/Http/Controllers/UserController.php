@@ -254,4 +254,16 @@ class UserController extends Controller
             return Redirect::to('/user/create')->withErrors('Gagal generate user, terjadi kesalahan dalam proses upload file, silahkan coba lagi');
         }
     }
+
+    public function resetPassword(Request $request){
+        $user = User::where('id_user', $request->idUser)->first();
+        $password = $user->username;
+        $user->password = bcrypt($password);
+        if($user->save()){
+            return Redirect::to('/user')->with('message','Password berhasil direset');
+        }
+        else{
+            return Redirect::to('/user')->withErrors('Gagal mereset password user, coba lagi');
+        }
+    }
 }

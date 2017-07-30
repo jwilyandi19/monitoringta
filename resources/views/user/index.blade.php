@@ -36,7 +36,7 @@
                     <th class="col-md-3"><strong>Username</strong></th>
                     <th class="col-md-5"><strong>Nama</strong></th>
                     <th class="col-md-1 text-center"><strong>Peran</strong></th>
-                    <th class="col-md-1 text-center"><strong>Aksi</strong></th>
+                    <th class="col-md-2 text-center"><strong>Aksi</strong></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,7 +53,10 @@
                             @else
                                 <td class="text-center">Koordinator TA</th>
                             @endif
-                            <td><a class="btn btn-info btn-sm" href="{{url('/user/'.$user->id_user)}}">Detail</a></td>
+                            <td>
+                                <a class="btn btn-warning btn-block btn-xs" value="{{$user->id_user}}">Reset Password</a>
+                                <a class="btn btn-info btn-block btn-xs" href="{{url('/user/'.$user->id_user)}}">Detail</a>
+                            </td>
                         </tr>
                     @endforeach
                 @endif
@@ -61,13 +64,26 @@
             </table>
         </div>
     </div>
+    <form id="resetPassword" method="POST" action="{{url('/resetpass')}}" style="display: none;">
+        {{csrf_field()}}
+        {{method_field('POST')}}
+        <input type="text" id="inpIdUser" name="idUser">
+    </form>
 @endsection
 
 @section('moreScript')
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#listUser').DataTable({});
-    })
+        $('#listUser').DataTable({
+
+        });
+        $('.btn-warning').click( function(){
+            var idUser = $(this).attr('value');
+            console.log(idUser);
+            $('#inpIdUser').val(idUser);
+            $('#resetPassword').submit();
+        });
+    });
 </script>
 @endsection

@@ -9,7 +9,7 @@ class RumpunMK extends Model
     protected $table = 'rumpun_mk';
     protected $primaryKey='id_rumpun_mk';
     public $incrementing = true;
-    public $timestamps = true;
+    public $timestamps = false;
     protected $fillable = [
     'id_rumpun_mk',
     'nama_rumpun',

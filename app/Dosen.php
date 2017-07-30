@@ -13,9 +13,11 @@ class Dosen extends Model
     protected $fillable = [
     'id_dosen',
     'id_user',
+    'id_bidang_mk',
     'nip',
     'nama',
     'nama_lengkap',
+    'pembimbing1',
     ];
 
     public function bimbingans(){
@@ -60,6 +62,14 @@ class Dosen extends Model
 
     public function rmks(){
         return $this->hasMany('App\RmkDosen', 'id_dosen', 'id_dosen');
+    }
+
+    public function bidangs(){
+        return $this->hasMany('App\BidangDosen', 'id_dosen', 'id_dosen');
+    }
+
+    public function bidang(){
+        return $this->belongsTo('App\BidangMK', 'id_bidang_mk', 'id_bidang_mk');
     }
 
     public function penguji1s(){

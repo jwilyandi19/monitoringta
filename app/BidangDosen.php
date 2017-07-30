@@ -4,20 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RmkDosen extends Model
+class BidangDosen extends Model
 {
-    protected $table = 'rmk_dosen';
-    public $primaryKey = 'id_rmk_dosen';
+    protected $table = 'bidang_dosen';
+    public $primaryKey = 'id_bidang_dosen';
     public $incrementing = false;
     public $timestamps = false;
     protected $fillable =[
-    'id_rmk_dosen',
+    'id_bidang_dosen',
     'id_dosen',
-    'id_rumpun_mk',
+    'id_bidang_mk',
     ];
 
-    public function rmk(){
-    	return $this->belongsTo('App\RumpunMK', 'id_rumpun_mk', 'id_rumpun_mk');
+    public function bidang(){
+    	return $this->belongsTo('App\BidangMK', 'id_bidang_mk', 'id_bidang_mk');
     }
 
     public function dosen(){
