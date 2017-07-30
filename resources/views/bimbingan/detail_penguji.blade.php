@@ -149,7 +149,7 @@
                 <div>
                     <h4>Seminar Tugas Akhir</h4>
                 </div>
-                @if($detailta->seminarTA->status == 1)
+                @if($detailta->seminarTA == null)
                     <!-- Tanggal Seminar -->
                     <div class="row">
                         <label class="col-md-2"><h6 class="pull-left">Tanggal Seminar</h6></label>
