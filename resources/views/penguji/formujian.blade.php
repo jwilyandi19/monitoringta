@@ -61,7 +61,7 @@
                     <thead>
                         <th class="text-center">No</th>
                         <th>Nama</th>
-                        <th class="text-center">RMK</th>
+                        <th class="text-center">Bidang MK</th>
                         <th class="text-center">Jumlah Menguji</th>
                     </thead>
                     <tbody>
@@ -69,7 +69,7 @@
                             <tr class="info">
                                 <td class="text-center">{{$key+1}}</td>
                                 <td>{{$dosenBersedia['nama_lengkap']}}</td>
-                                <td class="text-center">{{$dosenBersedia['rmk']}}</td>
+                                <td class="text-center">{{$dosenBersedia['bidang']}}</td>
                                 <td class="text-center">{{$dosenBersedia['menguji']}}</td>
                             </tr>
                         @endforeach
@@ -86,7 +86,7 @@
                     <thead>
                         <th class="text-center">No</th>
                         <th class="text-center">NRP Mhs.</th>
-                        <th class="text-center">RMK</th>
+                        <th class="text-center">Bidang MK</th>
                         <th class="">Judul TA</th>
                         <th class="text-center">Pembimbing1</th>
                         <th class="text-center">Pembimbing2</th>
@@ -104,7 +104,7 @@
                                 @endif
                                     <td class="text-center">{{$keys+1}}</td>
                                     <td>{{$ujian->tugasAkhir->user->username}}</td>
-                                    <td>{{$ujian->tugasAkhir->rmk->nama_rumpun}}</td>
+                                    <td>{{$ujian->tugasAkhir->bidang->nama_bidang}}</td>
                                     <td>{{$ujian->tugasAkhir->judul}}</td>
                                     
                                     @if($ujian->tugasAkhir->dosbing1)
@@ -141,7 +141,7 @@
                     <thead>
                         <th class="text-center ">No</th>
                         <th class="text-center ">NRP</th>
-                        <th class="text-center">RMK</th>
+                        <th class="text-center">Bidang MK</th>
                         <th >Judul</th>
                         <th class="text-center ">Penguji 1</th>
                         <th class="text-center ">Penguji 2</th>
@@ -160,7 +160,7 @@
                                         
                                         <td>{{$index+1}}</td>
                                         <td>{{$ujianDiterima->tugasAkhir->user->username}}</td>
-                                        <td>{{$ujianDiterima->tugasAkhir->rmk->nama_rumpun}}</td>
+                                        <td>{{$ujianDiterima->tugasAkhir->bidang->nama_bidang}}</td>
                                         <td>{{$ujianDiterima->tugasAkhir->judul}}</td>
                                         <td>
                                             <select name="penguji1">
