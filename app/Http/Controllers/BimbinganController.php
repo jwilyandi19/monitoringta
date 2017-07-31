@@ -258,4 +258,10 @@ class BimbinganController extends Controller
             return view('home');
         }
     }
+
+    public function ubahDetail(Request $request){
+        $ta = TugasAkhir::where('id_ta', $request->id_ta)->first();
+        $ta->judul = $request->judulTA;
+        $ta->bidangMK = $request->bidangMK;
+    }
 }

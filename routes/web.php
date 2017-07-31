@@ -39,10 +39,14 @@ Route::get('/pencarianta', 'PencarianController@pencarianTA');
 Route::get('/error', 'FrontendController@error');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
+
     Route::resource('/progres', 'ProgresController');
-    Route::get('/statusproposal', 'FrontendController@statusProposal');
+
+    //Detail TA
     Route::get('/detailta', 'ProgresController@detail');
     Route::post('/progres/uploadfile', 'ProgresController@uploadFile');
+
+    //Pengajuan Seminar
     Route::get('/pengajuanseminar', 'SeminarController@pengajuanJadwal');
     Route::post('/pengajuanseminar', 'SeminarController@doPengajuan');
     Route::get('/formpengajuanseminar/{id}', 'SeminarController@formPengajuan');
