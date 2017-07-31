@@ -13,28 +13,44 @@
                     <div class="form-group" >
                         <label class="col-md-2 control-label">Nilai Penguji 1</label>
                         <div class="col-md-10">
-                            <input type="text" name="nilai1" class="form-control" placeholder="Angka Nilai Ujian">
+                            @if($detailta->ujianTA->nilai_penguji1 != null)
+                                <input type="text" name="nilai1" class="form-control" value="{{$detailta->ujianTA->nilai_penguji1}}">
+                            @else
+                                <input type="text" name="nilai1" class="form-control" placeholder="Angka Nilai Ujian">
+                            @endif
                         </div>
                     </div>
 
                     <div class="form-group" >
                         <label class="col-md-2 control-label">Nilai Penguji 2</label>
                         <div class="col-md-10">
-                            <input type="text" name="nilai2" class="form-control" placeholder="Angka Nilai Ujian">
+                            @if($detailta->ujianTA->nilai_penguji2 != null)
+                                <input type="text" name="nilai2" class="form-control" value="{{$detailta->ujianTA->nilai_penguji2}}">
+                            @else
+                                <input type="text" name="nilai2" class="form-control" placeholder="Angka Nilai Ujian">
+                            @endif
                         </div>
                     </div>
 
                     <div class="form-group" >
                         <label class="col-md-2 control-label">Nilai Penguji 3</label>
                         <div class="col-md-10">
-                            <input type="text" name="nilai3" class="form-control" placeholder="Angka Nilai Ujian">
+                            @if($detailta->ujianTA->nilai_penguji3 != null)
+                                <input type="text" name="nilai3" class="form-control" value="{{$detailta->ujianTA->nilai_penguji3}}">
+                            @else
+                                <input type="text" name="nilai3" class="form-control" placeholder="Angka Nilai Ujian">
+                            @endif
                         </div>
                     </div>
 
                     <div class="form-group" >
                         <label class="col-md-2 control-label">Nilai Penguji 4</label>
                         <div class="col-md-10">
-                            <input type="text" name="nilai4" class="form-control" placeholder="Angka Nilai Ujian">
+                            @if($detailta->ujianTA->nilai_penguji4 != null)
+                                <input type="text" name="nilai4" class="form-control" value="{{$detailta->ujianTA->nilai_penguji4}}">
+                            @else
+                                <input type="text" name="nilai4" class="form-control" placeholder="Angka Nilai Ujian">
+                            @endif
                         </div>
                     </div>
 
@@ -42,7 +58,11 @@
                         <div class="form-group" >
                             <label class="col-md-2 control-label">Nilai Penguji 5</label>
                             <div class="col-md-10">
-                                <input type="text" name="nilai5" class="form-control" placeholder="Angka Nilai Ujian">
+                                @if($detailta->ujianTA->nilai_penguji5 != null)
+                                    <input type="text" name="nilai5" class="form-control" value="{{$detailta->ujianTA->nilai_penguji5}}">
+                                @else
+                                    <input type="text" name="nilai5" class="form-control" placeholder="Angka Nilai Ujian">
+                                @endif
                             </div>
                         </div>
                     @endif
@@ -57,7 +77,11 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Evaluasi</label>
                         <div class="col-md-10">
-                            <textarea type="text" name="evaluasi" class="form-control" placeholder="Evaluasi Seminar"></textarea>
+                            @if($detailta->ujianTA->evaluasi != null)
+                                <textarea type="text" name="evaluasi" class="form-control">{{$detailta->ujianTA->evaluasi}}</textarea>
+                            @else
+                                <textarea type="text" name="evaluasi" class="form-control" placeholder="Evaluasi Seminar"></textarea>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">

@@ -14,11 +14,24 @@
                         <label class="col-md-2 control-label">Nilai</label>
                         <div class="col-md-10">
                             <select class="form-control" name="nilai">
-                                <option value="" selected >Nilai Seminar</option>
-                                <option value="A" > A (Diterima dengan perbaikan)</option>
-                                <option value="B" > B (Diterima dengan perubahan judul)</option>
-                                <option value="C" > C (Ditolak)</option>
-
+                                @if($detailta->seminarTA->nilai == 'A')
+                                    <option value="A" selected> A (Diterima dengan perbaikan)</option>
+                                    <option value="B" > B (Diterima dengan perubahan judul)</option>
+                                    <option value="C" > C (Ditolak)</option>
+                                @elseif($detailta->seminarTA->nilai == 'B')
+                                    <option value="A" > A (Diterima dengan perbaikan)</option>
+                                    <option value="B" selected> B (Diterima dengan perubahan judul)</option>
+                                    <option value="C" > C (Ditolak)</option>
+                                @elseif($detailta->seminarTA->nilai == 'C')
+                                    <option value="A" > A (Diterima dengan perbaikan)</option>
+                                    <option value="B" > B (Diterima dengan perubahan judul)</option>
+                                    <option value="C" selected> C (Ditolak)</option>
+                                @else
+                                    <option value="" selected >Nilai Seminar</option>
+                                    <option value="A" > A (Diterima dengan perbaikan)</option>
+                                    <option value="B" > B (Diterima dengan perubahan judul)</option>
+                                    <option value="C" > C (Ditolak)</option>
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -31,7 +44,11 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Evaluasi</label>
                         <div class="col-md-10">
-                            <textarea type="text" name="evaluasi" class="form-control" placeholder="Evaluasi Seminar"></textarea>
+                            @if($detailta->seminarTA->evaluasi != null)
+                                <textarea type="text" name="evaluasi" class="form-control">{{$detailta->seminarTA->evaluasi}}</textarea>
+                            @else
+                                <textarea type="text" name="evaluasi" class="form-control" placeholder="Evaluasi Seminar"></textarea>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">

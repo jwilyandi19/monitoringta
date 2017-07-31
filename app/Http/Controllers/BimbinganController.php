@@ -181,7 +181,6 @@ class BimbinganController extends Controller
 
     public function nilaiUjian(Request $request)
     {
-
         //dd($request);
         $ujian = UjianTA::where('id_ujian_ta',$request->id_ujian_ta)->first();
         $ujian->nilai_penguji1 = $request->nilai1;
@@ -191,11 +190,11 @@ class BimbinganController extends Controller
         $ujian->nilai_penguji5 = $request->nilai5;
         if($request->nilai5 != null)
         {
-            $ujian->nilai_angka = ($request->nilai1 * 0.5) + ($request->nilai2 * 0.2) + ($request->nilai3 * 0.1) + ($request->nilai4 * 0.1) + ($request->nilai5 * 0.1);
+            $ujian->nilai_angka = ($request->nilai1 * 0.2) + ($request->nilai2 * 0.2) + ($request->nilai3 * 0.2) + ($request->nilai4 * 0.2) + ($request->nilai5 * 0.2);
         }
         else
         {
-            $ujian->nilai_angka = ($request->nilai1 * 0.5) + ($request->nilai2 * 0.2) + ($request->nilai3 * 0.15) + ($request->nilai4 * 0.15);
+            $ujian->nilai_angka = ($request->nilai1 * 0.25) + ($request->nilai2 * 0.25) + ($request->nilai3 * 0.25) + ($request->nilai4 * 0.25);
         }
         if($ujian->nilai_angka>=88)
         {
