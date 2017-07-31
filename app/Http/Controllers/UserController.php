@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Dosen;
 use App\User;
 use App\TugasAkhir;
+use App\BidangMK;
+use App\Asistensi;
 
 class UserController extends Controller
 {
@@ -307,6 +309,26 @@ class UserController extends Controller
         }
         else{
             return Redirect::to('/manajementa')->withError('Gagal menyimpan data ta tidak lulus');
+        }
+    }
+
+    public function detailTA($id_ta){
+        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','bidang',
+            'seminarTA' => function($query){
+                $query->with(['penguji1','penguji2','penguji3','penguji4','penguji5','jadwalSeminar']);
+            },'ujianTA' => function($query){
+                $query->with(['penguji1Ujian','penguji2Ujian','penguji3Ujian','penguji4Ujian','penguji5Ujian','jadwalUjian']);
+            }])->first();
+        //dd($detailta);
+        if($detailta){
+            $data['detailta'] = $detailta;
+            $data['bidang_mks'] = BidangMK::all();
+            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
+            return view('user.detail_koordinator',$data);
+        }
+        else
+        {
+            return view('home');
         }
     }
 }
