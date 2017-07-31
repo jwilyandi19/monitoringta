@@ -113,4 +113,6 @@ Route::group(['middleware' => ['Koordinator']], function(){
 
     Route::post('/resetpass', 'UserController@resetPassword');
     Route::get('/manajementa', 'UserController@indexManajemen');
+    Route::post('/tidaklulus', 'UserController@tidakLulus');
+    Route::post('/dinyatakanlulus', 'UserController@dinyatakanLulus');
 });

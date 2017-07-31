@@ -11,7 +11,6 @@
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav navbar-right">
                 
-                <li><a href="{{url('/pencarianta')}}"><i class="glyphicon glyphicon-search"></i> Pencarian TA </a></li>
                 <li><a href="{{url('/pengajuan/create')}}"><i class="glyphicon glyphicon-plus-sign"></i> Pengajuan TA </a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-blackboard"></i> Seminar TA </a>

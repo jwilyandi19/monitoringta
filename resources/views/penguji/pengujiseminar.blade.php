@@ -35,8 +35,8 @@
                             <p><strong>{{$tanggalSeminar['hari'].", ".date('d-m-Y',strtotime($tanggalSeminar['tanggal']))}}</strong></p>
                         </div>
                         <div class="panel sesi-tanggal">
-                            @foreach($tanggalSeminar['sesi'] as $key => $sesi)
-                                <a href="{{url('/formpengujiseminar/'.$sesi)}}" class="btn btn-default btn-xs btn-block sesi"><p>sesi {{$key}}</p></a>
+                            @foreach($tanggalSeminar['sesi'] as $keys => $sesi)
+                                <a href="{{url('/formpengujiseminar/'.$sesi)}}" class="btn btn-default btn-xs btn-block sesi"><p>sesi {{$keys}}</p></a>
                             @endforeach
                         </div>   
                     </div>

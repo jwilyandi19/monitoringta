@@ -31,7 +31,11 @@
         @if($ujianTA)
             <div class="">
                 <div class="">
-                    <h6>Anda sudah mengajukan jadwal sidang pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                    @if($ujianTA->status == 1)
+                        <h6>Pengajuan jadwal sidang anda sudah disetujui pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                    @elseif($ujianTA->status == 0)
+                        <h6>Anda sudah mengajukan jadwal sidang pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                    @endif
                     <h6>Berikut daftar TA yang juga mendaftar dapa jadwal ini :</h6>
                 </div>
                 <div class="">
@@ -46,7 +50,9 @@
                         <tbody>
                             @if($ujians)
                                 @foreach($ujians as $keys => $ujian)
-                                    @if($keys < 3)
+                                    @if($ujian->status == 1)
+                                        <tr class="success">
+                                    @elseif($keys < 3)
                                         <tr class="warning">
                                     @else
                                         <tr>
@@ -62,9 +68,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="center" style="text-align: center;">
-                    <button class="btn btn-danger" value="{{$ujianTA->id_ujian_ta}}"><i class="glyphicon glyphicon-trash"></i> Batalkan Pengajuan Jadwal Sidang</button>
-                </div>
+                @if($ujianTA->status == 0)
+                    <div class="center" style="text-align: center;">
+                        <button class="btn btn-danger" value="{{$ujianTA->id_ujian_ta}}"><i class="glyphicon glyphicon-trash"></i> Batalkan Pengajuan Jadwal Sidang</button>
+                    </div>
+                @endif
             </div>
             <hr>
         @endif

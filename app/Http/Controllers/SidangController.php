@@ -104,7 +104,7 @@ class SidangController extends Controller
         $ujianTA = UjianTA::where('id_ta', $tugasAkhir->id_ta)->first();
         if($ujianTA){
             $jadwalTerdaftar = JadwalUjian::where('id_ju', $ujianTA->id_ju)->first();
-            $data['ujians'] = UjianTA::where([['id_ju', '=',$ujianTA->id_ju], ['status', '=', '0']])->with('tugasAkhir.user')->orderBy('created_at')->get();
+            $data['ujians'] = UjianTA::where([['id_ju', '=',$ujianTA->id_ju], ['status', '>=', '0'], ['status', '<=','1']])->with('tugasAkhir.user')->orderBy('created_at')->get();
             $day = date('D', strtotime($jadwalTerdaftar->tanggal));
             $data['hari'] = $dayList[$day];
             $data['jadwalTerdaftar'] = $jadwalTerdaftar;

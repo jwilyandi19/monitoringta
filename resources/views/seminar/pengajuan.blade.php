@@ -31,7 +31,11 @@
         @if($seminarTA)
             <div class="">
                 <div class="">
-                    <h6>Anda sudah mengajukan jadwal seminar pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                    @if($seminarTA->status == 1)
+                        <h6>Pengajuan jadwal seminar anda sudah disetujui pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                    @elseif($seminarTA->status == 0)
+                        <h6>Anda sudah mengajukan jadwal seminar pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                    @endif
                     <h6>Berikut daftar TA yang juga mendaftar dapa jadwal ini :</h6>
                 </div>
                 <div class="">
@@ -46,7 +50,9 @@
                         <tbody>
                             @if($seminars)
                                 @foreach($seminars as $keys => $seminar)
-                                    @if($keys < 3)
+                                    @if($seminar->status == 1)
+                                        <tr class="success">
+                                    @elseif($keys < 3)
                                         <tr class="warning">
                                     @else
                                         <tr>
@@ -62,9 +68,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="center" style="text-align: center;">
-                    <button class="btn btn-danger" value="{{$seminarTA->id_seminar_ta}}"><i class="glyphicon glyphicon-trash"></i> Batalkan Pengajuan Jadwal Seminar</button>
-                </div>
+                @if($seminarTA->status == 0)
+                    <div class="center" style="text-align: center;">
+                        <button class="btn btn-danger" value="{{$seminarTA->id_seminar_ta}}"><i class="glyphicon glyphicon-trash"></i> Batalkan Pengajuan Jadwal Seminar</button>
+                    </div>
+                @endif
             </div>
             <hr>
         @endif

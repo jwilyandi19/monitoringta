@@ -234,8 +234,8 @@ class BimbinganController extends Controller
     }
 
     public function mahasiswaUji(){
-        $data['seminars'] = SeminarTA::where([['id_penguji3', '=',session('user')['id_dosen']],['status', '>=', 1]])->orWhere([['id_penguji4', '=',session('user')['id_dosen']],['status', '>=', 1]])->orWhere([['id_penguji5', '=',session('user')['id_dosen']],['status', '>=', 1]])->with('tugasAkhir.user')->paginate(8);
-        $data['ujians'] = UjianTA::where([['id_penguji3', '=',session('user')['id_dosen']],['status', '>=', 1]])->orWhere([['id_penguji4', '=',session('user')['id_dosen']],['status', '>=', 1]])->orWhere([['id_penguji5', '=',session('user')['id_dosen']],['status', '>=', 1]])->with('tugasAkhir.user')->paginate(8);
+        $data['seminars'] = SeminarTA::where([['id_penguji3', '=',session('user')['id_dosen']],['status', '=', 1]])->orWhere([['id_penguji4', '=',session('user')['id_dosen']],['status', '=', 1]])->orWhere([['id_penguji5', '=',session('user')['id_dosen']],['status', '=', 1]])->with('tugasAkhir.user')->paginate(8);
+        $data['ujians'] = UjianTA::where([['id_penguji3', '=',session('user')['id_dosen']],['status', '=', 1]])->orWhere([['id_penguji4', '=',session('user')['id_dosen']],['status', '=', 1]])->orWhere([['id_penguji5', '=',session('user')['id_dosen']],['status', '=', 1]])->with('tugasAkhir.user')->paginate(8);
 
         return view('bimbingan.uji', $data);
     }

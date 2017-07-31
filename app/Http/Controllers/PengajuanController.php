@@ -88,7 +88,9 @@ class PengajuanController extends Controller
             $dosen = Dosen::where('id_dosen', $request->pembimbing1)->first();
             $taDosen = TugasAkhir::where([['id_dosbing1','=',$dosen->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5']])->orWhere([['id_dosbing2','=',$dosen->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5']])->count();
             //dd($taDosen);
-            if($dosen->pembimbing1 && $taDosen = 8){
+            $flagPembimbing1 = 0;
+            $flagPembimbing2 = 0;
+            if($dosen->pembimbing1 && $taDosen == 8){
                 $flagPembimbing1 = 1;
             }
             else{
@@ -105,7 +107,7 @@ class PengajuanController extends Controller
             if($request->pembimbing2){
                 $dosen2 = Dosen::where('id_dosen', $request->pembimbing2)->first();
                 $taDosen2 = TugasAkhir::where([['id_dosbing1','=',$dosen2->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5']])->orWhere([['id_dosbing2','=',$dosen2->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5']])->count();
-                if($dosen2->pembimbing1 && $taDosen2 = 8){
+                if($dosen2->pembimbing1 && $taDosen2 == 8){
                     $flagPembimbing2 = 1;
                 }
                 else{

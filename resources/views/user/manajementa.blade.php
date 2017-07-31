@@ -6,6 +6,7 @@
 
 @section('moreStyle')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
 @endsection
 
 @section('content')
@@ -76,35 +77,57 @@
             </table>
         </div>
     </div>
-    <form id="resetPassword" method="POST" action="{{url('/resetpass')}}" style="display: none;">
+    <form id="tidakLulus" method="POST" action="{{url('/tidaklulus')}}" style="display: none;">
         {{csrf_field()}}
         {{method_field('POST')}}
-        <input type="text" id="inpIdUser" name="idUser">
+        <input type="text" id="inpTidakLulus" name="idTA">
+    </form>
+    <form id="dinyatakanLulus" method="POST" action="{{url('/dinyatakanlulus')}}" style="display: none;">
+        {{csrf_field()}}
+        {{method_field('POST')}}
+        <input type="text" id="inpLulus" name="idTA">
     </form>
 @endsection
 
 @section('moreScript')
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#listTA').DataTable({
 
         });
-        $('.btn-warning').click( function(){
-            var idUser = $(this).attr('value');
-
+        $('.btn-danger').click( function(){
+            var idTA = $(this).attr('value');
+            console.log(idTA);
             swal({
                 title: "Perhatian",
-                text: "Apakah anda yakin ingin mereset password dari user ini ?",
+                text: "Apakah anda yakin menyatakan bahwa TA ini dinyatakan tidak lulus ?",
                 type: "warning",
                 showCancelButton: true,
-                confirmButtonText: "Ya",
+                confirmButtonText: "Ya, Konfirmasi",
                 cancelButtonText: "Batal"
             },
             function(){
-                $('#inpIdUser').val(idUser);
-                $('#resetPassword').submit();
+                $('#inpTidakLulus').val(idTA);
+                $('#tidakLulus').submit();
             });
+        });
+        $('.btn-primary').click(function(){
+            var idTA = $(this).attr('value');
+            console.log(idTA);
+            swal({
+                title: "Perhatian",
+                text: "Apakah anda yakin menyatakan bahwa TA ini dinyatakan lulus ?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, Konfirmasi",
+                cancelButtonText: "Batal"
+            },
+            function(){
+                $('#inpLulus').val(idTA);
+                $('#dinyatakanLulus').submit();
+            });            
         });
     });
 </script>

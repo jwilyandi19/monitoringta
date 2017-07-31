@@ -273,4 +273,40 @@ class UserController extends Controller
         //dd($data);
         return view('user.manajementa', $data);
     }
+
+    public function tidakLulus(Request $request){
+        $tugasAkhir = TugasAkhir::where('id_ta', $request->idTA)->with(['seminarTA', 'ujianTA'])->first();
+        $tugasAkhir->id_status = 7;
+        if($tugasAkhir->seminarTA){
+            $tugasAkhir->seminarTA->status = 2;
+        }
+        if($tugasAkhir->ujianTA){
+            $tugasAkhir->ujianTA->status = 2;
+        }
+        //dd($tugasAkhir);
+        if($tugasAkhir->save() && $tugasAkhir->seminarTA->save() && $tugasAkhir->ujianTA->save()){
+            return Redirect::to('/manajementa')->with('message', 'Berhasil menyatakan bahwa TA tidak lulus');
+        }
+        else{
+            return Redirect::to('/manajementa')->withError('Gagal menyimpan data ta tidak lulus');
+        }
+    }
+
+    public function dinyatakanLulus(Request $request){
+        $tugasAkhir = TugasAkhir::where('id_ta', $request->idTA)->with(['seminarTA', 'ujianTA'])->first();
+        $tugasAkhir->id_status = 6;
+        if($tugasAkhir->seminarTA){
+            $tugasAkhir->seminarTA->status = 2;
+        }
+        if($tugasAkhir->ujianTA){
+            $tugasAkhir->ujianTA->status = 2;
+        }
+        //dd($tugasAkhir);
+        if($tugasAkhir->save() && $tugasAkhir->seminarTA->save() && $tugasAkhir->ujianTA->save()){
+            return Redirect::to('/manajementa')->with('message', 'Berhasil menyatakan bahwa TA lulus');
+        }
+        else{
+            return Redirect::to('/manajementa')->withError('Gagal menyimpan data ta tidak lulus');
+        }
+    }
 }

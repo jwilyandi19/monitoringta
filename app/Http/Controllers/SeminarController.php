@@ -104,7 +104,7 @@ class SeminarController extends Controller
         $seminarTA = SeminarTA::where('id_ta', $tugasAkhir->id_ta)->first();
         if($seminarTA){
             $jadwalTerdaftar = JadwalSeminar::where('id_js', $seminarTA->id_js)->first();
-            $data['seminars'] = SeminarTA::where([['id_js', '=',$seminarTA->id_js], ['status', '=', '0']])->with('tugasAkhir.user')->orderBy('created_at')->get();
+            $data['seminars'] = SeminarTA::where([['id_js', '=',$seminarTA->id_js], ['status', '>=', '0'], ['status', '<=', '1']])->with('tugasAkhir.user')->orderBy('created_at')->get();
             $day = date('D', strtotime($jadwalTerdaftar->tanggal));
             $data['hari'] = $dayList[$day];
             $data['jadwalTerdaftar'] = $jadwalTerdaftar;
