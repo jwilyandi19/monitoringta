@@ -115,7 +115,7 @@
                         @endif
                     </div>
                 </div>
-                @if($detailta->id_status >= 0 || $detailta->id_status <= 2)
+                @if($detailta->id_status == 0 || $detailta->id_status == 2)
                     <div class="row">
                         <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ubahDetailModal"><i class="glyphicon glyphicon-file"></i> Ubah Detail TA</button>
                     </div>
