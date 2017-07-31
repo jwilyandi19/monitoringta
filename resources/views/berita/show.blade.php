@@ -31,6 +31,11 @@
         <div class="panel-body isi-halaman">
             {!! $berita->isi_berita !!}
         </div>
+        <hr>
+        <div class="pull-right">
+            <a href="{{url('/')}}" class="btn btn-default">Kembali</a>
+        </div>
+        <br>
     </div>
 
 

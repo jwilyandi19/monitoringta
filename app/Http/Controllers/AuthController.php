@@ -28,7 +28,7 @@ class AuthController extends Controller
 
         if($validator->fails()) 
         { 
-            return Redirect::to('/home')->withErrors($validator)->withInput();
+            return Redirect::to('/')->withErrors($validator)->withInput();
         }
         else{
         	$username = $request->username;
@@ -43,31 +43,31 @@ class AuthController extends Controller
                         $dataUser = array('username' => $user->username, 'role' => $user->role, 'id' => $user->id_user);
                     }
     				$request->session()->put('user', $dataUser);
-    				return Redirect::to('home');
+    				return Redirect::to('/');
         		}
         		else{
-        			return Redirect::to('home')->withErrors('Username atau Password yang dimasukkan Salah');
+        			return Redirect::to('/')->withErrors('Username atau Password yang dimasukkan Salah');
         		}
         	}
         	else{
-        		return Redirect::to('home')->withErrors('Username atau Password yang dimasukkan Salah');
+        		return Redirect::to('/')->withErrors('Username atau Password yang dimasukkan Salah');
         	}
         }
     }
 
     public function logOut(Request $request){
         if(!session('user')){
-            return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
+            return redirect('/')->withErrors('Halaman Tidak Ditemukan');
         }
         else{
             $request->session()->flush();
-            return Redirect::to('/home');
+            return Redirect::to('/');
         }
     }
 
     public function gantiPass(){
         if(!session('user')){
-            return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
+            return redirect('/')->withErrors('Halaman Tidak Ditemukan');
         }
         else{
             return view('/gantipassword');
