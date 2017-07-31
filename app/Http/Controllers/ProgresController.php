@@ -67,12 +67,10 @@ class ProgresController extends Controller
      */
     public function edit($id_ta)
     {
-        //dd($id_ta);
         $data['tugasAkhir'] = TugasAkhir::where('id_ta',$id_ta)->with(['dosbing1', 'dosbing2', 'rmk'])->first();
-        $data['rumpun_mks'] = RumpunMK::all();
-        $data['pembimbing1s'] = Dosen::where('pembimbing1', 1)->get();
-        $data['pembimbing2s'] = Dosen::all();
-        //dd($data);
+        $data['bidang_mks'] = BidangMK::all();
+        $data['pembimbing1s'] = Dosen::where('pembimbing1', 1)->orderBy('nama')->get();
+        $data['pembimbing2s'] = Dosen::orderBy('nama')->get();
         return view('progres.edit', $data);
     }
 
@@ -88,7 +86,7 @@ class ProgresController extends Controller
         //dd($request);
         $tugasAkhir = TugasAkhir::where('id_ta',$id_ta)->first();
         $tugasAkhir->judul = $request->judulTA;
-        $tugasAkhir->id_rumpun_mk = $request->rumpunMK;
+        $tugasAkhir->id_bidang_mk = $request->bidangMK;
         if($tugasAkhir->id_dosbing1){
             if($request->pembimbing1){
                 if($tugasAkhir->id_dosbing1 != $request->pembimbing1){
@@ -183,7 +181,7 @@ class ProgresController extends Controller
 
     public function detail()
     {
-        $detailta = TugasAkhir::where([['id_user', '=', session('user')['id']],['id_status','>=','0']])->with(['user','dosbing1','dosbing2','status','rmk', 'seminarTA', 'ujianTA'])->first();
+        $detailta = TugasAkhir::where([['id_user', '=', session('user')['id']],['id_status','>=','0']])->with(['user','dosbing1','dosbing2','status','bidang', 'seminarTA', 'ujianTA'])->first();
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();

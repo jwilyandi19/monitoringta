@@ -17,7 +17,7 @@ class SidangController extends Controller
             'jadwalUjian' => function($query){
                 $query->orderBy('tanggal', 'des')->orderBy('sesi');
             }, 'tugasAkhir' => function($query){
-                $query->with(['rmk', 'user']);
+                $query->with(['bidang', 'user']);
             }, 'penguji1Ujian', 'penguji2Ujian', 'penguji3Ujian', 'penguji4Ujian', 'penguji5Ujian',
         ])->get();
         $data['ujians'] = $ujianTA;

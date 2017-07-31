@@ -41,9 +41,9 @@ class PengajuanController extends Controller
             return view('pengajuan.sudah');
         }
         else{
-            $data['rumpun_mks'] = RumpunMK::all();
-            $data['pembimbing1s'] = Dosen::where('pembimbing1', 1)->get();
-            $data['pembimbing2s'] = Dosen::all();
+            $data['bidang_mks'] = BidangMK::all();
+            $data['pembimbing1s'] = Dosen::where('pembimbing1', 1)->orderBy('nama')->get();
+            $data['pembimbing2s'] = Dosen::orderBy('nama')->get();
             return view('pengajuan.index', $data);
         }
     }
@@ -59,13 +59,13 @@ class PengajuanController extends Controller
         //dd($request);
         $messagesError = [ 
             'judulTA.required' => 'Judul Tugas Akhir tidak boleh kosong',
-            'rumpunMK.required' => 'Rumpun Matakuliah tdak boleh kosong',
+            'bidangMK.required' => 'Rumpun Matakuliah tdak boleh kosong',
             'pembimbing1.required' => 'Dosen Pembimbing 1 tidak boleh kosong'
             ];
 
         $validator = Validator::make($request->all(), [ 
                 'judulTA' => 'required',
-                'rumpunMK' => 'required',
+                'bidangMK' => 'required',
                 'pembimbing1' => 'required',
             ], $messagesError);
 
@@ -77,7 +77,7 @@ class PengajuanController extends Controller
             $statusTA = StatusTA::where('id_status', 0)->first();
             $taBaru = new TugasAkhir();
             $taBaru->id_user = session('user')['id'];
-            $taBaru->id_rumpun_mk = $request->rumpunMK;
+            $taBaru->id_bidang_mk = $request->bidangMK;
             $taBaru->judul = $request->judulTA;
             //dd($taBaru);
             if(!$statusTA->tugasAkhirs()->save($taBaru)){

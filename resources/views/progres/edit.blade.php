@@ -41,13 +41,13 @@ Ubah Detail Tugas Akhir
                         <textarea type="text" name="judulTA" class="form-control col-md-10">{{$tugasAkhir->judul}}</textarea>
                     </div>
                     <div class="form-group has-warning">
-                        <label class="control-label" for="bidang"><h5>Rumpun Matakuliah</h5></label>
+                        <label class="control-label" for="bidang"><h5>Bidang Matakuliah</h5></label>
                         <select class="form-control" name="rumpunMK">
-                            @foreach($rumpun_mks as $key => $rumpun_mk)
-                                @if($rumpun_mk->id_rumpun_mk == $tugasAkhir->id_rumpun_mk)
-                                    <option value="{{$rumpun_mk->id_rumpun_mk}}" selected>{{$rumpun_mk->nama_rumpun}}</option>
+                            @foreach($bidang_mks as $key => $bidang_mk)
+                                @if($bidang_mk->id_bidang_mk == $tugasAkhir->id_bidang_mk)
+                                    <option value="{{$bidang_mk->id_bidang_mk}}" selected>{{$bidang_mk->nama_bidang}}</option>
                                 @else
-                                    <option value="{{$rumpun_mk->id_rumpun_mk}}">{{$rumpun_mk->nama_rumpun}}</option>
+                                    <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->nama_bidang}}</option>
                                 @endif
                             @endforeach
                         </select>

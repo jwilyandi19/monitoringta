@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    List Data User
+    Manajemen TA
 @endsection
 
 @section('moreStyle')
@@ -25,39 +25,48 @@
     @endif
     <div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
         <div class="judul-halaman">
-            <h4><strong>List Data User</strong></h4>
+            <h4><strong>Manajemen TA</strong></h4>
             <hr>
         </div>
         <div class="data-user">
-            <table id="listUser" class="table table-striped">
+            <table id="listTA" class="table table-striped">
                 <thead>
                 <tr>
-                    <th class="col-md-1 text-center"><strong>id user</strong></th>
-                    <th class="col-md-3"><strong>Username</strong></th>
-                    <th class="col-md-5"><strong>Nama</strong></th>
-                    <th class="col-md-1 text-center"><strong>Peran</strong></th>
-                    <th class="col-md-2 text-center"><strong>Aksi</strong></th>
+                    <th class="text-center"><strong>ID TA</strong></th>
+                    <th class="text-center"><strong>NRP</strong></th>
+                    <th class=""><strong>Nama</strong></th>
+                    <th class=""><strong>Judul</strong></th>
+                    <th class="text-center"><strong>Nilai Seminar</strong></th>
+                    <th class="text-center"><strong>Nilai Sidang</strong></th>
+                    <th class="text-center"><strong>Aksi</strong></th>
                 </tr>
                 </thead>
                 <tbody>
-                @if($users)
-                    @foreach($users as $key => $user)
+                @if($tugasAkhirs)
+                    @foreach($tugasAkhirs as $key => $tugasAkhir)
                         <tr>
-                            <td class="text-center">{{$key+1}}</td>
-                            <td>{{$user->username}}</td>
-                            <td>{{$user->nama}}</td>
-                            @if($user->role == 1)
-                                <td class="text-center">Mahasiswa</th>
-                            @elseif($user->role == 2)
-                                <td class="text-center">Dosen</th>
+                            <td class="text-center">{{$tugasAkhir->id_ta}}</td>
+                            <td>{{$tugasAkhir->user->username}}</td>
+                            <td>{{$tugasAkhir->user->nama}}</td>
+                            <td>{{$tugasAkhir->judul}}</td>
+                            
+                            @if($tugasAkhir->seminarTA && $tugasAkhir->seminarTA->nilai)
+                                <td class="text-center">{{$tugasAkhir->seminarTA->nilai}}</td>
                             @else
-                                <td class="text-center">Koordinator TA</th>
+                                <td class="text-center">-</td>
                             @endif
+                            
+                            @if($tugasAkhir->ujianTA && $tugasAkhir->ujianTA->nilai)
+                                <td class="text-center">{{$tugasAkhir->ujianTA->nilai}}</td>
+                            @else
+                                <td class="text-center">-</td>
+                            @endif
+
                             <td>
                                 <div class="text-center">
-                                    <button class="btn btn-warning btn-sm" value="{{$user->id_user}}"><i class="glyphicon glyphicon-repeat"></i></button>
-                                    <a class="btn btn-info btn-sm" href="{{url('/user/'.$user->id_user)}}"><i class="glyphicon glyphicon-align-justify"></i></a>
-                                    
+                                    <button class="btn btn-block btn-danger btn-xs" value="{{$tugasAkhir->id_ta}}"><i class="glyphicon glyphicon-remove"></i></button>
+                                    <button class="btn btn-block btn-primary btn-xs" value="{{$tugasAkhir->id_ta}}"><i class="glyphicon glyphicon-ok"></i></button>
+                                    <a class="btn btn-block btn-info btn-xs" href="{{url('')}}"><i class="glyphicon glyphicon-align-justify"></i></a>        
                                 </div>
                             </td>
                         </tr>
@@ -78,7 +87,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#listUser').DataTable({
+        $('#listTA').DataTable({
 
         });
         $('.btn-warning').click( function(){

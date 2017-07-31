@@ -17,7 +17,7 @@ class SeminarController extends Controller
             'jadwalSeminar' => function($query){
                 $query->orderBy('tanggal', 'des')->orderBy('sesi');
             }, 'tugasAkhir' => function($query){
-                $query->with(['rmk', 'user']);
+                $query->with(['bidang', 'user']);
             }, 'penguji1', 'penguji2', 'penguji3', 'penguji4', 'penguji5',
         ])->get();
         $data['seminars'] = $seminarTA;

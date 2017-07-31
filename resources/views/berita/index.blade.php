@@ -51,11 +51,13 @@ Home
                     <div class="berita-singkat">
                         <p>{!! str_limit($berita->isi_berita,50) !!}</p>
                     </div>
-                    @if(Session('user')['role'] == 3)
-                        <a href="{{url('/home/'.$berita->id_berita.'/delete')}}" class="btn btn-danger pull-right" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
-                        <a href="{{url('/home/'.$berita->id_berita.'/edit')}}" class="btn btn-info pull-right" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                    @endif
-                    <a href="{{url('/home/'.$berita->id_berita)}}" class="btn btn-warning pull-right" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-eye-open"></i> Selengkapnya</a>
+                    <div class="pull-right">
+                        <a href="{{url('/home/'.$berita->id_berita)}}" class="btn btn-warning" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-eye-open"></i> Selengkapnya</a>
+                        @if(Session('user')['role'] == 3)
+                            <a href="{{url('/home/'.$berita->id_berita.'/edit')}}" class="btn btn-info" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                            <a href="{{url('/home/'.$berita->id_berita.'/delete')}}" class="btn btn-danger" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
+                        @endif
+                    </div>
                     <br>
                     <br>
                     <hr class="berita">

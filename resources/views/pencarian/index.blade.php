@@ -34,7 +34,7 @@ Pencarian Tugas Akhir
                     <tr class="">
                         <th class="text-center">No</th>
                         <th class="text-center">ID</th>
-                        <th class="text-center">RMK</th>
+                        <th class="text-center">Bidang MK</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">NRP</th>
                         <th class="text-center">Nama</th>
@@ -52,7 +52,7 @@ Pencarian Tugas Akhir
                         @endif
                             <td>{{$key+1}}</td>
                             <td>{{$tugasAkhir->id_ta}}</td>
-                            <td id="row-rumpun" style="white-space: nowrap;">{{$tugasAkhir->rmk->nama_rumpun}}</td>
+                            <td id="row-rumpun" style="white-space: nowrap;">{{$tugasAkhir->bidang->nama_bidang}}</td>
                             <td id="row-status" style="white-space: nowrap;">{{$tugasAkhir->status->keterangan}}</td>
                             <td id="row-nrp" style="white-space: nowrap;">{{$tugasAkhir->user->username}}</td>
                             <td id="row-nama" style="white-space: nowrap;">{{$tugasAkhir->user->nama}}</td>
