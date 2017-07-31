@@ -25,7 +25,7 @@
     @endif
 	<div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
 		<div class="judul-halaman">
-            <h4><strong>Jadwal Sidang Tugas Akhir</strong></h4>
+            <h4><strong>Jadwal Seminar Tugas Akhir</strong></h4>
             <hr>
         </div>
         <div class="pencarian">
