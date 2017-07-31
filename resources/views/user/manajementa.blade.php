@@ -67,7 +67,7 @@
                                 <div class="text-center">
                                     <button class="btn btn-block btn-danger btn-xs" value="{{$tugasAkhir->id_ta}}"><i class="glyphicon glyphicon-remove"></i></button>
                                     <button class="btn btn-block btn-primary btn-xs" value="{{$tugasAkhir->id_ta}}"><i class="glyphicon glyphicon-ok"></i></button>
-                                    <a class="btn btn-block btn-info btn-xs" href="{{url('')}}"><i class="glyphicon glyphicon-align-justify"></i></a>        
+                                    <a class="btn btn-block btn-info btn-xs" href="{{url('/detailta/'.$tugasAkhir->id_ta)}}"><i class="glyphicon glyphicon-align-justify"></i></a>
                                 </div>
                             </td>
                         </tr>

@@ -117,4 +117,6 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::get('/manajementa', 'UserController@indexManajemen');
     Route::post('/tidaklulus', 'UserController@tidakLulus');
     Route::post('/dinyatakanlulus', 'UserController@dinyatakanLulus');
+    Route::get('/detailta/{id}', 'UserController@detailTA');
+
 });
