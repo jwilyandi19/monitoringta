@@ -39,10 +39,14 @@ Route::get('/pencarianta', 'PencarianController@pencarianTA');
 Route::get('/error', 'FrontendController@error');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
+
     Route::resource('/progres', 'ProgresController');
-    Route::get('/statusproposal', 'FrontendController@statusProposal');
+
+    //Detail TA
     Route::get('/detailta', 'ProgresController@detail');
     Route::post('/progres/uploadfile', 'ProgresController@uploadFile');
+
+    //Pengajuan Seminar
     Route::get('/pengajuanseminar', 'SeminarController@pengajuanJadwal');
     Route::post('/pengajuanseminar', 'SeminarController@doPengajuan');
     Route::get('/formpengajuanseminar/{id}', 'SeminarController@formPengajuan');
@@ -74,6 +78,7 @@ Route::group(['middleware' => ['Dosen']], function(){
     Route::get('/mahasiswauji', 'BimbinganController@mahasiswaUji');
     Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
     Route::get('/detailuji/{id}', 'BimbinganController@detailUji');
+    Route::post('/bimbingan/ubahdetail', 'BimbinganController@ubahDetail');
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){

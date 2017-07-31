@@ -247,7 +247,7 @@
                                 <select class="form-control" name="bidangMK">
                                     @foreach($bidang_mks as $key => $bidang_mk)
                                         @if($detailta->id_bidang_mk == $bidang_mk->id_bidang_mk)
-                                            <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->nama_bidang}}</option>
+                                            <option value="{{$bidang_mk->id_bidang_mk}}" selected>{{$bidang_mk->nama_bidang}}</option>
                                         @else
                                             <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->nama_bidang}}</option>
                                         @endif

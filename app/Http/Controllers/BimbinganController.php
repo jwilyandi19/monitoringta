@@ -258,4 +258,19 @@ class BimbinganController extends Controller
             return view('home');
         }
     }
+
+    public function ubahDetail(Request $request){
+        //dd($request);
+        $ta = TugasAkhir::where('id_ta', $request->id_ta)->first();
+        $ta->judul = $request->judulTA;
+        $ta->id_bidang_mk = $request->bidangMK;
+        if($ta->save())
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->with('message', 'Berhasil Mengubah Data TA');
+        }
+        else
+        {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withError('Terjadi Error Ketika Menginputkan Data TA baru');
+        }
+    }
 }
