@@ -15,8 +15,8 @@
 
 //home
 Route::get('/', 'BeritaController@index');
-Route::get('/home', 'BeritaController@index');
-Route::get('/home/{id}', 'BeritaController@show');
+Route::get('/berita', 'BeritaController@index');
+Route::get('/berita/{id}', 'BeritaController@show');
 
 //login
 Route::post('/login', 'AuthController@doLogin');
@@ -82,11 +82,13 @@ Route::group(['middleware' => ['Dosen']], function(){
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){
-    Route::get('/home/create', 'BeritaController@create');
-    Route::post('/home', 'BeritaController@store');
-    Route::get('/home/{id}/edit', 'BeritaController@edit');
-    Route::put('/home/{id}','BeritaController@update');
-    Route::get('/home/{id}/delete','BeritaController@destroy');
+    Route::resource('/home', 'BeritaController');
+
+//    Route::get('/home/create', 'BeritaController@create');
+//    Route::post('/home', 'BeritaController@store');
+//    Route::get('/home/{id}/edit', 'BeritaController@edit');
+//    Route::put('/home/{id}','BeritaController@update');
+//    Route::get('/home/{id}/delete','BeritaController@destroy');
 
     Route::resource('/user', 'UserController');
     Route::post('/user/uploadfile', 'UserController@uploadFile');

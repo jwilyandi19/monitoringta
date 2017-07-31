@@ -1,7 +1,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #24292e;">
     <div class="container">
         <div class="navbar-header">
-            <a href="{{url('/home')}}" class="navbar-brand web-logo" > SistemInformasi<strong>TA</strong></a>
+            <a href="{{url('/')}}" class="navbar-brand web-logo" > SistemInformasi<strong>TA</strong></a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
