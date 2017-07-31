@@ -68,28 +68,35 @@ class PengujiController extends Controller
         $day = date('D', strtotime($jadwal->tanggal));
 
         $ketersediaanSeminars = KetersediaanSeminar::where('id_js', $id)->with([
-            'dosen' => function($query) use($tanggal){
+            'dosen' => function($query){
                 $query->with([
-                    'penguji1s.jadwalSeminar' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'penguji2s.jadwalSeminar' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'penguji3s.jadwalSeminar' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'penguji4s.jadwalSeminar' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'penguji5s.jadwalSeminar' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'rmks'
+                    'penguji1s' => function($query){
+                        $query->where('status', '=', 1);
+                    },'penguji2s' => function($query){
+                        $query->where('status', '=', 1);
+                    },'penguji3s' => function($query){
+                        $query->where('status', '=', 1);
+                    },'penguji4s' => function($query){
+                        $query->where('status', '=', 1);
+                    },'penguji5s' => function($query){
+                        $query->where('status', '=', 1);
+                    },'bidang'
                 ]);
             }
         ])->get();
+        //dd($ketersediaanSeminars);
         $dosenBersedia = array();
         foreach ($ketersediaanSeminars as $key => $ketersediaanSeminar) {
             $dosenBersedia[$key]['nama_lengkap'] = $ketersediaanSeminar->dosen->nama_lengkap;
             $dosenBersedia[$key]['nama'] = $ketersediaanSeminar->dosen->nama;
             $string = "";
-            if(count($ketersediaanSeminar->dosen->rmks) != 0){
+            if($ketersediaanSeminar->dosen->bidang){
+                $string = $ketersediaanSeminar->dosen->bidang->nama_bidang;
+            }
+            else{
+                $string = "tidak memiliki bidang";
+            }
+            /*if(count($ketersediaanSeminar->dosen->rmks) != 0){
                 $string = "";
                 foreach ($ketersediaanSeminar->dosen->rmks as $key => $rmk) {
                     if($key<1){
@@ -102,8 +109,8 @@ class PengujiController extends Controller
             }
             else{
                 $string="tidak memiliki rmk";
-            }
-            $dosenBersedia[$key]['rmk'] = $string;
+            }*/
+            $dosenBersedia[$key]['bidang'] = $string;
             $penguji1 = count($ketersediaanSeminar->dosen->penguji1s);
             $penguji2 = count($ketersediaanSeminar->dosen->penguji2s);
             $penguji3 = count($ketersediaanSeminar->dosen->penguji3s);
@@ -115,10 +122,10 @@ class PengujiController extends Controller
         }
         $data['seminars'] = SeminarTA::where('id_js', $id)->with([
             'tugasAkhir' =>  function($query){
-                $query->with(['user','rmk', 'dosbing1', 'dosbing2']);
+                $query->with(['user','bidang', 'dosbing1', 'dosbing2']);
             }
         ])->orderBy('created_at')->get();
-        $data['seminarDiterimas'] = SeminarTA::where([['id_js', '=', $id], ['status', '=', '1']])->with('tugasAkhir.rmk')->orderBy('created_at')->get();
+        $data['seminarDiterimas'] = SeminarTA::where([['id_js', '=', $id], ['status', '=', '1']])->with('tugasAkhir.bidang')->orderBy('created_at')->get();
         $data['dosenBersedias'] = $dosenBersedia;
         $data['hari'] = $dayList[$day];
         $data['jadwal'] = $jadwal;
@@ -240,19 +247,19 @@ class PengujiController extends Controller
         $day = date('D', strtotime($jadwal->tanggal));
 
         $ketersediaanUjians = KetersediaanUjian::where('id_ju', $id)->with([
-            'dosen' => function($query) use($tanggal){
+            'dosen' => function($query){
                 $query->with([
-                    'penguji1Ujians.jadwalUjian' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'penguji2Ujians.jadwalUjian' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'penguji3Ujians.jadwalUjian' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'penguji4Ujians.jadwalUjian' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'penguji5Ujians.jadwalUjian' => function($query) use($tanggal){
-                        $query->where('tanggal', '>', $tanggal);
-                    },'rmks'
+                    'penguji1Ujians' => function($query){
+                        $query->where('status', '=', 1);
+                    },'penguji2Ujians' => function($query){
+                        $query->where('status', '=', 1);
+                    },'penguji3Ujians' => function($query){
+                        $query->where('status', '=', 1);
+                    },'penguji4Ujians' => function($query){
+                        $query->where('status', '=', 1);
+                    },'penguji5Ujians' => function($query){
+                        $query->where('status', '=', 1);
+                    },'bidang'
                 ]);
             }
         ])->get();
@@ -261,7 +268,13 @@ class PengujiController extends Controller
             $dosenBersedia[$key]['nama_lengkap'] = $ketersediaanUjian->dosen->nama_lengkap;
             $dosenBersedia[$key]['nama'] = $ketersediaanUjian->dosen->nama;
             $string = "";
-            if(count($ketersediaanUjian->dosen->rmks) != 0){
+            if($ketersediaanUjian->dosen->bidang){
+                $string = $ketersediaanUjian->dosen->bidang->nama_bidang;
+            }
+            else{
+                $string = "tidak memiliki bidang";
+            }
+            /*if(count($ketersediaanUjian->dosen->rmks) != 0){
                 $string = "";
                 foreach ($ketersediaanUjian->dosen->rmks as $key => $rmk) {
                     if($key<1){
@@ -274,8 +287,8 @@ class PengujiController extends Controller
             }
             else{
                 $string="tidak memiliki rmk";
-            }
-            $dosenBersedia[$key]['rmk'] = $string;
+            }*/
+            $dosenBersedia[$key]['bidang'] = $string;
             $penguji1 = count($ketersediaanUjian->dosen->penguji1Ujians);
             $penguji2 = count($ketersediaanUjian->dosen->penguji2Ujians);
             $penguji3 = count($ketersediaanUjian->dosen->penguji3Ujians);

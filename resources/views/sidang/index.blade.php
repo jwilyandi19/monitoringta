@@ -33,7 +33,7 @@
                 <thead>
                     <tr class="success">
                         <th >Waktu</th>
-                        <th >RMK</th>
+                        <th >Bidang MK</th>
                         <th >NRP</th>
                         <th >Mahasiswa</th>
                         <th >Penguji 1</th>
@@ -64,7 +64,7 @@
                                 {{' Sabtu '}}
                             @endif, {{date('d/m/Y',strtotime($ujian->jadwalUjian->tanggal)).' Sesi '.$ujian->jadwalUjian->sesi}}
                             </td>
-                            <td style="white-space: nowrap;">{{$ujian->tugasAkhir->rmk->nama_rumpun}}</td>
+                            <td style="white-space: nowrap;">{{$ujian->tugasAkhir->bidang->nama_bidang}}</td>
                             <td style="white-space: nowrap;">{{$ujian->tugasAkhir->user->username}}</td>
                             <td style="white-space: nowrap;">{{$ujian->tugasAkhir->user->nama}}</td>
                             <td style="white-space: nowrap;">{{$ujian->penguji1Ujian->nama_lengkap}}</td>

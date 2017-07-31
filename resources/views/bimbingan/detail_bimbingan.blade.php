@@ -25,7 +25,7 @@
     @endif
     <div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
         <div class="judul-halaman">
-            <h4><strong>Detail Progres Tugas Akhir </strong></h4>
+            <h4><strong>Detail Tugas Akhir </strong></h4>
             <hr>
         </div>
         <div class="panel-body isi-halaman">
@@ -115,14 +115,11 @@
                         @endif
                     </div>
                 </div>
-                @if($detailta->file)
+                @if($detailta->id_status >= 0 || $detailta->id_status <= 2)
                     <div class="row">
-                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#fileUploadModal"><i class="glyphicon glyphicon-file"></i> Update File</button>
+                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ubahDetailModal"><i class="glyphicon glyphicon-file"></i> Ubah Detail TA</button>
                     </div>
                 @else
-                    <div class="row">
-                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#fileUploadModal"><i class="glyphicon glyphicon-file"></i> Tambahkan File</button>
-                    </div>
                 @endif
             </div>
             <hr>
@@ -152,53 +149,119 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="row">
+                    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#bimbinganModal">Tambahkan Asistensi</button>
+                </div>
             </div>
             <hr>
             <div class="form-group">
                 @if($detailta->seminarTA && $detailta->seminarTA->status == 1)
-                    @include('progres.detail.seminar_isi')
+                    @include('bimbingan.detail.seminar_isi')
+                    {{--Tombol Ubah Nilai--}}
+                    <div class="row">
+                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#seminarModal">Beri Penilaian</button>
+                    </div>
+                    @include('bimbingan.detail.seminarModal')
                 @else
-                    @include('progres.detail.seminar_kosong')
+                    @include('bimbingan.detail.seminar_kosong')
                 @endif
             </div>
             <hr>
             <div class="form-group">
                 @if($detailta->ujianTA && $detailta->ujianTA->status == 1)
-                    @include('progres.detail.ujian_isi')
+                    @include('bimbingan.detail.ujian_isi')
+                    {{--Tombol Ubah Nilai Ujian--}}
+                    <div class="row">
+                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ujianModal">Beri Penilaian</button>
+                    </div>
+                    @include('bimbingan.detail.ujianModal')
                 @else
-                    @include('progres.detail.ujian_kosong')
+                    @include('bimbingan.detail.ujian_kosong')
                 @endif
             </div>
         </div>
-        <div class="modal fade" id="fileUploadModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
-                        <button type="button" class="close" data-dismiss="modal" style="color: #ffffff;">&times;</button>
-                        <h4 class="modal-title" style="color: #ffffff;"> Upload File Tugas Akhir</h4>
-                    </div>
-                    <div class="modal-body panel panel-body" style="margin-bottom: 0px; padding: 30px;">
-                        <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{url('/progres/uploadfile')}}" style="padding: 0px 20px;">
-                            <div class="form-group alert alert-warning">
-                                <h4>Perhatian</h4>
-                                <p>File yag dapat diupload adalah file dengan ekstensi .zip</p>
+    </div>
+
+    <div class="modal fade" id="bimbinganModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+                    <h4 class="modal-title" style="color: #ffffff;">Tambahkan Data Asistensi</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="POST" action="{{url('/bimbingan/asistensi')}}">
+                        <div class="form-group" style="display: none;">
+                            <label class="col-md-2 control-label">ID TA</label>
+                            <div class="col-md-10">
+                                <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
                             </div>
-                            <input type="text" name="idTA" style="display: none;" value="{{$detailta->id_ta}}">
-                            <div class="form-group">
-                                <label class="control-label"><h6>Select File</h6></label>
-                                <input type="file" name="fileTugasAkhir" class="file col-md-12" style="height: 30px;" accept=".zip">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Tanggal</label>
+                            <div class="col-md-10">
+                                <input type="date" name="tanggal" class="form-control">
                             </div>
-                            <br>
-                            <hr style="border-top: 1px solid #24292e;">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Materi</label>
+                            <div class="col-md-10">
+                                <textarea type="text" name="materi" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {{csrf_field()}}
                             {{method_field('POST')}}
-                            <div class="form-group" style="height: 30px;">
-                                <button type="submit" class="btn btn-primary pull-right">Tambahkan File</button>
-                                <button class="btn btn-default pull-right" style="margin-right: 10px;" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Tambahkan</button>
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ubahDetailModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+                    <h4 class="modal-title" style="color: #ffffff;">Ubah Detail TA</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="POST" action="{{url('/bimbingan/ubahdetail')}}">
+                        <div class="form-group" style="display: none;">
+                            <label class="col-md-2 control-label">ID TA</label>
+                            <div class="col-md-10">
+                                <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
                             </div>
-                        </form>
-
-                    </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Judul TA</label>
+                            <div class="col-md-9">
+                                <textarea type="text" name="judulTA" class="form-control">{{$detailta->judul}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Bidang Matakuliah</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="bidangMK">
+                                    @foreach($bidang_mks as $key => $bidang_mk)
+                                        @if($detailta->id_bidang_mk == $bidang_mk->id_bidang_mk)
+                                            <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->nama_bidang}}</option>
+                                        @else
+                                            <option value="{{$bidang_mk->id_bidang_mk}}">{{$bidang_mk->nama_bidang}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{csrf_field()}}
+                            {{method_field('POST')}}
+                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Tambahkan</button>
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -208,5 +271,4 @@
 @section('moreScript')
 
 @endsection
-
 

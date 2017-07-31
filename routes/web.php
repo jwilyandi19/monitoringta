@@ -16,6 +16,7 @@
 //home
 Route::get('/', 'BeritaController@index');
 Route::get('/home', 'BeritaController@index');
+Route::get('/home/{id}', 'BeritaController@show');
 
 //login
 Route::post('/login', 'AuthController@doLogin');
@@ -78,7 +79,7 @@ Route::group(['middleware' => ['Dosen']], function(){
 Route::group(['middleware' => ['Koordinator']], function(){
     Route::get('/home/create', 'BeritaController@create');
     Route::post('/home', 'BeritaController@store');
-    Route::get('/home/{id}/edit', 'BeritaCOntroller@edit');
+    Route::get('/home/{id}/edit', 'BeritaController@edit');
     Route::put('/home/{id}','BeritaController@update');
     Route::get('/home/{id}/delete','BeritaController@destroy');
 
@@ -104,4 +105,7 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::post('/pengujiujian/{id}', 'PengujiController@formPengujiUjian');  
     Route::post('/terimapengajuanujian', 'PengujiController@terimaUjian');
     Route::post('/batalkanujian', 'PengujiController@batalkanUjian');
+
+    Route::post('/resetpass', 'UserController@resetPassword');
+    Route::get('/manajementa', 'UserController@indexManajemen');
 });

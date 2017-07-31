@@ -8,6 +8,7 @@ use App\TugasAkhir;
 use App\Asistensi;
 use App\Dosen;
 use Redirect;
+use App\BidangMK;
 Use App\SeminarTA;
 Use App\UjianTA;
 use App\Jadwal;
@@ -59,7 +60,7 @@ class BimbinganController extends Controller
      */
     public function show($id_ta)
     {
-        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','rmk',
+        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','bidang',
             'seminarTA' => function($query){
                 $query->with(['penguji1','penguji2','penguji3','penguji4','penguji5','jadwalSeminar']);
             },'ujianTA' => function($query){
@@ -68,8 +69,9 @@ class BimbinganController extends Controller
         //dd($detailta);
         if($detailta){
             $data['detailta'] = $detailta;
+            $data['bidang_mks'] = BidangMK::all();
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
-            return view('bimbingan.detail.dosbing',$data);
+            return view('bimbingan.detail_bimbingan',$data);
         }
         else
         {
@@ -239,13 +241,13 @@ class BimbinganController extends Controller
     }
 
     public function detailUji($id_ta){
-        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','rmk',
+        $detailta = TugasAkhir::where('id_ta',$id_ta)->with(['user','dosbing1','dosbing2','status','bidang',
             'seminarTA' => function($query){
                 $query->with(['penguji1','penguji2','penguji3','penguji4','penguji5','jadwalSeminar']);
             },'ujianTA' => function($query){
                 $query->with(['penguji1Ujian','penguji2Ujian','penguji3Ujian','penguji4Ujian','penguji5Ujian','jadwalUjian']);
             }])->first();
-        dd($detailta);
+        //dd($detailta);
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();

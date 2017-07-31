@@ -41,6 +41,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="{{url('/user/create')}}"><i class="glyphicon glyphicon-user"></i> Buat User</a></li>
                         <li><a href="{{url('/user')}}"><i class="glyphicon glyphicon-user"></i> Lihat User</a></li>
+                        <li><a href="{{url('/manajementa')}}"><i class="glyphicon glyphicon-education"></i> Daftar TA Aktif</a></li>
                     </ul>
                 </li>
 

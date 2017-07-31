@@ -85,12 +85,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <label class=" col-md-2"><h6 class="pull-left">RMK</h6></label>
+                    <label class=" col-md-2"><h6 class="pull-left">Bidang Matakuliah</h6></label>
                     <div class="col-md-1" style="text-align: right;">
                         <h6>:</h6>
                     </div>
                     <div class="col-md-9">
-                        <h6>{{$detailta->rmk->nama_rumpun}}</h6>
+                        <h6>{{$detailta->bidang->nama_bidang}}</h6>
                     </div>
                 </div>
                 <div class="row">
@@ -146,215 +146,19 @@
             </div>
             <hr>
             <div class="form-group">
-                @if($detailta->seminarTA != null)
-                    <h6>{{'anjing'}}</h6>
-                    {{--@if($detailta->seminarTA->status == 1)--}}
-                        {{--<h6>{{'anjing2'}}</h6>--}}
-                        {{--@extends('bimbingan.detail.terjadwal')--}}
-                    {{--@else--}}
-                        {{--<h6>{{'anjing3'}}</h6>--}}
-                        {{--@extends('bimbingan.detail.kosong')--}}
-                    {{--@endif--}}
+                @if($detailta->seminarTA && $detailta->seminarTA->status == 1)
+                    @include('bimbingan.detail.seminar_isi')
                 @else
-                    <h6>{{'anjing4'}}</h6>
-                    {{--@extends('bimbingan.detail.kosong')--}}
+                    @include('bimbingan.detail.seminar_kosong')
                 @endif
             </div>
-
             <hr>
-
             <div class="form-group">
-
-                <div>
-                    <h4>Ujian Tugas Akhir</h4>
-                </div>
-
-                {{--@if($detailta->ujianTA->status == 1)--}}
-                    {{--<!-- Tanggal Seminar -->--}}
-                    {{--<div class="row">--}}
-                        {{--<label class="col-md-2"><h6 class="pull-left">Tanggal Seminar</h6></label>--}}
-                        {{--<div class="col-md-1" style="text-align: right;">--}}
-                            {{--<h6>:</h6>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-md-9">--}}
-                            {{--<h6>{{date('d-m-Y', strtotime($detailta->ujianTA->jadwalUjian->tanggal))}} - Sesi : {{$detailta->ujianTA->jadwalUjian->sesi}}</h6>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--@if($detailta->ujianTA->penguji1Ujian != null)--}}
-                        {{--<!-- Penguji 1 -->--}}
-                        {{--<div class="row">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Penguji 1</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--<h6>{{$detailta->ujianTA->penguji1Ujian->nama}}</h6>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="row">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Nilai Penguji 1</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--@if($detailta->ujianTA->nilai_penguji1 == null)--}}
-                                    {{--<h6>-</h6>--}}
-                                {{--@else--}}
-                                    {{--<h6>{{$detailta->ujianTA->nilai_penguji1}}</h6>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
-
-                    {{--@if($detailta->ujianTA->penguji2Ujian != null)--}}
-                        {{--<!-- Penguji 2 -->--}}
-                        {{--<div class="row">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Penguji 2</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--<h6>{{$detailta->ujianTA->penguji2Ujian->nama}}</h6>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="row">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Nilai Penguji 2</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--@if($detailta->ujianTA->nilai_penguji2 == null)--}}
-                                    {{--<h6>-</h6>--}}
-                                {{--@else--}}
-                                    {{--<h6>{{$detailta->ujianTA->nilai_penguji2}}</h6>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
-
-                    {{--@if($detailta->ujianTA->penguji3Ujian != null)--}}
-                        {{--<!-- Penguji 3 -->--}}
-                        {{--<div class="row ">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Penguji 3</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--<h6>{{$detailta->ujianTA->penguji3Ujian->nama}}</h6>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="row">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Nilai Penguji 3</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--@if($detailta->ujianTA->nilai_penguji3 == null)--}}
-                                    {{--<h6>-</h6>--}}
-                                {{--@else--}}
-                                    {{--<h6>{{$detailta->ujianTA->nilai_penguji3}}</h6>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
-
-                    {{--@if($detailta->ujianTA->penguji4Ujian != null)--}}
-                        {{--<!-- Penguji 4 -->--}}
-                        {{--<div class="row">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Penguji 4</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--<h6>{{$detailta->ujianTA->penguji4Ujian->nama}}</h6>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="row">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Nilai Penguji 4</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--@if($detailta->ujianTA->nilai_penguji4 == null)--}}
-                                    {{--<h6>-</h6>--}}
-                                {{--@else--}}
-                                    {{--<h6>{{$detailta->ujianTA->nilai_penguji4}}</h6>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
-                    {{--@if($detailta->ujianTA->penguji5Ujian != null)--}}
-                        {{--<div class="row">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Penguji 5</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--<h6>{{$detailta->ujianTA->penguji5Ujian->nama}}</h6>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="row">--}}
-                            {{--<label class="col-md-2"><h6 class="pull-left">Nilai Penguji 5</h6></label>--}}
-                            {{--<div class="col-md-1" style="text-align: right;">--}}
-                                {{--<h6>:</h6>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-9">--}}
-                                {{--@if($detailta->ujianTA->nilai_penguji5 == null)--}}
-                                    {{--<h6>-</h6>--}}
-                                {{--@else--}}
-                                    {{--<h6>{{$detailta->ujianTA->nilai_penguji5}}</h6>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
-                {{--@endif--}}
-
-                {{--<div class="row">--}}
-                    {{--<label class="col-md-2"><h6 class="pull-left">Nilai Angka</h6></label>--}}
-                    {{--<div class="col-md-1" style="text-align: right;">--}}
-                        {{--<h6>:</h6>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-9">--}}
-                        {{--@if($detailta->ujianTA->nilai == null)--}}
-                            {{--<h6>-</h6>--}}
-                        {{--@else--}}
-                            {{--<h6>{{$detailta->ujianTA->nilai_angka}}</h6>--}}
-                        {{--@endif--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-                {{--<div class="row">--}}
-                    {{--<label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>--}}
-                    {{--<div class="col-md-1" style="text-align: right;">--}}
-                        {{--<h6>:</h6>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-9">--}}
-                        {{--@if($detailta->ujianTA->nilai == null)--}}
-                            {{--<h6>-</h6>--}}
-                        {{--@else--}}
-                            {{--<h6>{{$detailta->ujianTA->nilai}}</h6>--}}
-                        {{--@endif--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-                {{--<div class="row">--}}
-                    {{--<label class="col-md-2"><h6 class="pull-left">Evaluasi</h6></label>--}}
-                    {{--<div class="col-md-1" style="text-align: right;">--}}
-                        {{--<h6>:</h6>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-9">--}}
-                        {{--@if($detailta->ujianTA->evaluasi == null)--}}
-                            {{--<h6>-</h6>--}}
-                        {{--@else--}}
-                            {{--<h6>{{$detailta->ujianTA->evaluasi}}</h6>--}}
-                        {{--@endif--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+                @if($detailta->ujianTA && $detailta->ujianTA->status == 1)
+                    @include('bimbingan.detail.ujian_isi')
+                @else
+                    @include('bimbingan.detail.ujian_kosong')
+                @endif
             </div>
         </div>
     </div>
