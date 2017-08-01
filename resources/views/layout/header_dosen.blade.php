@@ -11,8 +11,6 @@
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="#"><i class="glyphicon glyphicon-search"></i> Pencarian TA </a></li>
-
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-education"></i> Mahasiswa </a>
                     <ul class="dropdown-menu">
@@ -38,8 +36,9 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{session('user')['username']}} </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('gantipassword')}}"><i class=" glyphicon glyphicon-cog"></i> Ganti Password</a></li>
-                        <li><a href="{{url('logout')}}"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                        <li><a href="{{url('/datadosen')}}"><i class="glyphicon glyphicon-user"></i> Data Dosen</a></li>
+                        <li><a href="{{url('/gantipassword')}}"><i class=" glyphicon glyphicon-cog"></i> Ganti Password</a></li>
+                        <li><a href="{{url('/logout')}}"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
                     </ul>
                 </li>
             </ul>

@@ -103,6 +103,24 @@
                     </div>
                 </div>
                 <div class="row">
+                    <label class=" col-md-2"><h6 class="pull-left">Dibuat Pada</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        <h6>{{$dibuat}}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class=" col-md-2"><h6 class="pull-left">Pengerjaan</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        <h6>{{'Semester Ke '.$semester}}</h6>
+                    </div>
+                </div>
+                <div class="row">
                     <label class=" col-md-2"><h6 class="pull-left">File Proposal</h6></label>
                     <div class="col-md-1" style="text-align: right;">
                         <h6>:</h6>

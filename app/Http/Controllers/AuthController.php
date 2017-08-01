@@ -11,7 +11,9 @@ use Uuid;
 use DB;
 use Redirect;
 use App\Dosen;
+use App\BidangMK;
 use App\User;
+use App\BidangDosen;
 
 class AuthController extends Controller
 {
@@ -70,7 +72,7 @@ class AuthController extends Controller
             return redirect('/')->withErrors('Halaman Tidak Ditemukan');
         }
         else{
-            return view('/gantipassword');
+            return view('gantipassword');
         }
     }
 
@@ -127,6 +129,55 @@ class AuthController extends Controller
             {
                 return Redirect::to('gantipassword')->withErrors('Password Lama Salah!');
             }
+        }
+    }
+
+    public function dataDosen(){
+        $data['dosen'] = Dosen::where('id_dosen', session('user')['id_dosen'])->with('bidangs.bidang')->first();
+        $data['bidangs'] = BidangMK::all();
+        //dd($data);
+        return view('datadosen', $data);
+    }
+
+    public function tambahkanBidang(Request $request){
+        $dosen = Dosen::where('id_dosen', session('user')['id_dosen'])->with('bidangs.bidang')->first();
+        if($request->bidangMK){
+            $flagAda = 0;
+            if($dosen->bidangs){
+                foreach ($dosen->bidangs as $key => $bidang) {
+                    if($bidang->id_bidang_mk == $request->bidangMK){
+                        $flagAda = 1;
+                    }
+                }
+            }
+            if($flagAda){
+                return Redirect::to(url('/datadosen'))->withErrors('Gagal menambahkan bidang keahlian, karena bidang yang anda pilih sudah pernah ditambahkan');
+            }
+            else{
+                $bidangDosen = new BidangDosen();
+                $bidangDosen->id_dosen = session('user')['id_dosen'];
+                $bidangDosen->id_bidang_mk = $request->bidangMK;
+                if($bidangDosen->save()){
+                    return Redirect::to('/datadosen');
+                }
+                else{
+                    return Redirect::to('/datadosen')->withErrors('Gagal menyimpan data bidang, silahkan coba lagi');
+                }
+            }
+        }
+        else{
+            return Redirect::to('/datadosen')->withErrors('Data bidang tidak boleh kosong');
+        }
+
+    }
+
+    public function hapusBidang(Request $request){
+        $bidang = BidangDosen::where([['id_dosen', '=',session('user')['id_dosen']],['id_bidang_mk', '=', $request->idBidangMK]])->first();
+        if($bidang->delete()){
+            return Redirect::to('/datadosen');
+        }
+        else{
+            return Redirect::to('/datadosen')->withErrors('Gagal menghapus bidang keahlian, silahkan coba lagi');
         }
     }
 }
