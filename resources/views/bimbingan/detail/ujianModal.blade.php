@@ -74,6 +74,13 @@
                         </div>
                     </div>
 
+                    <div class="form-group" style="display: none;">
+                        <label class="col-md-2 control-label">Id Ujian TA</label>
+                        <div class="col-md-10">
+                            <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label class="col-md-2 control-label">Evaluasi</label>
                         <div class="col-md-10">

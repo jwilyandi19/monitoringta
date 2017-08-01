@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\DosenPembimbing;
 use App\TugasAkhir;
@@ -184,6 +185,48 @@ class BimbinganController extends Controller
     public function nilaiUjian(Request $request)
     {
         //dd($request);
+        if($request->nilai5 == null)
+        {
+            $messagesError = [
+                'nilai1.required' => 'Input nilai penguji 1 harus berupa angka antara 0 - 100',
+                'nilai2.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
+                'nilai3.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
+                'nilai4.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
+            ];
+
+            $validator = Validator::make($request->all(), [
+                'nilai1' => 'numeric|min:0|max:100',
+                'nilai2' => 'numeric|min:0|max:100',
+                'nilai3' => 'numeric|min:0|max:100',
+                'nilai4' => 'numeric|min:0|max:100',
+            ], $messagesError);
+            if($validator->fails())
+            {
+                return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors($validator)->withInput();
+            }
+        }
+        else{
+            $messagesError = [
+                'nilai1.required' => 'Input nilai penguji 1 harus berupa angka antara 0 - 100',
+                'nilai2.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
+                'nilai3.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
+                'nilai4.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
+                'nilai5.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
+            ];
+
+            $validator = Validator::make($request->all(), [
+                'nilai1' => 'numeric|min:0|max:100',
+                'nilai2' => 'numeric|min:0|max:100',
+                'nilai3' => 'numeric|min:0|max:100',
+                'nilai4' => 'numeric|min:0|max:100',
+                'nilai5' => 'numeric|min:0|max:100',
+            ], $messagesError);
+            if($validator->fails())
+            {
+                return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors($validator)->withInput();
+            }
+        }
+
         $ujian = UjianTA::where('id_ujian_ta',$request->id_ujian_ta)->first();
         $ujian->nilai_penguji1 = $request->nilai1;
         $ujian->nilai_penguji2 = $request->nilai2;
