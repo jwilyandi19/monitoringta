@@ -39,40 +39,49 @@ class SeminarController extends Controller
         $jadwalSeminar = array();
         $tanggalSeminars = array();
         
+        $tanggalBuka = Jadwal::where('nama', 'Buka Ketersediaan Seminar')->first()->tanggal;
         $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
-        $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
-        $jumlahJadwal = count($jadwals);
-        
-        if($jumlahJadwal == 0){
-            return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal seminar belum disediakan');
+        if((time()-(60*60*24)) > strtotime($tanggalBuka) && (time()-(60*60*24)) < strtotime($tanggalTutup)){
+            $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
+            $jumlahJadwal = count($jadwals);
+            
+            if($jumlahJadwal == 0){
+                return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal seminar belum disediakan');
+            }
+            else{
+                foreach ($jadwals as $key => $jadwal) {
+                    $jadwalSeminar[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_js;
+                }
+
+                $dosens = KetersediaanSeminar::where('id_dosen', session('user')['id_dosen'])->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
+                    $query->where('tanggal', '>', $tanggalTutup);
+                }])->get();
+                
+                foreach ($dosens as $key => $dosen) {
+                    if($dosen->jadwalSeminar){
+                        $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi] = 1;
+                    }
+                }
+
+                $dates = array_keys($jadwalSeminar);
+                foreach ($dates as $key => $date) {
+                    $tanggalSeminars[$key]['tanggal'] = $date;
+                    $day = date('D', strtotime($date));
+                    $tanggalSeminars[$key]['hari'] = $dayList[$day];
+                    $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$date];
+                }
+                $data['tanggalSeminars'] = $tanggalSeminars;
+                $data['ketersediaanDosen'] = $ketersediaanDosen;
+
+                return view('seminar.ketersediaan', $data);
+            }
         }
         else{
-            foreach ($jadwals as $key => $jadwal) {
-                $jadwalSeminar[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_js;
-            }
-
-            $dosens = KetersediaanSeminar::where('id_dosen', session('user')['id_dosen'])->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
-                $query->where('tanggal', '>', $tanggalTutup);
-            }])->get();
+            return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena pengisian ketersediaan seminar belum dibuka');
             
-            foreach ($dosens as $key => $dosen) {
-                if($dosen->jadwalSeminar){
-                    $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi] = 1;
-                }
-            }
-
-            $dates = array_keys($jadwalSeminar);
-            foreach ($dates as $key => $date) {
-                $tanggalSeminars[$key]['tanggal'] = $date;
-                $day = date('D', strtotime($date));
-                $tanggalSeminars[$key]['hari'] = $dayList[$day];
-                $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$date];
-            }
-            $data['tanggalSeminars'] = $tanggalSeminars;
-            $data['ketersediaanDosen'] = $ketersediaanDosen;
-
-            return view('seminar.ketersediaan', $data);
         }
+
+        
     }
 
     public function mengisiKetersediaan(Request $request){
@@ -90,108 +99,123 @@ class SeminarController extends Controller
     }
 
     public function pengajuanJadwal(){
-        $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0']])->first();
-        $dayList = array(
-            'Sun' => 'Minggu',
-            'Mon' => 'Senin',
-            'Tue' => 'Selasa',
-            'Wed' => 'Rabu',
-            'Thu' => 'Kamis',
-            'Fri' => 'Jumat',
-            'Sat' => 'Sabtu'
-        );
-        
-        $seminarTA = SeminarTA::where('id_ta', $tugasAkhir->id_ta)->first();
-        if($seminarTA){
-            $jadwalTerdaftar = JadwalSeminar::where('id_js', $seminarTA->id_js)->first();
-            $data['seminars'] = SeminarTA::where([['id_js', '=',$seminarTA->id_js], ['status', '>=', '0'], ['status', '<=', '1']])->with('tugasAkhir.user')->orderBy('created_at')->get();
-            $day = date('D', strtotime($jadwalTerdaftar->tanggal));
-            $data['hari'] = $dayList[$day];
-            $data['jadwalTerdaftar'] = $jadwalTerdaftar;
-        }
-        $data['seminarTA'] = $seminarTA;
-
-        $ketersediaanDosen = array();
-        $jadwalSeminar = array();
-        $tanggalSeminars = array();
-        
-        $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
-        $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
-        $jumlahJadwal = count($jadwals);
-        if($jumlahJadwal == 0){
-            return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal seminar belum disediakan');
-        }
-        else{
-            if($tugasAkhir->id_dosbing1 && $tugasAkhir->id_dosbing2){
-                $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->orWhere('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
-                    $query->where('tanggal', '>', $tanggalTutup);
-                }])->get();
+        $batasTanggalBawah = Jadwal::where('nama', 'Buka Pengajuan Jadwal Seminar')->first()->tanggal;
+        $batasTanggalAtas = Jadwal::where('nama', 'Tutup Pengajuan Jadwal Seminar')->first()->tanggal;
+        if((time()-(60*60*24)) > strtotime($batasTanggalBawah) && (time()-(60*60*24)) < strtotime($batasTanggalAtas)){
+            $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0']])->first();
+            $dayList = array(
+                'Sun' => 'Minggu',
+                'Mon' => 'Senin',
+                'Tue' => 'Selasa',
+                'Wed' => 'Rabu',
+                'Thu' => 'Kamis',
+                'Fri' => 'Jumat',
+                'Sat' => 'Sabtu'
+            );
+            
+            $seminarTA = SeminarTA::where('id_ta', $tugasAkhir->id_ta)->first();
+            if($seminarTA){
+                $jadwalTerdaftar = JadwalSeminar::where('id_js', $seminarTA->id_js)->first();
+                $data['seminars'] = SeminarTA::where([['id_js', '=',$seminarTA->id_js], ['status', '>=', '0'], ['status', '<=', '1']])->with('tugasAkhir.user')->orderBy('created_at')->get();
+                $day = date('D', strtotime($jadwalTerdaftar->tanggal));
+                $data['hari'] = $dayList[$day];
+                $data['jadwalTerdaftar'] = $jadwalTerdaftar;
             }
-            elseif(!$tugasAkhir->id_dosbing2 || !$tugasAkhir->id_dosbing1){
-                if($tugasAkhir->id_dosbing1){
-                    $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
-                        $query->where('tanggal', '>', $tanggalTutup);
-                    }])->get();
-                }
-                else{
-                    $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
-                        $query->where('tanggal', '>', $tanggalTutup);
-                    }])->get();
-                }
+            $data['seminarTA'] = $seminarTA;
+
+            $ketersediaanDosen = array();
+            $jadwalSeminar = array();
+            $tanggalSeminars = array();
+            
+            $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
+            $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
+            $jumlahJadwal = count($jadwals);
+            if($jumlahJadwal == 0){
+                return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal seminar belum disediakan');
             }
             else{
-                return Redirect::to('/error')->with('message', 'Tidak dapat mengajukan jadwal semminar karena anda tidak memiliki dosen pembimbing');
-            }
-            
-            //dd($dosens);
-            foreach ($dosens as $key => $dosen) {
-                if($dosen->jadwalSeminar){
-                    if($dosen->id_dosen == $tugasAkhir->id_dosbing1){
-                        $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi][1] = 1;
+                if($tugasAkhir->id_dosbing1 && $tugasAkhir->id_dosbing2){
+                    $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->orWhere('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
+                        $query->where('tanggal', '>', $tanggalTutup);
+                    }])->get();
+                }
+                elseif(!$tugasAkhir->id_dosbing2 || !$tugasAkhir->id_dosbing1){
+                    if($tugasAkhir->id_dosbing1){
+                        $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
+                            $query->where('tanggal', '>', $tanggalTutup);
+                        }])->get();
                     }
-                    else if($dosen->id_dosen == $tugasAkhir->id_dosbing2){
-                        $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi][2] = 1;
+                    else{
+                        $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
+                            $query->where('tanggal', '>', $tanggalTutup);
+                        }])->get();
                     }
                 }
-            }
-            foreach ($jadwals as $key => $jadwal) {
-                $jadwalSeminar[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_js;
+                else{
+                    return Redirect::to('/error')->with('message', 'Tidak dapat mengajukan jadwal semminar karena anda tidak memiliki dosen pembimbing');
+                }
+                
+                //dd($dosens);
+                foreach ($dosens as $key => $dosen) {
+                    if($dosen->jadwalSeminar){
+                        if($dosen->id_dosen == $tugasAkhir->id_dosbing1){
+                            $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi][1] = 1;
+                        }
+                        else if($dosen->id_dosen == $tugasAkhir->id_dosbing2){
+                            $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi][2] = 1;
+                        }
+                    }
+                }
+                foreach ($jadwals as $key => $jadwal) {
+                    $jadwalSeminar[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_js;
+                }
+
+                $dates = array_keys($jadwalSeminar);
+                foreach ($dates as $key => $date) {
+                    $tanggalSeminars[$key]['tanggal'] = $date;
+                    $day = date('D', strtotime($date));
+                    $tanggalSeminars[$key]['hari'] = $dayList[$day];
+                    $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$date];
+                }
+                $data['tanggalSeminars'] = $tanggalSeminars;
+                $data['ketersediaanDosen'] = $ketersediaanDosen;
+
+                return view('seminar.pengajuan', $data);
             }
 
-            $dates = array_keys($jadwalSeminar);
-            foreach ($dates as $key => $date) {
-                $tanggalSeminars[$key]['tanggal'] = $date;
-                $day = date('D', strtotime($date));
-                $tanggalSeminars[$key]['hari'] = $dayList[$day];
-                $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$date];
-            }
-            $data['tanggalSeminars'] = $tanggalSeminars;
-            $data['ketersediaanDosen'] = $ketersediaanDosen;
-
-            return view('seminar.pengajuan', $data);
+        }
+        else{
+            return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena pengajuan jadwal seminar belum dibuka');
         }
 
     }
 
     public function formPengajuan($id){
-        $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0']])->first();
-        $seminarTA = SeminarTA::where('id_ta', $tugasAkhir->id_ta)->first();
-        $dayList = array(
-            'Sun' => 'Minggu',
-            'Mon' => 'Senin',
-            'Tue' => 'Selasa',
-            'Wed' => 'Rabu',
-            'Thu' => 'Kamis',
-            'Fri' => 'Jumat',
-            'Sat' => 'Sabtu'
-        );
-        $jadwal = JadwalSeminar::where('id_js', $id)->first();
-        $day = date('D', strtotime($jadwal->tanggal));
-        $data['seminarTA'] = $seminarTA;
-        $data['seminars'] = SeminarTA::where([['id_js', '=',$id], ['status', '=', '0']])->with('tugasAkhir.user')->orderBy('created_at')->get();
-        $data['hari'] = $dayList[$day];
-        $data['jadwal'] = $jadwal;
-        return view('seminar.formpengajuan', $data);
+        $batasTanggalBawah = Jadwal::where('nama', 'Buka Pengajuan Jadwal Seminar')->first()->tanggal;
+        $batasTanggalAtas = Jadwal::where('nama', 'Tutup Pengajuan Jadwal Seminar')->first()->tanggal;
+        if((time()-(60*60*24)) > strtotime($batasTanggalBawah) && (time()-(60*60*24)) < strtotime($batasTanggalAtas)){
+            $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0']])->first();
+            $seminarTA = SeminarTA::where('id_ta', $tugasAkhir->id_ta)->first();
+            $dayList = array(
+                'Sun' => 'Minggu',
+                'Mon' => 'Senin',
+                'Tue' => 'Selasa',
+                'Wed' => 'Rabu',
+                'Thu' => 'Kamis',
+                'Fri' => 'Jumat',
+                'Sat' => 'Sabtu'
+            );
+            $jadwal = JadwalSeminar::where('id_js', $id)->first();
+            $day = date('D', strtotime($jadwal->tanggal));
+            $data['seminarTA'] = $seminarTA;
+            $data['seminars'] = SeminarTA::where([['id_js', '=',$id], ['status', '=', '0']])->with('tugasAkhir.user')->orderBy('created_at')->get();
+            $data['hari'] = $dayList[$day];
+            $data['jadwal'] = $jadwal;
+            return view('seminar.formpengajuan', $data);
+        }
+        else{
+            return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena pengajuan jadwal seminar belum dibuka');
+        }
     }
 
     public function doPengajuan(Request $request){
