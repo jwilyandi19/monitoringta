@@ -80,7 +80,7 @@ class PengujiController extends Controller
                         $query->where('status', '=', 1);
                     },'penguji5s' => function($query){
                         $query->where('status', '=', 1);
-                    },'bidang'
+                    },'bidangs.bidang'
                 ]);
             }
         ])->get();
@@ -90,26 +90,21 @@ class PengujiController extends Controller
             $dosenBersedia[$key]['nama_lengkap'] = $ketersediaanSeminar->dosen->nama_lengkap;
             $dosenBersedia[$key]['nama'] = $ketersediaanSeminar->dosen->nama;
             $string = "";
-            if($ketersediaanSeminar->dosen->bidang){
-                $string = $ketersediaanSeminar->dosen->bidang->nama_bidang;
-            }
-            else{
-                $string = "tidak memiliki bidang";
-            }
-            /*if(count($ketersediaanSeminar->dosen->rmks) != 0){
+            
+            if(count($ketersediaanSeminar->dosen->bidangs) != 0){
                 $string = "";
-                foreach ($ketersediaanSeminar->dosen->rmks as $key => $rmk) {
-                    if($key<1){
-                        $string = $rmk->nama_rumpun;
+                foreach ($ketersediaanSeminar->dosen->bidangs as $keys => $bidang) {
+                    if($keys<1){
+                        $string = $bidang->bidang->nama_bidang;
                     }
                     else{
-                        $string = $string.", ".$rmk->nama_rumpun;
+                        $string = $string.", ".$bidang->bidang->nama_bidang;
                     }
                 }
             }
             else{
-                $string="tidak memiliki rmk";
-            }*/
+                $string="tidak memiliki bidang";
+            }
             $dosenBersedia[$key]['bidang'] = $string;
             $penguji1 = count($ketersediaanSeminar->dosen->penguji1s);
             $penguji2 = count($ketersediaanSeminar->dosen->penguji2s);
@@ -259,7 +254,7 @@ class PengujiController extends Controller
                         $query->where('status', '=', 1);
                     },'penguji5Ujians' => function($query){
                         $query->where('status', '=', 1);
-                    },'bidang'
+                    },'bidangs.bidang'
                 ]);
             }
         ])->get();
@@ -268,26 +263,20 @@ class PengujiController extends Controller
             $dosenBersedia[$key]['nama_lengkap'] = $ketersediaanUjian->dosen->nama_lengkap;
             $dosenBersedia[$key]['nama'] = $ketersediaanUjian->dosen->nama;
             $string = "";
-            if($ketersediaanUjian->dosen->bidang){
-                $string = $ketersediaanUjian->dosen->bidang->nama_bidang;
-            }
-            else{
-                $string = "tidak memiliki bidang";
-            }
-            /*if(count($ketersediaanUjian->dosen->rmks) != 0){
+            if(count($ketersediaanUjian->dosen->bidangs) != 0){
                 $string = "";
-                foreach ($ketersediaanUjian->dosen->rmks as $key => $rmk) {
-                    if($key<1){
-                        $string = $rmk->nama_rumpun;
+                foreach ($ketersediaanUjian->dosen->bidangs as $keys => $bidang) {
+                    if($keys<1){
+                        $string = $bidang->bidang->nama_bidang;
                     }
                     else{
-                        $string = $string.", ".$rmk->nama_rumpun;
+                        $string = $string.", ".$bidang->bidang->nama_bidang;
                     }
                 }
             }
             else{
-                $string="tidak memiliki rmk";
-            }*/
+                $string="tidak memiliki bidang";
+            }
             $dosenBersedia[$key]['bidang'] = $string;
             $penguji1 = count($ketersediaanUjian->dosen->penguji1Ujians);
             $penguji2 = count($ketersediaanUjian->dosen->penguji2Ujians);
@@ -307,7 +296,7 @@ class PengujiController extends Controller
         $data['dosenBersedias'] = $dosenBersedia;
         $data['hari'] = $dayList[$day];
         $data['jadwal'] = $jadwal;
-
+        
         return view('penguji.formujian', $data);
     }
 

@@ -67,8 +67,46 @@ class BimbinganController extends Controller
             },'ujianTA' => function($query){
                 $query->with(['penguji1Ujian','penguji2Ujian','penguji3Ujian','penguji4Ujian','penguji5Ujian','jadwalUjian']);
             }])->first();
-        //dd($detailta);
         if($detailta){
+            $bulan = array(
+                '01' => 'JANUARI',
+                '02' => 'FEBRUARI',
+                '03' => 'MARET',
+                '04' => 'APRIL',
+                '05' => 'MEI',
+                '06' => 'JUNI',
+                '07' => 'JULI',
+                '08' => 'AGUSTUS',
+                '09' => 'SEPTEMBER',
+                '10' => 'OKTOBER',
+                '11' => 'NOVEMBER',
+                '12' => 'DESEMBER',
+            );
+
+            $tanggalBuat = $detailta->created_at;
+            $tahunBuat = date('Y', strtotime($tanggalBuat));
+            $bulanBuat = date('m', strtotime($tanggalBuat));
+            $intBulanBuat = (int)$bulanBuat;
+            //dd($bulanBuat);
+            if($intBulanBuat <= 7){
+                $tahun1 = $tahunBuat-1;
+                $tahun2 = $tahunBuat;
+                $dibuat = 'Bulan '.$bulan[$bulanBuat].' Tahun Ajaran '.$tahun1.'/'.$tahun2;
+            }
+            elseif($intBulanBuat > 7){
+                $tahun1 = $tahunBuat;
+                $tahun2 = $tahunBuat+1;
+                $dibuat = 'Bulan '.$bulan[$bulanBuat].' Tahun Ajaran '.$tahun1.'/'.$tahun2;
+            }
+            unset($tanggalBuat);
+            $tanggalBuat = date_create(date('Y-m-d',strtotime($detailta->created_at)));
+            $tanggalSekarang = date_create(date('Y-m-d',time()));
+            $jarak = date_diff($tanggalBuat, $tanggalSekarang);
+            $jarak = (int) $jarak->format('%m');
+            $semester = ($jarak / 6) + 1;
+
+            $data['semester'] = $semester;
+            $data['dibuat'] = $dibuat;
             $data['detailta'] = $detailta;
             $data['bidang_mks'] = BidangMK::all();
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
@@ -132,7 +170,7 @@ class BimbinganController extends Controller
             }
         }
         else{
-            return Redirect::to('/bimbingan')->withError('Konfirmasi penerimaan bimbingan gagal dilakukan');
+            return Redirect::to('/bimbingan')->withErrors('Konfirmasi penerimaan bimbingan gagal dilakukan');
         }
     }
 
@@ -142,7 +180,7 @@ class BimbinganController extends Controller
             return Redirect::to('/bimbingan')->with('message', 'Berhasil menolak permintaan bimbingan');
         }
         else{
-            return Redirect::to('/bimbingan')->withError('Menolak penerimaan bimbingan gagal dilakukan');
+            return Redirect::to('/bimbingan')->withErrors('Menolak penerimaan bimbingan gagal dilakukan');
         }
     }
 
@@ -161,7 +199,7 @@ class BimbinganController extends Controller
         }
         else
         {
-            return Redirect::to('/bimbingan')->withError('Gagal Mengisi Asistensi');
+            return Redirect::to('/bimbingan')->withErrors('Gagal Mengisi Asistensi');
         }
     }
 
@@ -178,7 +216,7 @@ class BimbinganController extends Controller
         }
         else
         {
-            return Redirect::to('/bimbingan/'.$request->id_ta)->withError('Terjadi Error Ketika Menginputkan Nilai Seminar');
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors('Terjadi Error Ketika Menginputkan Nilai Seminar');
         }
     }
 
@@ -272,7 +310,7 @@ class BimbinganController extends Controller
         }
         else
         {
-            return Redirect::to('/bimbingan/'.$request->id_ta)->withError('Terjadi Error Ketika Menginputkan Nilai Ujian');
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors('Terjadi Error Ketika Menginputkan Nilai Ujian');
         }
     }
 
@@ -292,6 +330,45 @@ class BimbinganController extends Controller
             }])->first();
         //dd($detailta);
         if($detailta){
+            $bulan = array(
+                '01' => 'JANUARI',
+                '02' => 'FEBRUARI',
+                '03' => 'MARET',
+                '04' => 'APRIL',
+                '05' => 'MEI',
+                '06' => 'JUNI',
+                '07' => 'JULI',
+                '08' => 'AGUSTUS',
+                '09' => 'SEPTEMBER',
+                '10' => 'OKTOBER',
+                '11' => 'NOVEMBER',
+                '12' => 'DESEMBER',
+            );
+
+            $tanggalBuat = $detailta->created_at;
+            $tahunBuat = date('Y', strtotime($tanggalBuat));
+            $bulanBuat = date('m', strtotime($tanggalBuat));
+            $intBulanBuat = (int)$bulanBuat;
+            //dd($bulanBuat);
+            if($intBulanBuat <= 7){
+                $tahun1 = $tahunBuat-1;
+                $tahun2 = $tahunBuat;
+                $dibuat = 'Bulan '.$bulan[$bulanBuat].' Tahun Ajaran '.$tahun1.'/'.$tahun2;
+            }
+            elseif($intBulanBuat > 7){
+                $tahun1 = $tahunBuat;
+                $tahun2 = $tahunBuat+1;
+                $dibuat = 'Bulan '.$bulan[$bulanBuat].' Tahun Ajaran '.$tahun1.'/'.$tahun2;
+            }
+            unset($tanggalBuat);
+            $tanggalBuat = date_create(date('Y-m-d',strtotime($detailta->created_at)));
+            $tanggalSekarang = date_create(date('Y-m-d',time()));
+            $jarak = date_diff($tanggalBuat, $tanggalSekarang);
+            $jarak = (int) $jarak->format('%m');
+            $semester = ($jarak / 6) + 1;
+
+            $data['semester'] = $semester;
+            $data['dibuat'] = $dibuat;
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
             return view('bimbingan.detail_penguji',$data);
@@ -313,7 +390,7 @@ class BimbinganController extends Controller
         }
         else
         {
-            return Redirect::to('/bimbingan/'.$request->id_ta)->withError('Terjadi Error Ketika Menginputkan Data TA baru');
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors('Terjadi Error Ketika Menginputkan Data TA baru');
         }
     }
 }
