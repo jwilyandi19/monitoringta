@@ -42,7 +42,8 @@ class SeminarController extends Controller
         $tanggalBuka = Jadwal::where('nama', 'Buka Ketersediaan Seminar')->first()->tanggal;
         $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
         if((time()-(60*60*24)) > strtotime($tanggalBuka) && (time()-(60*60*24)) < strtotime($tanggalTutup)){
-            $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
+            $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
+            $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
             $jumlahJadwal = count($jadwals);
             
             if($jumlahJadwal == 0){
