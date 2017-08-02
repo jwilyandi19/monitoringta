@@ -43,7 +43,7 @@ class SeminarController extends Controller
         $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
         if((time()-(60*60*24)) > strtotime($tanggalBuka) && (time()-(60*60*24)) < strtotime($tanggalTutup)){
             $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
-            $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
+            $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('sesi')->get();
             $jumlahJadwal = count($jadwals);
             
             if($jumlahJadwal == 0){
@@ -127,7 +127,7 @@ class SeminarController extends Controller
             $tanggalSeminars = array();
             
             $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
-            $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
+            $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('sesi')->get();
             $jumlahJadwal = count($jadwals);
             if($jumlahJadwal == 0){
                 return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal seminar belum disediakan');
@@ -206,7 +206,7 @@ class SeminarController extends Controller
             $jadwal = JadwalSeminar::where('id_js', $id)->first();
             $day = date('D', strtotime($jadwal->tanggal));
             $data['seminarTA'] = $seminarTA;
-            $data['seminars'] = SeminarTA::where([['id_js', '=',$id], ['status', '=', '0']])->with('tugasAkhir.user')->orderBy('created_at')->get();
+            $data['seminars'] = SeminarTA::where([['id_js', '=',$id], ['status', '<', '2']])->with('tugasAkhir.user')->orderBy('created_at')->get();
             $data['hari'] = $dayList[$day];
             $data['jadwal'] = $jadwal;
             return view('seminar.formpengajuan', $data);
@@ -217,7 +217,7 @@ class SeminarController extends Controller
     }
 
     public function doPengajuan(Request $request){
-        $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0']])->first();
+        $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0'],['id_status', '<=', '5']])->first();
         $seminarTA = new SeminarTA();
         $seminarTA->id_ta = $tugasAkhir->id_ta;
         $seminarTA->id_js = $request->idJadwal;

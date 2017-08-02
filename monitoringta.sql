@@ -33,7 +33,7 @@ CREATE TABLE `asistensi` (
   PRIMARY KEY (`id_asistensi`),
   KEY `id_ta` (`id_ta`),
   KEY `id_dosen` (`id_dosen`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `asistensi` (
 
 LOCK TABLES `asistensi` WRITE;
 /*!40000 ALTER TABLE `asistensi` DISABLE KEYS */;
-INSERT INTO `asistensi` VALUES (1,1,2,'2017-07-20','Paradigma Reactive Programming','2017-07-20 02:13:56','2017-07-20 02:13:56'),(2,1,1,'2017-07-13','Mobile Programming','2017-07-20 02:17:28','2017-07-20 02:17:28'),(3,1,1,'2017-07-23','Buku TA bab 3','2017-07-21 00:12:07','2017-07-21 00:12:07'),(4,3,7,'2017-07-21','Judul','2017-07-21 06:49:48','2017-07-21 06:49:48'),(5,3,23,'2017-07-22','Abstrak','2017-07-21 07:06:26','2017-07-21 07:06:26');
+INSERT INTO `asistensi` VALUES (1,1,7,'2017-08-03','Bab 1','2017-08-02 10:16:53','2017-08-02 10:16:53'),(2,1,7,'2017-08-04','Metode Deteksi','2017-08-02 10:17:17','2017-08-02 10:17:17'),(3,2,16,'2017-08-03','Bab 2','2017-08-02 10:18:29','2017-08-02 10:18:29'),(4,2,16,'2017-08-04','Neovascularization','2017-08-02 10:18:55','2017-08-02 10:18:55'),(5,1,16,'2017-08-04','Bab 2','2017-08-02 10:19:36','2017-08-02 10:19:36'),(6,1,16,'2017-08-05','Metode Deteksi','2017-08-02 10:19:54','2017-08-02 10:19:54'),(7,2,11,'2017-08-02',NULL,'2017-08-02 10:20:42','2017-08-02 10:20:42'),(8,2,11,'2017-08-04','Metode Deteksi','2017-08-02 10:21:06','2017-08-02 10:21:06'),(9,4,16,'2017-07-20','Bab 1','2017-08-02 15:59:31','2017-08-02 15:59:31'),(10,6,16,'2017-07-29','Metode Efisiensi','2017-08-02 16:00:28','2017-08-02 16:00:28'),(11,5,7,'2017-08-03','Bab 1','2017-08-02 16:02:13','2017-08-02 16:02:13'),(12,3,10,'2017-08-02','Bab 1','2017-08-02 16:04:37','2017-08-02 16:04:37'),(13,4,10,'2017-08-01','Bab 2','2017-08-02 16:05:22','2017-08-02 16:05:22'),(14,3,25,'2017-08-03','Fenomena Die Soldering','2017-08-02 16:07:26','2017-08-02 16:07:26'),(15,5,25,'2017-08-03','bab 2','2017-08-02 16:08:29','2017-08-02 16:08:29'),(16,6,25,'2017-08-01','Bab 1','2017-08-02 16:09:03','2017-08-02 16:09:03');
 /*!40000 ALTER TABLE `asistensi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,11 +83,11 @@ DROP TABLE IF EXISTS `bidang_dosen`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bidang_dosen` (
-  `id_bidang_dosen` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `id_bidang_dosen` int(11) NOT NULL AUTO_INCREMENT,
   `id_dosen` int(11) DEFAULT NULL,
   `id_bidang_mk` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_bidang_dosen`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,6 +96,7 @@ CREATE TABLE `bidang_dosen` (
 
 LOCK TABLES `bidang_dosen` WRITE;
 /*!40000 ALTER TABLE `bidang_dosen` DISABLE KEYS */;
+INSERT INTO `bidang_dosen` VALUES (4,1,1);
 /*!40000 ALTER TABLE `bidang_dosen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +181,7 @@ CREATE TABLE `dosen_pembimbing` (
 
 LOCK TABLES `dosen_pembimbing` WRITE;
 /*!40000 ALTER TABLE `dosen_pembimbing` DISABLE KEYS */;
-INSERT INTO `dosen_pembimbing` VALUES (2,1,1,2,1,'2017-07-20 02:14:56','2017-07-20 02:16:57'),(3,1,2,1,1,'2017-07-20 02:22:59','2017-07-20 02:22:59'),(4,7,3,1,1,'2017-07-21 06:41:50','2017-07-21 06:48:46'),(5,23,3,2,1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(6,2,2,2,1,'2017-07-25 01:58:41','2017-07-25 01:59:21'),(9,7,5,1,1,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(10,16,5,2,0,'2017-07-26 01:51:17','2017-07-26 01:51:17'),(11,16,6,1,0,'2017-07-27 01:30:50','2017-07-27 01:30:50'),(12,7,6,2,1,'2017-07-27 01:30:50','2017-07-28 01:32:33'),(13,7,7,1,1,'2017-07-28 03:23:20','2017-07-28 03:46:23'),(14,1,11,1,1,'2017-07-31 03:42:06','2017-07-31 03:42:35');
+INSERT INTO `dosen_pembimbing` VALUES (1,7,1,1,1,'2017-08-02 10:11:30','2017-08-02 10:16:08'),(2,16,1,2,1,'2017-08-02 10:11:30','2017-08-02 10:18:10'),(3,16,2,1,1,'2017-08-02 10:15:18','2017-08-02 10:18:12'),(4,11,2,2,1,'2017-08-02 10:15:18','2017-08-02 10:20:23'),(5,10,3,1,1,'2017-08-02 15:53:17','2017-08-02 16:03:41'),(6,25,3,2,1,'2017-08-02 15:53:17','2017-08-02 16:06:11'),(7,16,4,1,1,'2017-08-02 15:54:54','2017-08-02 15:58:47'),(8,10,4,2,1,'2017-08-02 15:54:54','2017-08-02 16:03:43'),(9,7,5,1,1,'2017-08-02 15:56:32','2017-08-02 16:02:00'),(10,25,5,2,1,'2017-08-02 15:56:32','2017-08-02 16:06:14'),(11,16,6,1,1,'2017-08-02 15:58:09','2017-08-02 15:58:50'),(12,25,6,2,1,'2017-08-02 15:58:09','2017-08-02 16:06:15'),(13,7,7,1,1,'2017-08-02 16:30:06','2017-08-02 16:30:26'),(14,23,7,2,1,'2017-08-02 16:30:06','2017-08-02 16:30:46');
 /*!40000 ALTER TABLE `dosen_pembimbing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +206,7 @@ CREATE TABLE `jadwal` (
 
 LOCK TABLES `jadwal` WRITE;
 /*!40000 ALTER TABLE `jadwal` DISABLE KEYS */;
-INSERT INTO `jadwal` VALUES (1,'Awal Semester','2017-02-08 00:00:00'),(2,'Buka Ketersediaan Seminar','2017-07-25 23:59:00'),(3,'Tutup Ketersediaan Seminar','2017-07-26 00:00:01'),(4,'Buka Pengajuan Jadwal Seminar','2017-07-30 23:59:00'),(5,'Tutup Pengajuan Jadwal Seminar','2017-07-25 00:01:00'),(6,'Buka Ketersediaan Ujian','2017-07-27 13:10:28'),(7,'Tutup Ketersediaan Ujian','2017-07-27 13:13:51'),(8,'Buka Pengajuan Jadwal Ujian','2017-07-27 13:14:34'),(9,'Tutup Pengajuan Jadwal Ujian','2017-07-27 13:14:50');
+INSERT INTO `jadwal` VALUES (1,'Awal Semester','2017-02-08 00:00:00'),(2,'Buka Ketersediaan Seminar','2017-07-28 00:00:00'),(3,'Tutup Ketersediaan Seminar','2017-08-05 23:59:00'),(4,'Buka Pengajuan Jadwal Seminar','2017-07-28 00:00:00'),(5,'Tutup Pengajuan Jadwal Seminar','2017-08-05 23:59:00'),(6,'Buka Ketersediaan Ujian','2017-07-28 00:00:00'),(7,'Tutup Ketersediaan Ujian','2017-08-05 23:59:00'),(8,'Buka Pengajuan Jadwal Ujian','2017-07-28 00:00:00'),(9,'Tutup Pengajuan Jadwal Ujian','2017-08-05 23:59:00');
 /*!40000 ALTER TABLE `jadwal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,7 +280,7 @@ CREATE TABLE `ketersediaan_seminar` (
   PRIMARY KEY (`id_ks`),
   KEY `id_dosen` (`id_dosen`),
   KEY `id_js` (`id_js`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,7 +289,7 @@ CREATE TABLE `ketersediaan_seminar` (
 
 LOCK TABLES `ketersediaan_seminar` WRITE;
 /*!40000 ALTER TABLE `ketersediaan_seminar` DISABLE KEYS */;
-INSERT INTO `ketersediaan_seminar` VALUES (1,14,2,'2017-07-21 02:29:18','2017-07-21 02:29:18'),(3,19,2,'2017-07-21 02:29:23','2017-07-21 02:29:23'),(4,11,2,'2017-07-21 02:29:28','2017-07-21 02:29:28'),(5,12,2,'2017-07-21 02:29:29','2017-07-21 02:29:29'),(6,14,1,'2017-07-21 02:29:42','2017-07-21 02:29:42'),(7,15,1,'2017-07-21 02:32:26','2017-07-21 02:32:26'),(8,15,2,'2017-07-21 03:07:40','2017-07-21 03:07:40'),(10,17,23,'2017-07-21 07:14:02','2017-07-21 07:14:02'),(11,14,23,'2017-07-21 07:14:22','2017-07-21 07:14:22'),(12,15,23,'2017-07-21 07:14:23','2017-07-21 07:14:23'),(14,12,23,'2017-07-21 07:14:25','2017-07-21 07:14:25'),(15,26,23,'2017-07-21 07:14:26','2017-07-21 07:14:26'),(16,14,7,'2017-07-27 00:24:36','2017-07-27 00:24:36'),(17,15,7,'2017-07-27 00:24:38','2017-07-27 00:24:38'),(18,12,7,'2017-07-27 00:24:40','2017-07-27 00:24:40'),(19,11,7,'2017-07-27 00:24:40','2017-07-27 00:24:40'),(20,13,7,'2017-07-27 00:24:41','2017-07-27 00:24:41');
+INSERT INTO `ketersediaan_seminar` VALUES (1,14,2,'2017-07-21 02:29:18','2017-07-21 02:29:18'),(3,19,2,'2017-07-21 02:29:23','2017-07-21 02:29:23'),(4,11,2,'2017-07-21 02:29:28','2017-07-21 02:29:28'),(5,12,2,'2017-07-21 02:29:29','2017-07-21 02:29:29'),(6,14,1,'2017-07-21 02:29:42','2017-07-21 02:29:42'),(7,15,1,'2017-07-21 02:32:26','2017-07-21 02:32:26'),(8,15,2,'2017-07-21 03:07:40','2017-07-21 03:07:40'),(10,17,23,'2017-07-21 07:14:02','2017-07-21 07:14:02'),(11,14,23,'2017-07-21 07:14:22','2017-07-21 07:14:22'),(12,15,23,'2017-07-21 07:14:23','2017-07-21 07:14:23'),(14,12,23,'2017-07-21 07:14:25','2017-07-21 07:14:25'),(15,26,23,'2017-07-21 07:14:26','2017-07-21 07:14:26'),(16,14,7,'2017-07-27 00:24:36','2017-07-27 00:24:36'),(17,15,7,'2017-07-27 00:24:38','2017-07-27 00:24:38'),(18,12,7,'2017-07-27 00:24:40','2017-07-27 00:24:40'),(19,11,7,'2017-07-27 00:24:40','2017-07-27 00:24:40'),(20,13,7,'2017-07-27 00:24:41','2017-07-27 00:24:41'),(21,26,1,'2017-07-31 07:30:29','2017-07-31 07:30:29'),(22,27,1,'2017-07-31 07:30:31','2017-07-31 07:30:31'),(23,20,7,'2017-08-02 10:22:00','2017-08-02 10:22:00'),(24,23,7,'2017-08-02 10:22:01','2017-08-02 10:22:01'),(25,24,7,'2017-08-02 10:22:02','2017-08-02 10:22:02'),(26,14,12,'2017-08-02 10:22:15','2017-08-02 10:22:15'),(27,15,12,'2017-08-02 10:22:15','2017-08-02 10:22:15'),(28,13,12,'2017-08-02 10:22:16','2017-08-02 10:22:16'),(29,11,12,'2017-08-02 10:22:17','2017-08-02 10:22:17'),(30,22,12,'2017-08-02 10:22:18','2017-08-02 10:22:18'),(31,21,12,'2017-08-02 10:22:19','2017-08-02 10:22:19'),(32,23,12,'2017-08-02 10:22:20','2017-08-02 10:22:20'),(33,25,12,'2017-08-02 10:22:21','2017-08-02 10:22:21'),(34,26,12,'2017-08-02 10:22:23','2017-08-02 10:22:23'),(35,14,11,'2017-08-02 10:23:03','2017-08-02 10:23:03'),(36,12,11,'2017-08-02 10:23:04','2017-08-02 10:23:04'),(37,13,11,'2017-08-02 10:23:04','2017-08-02 10:23:04'),(38,18,11,'2017-08-02 10:23:06','2017-08-02 10:23:06'),(39,19,11,'2017-08-02 10:23:07','2017-08-02 10:23:07'),(40,27,11,'2017-08-02 10:23:08','2017-08-02 10:23:08'),(41,26,11,'2017-08-02 10:23:10','2017-08-02 10:23:10'),(42,23,11,'2017-08-02 10:23:11','2017-08-02 10:23:11'),(43,24,11,'2017-08-02 10:23:12','2017-08-02 10:23:12'),(44,25,11,'2017-08-02 10:23:13','2017-08-02 10:23:13'),(45,22,11,'2017-08-02 10:23:16','2017-08-02 10:23:16'),(46,14,16,'2017-08-02 10:25:04','2017-08-02 10:25:04'),(47,17,16,'2017-08-02 10:25:06','2017-08-02 10:25:06'),(48,12,16,'2017-08-02 10:25:07','2017-08-02 10:25:07'),(49,13,16,'2017-08-02 10:25:08','2017-08-02 10:25:08'),(50,21,16,'2017-08-02 10:25:08','2017-08-02 10:25:08'),(51,24,16,'2017-08-02 10:25:09','2017-08-02 10:25:09'),(52,23,16,'2017-08-02 10:25:10','2017-08-02 10:25:10'),(53,26,16,'2017-08-02 10:25:12','2017-08-02 10:25:12'),(54,19,16,'2017-08-02 10:25:14','2017-08-02 10:25:14'),(55,13,10,'2017-08-02 16:03:48','2017-08-02 16:03:48'),(56,12,10,'2017-08-02 16:03:49','2017-08-02 16:03:49'),(57,11,10,'2017-08-02 16:03:50','2017-08-02 16:03:50'),(58,14,10,'2017-08-02 16:03:51','2017-08-02 16:03:51'),(59,15,10,'2017-08-02 16:03:51','2017-08-02 16:03:51'),(60,24,10,'2017-08-02 16:03:53','2017-08-02 16:03:53'),(61,25,10,'2017-08-02 16:03:53','2017-08-02 16:03:53'),(62,17,10,'2017-08-02 16:03:54','2017-08-02 16:03:54'),(63,18,10,'2017-08-02 16:03:54','2017-08-02 16:03:54'),(64,26,10,'2017-08-02 16:03:56','2017-08-02 16:03:56'),(65,20,10,'2017-08-02 16:03:59','2017-08-02 16:03:59'),(66,14,25,'2017-08-02 16:07:39','2017-08-02 16:07:39'),(68,20,25,'2017-08-02 16:07:41','2017-08-02 16:07:41'),(70,24,25,'2017-08-02 16:07:44','2017-08-02 16:07:44'),(71,23,25,'2017-08-02 16:07:44','2017-08-02 16:07:44'),(73,21,25,'2017-08-02 16:07:46','2017-08-02 16:07:46'),(74,28,25,'2017-08-02 16:07:48','2017-08-02 16:07:48'),(75,26,25,'2017-08-02 16:07:50','2017-08-02 16:07:50'),(76,19,25,'2017-08-02 16:07:51','2017-08-02 16:07:51'),(77,17,25,'2017-08-02 16:07:52','2017-08-02 16:07:52'),(78,16,25,'2017-08-02 16:07:55','2017-08-02 16:07:55'),(79,25,25,'2017-08-02 16:07:56','2017-08-02 16:07:56'),(80,13,25,'2017-08-02 16:10:57','2017-08-02 16:10:57'),(81,23,10,'2017-08-02 16:23:40','2017-08-02 16:23:40'),(82,11,25,'2017-08-02 16:26:29','2017-08-02 16:26:29'),(83,15,25,'2017-08-02 16:26:31','2017-08-02 16:26:31'),(84,12,25,'2017-08-02 16:26:32','2017-08-02 16:26:32'),(85,11,16,'2017-08-02 16:26:47','2017-08-02 16:26:47'),(86,11,23,'2017-08-02 16:31:36','2017-08-02 16:31:36'),(87,13,23,'2017-08-02 16:31:37','2017-08-02 16:31:37');
 /*!40000 ALTER TABLE `ketersediaan_seminar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +309,7 @@ CREATE TABLE `ketersediaan_ujian` (
   PRIMARY KEY (`id_ku`),
   KEY `id_dosen` (`id_dosen`),
   KEY `id_ju` (`id_ju`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,64 +318,8 @@ CREATE TABLE `ketersediaan_ujian` (
 
 LOCK TABLES `ketersediaan_ujian` WRITE;
 /*!40000 ALTER TABLE `ketersediaan_ujian` DISABLE KEYS */;
-INSERT INTO `ketersediaan_ujian` VALUES (1,1,1,'2017-07-21 02:45:20','2017-07-21 02:45:20'),(2,13,2,'2017-07-21 03:00:08','2017-07-21 03:00:08'),(3,19,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(4,17,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(5,20,2,'2017-07-21 03:00:12','2017-07-21 03:00:12'),(6,16,1,'2017-07-25 06:39:57','2017-07-25 06:39:57'),(7,18,1,'2017-07-25 06:39:59','2017-07-25 06:39:59'),(8,17,1,'2017-07-25 06:40:00','2017-07-25 06:40:00'),(9,19,1,'2017-07-25 06:40:00','2017-07-25 06:40:00'),(10,20,1,'2017-07-25 06:40:01','2017-07-25 06:40:01'),(11,13,1,'2017-07-25 06:40:02','2017-07-25 06:40:02'),(12,14,1,'2017-07-25 06:40:03','2017-07-25 06:40:03'),(13,19,7,'2017-07-27 03:25:32','2017-07-27 03:25:32'),(14,20,7,'2017-07-27 03:25:34','2017-07-27 03:25:34'),(15,16,7,'2017-07-27 03:25:36','2017-07-27 03:25:36'),(16,17,7,'2017-07-27 03:25:39','2017-07-27 03:25:39'),(17,21,7,'2017-07-27 03:25:41','2017-07-27 03:25:41'),(18,19,12,'2017-07-31 02:44:11','2017-07-31 02:44:11'),(19,20,12,'2017-07-31 02:44:12','2017-07-31 02:44:12'),(20,22,12,'2017-07-31 02:44:13','2017-07-31 02:44:13');
+INSERT INTO `ketersediaan_ujian` VALUES (1,1,1,'2017-07-21 02:45:20','2017-07-21 02:45:20'),(2,13,2,'2017-07-21 03:00:08','2017-07-21 03:00:08'),(3,19,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(4,17,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(5,20,2,'2017-07-21 03:00:12','2017-07-21 03:00:12'),(6,16,1,'2017-07-25 06:39:57','2017-07-25 06:39:57'),(7,18,1,'2017-07-25 06:39:59','2017-07-25 06:39:59'),(8,17,1,'2017-07-25 06:40:00','2017-07-25 06:40:00'),(9,19,1,'2017-07-25 06:40:00','2017-07-25 06:40:00'),(10,20,1,'2017-07-25 06:40:01','2017-07-25 06:40:01'),(11,13,1,'2017-07-25 06:40:02','2017-07-25 06:40:02'),(12,14,1,'2017-07-25 06:40:03','2017-07-25 06:40:03'),(13,19,7,'2017-07-27 03:25:32','2017-07-27 03:25:32'),(14,20,7,'2017-07-27 03:25:34','2017-07-27 03:25:34'),(15,16,7,'2017-07-27 03:25:36','2017-07-27 03:25:36'),(16,17,7,'2017-07-27 03:25:39','2017-07-27 03:25:39'),(17,21,7,'2017-07-27 03:25:41','2017-07-27 03:25:41'),(18,19,12,'2017-07-31 02:44:11','2017-07-31 02:44:11'),(19,20,12,'2017-07-31 02:44:12','2017-07-31 02:44:12'),(20,22,12,'2017-07-31 02:44:13','2017-07-31 02:44:13'),(21,13,12,'2017-08-02 10:22:27','2017-08-02 10:22:27'),(22,14,12,'2017-08-02 10:22:27','2017-08-02 10:22:27'),(23,7,12,'2017-08-02 10:22:28','2017-08-02 10:22:28'),(24,18,12,'2017-08-02 10:22:29','2017-08-02 10:22:29'),(25,17,12,'2017-08-02 10:22:30','2017-08-02 10:22:30'),(26,9,12,'2017-08-02 10:22:32','2017-08-02 10:22:32'),(27,7,7,'2017-08-02 10:22:44','2017-08-02 10:22:44'),(28,14,7,'2017-08-02 10:22:45','2017-08-02 10:22:45'),(29,9,7,'2017-08-02 10:22:46','2017-08-02 10:22:46'),(30,8,11,'2017-08-02 10:23:20','2017-08-02 10:23:20'),(31,9,11,'2017-08-02 10:23:21','2017-08-02 10:23:21'),(32,15,11,'2017-08-02 10:23:21','2017-08-02 10:23:21'),(33,17,11,'2017-08-02 10:23:22','2017-08-02 10:23:22'),(34,18,11,'2017-08-02 10:23:23','2017-08-02 10:23:23'),(35,19,11,'2017-08-02 10:23:24','2017-08-02 10:23:24'),(36,25,11,'2017-08-02 10:23:25','2017-08-02 10:23:25'),(37,26,11,'2017-08-02 10:23:26','2017-08-02 10:23:26'),(38,9,16,'2017-08-02 10:25:19','2017-08-02 10:25:19'),(39,8,16,'2017-08-02 10:25:20','2017-08-02 10:25:20'),(40,15,16,'2017-08-02 10:25:21','2017-08-02 10:25:21'),(41,14,16,'2017-08-02 10:25:21','2017-08-02 10:25:21'),(42,18,16,'2017-08-02 10:25:22','2017-08-02 10:25:22'),(43,16,16,'2017-08-02 10:25:23','2017-08-02 10:25:23'),(44,6,16,'2017-08-02 10:25:24','2017-08-02 10:25:24'),(45,4,16,'2017-08-02 10:25:25','2017-08-02 10:25:25'),(46,23,16,'2017-08-02 10:25:26','2017-08-02 10:25:26'),(47,26,16,'2017-08-02 10:25:29','2017-08-02 10:25:29'),(48,20,16,'2017-08-02 10:25:30','2017-08-02 10:25:30'),(49,7,25,'2017-08-02 16:26:15','2017-08-02 16:26:15'),(50,13,25,'2017-08-02 16:26:16','2017-08-02 16:26:16'),(51,14,25,'2017-08-02 16:26:17','2017-08-02 16:26:17'),(52,9,25,'2017-08-02 16:26:17','2017-08-02 16:26:17'),(53,8,25,'2017-08-02 16:26:17','2017-08-02 16:26:17'),(54,16,25,'2017-08-02 16:26:18','2017-08-02 16:26:18'),(55,17,25,'2017-08-02 16:26:19','2017-08-02 16:26:19'),(56,22,25,'2017-08-02 16:26:22','2017-08-02 16:26:22'),(57,23,25,'2017-08-02 16:26:22','2017-08-02 16:26:22'),(58,21,25,'2017-08-02 16:26:23','2017-08-02 16:26:23');
 /*!40000 ALTER TABLE `ketersediaan_ujian` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `penguji_seminar`
---
-
-DROP TABLE IF EXISTS `penguji_seminar`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `penguji_seminar` (
-  `id_penguji_s` int(11) NOT NULL AUTO_INCREMENT,
-  `id_seminar_ta` int(11) DEFAULT NULL,
-  `id_dosen` int(11) DEFAULT NULL,
-  `id_js` int(11) DEFAULT NULL,
-  `peran` int(11) DEFAULT NULL,
-  `konfirmasi` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_penguji_s`),
-  KEY `id_seminar_ta` (`id_seminar_ta`),
-  KEY `id_dosen` (`id_dosen`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `penguji_seminar`
---
-
-LOCK TABLES `penguji_seminar` WRITE;
-/*!40000 ALTER TABLE `penguji_seminar` DISABLE KEYS */;
-/*!40000 ALTER TABLE `penguji_seminar` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `penguji_ujian`
---
-
-DROP TABLE IF EXISTS `penguji_ujian`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `penguji_ujian` (
-  `id_penguji_u` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ujian_ta` int(11) DEFAULT NULL,
-  `id_dosen` int(11) DEFAULT NULL,
-  `konfirmasi` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_penguji_u`),
-  KEY `id_ujian_ta` (`id_ujian_ta`),
-  KEY `id_dosen` (`id_dosen`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `penguji_ujian`
---
-
-LOCK TABLES `penguji_ujian` WRITE;
-/*!40000 ALTER TABLE `penguji_ujian` DISABLE KEYS */;
-/*!40000 ALTER TABLE `penguji_ujian` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -426,29 +371,6 @@ INSERT INTO `rumpun_mk` VALUES (1,'Pengelasan');
 UNLOCK TABLES;
 
 --
--- Table structure for table `seminar_final`
---
-
-DROP TABLE IF EXISTS `seminar_final`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `seminar_final` (
-  `id_jadwal` int(11) DEFAULT NULL,
-  `id_dosen_uji` int(11) DEFAULT NULL,
-  KEY `id_dosen_uji` (`id_dosen_uji`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `seminar_final`
---
-
-LOCK TABLES `seminar_final` WRITE;
-/*!40000 ALTER TABLE `seminar_final` DISABLE KEYS */;
-/*!40000 ALTER TABLE `seminar_final` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `seminar_ta`
 --
 
@@ -482,7 +404,7 @@ CREATE TABLE `seminar_ta` (
 
 LOCK TABLES `seminar_ta` WRITE;
 /*!40000 ALTER TABLE `seminar_ta` DISABLE KEYS */;
-INSERT INTO `seminar_ta` VALUES (1,3,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-07-21 06:51:07','2017-07-21 06:51:07'),(4,1,14,2,1,NULL,7,NULL,1,'A',NULL,'Sudah cukup baik','2017-07-25 03:02:39','2017-07-31 03:21:57'),(7,2,14,1,2,7,23,NULL,1,'A',NULL,'Sudah OK','2017-07-25 03:17:44','2017-07-31 03:21:52');
+INSERT INTO `seminar_ta` VALUES (1,1,12,7,16,11,23,NULL,1,'A',NULL,'Sudah Ok','2017-08-02 10:26:01','2017-08-02 16:35:38'),(2,2,12,16,11,7,23,NULL,1,'A',NULL,'Sudah Ok','2017-08-02 10:26:41','2017-08-02 16:36:31'),(3,3,12,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-08-02 16:19:01','2017-08-02 16:19:01'),(4,5,23,7,25,NULL,NULL,NULL,1,NULL,NULL,NULL,'2017-08-02 16:22:36','2017-08-02 16:33:56'),(6,6,12,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-08-02 16:27:55','2017-08-02 16:27:55'),(7,7,12,7,23,11,16,NULL,1,NULL,NULL,NULL,'2017-08-02 16:31:55','2017-08-02 16:33:32');
 /*!40000 ALTER TABLE `seminar_ta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -533,7 +455,7 @@ CREATE TABLE `tugas_akhir` (
   KEY `nrp` (`id_user`),
   KEY `id_dosbing1` (`id_dosbing1`),
   KEY `id_dosbing2` (`id_dosbing2`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -542,31 +464,8 @@ CREATE TABLE `tugas_akhir` (
 
 LOCK TABLES `tugas_akhir` WRITE;
 /*!40000 ALTER TABLE `tugas_akhir` DISABLE KEYS */;
-INSERT INTO `tugas_akhir` VALUES (1,3,2,1,5,1,1,'Rancang Bangun Aplikasi e-Learning Berbasis Perangkat Bergerak Android pada Fitur Manajemen Quiz dan Tanya Jawab Menggunakan Paradigma Reactive Programming',1,'2017-07-20 02:02:38','2017-07-31 03:21:57'),(2,8,1,2,3,1,1,'Rancang Bangun Simulasi Tertib Lalu Lintas Sesuai Dengan Peraturan Pemerintah Nomor 79 Tahun 2013 Menggunakan Steering Wheel dan Oculus Rift',NULL,'2017-07-20 02:22:59','2017-07-31 03:21:52'),(3,443,7,23,0,1,1,'Tugas Akhir',1,'2017-07-21 06:41:50','2017-07-21 07:05:59'),(5,442,7,NULL,0,1,1,'Implementasi MIR (Musik Information Retrieval) pada Modul Genre Recognition dan Deep Learning Classification untuk Aplikasi Musicmoo',NULL,'2017-07-26 01:51:17','2017-07-26 01:57:59'),(6,444,NULL,7,0,1,1,'Coba TA',NULL,'2017-07-27 01:30:50','2017-07-28 01:32:33'),(7,446,7,NULL,0,1,1,'Coba judul tugas akhir',NULL,'2017-07-28 03:23:20','2017-07-28 03:46:23'),(8,447,NULL,NULL,0,1,1,'Coba coba',NULL,'2017-07-28 04:12:59','2017-07-28 04:12:59'),(11,454,1,NULL,0,2,NULL,'Coba masukin deh',NULL,'2017-07-31 03:42:06','2017-07-31 03:42:35');
+INSERT INTO `tugas_akhir` VALUES (1,442,7,16,5,3,NULL,'Deteksi Eksudat Otomatis dengan menggabungkan beberapa Active Contours dan Klasifikasi Regionwise',1,'2017-08-02 10:11:30','2017-08-02 16:37:50'),(2,444,16,11,1,3,NULL,'Deteksi Neovascularization untuk Proliferative Diabetic Retinopathy pada Citra Fundus Retina',NULL,'2017-08-02 10:15:18','2017-08-02 15:43:44'),(3,446,10,25,0,3,NULL,'Pengaruh unsur Mn pada paduan Al-12 wt % Si terhadap sifat fisik dan mekanik lapisan intermetalik pada fenomena die soldering',NULL,'2017-08-02 15:53:17','2017-08-02 16:06:12'),(4,445,16,10,1,1,NULL,'Pengaruh konsentrasi serat rami terhadap sifat mekanik material komposit poliester - serat alam',NULL,'2017-08-02 15:54:54','2017-08-02 16:34:00'),(5,447,7,25,1,3,NULL,'Studi awal pengembangan metode prediksi ketebalan difusi hasil karburisasi pada baja karbon rendah dengan ultrasonik',NULL,'2017-08-02 15:56:32','2017-08-02 16:33:56'),(6,448,16,25,0,2,NULL,'Efisiensi perlakuan panas dengan menggati proses T6 (Artificial Ageing) dengan T4 (Natural Ageing) pada pembuatan piston dengan material AC8H',NULL,'2017-08-02 15:58:09','2017-08-02 16:06:15'),(7,449,7,23,1,3,NULL,'Studi morfologi mikrostruktur dan pengaruhnya terhadap laju korosi antara baja HSLA 0,029 % Nb dan baja karbon rendah setelah pemanasan isothermal',NULL,'2017-08-02 16:30:06','2017-08-02 16:33:22');
 /*!40000 ALTER TABLE `tugas_akhir` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ujian_final`
---
-
-DROP TABLE IF EXISTS `ujian_final`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ujian_final` (
-  `id_ju` int(11) DEFAULT NULL,
-  `id_dosen_uji` int(11) DEFAULT NULL,
-  KEY `id_dosen_uji` (`id_dosen_uji`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ujian_final`
---
-
-LOCK TABLES `ujian_final` WRITE;
-/*!40000 ALTER TABLE `ujian_final` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ujian_final` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -599,7 +498,7 @@ CREATE TABLE `ujian_ta` (
   PRIMARY KEY (`id_ujian_ta`),
   KEY `id_pu` (`id_ta`),
   KEY `id_ju` (`id_ju`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -608,7 +507,7 @@ CREATE TABLE `ujian_ta` (
 
 LOCK TABLES `ujian_ta` WRITE;
 /*!40000 ALTER TABLE `ujian_ta` DISABLE KEYS */;
-INSERT INTO `ujian_ta` VALUES (6,1,19,2,77,1,75,7,79,12,78,NULL,NULL,1,'B',77,'Cukup','2017-07-25 06:52:53','2017-07-31 03:21:57'),(7,2,19,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-07-25 06:53:12','2017-07-31 03:21:52');
+INSERT INTO `ujian_ta` VALUES (3,1,9,7,82,16,77,25,79,12,81,NULL,NULL,1,'B',80,'Sudah Ok','2017-08-02 10:27:24','2017-08-02 16:39:12'),(4,2,9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-08-02 10:27:49','2017-08-02 10:27:49');
 /*!40000 ALTER TABLE `ujian_ta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -649,4 +548,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-31 11:28:44
+-- Dump completed on 2017-08-02 23:48:10

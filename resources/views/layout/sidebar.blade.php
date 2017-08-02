@@ -16,7 +16,7 @@
 		<h5 style="color: #ffffff; margin: 0 0">Lain - Lain</h5>
 	</div>
 	<div class="panel-body list-group" style="padding: 1px;">
-		<a href="http://material.its.ac.id/" class="list-group-item">Teknik Material dan Metalurgi</a>
-		<a href="http://baak.its.ac.id/newsite/upload/KA_2017.pdf" class="list-group-item">Kalender Akademik ITS</a>
+		<a href="http://material.its.ac.id/" target="_blank" class="list-group-item">Teknik Material dan Metalurgi</a>
+		<a href="http://baak.its.ac.id/newsite/upload/KA_2017.pdf" target="_blank" class="list-group-item">Kalender Akademik ITS</a>
 	</div>	
 </div>

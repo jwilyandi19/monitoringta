@@ -43,7 +43,7 @@ class SidangController extends Controller
         $tanggalBuka = Jadwal::where('nama', 'Buka Ketersediaan Ujian')->first()->tanggal;
         if((time()-(60*60*24)) > strtotime($tanggalBuka) && (time()-(60*60*24)) < strtotime($tanggalTutup)){
             $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
-            $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
+            $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('sesi')->get();
             $jumlahJadwal = count($jadwals);
             
             if($jumlahJadwal == 0){
@@ -127,7 +127,7 @@ class SidangController extends Controller
             $tanggalUjians = array();
             
             $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
-            $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
+            $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('sesi')->get();
             $jumlahJadwal = count($jadwals);
             if($jumlahJadwal == 0){
                 return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal sidang belum disediakan');
@@ -207,7 +207,7 @@ class SidangController extends Controller
             $jadwal = JadwalUjian::where('id_ju', $id)->first();
             $day = date('D', strtotime($jadwal->tanggal));
             $data['ujianTA'] = $ujianTA;
-            $data['ujians'] = UjianTA::where([['id_ju', '=',$id], ['status', '=', '0']])->with('tugasAkhir.user')->orderBy('created_at')->get();
+            $data['ujians'] = UjianTA::where([['id_ju', '=',$id], ['status', '<', '2']])->with('tugasAkhir.user')->orderBy('created_at')->get();
             $data['hari'] = $dayList[$day];
             $data['jadwal'] = $jadwal;
             return view('sidang.formpengajuan', $data);
@@ -218,7 +218,7 @@ class SidangController extends Controller
     }
 
     public function doPengajuan(Request $request){
-        $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0']])->first();
+        $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0'],['id_status', '<=', '5']])->first();
         $ujianTA = new UjianTA();
         $ujianTA->id_ta = $tugasAkhir->id_ta;
         $ujianTA->id_ju = $request->idJadwal;
