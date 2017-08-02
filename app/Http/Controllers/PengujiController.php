@@ -30,7 +30,7 @@ class PengujiController extends Controller
         $tanggalSeminars = array();
         
         $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
-        $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
+        $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal','asc')->orderBy('sesi','asc')->get();
         $jumlahJadwal = count($jadwals);
         if($jumlahJadwal == 0){
         	return Redirect::to('/error')->with('message', 'Halaman tidak ditemukan, tidak ada tanggal seminar yang sedang aktif saat ini');
@@ -204,7 +204,7 @@ class PengujiController extends Controller
         $tanggalUjians = array();
         
         $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Ujian')->first()->tanggal;
-        $jadwals = JadwalUjian::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
+        $jadwals = JadwalUjian::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal','asc')->orderBy('sesi','asc')->get();
         $jumlahJadwal = count($jadwals);
         if($jumlahJadwal == 0){
             return Redirect::to('/error')->with('message', 'Halaman tidak ditemukan, tidak ada tanggal ujian yang sedang aktif saat ini');
