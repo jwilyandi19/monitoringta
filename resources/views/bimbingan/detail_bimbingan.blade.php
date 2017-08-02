@@ -280,7 +280,7 @@
                         <div class="form-group">
                             {{csrf_field()}}
                             {{method_field('POST')}}
-                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Tambahkan</button>
+                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Simpan</button>
                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
                         </div>
                     </form>
