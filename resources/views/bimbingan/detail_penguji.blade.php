@@ -179,6 +179,10 @@
                 @endif
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <a class="btn btn-default pull-right" href="{{url('/mahasiswauji')}}" ><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali</a>
+        </div>
     </div>
 @endsection
 

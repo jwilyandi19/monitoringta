@@ -198,6 +198,10 @@
                 @endif
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <a class="btn btn-default pull-right" href="{{url('/bimbingan')}}" ><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali</a>
+        </div>
     </div>
 
     <div class="modal fade" id="bimbinganModal">
