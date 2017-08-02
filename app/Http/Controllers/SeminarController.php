@@ -54,8 +54,8 @@ class SeminarController extends Controller
                     $jadwalSeminar[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_js;
                 }
 
-                $dosens = KetersediaanSeminar::where('id_dosen', session('user')['id_dosen'])->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
-                    $query->where('tanggal', '>', $tanggalTutup);
+                $dosens = KetersediaanSeminar::where('id_dosen', session('user')['id_dosen'])->with(['jadwalSeminar' => function($query) use ($awalSemester){
+                    $query->where('tanggal', '>', $awalSemester);
                 }])->get();
                 
                 foreach ($dosens as $key => $dosen) {
@@ -81,8 +81,6 @@ class SeminarController extends Controller
             return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena pengisian ketersediaan seminar belum dibuka');
             
         }
-
-        
     }
 
     public function mengisiKetersediaan(Request $request){
@@ -128,27 +126,27 @@ class SeminarController extends Controller
             $jadwalSeminar = array();
             $tanggalSeminars = array();
             
-            $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
-            $jadwals = JadwalSeminar::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
+            $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
+            $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
             $jumlahJadwal = count($jadwals);
             if($jumlahJadwal == 0){
                 return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal seminar belum disediakan');
             }
             else{
                 if($tugasAkhir->id_dosbing1 && $tugasAkhir->id_dosbing2){
-                    $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->orWhere('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
-                        $query->where('tanggal', '>', $tanggalTutup);
+                    $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->orWhere('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($awalSemester){
+                        $query->where('tanggal', '>', $awalSemester);
                     }])->get();
                 }
                 elseif(!$tugasAkhir->id_dosbing2 || !$tugasAkhir->id_dosbing1){
                     if($tugasAkhir->id_dosbing1){
-                        $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
-                            $query->where('tanggal', '>', $tanggalTutup);
+                        $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing1)->with(['jadwalSeminar' => function($query) use ($awalSemester){
+                            $query->where('tanggal', '>', $awalSemester);
                         }])->get();
                     }
                     else{
-                        $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($tanggalTutup){
-                            $query->where('tanggal', '>', $tanggalTutup);
+                        $dosens = KetersediaanSeminar::where('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalSeminar' => function($query) use ($awalSemester){
+                            $query->where('tanggal', '>', $awalSemester);
                         }])->get();
                     }
                 }
@@ -156,7 +154,6 @@ class SeminarController extends Controller
                     return Redirect::to('/error')->with('message', 'Tidak dapat mengajukan jadwal semminar karena anda tidak memiliki dosen pembimbing');
                 }
                 
-                //dd($dosens);
                 foreach ($dosens as $key => $dosen) {
                     if($dosen->jadwalSeminar){
                         if($dosen->id_dosen == $tugasAkhir->id_dosbing1){

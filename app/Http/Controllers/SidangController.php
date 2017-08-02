@@ -42,7 +42,8 @@ class SidangController extends Controller
         $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Ujian')->first()->tanggal;
         $tanggalBuka = Jadwal::where('nama', 'Buka Ketersediaan Ujian')->first()->tanggal;
         if((time()-(60*60*24)) > strtotime($tanggalBuka) && (time()-(60*60*24)) < strtotime($tanggalTutup)){
-            $jadwals = JadwalUjian::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
+            $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
+            $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
             $jumlahJadwal = count($jadwals);
             
             if($jumlahJadwal == 0){
@@ -53,8 +54,8 @@ class SidangController extends Controller
                     $jadwalUjian[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_ju;
                 }
 
-                $dosens = KetersediaanUjian::where('id_dosen', session('user')['id_dosen'])->with(['jadwalUjian' => function($query) use ($tanggalTutup){
-                    $query->where('tanggal', '>', $tanggalTutup);
+                $dosens = KetersediaanUjian::where('id_dosen', session('user')['id_dosen'])->with(['jadwalUjian' => function($query) use ($awalSemester){
+                    $query->where('tanggal', '>', $awalSemester);
                 }])->get();
                 
                 foreach ($dosens as $key => $dosen) {
@@ -125,27 +126,27 @@ class SidangController extends Controller
             $jadwalUjian = array();
             $tanggalUjians = array();
             
-            $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Ujian')->first()->tanggal;
-            $jadwals = JadwalUjian::where('tanggal', '>', $tanggalTutup)->orderBy('tanggal')->get();
+            $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
+            $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
             $jumlahJadwal = count($jadwals);
             if($jumlahJadwal == 0){
                 return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal sidang belum disediakan');
             }
             else{
                 if($tugasAkhir->id_dosbing1 && $tugasAkhir->id_dosbing2){
-                    $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing1)->orWhere('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalUjian' => function($query) use ($tanggalTutup){
-                        $query->where('tanggal', '>', $tanggalTutup);
+                    $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing1)->orWhere('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalUjian' => function($query) use ($awalSemester){
+                        $query->where('tanggal', '>', $awalSemester);
                     }])->get();
                 }
                 elseif(!$tugasAkhir->id_dosbing2 || !$tugasAkhir->id_dosbing1){
                     if($tugasAkhir->id_dosbing1){
-                        $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing1)->with(['jadwalUjian' => function($query) use ($tanggalTutup){
-                            $query->where('tanggal', '>', $tanggalTutup);
+                        $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing1)->with(['jadwalUjian' => function($query) use ($awalSemester){
+                            $query->where('tanggal', '>', $awalSemester);
                         }])->get();
                     }
                     else{
-                        $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalUjian' => function($query) use ($tanggalTutup){
-                            $query->where('tanggal', '>', $tanggalTutup);
+                        $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalUjian' => function($query) use ($awalSemester){
+                            $query->where('tanggal', '>', $awalSemester);
                         }])->get();
                     }
                 }
