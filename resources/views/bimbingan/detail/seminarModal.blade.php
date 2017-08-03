@@ -41,6 +41,12 @@
                             <input type="text" name="id_seminar_ta" class="form-control" value="{{$detailta->seminarTA->id_seminar_ta}}">
                         </div>
                     </div>
+                    <div class="form-group" style="display: none;">
+                        <label class="col-md-2 control-label">id ta</label>
+                        <div class="col-md-10">
+                            <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Evaluasi</label>
                         <div class="col-md-10">
@@ -54,7 +60,7 @@
                     <div class="form-group">
                         {{csrf_field()}}
                         {{method_field('POST')}}
-                        <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Nilai</button>
+                        <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Simpan</button>
                         {{--<button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;">Tambahkan</button>--}}
                         <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
                     </div>
