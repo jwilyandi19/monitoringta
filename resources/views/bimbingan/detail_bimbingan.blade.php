@@ -177,7 +177,7 @@
                     @include('bimbingan.detail.seminar_isi')
                     {{--Tombol Ubah Nilai--}}
                     <div class="row">
-                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#seminarModal">Beri Penilaian</button>
+                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#seminarModal">Ubah Nilai</button>
                     </div>
                     @include('bimbingan.detail.seminarModal')
                 @else
@@ -190,13 +190,17 @@
                     @include('bimbingan.detail.ujian_isi')
                     {{--Tombol Ubah Nilai Ujian--}}
                     <div class="row">
-                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ujianModal">Beri Penilaian</button>
+                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ujianModal">Ubah Nilai</button>
                     </div>
                     @include('bimbingan.detail.ujianModal')
                 @else
                     @include('bimbingan.detail.ujian_kosong')
                 @endif
             </div>
+        </div>
+        <hr>
+        <div class="row">
+            <a class="btn btn-default pull-right" href="{{url('/bimbingan')}}" ><i class="glyphicon glyphicon-circle-arrow-left"></i> Kembali</a>
         </div>
     </div>
 
@@ -230,7 +234,7 @@
                         <div class="form-group">
                             {{csrf_field()}}
                             {{method_field('POST')}}
-                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Tambahkan</button>
+                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Simpan</button>
                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
                         </div>
                     </form>
@@ -276,7 +280,7 @@
                         <div class="form-group">
                             {{csrf_field()}}
                             {{method_field('POST')}}
-                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Tambahkan</button>
+                            <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Simpan</button>
                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
                         </div>
                     </form>
