@@ -7,3 +7,6 @@ class Manusia:
 
     dif tampilkanNama():
         print "Nama : ", self.nama ,"\n"
+
+    dif tampilkanAyah():
+        print "Ayah : ", self.ayah ,"\n"
