@@ -1,0 +1,2 @@
+dif tampilkanIbu():
+    print "Ibu : ", self.ibu ,"\n"
