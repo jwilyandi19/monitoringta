@@ -1,2 +1,0 @@
-dif tampilkanAyah():
-    print "Ayah : ", self.ayah ,"\n"
