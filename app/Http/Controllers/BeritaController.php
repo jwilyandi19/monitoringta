@@ -141,8 +141,9 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->idBerita;
         $berita = Berita::where('id_berita',$id)->first();
         if($berita!= null)
         {

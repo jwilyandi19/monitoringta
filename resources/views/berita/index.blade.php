@@ -5,7 +5,7 @@ Home
 @endsection
 
 @section('moreStyle')
-
+<link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
 @endsection
 
 @section('content')
@@ -60,7 +60,7 @@ Home
 
                         @if(Session('user')['role'] == 3)
                             <a href="{{url('/home/'.$berita->id_berita.'/edit')}}" class="btn btn-info" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                            <a href="{{url('/home/'.$berita->id_berita.'/delete')}}" class="btn btn-danger" style="margin-left: 10px;margin-right: 10px;"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
+                            <button class="btn btn-danger" style="margin-left: 10px;margin-right: 10px;" value="{{$berita->id_berita}}"><i class="glyphicon glyphicon-trash"></i> Hapus</button>
                         @endif
                     </div>
                     <br>
@@ -69,10 +69,35 @@ Home
                 </div>
             @endforeach
         @endif
-	</div>	
+	</div>
+    <form id="hapusBerita" method="POST" action="{{url('/hapusberita')}}" style="display: none;">
+        {{csrf_field()}}
+        {{method_field('POST')}}
+        <input type="text" id="inpHapusBerita" name="idBerita">
+    </form>	
 @endsection
 
 @section('moreScript')
-
+<script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.btn-danger').click( function(){
+            var idBerita = $(this).attr('value');
+            console.log(idBerita);
+            swal({
+                title: "Perhatian",
+                text: "Apakah anda yakin untuk menghapus berita ini ?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, Konfirmasi",
+                cancelButtonText: "Batal"
+            },
+            function(){
+                $('#inpHapusBerita').val(idBerita);
+                $('#hapusBerita').submit();
+            });
+        });
+    });
+</script>
 @endsection
 

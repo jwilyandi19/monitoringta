@@ -9,7 +9,7 @@
 			@elseif(session('user')['role'] == 2)
 				<a href="{{url('/uploads/Panduan-Aplikasi-Dosen.pdf')}}" class="list-group-item">Panduan Sistem Informasi Tugas Akhir</a>
 			@elseif(session('user')['role'] == 3)
-				<a href="" class="list-group-item">Panduan Sistem Informasi Tugas Akhir</a>
+				<a href="{{url('/uploads/Panduan-Aplikasi-Koordinator.pdf')}}" class="list-group-item">Panduan Sistem Informasi Tugas Akhir</a>
 			@endif
 			<a href="#" class="list-group-item">Panduan Tugas Akhir</a>
 			<a href="#" class="list-group-item">Prosedur Tugas Akhir</a>

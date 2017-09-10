@@ -6,6 +6,7 @@
 
 @section('moreStyle')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
 @endsection
 
 @section('content')
@@ -76,6 +77,7 @@
 
 @section('moreScript')
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#listUser').DataTable({
@@ -83,7 +85,6 @@
         });
         $('.btn-warning').click( function(){
             var idUser = $(this).attr('value');
-
             swal({
                 title: "Perhatian",
                 text: "Apakah anda yakin ingin mereset password dari user ini ?",
