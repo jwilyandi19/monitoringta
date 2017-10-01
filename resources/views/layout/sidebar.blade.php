@@ -11,8 +11,15 @@
 			@elseif(session('user')['role'] == 3)
 				<a href="{{url('/uploads/Panduan-Aplikasi-Koordinator.pdf')}}" target="_blank" class="list-group-item">Panduan Sistem Informasi Tugas Akhir</a>
 			@endif
-			<a href="#" class="list-group-item">Panduan Tugas Akhir</a>
-			<a href="#" class="list-group-item">Prosedur Tugas Akhir</a>
+			
+			<a href="{{url('/uploads/BUKU-PANDUAN-TUGAS-AKHIR-PRODI-SARJANA-TEKNIK-MATERIAL-FTI-ITS.pdf')}}" target="_blank" class="list-group-item">Panduan Tugas Akhir</a>
+			
+			@if(session('user')['role'] == 1)
+				<a href="{{url('/uploads/Prosedur-Mahasiswa.pptx')}}" class="list-group-item">Prosedur Tugas Akhir</a>
+			@else
+				<a href="#" class="list-group-item">Prosedur Tugas Akhir</a>
+			@endif
+			
 		</div>	
 	</div>
 @endif
