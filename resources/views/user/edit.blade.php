@@ -89,7 +89,17 @@
     <script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
     <script type="text/javascript">
         function hideFunction() {
-
+            console.log("MASUK")
+            var x = document.getElementById("peran").value
+            console.log(x)
+            if(x===2) {
+                console.log("Dosen")
+                $("#nama-lengkap").show()
+            }
+            else {
+                console.log("dll")
+                $("#nama-lengkap").hide()
+            }
         }
         $(document).on('click', '#kembali', function(){
             $('#kembali-user').submit();

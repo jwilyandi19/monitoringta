@@ -81,9 +81,12 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#listUser').DataTable({
-
         });
+    });
+</script>
+<script>
         $('.btn-warning').click( function(){
+            console.log("MASUK");
             var idUser = $(this).attr('value');
             swal({
                 title: "Perhatian",
@@ -98,6 +101,5 @@
                 $('#resetPassword').submit();
             });
         });
-    });
 </script>
 @endsection

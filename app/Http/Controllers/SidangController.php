@@ -111,75 +111,80 @@ class SidangController extends Controller
                 'Fri' => 'Jumat',
                 'Sat' => 'Sabtu'
             );
-            
-            $ujianTA = UjianTA::where('id_ta', $tugasAkhir->id_ta)->first();
-            if($ujianTA){
-                $jadwalTerdaftar = JadwalUjian::where('id_ju', $ujianTA->id_ju)->first();
-                $data['ujians'] = UjianTA::where([['id_ju', '=',$ujianTA->id_ju], ['status', '>=', '0'], ['status', '<=','1']])->with('tugasAkhir.user')->orderBy('created_at')->get();
-                $day = date('D', strtotime($jadwalTerdaftar->tanggal));
-                $data['hari'] = $dayList[$day];
-                $data['jadwalTerdaftar'] = $jadwalTerdaftar;
-            }
-            $data['ujianTA'] = $ujianTA;
 
-            $ketersediaanDosen = array();
-            $jadwalUjian = array();
-            $tanggalUjians = array();
-            
-            $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
-            $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('sesi')->get();
-            $jumlahJadwal = count($jadwals);
-            if($jumlahJadwal == 0){
-                return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal sidang belum disediakan');
+            if(is_null($tugasAkhir)) {
+                return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena anda belum mengajukan Tugas Akhir. Pastikan Anda mengajukan Tugas Akhir terlebih dahulu.');
             }
-            else{
-                if($tugasAkhir->id_dosbing1 && $tugasAkhir->id_dosbing2){
-                    $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing1)->orWhere('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalUjian' => function($query) use ($awalSemester){
-                        $query->where('tanggal', '>', $awalSemester);
-                    }])->get();
+            else {
+                $ujianTA = UjianTA::where('id_ta', $tugasAkhir->id_ta)->first();
+                if($ujianTA){
+                    $jadwalTerdaftar = JadwalUjian::where('id_ju', $ujianTA->id_ju)->first();
+                    $data['ujians'] = UjianTA::where([['id_ju', '=',$ujianTA->id_ju], ['status', '>=', '0'], ['status', '<=','1']])->with('tugasAkhir.user')->orderBy('created_at')->get();
+                    $day = date('D', strtotime($jadwalTerdaftar->tanggal));
+                    $data['hari'] = $dayList[$day];
+                    $data['jadwalTerdaftar'] = $jadwalTerdaftar;
                 }
-                elseif(!$tugasAkhir->id_dosbing2 || !$tugasAkhir->id_dosbing1){
-                    if($tugasAkhir->id_dosbing1){
-                        $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing1)->with(['jadwalUjian' => function($query) use ($awalSemester){
-                            $query->where('tanggal', '>', $awalSemester);
-                        }])->get();
-                    }
-                    else{
-                        $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalUjian' => function($query) use ($awalSemester){
-                            $query->where('tanggal', '>', $awalSemester);
-                        }])->get();
-                    }
+                $data['ujianTA'] = $ujianTA;
+
+                $ketersediaanDosen = array();
+                $jadwalUjian = array();
+                $tanggalUjians = array();
+                
+                $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
+                $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('sesi')->get();
+                $jumlahJadwal = count($jadwals);
+                if($jumlahJadwal == 0){
+                    return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal sidang belum disediakan');
                 }
                 else{
-                    return Redirect::to('/error')->with('message', 'Tidak dapat mengajukan jadwal sidang karena anda tidak memiliki dosen pembimbing');
-                }
-                
-                //dd($dosens);
-                foreach ($dosens as $key => $dosen) {
-                    if($dosen->jadwalUjian){
-                        if($dosen->id_dosen == $tugasAkhir->id_dosbing1){
-                            $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->sesi][1] = 1;
+                    if($tugasAkhir->id_dosbing1 && $tugasAkhir->id_dosbing2){
+                        $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing1)->orWhere('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalUjian' => function($query) use ($awalSemester){
+                            $query->where('tanggal', '>', $awalSemester);
+                        }])->get();
+                    }
+                    elseif(!$tugasAkhir->id_dosbing2 || !$tugasAkhir->id_dosbing1){
+                        if($tugasAkhir->id_dosbing1){
+                            $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing1)->with(['jadwalUjian' => function($query) use ($awalSemester){
+                                $query->where('tanggal', '>', $awalSemester);
+                            }])->get();
                         }
-                        else if($dosen->id_dosen == $tugasAkhir->id_dosbing2){
-                            $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->sesi][2] = 1;
+                        else{
+                            $dosens = KetersediaanUjian::where('id_dosen', $tugasAkhir->id_dosbing2)->with(['jadwalUjian' => function($query) use ($awalSemester){
+                                $query->where('tanggal', '>', $awalSemester);
+                            }])->get();
                         }
                     }
-                }
-                foreach ($jadwals as $key => $jadwal) {
-                    $jadwalUjian[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_ju;
-                }
+                    else{
+                        return Redirect::to('/error')->with('message', 'Tidak dapat mengajukan jadwal sidang karena anda tidak memiliki dosen pembimbing');
+                    }
+                    
+                    //dd($dosens);
+                    foreach ($dosens as $key => $dosen) {
+                        if($dosen->jadwalUjian){
+                            if($dosen->id_dosen == $tugasAkhir->id_dosbing1){
+                                $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->sesi][1] = 1;
+                            }
+                            else if($dosen->id_dosen == $tugasAkhir->id_dosbing2){
+                                $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->sesi][2] = 1;
+                            }
+                        }
+                    }
+                    foreach ($jadwals as $key => $jadwal) {
+                        $jadwalUjian[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_ju;
+                    }
 
-                $dates = array_keys($jadwalUjian);
-                foreach ($dates as $key => $date) {
-                    $tanggalUjians[$key]['tanggal'] = $date;
-                    $day = date('D', strtotime($date));
-                    $tanggalUjians[$key]['hari'] = $dayList[$day];
-                    $tanggalUjians[$key]['sesi'] = $jadwalUjian[$date];
-                }
-                $data['tanggalUjians'] = $tanggalUjians;
-                $data['ketersediaanDosen'] = $ketersediaanDosen;
+                    $dates = array_keys($jadwalUjian);
+                    foreach ($dates as $key => $date) {
+                        $tanggalUjians[$key]['tanggal'] = $date;
+                        $day = date('D', strtotime($date));
+                        $tanggalUjians[$key]['hari'] = $dayList[$day];
+                        $tanggalUjians[$key]['sesi'] = $jadwalUjian[$date];
+                    }
+                    $data['tanggalUjians'] = $tanggalUjians;
+                    $data['ketersediaanDosen'] = $ketersediaanDosen;
 
-                return view('sidang.pengajuan', $data);
+                    return view('sidang.pengajuan', $data);
+                }
             }    
         }
         else{

@@ -21,8 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-        $data['users'] = User::orderBy('id_user')->get();
+        $x = session('user')['id'];
+        $data['users'] = User::where('id_user','!=',$x)->orderBy('id_user')->get();
         return view('user.index',$data);
     }
 
@@ -159,7 +159,7 @@ class UserController extends Controller
         if($user->role == 2)
         {
             $data['user'] = User::where('id_user',$id)->with('akunDosen')->first();
-            dd($data);
+            dd($data['user']);
             return view('user.edit',$data);
         }
         else
@@ -240,9 +240,25 @@ class UserController extends Controller
                         $user = new User();
                         $user->username = $username;
                         $user->password = bcrypt($username);
-                        $user->role = 1;
                         $user->nama = $nama;
-                        $user->save();
+
+                        if(strlen($username)==18) {
+                            $user->role = 2;
+                            $user->save();
+                            $get = User::where('username',$username)->first();
+                            //dd($get);
+                            $dosen = new Dosen();
+                            $dosen->id_user = $get->id_user;
+                            $dosen->nip = $username;
+                            $dosen->nama = $data[3];
+                            $dosen->pembimbing1 = $data[4];
+                            $dosen->nama_lengkap  = $nama;
+                            $dosen->save();
+                        }
+                        else {
+                            $user->role = 1;
+                            $user->save();
+                        }
                         unset($user);
                     }
                     unset($user);

@@ -42,7 +42,7 @@ Ubah Detail Tugas Akhir
                     </div>
                     <div class="form-group has-warning">
                         <label class="control-label" for="bidang"><h5>Bidang Matakuliah</h5></label>
-                        <select class="form-control" name="rumpunMK">
+                        <select class="form-control" name="bidangMK">
                             @foreach($bidang_mks as $key => $bidang_mk)
                                 @if($bidang_mk->id_bidang_mk == $tugasAkhir->id_bidang_mk)
                                     <option value="{{$bidang_mk->id_bidang_mk}}" selected>{{$bidang_mk->nama_bidang}}</option>

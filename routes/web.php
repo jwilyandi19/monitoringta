@@ -82,7 +82,7 @@ Route::group(['middleware' => ['Dosen']], function(){
     
     Route::get('/datadosen', 'AuthController@dataDosen');
     Route::post('/tambahkanbidang', 'AuthController@tambahkanBidang');
-    Route::post('/hapusbidang', 'AuthController@hapusBidang');
+    Route::post('/bidang', 'AuthController@hapusBidang');
 });
 
 Route::group(['middleware' => ['Koordinator']], function(){

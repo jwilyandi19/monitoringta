@@ -194,7 +194,6 @@ class ProgresController extends Controller
     }
 
     public function uploadFile(Request $request){
-        
         if($request->hasFile('fileTugasAkhir') && $request->file('fileTugasAkhir')->isValid()){
             $file = $request->fileTugasAkhir;
             if($file->guessExtension() != 'zip'){
@@ -235,7 +234,7 @@ class ProgresController extends Controller
             }
         }
         else{
-            return Redirect::to('/detailta')->withErrors('Gagal menyimpan file, terjadi kesalahan dalam proses upload file, silahkan coba lagi');
+            return Redirect::to('/detailta')->withErrors('Gagal menyimpan file, terjadi kesalahan dalam proses upload file, silahkan coba lagi!!');
         }
     }
 }

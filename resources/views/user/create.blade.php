@@ -25,12 +25,12 @@
     @endif
     <div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
         <div class="judul-halaman">
-            <h4><strong>Pengajuan Judul Tugas Akhir </strong></h4>
+            <h4><strong>Pengisian Data User </strong></h4>
             <hr>
         </div>
         <div class="center alert alert-warning" style="text-align: center;" >
             <br>
-            <h4>Tambahkan User Baru Menggunakan File CSV</h4>
+            <h4>Tambahkan Data Mahasiswa Menggunakan File CSV</h4>
             <button class="btn btn-primary" data-toggle="modal" data-target="#fileUploadModal"><i class="glyphicon glyphicon-file"></i> Upload File</button>
         </div>
         <hr>

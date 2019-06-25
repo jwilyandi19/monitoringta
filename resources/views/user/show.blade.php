@@ -45,7 +45,7 @@
                 <label class="col-md-2"><h6 class="pull-left">Peran</h6></label>
                 <div class="col-md-10">
                     @if($user->role == 1)
-                        <h6>: Mahaiswa</h6>
+                        <h6>: Mahasiswa</h6>
                     @elseif($user->role == 2)
                         <h6>: Dosen</h6>
                     @else
@@ -111,6 +111,7 @@
             $('#kembali-user').submit();
         });
         $(document).on('click', '#hapus', function(){
+            console.log("MASUK");
             var idUserHapus = $(this).attr('value');
             console.log(idUserHapus);
             swal({
