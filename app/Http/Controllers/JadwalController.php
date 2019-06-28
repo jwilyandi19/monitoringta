@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Jadwal;
 use App\JadwalSeminar;
 use App\JadwalUjian;
+use App\SeminarTA;
+use App\KetersediaanSeminar;
+use App\UjianTA;
+use App\KetersediaanUjian;
 use Redirect;
 
 class JadwalController extends Controller
@@ -123,12 +127,30 @@ class JadwalController extends Controller
 
     public function hapusJadwalSeminar(Request $request){
         $tanggal = $request->tanggalPilihan;
-        $deleteTanggals = JadwalSeminar::where('tanggal', $tanggal)->delete();
-        if($deleteTanggals){
-            return Redirect::to('/jadwalseminar');
+        $flag = 0;
+        $jadwalSeminars = JadwalSeminar::select('id_js')->where('tanggal',$tanggal)->get();
+        foreach($jadwalSeminars as $jadwalSeminar) {
+            $seminar = SeminarTA::where('id_js',$jadwalSeminar->id_js)->get();
+            if($seminar->first()) {
+                $flag = 1;
+                break;
+            }
         }
-        else{
-            return Redirect::to('/jadwalseminar')->withError('Gagal menghapus jadwal seminar');
+
+        if($flag) {
+            return Redirect::to('/jadwalseminar')->withErrors('Gagal menghapus jadwal seminar. Ada seminar dalam jadwal tersebut.');
+        }
+        else {
+            foreach($jadwalSeminars as $jadwalSeminar) {
+                $ketersediaanSeminar = KetersediaanSeminar::where('id_js',$jadwalSeminar->id_js)->delete();
+            }
+            $deleteTanggals = JadwalSeminar::where('tanggal', $tanggal)->delete();
+            if($deleteTanggals){
+                return Redirect::to('/jadwalseminar');
+            }
+            else{
+                return Redirect::to('/jadwalseminar')->withErrors('Gagal menghapus jadwal seminar');
+            }
         }
     }
 
@@ -159,12 +181,30 @@ class JadwalController extends Controller
 
     public function hapusJadwalUjian(Request $request){
         $tanggal = $request->tanggalPilihan;
-        $deleteTanggals = JadwalUjian::where('tanggal', $tanggal)->delete();
-        if($deleteTanggals){
-            return Redirect::to('/jadwalujian');
+        $flag = 0;
+        $jadwalUjians = JadwalUjian::select('id_ju')->where('tanggal',$tanggal)->get();
+        foreach($jadwalUjians as $jadwalUjian) {
+            $ujian = UjianTA::where('id_ju',$jadwalUjian->id_ju)->get();
+            if($ujian->first()) {
+                $flag = 1;
+                break;
+            }
         }
-        else{
-            return Redirect::to('/jadwalujian')->withError('Gagal menghapus jadwal seminar');
+
+        if($flag) {
+            return Redirect::to('/jadwalujian')->withErrors('Gagal menghapus jadwal ujian. Ada ujian dalam jadwal tersebut.');
+        }
+        else {
+            foreach($jadwalUjians as $jadwalUjian) {
+                $ketersediaanUjian = KetersediaanUjian::where('id_ju',$jadwalUjian->id_ju)->delete();
+            }
+            $deleteTanggals = JadwalUjian::where('tanggal', $tanggal)->delete();
+            if($deleteTanggals){
+                return Redirect::to('/jadwalujian');
+            }
+            else{
+                return Redirect::to('/jadwalujian')->withErrors('Gagal menghapus jadwal ujian');
+            }
         }
     }
 }
