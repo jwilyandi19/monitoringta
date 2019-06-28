@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $x = session('user')['id'];
-        $data['users'] = User::where('id_user','!=',$x)->orderBy('id_user')->get();
+        $data['users'] = User::where('id_user','!=',$x)->orderBy('id_user','DESC')->get();
         return view('user.index',$data);
     }
 
