@@ -82,10 +82,6 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#listUser').DataTable({
-            dom: 'l<"toolbar">frtip',
-            initComplete: function(){
-                $("div.toolbar").html('<button type="button" id="any_button">Click Me!</button>');           
-            } 
         });
     });
 </script>
