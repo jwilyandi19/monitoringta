@@ -196,12 +196,13 @@ class ProgresController extends Controller
     public function uploadFile(Request $request){
         if($request->hasFile('fileTugasAkhir') && $request->file('fileTugasAkhir')->isValid()){
             $file = $request->fileTugasAkhir;
-            if($file->guessExtension() != 'zip'){
-                return Redirect::to('/detailta')->withErrors('Gagal menyimpan file, ekstensi file yang diupload bukan .zip');
+            if($file->guessExtension() != 'pdf'){
+                return Redirect::to('/detailta')->withErrors('Gagal menyimpan file, ekstensi file yang diupload bukan .pdf');
             }
             else{
+                
                 $fileOriginal = $file->getClientOriginalName();
-                $fileName = session('user')['username']."_".$request->idTA.".zip";
+                $fileName = session('user')['username']."_".$request->idTA.".pdf";
                 $path = 'public/file_ta/'.session('user')['username']."_".$request->idTA;
 
                 $tugasAkhir = TugasAkhir::where('id_ta', $request->idTA)->first();

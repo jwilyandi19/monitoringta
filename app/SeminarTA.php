@@ -22,6 +22,7 @@ class SeminarTA extends Model
     'status',
     'nilai',
     'evaluasi',
+    'file',
     'created_at',
     'updated_at',
     ];

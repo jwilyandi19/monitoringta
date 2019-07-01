@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-md-9">
                         @if($detailta->file)
-                            <h6><a href="{{url(asset('storage/file_ta/'.$detailta->user->username.'_'.$detailta->id_ta.'/'.$detailta->user->username.'_'.$detailta->id_ta.'.zip'))}}">{{$detailta->user->username.'_'.$detailta->id_ta}}</a></h6>
+                            <h6><a href="{{url(asset('storage/file_ta/'.$detailta->user->username.'_'.$detailta->id_ta.'/'.$detailta->user->username.'_'.$detailta->id_ta.'.pdf'))}}">{{$detailta->user->username.'_'.$detailta->id_ta}}</a></h6>
                         @else
                             <h6>-</h6>
                         @endif
@@ -181,12 +181,13 @@
                         <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{url('/progres/uploadfile')}}" style="padding: 0px 20px;">
                             <div class="form-group alert alert-warning">
                                 <h4>Perhatian</h4>
-                                <p>File yag dapat diupload adalah file dengan ekstensi .zip</p>
+                                <p>File yang dapat diupload adalah file dengan ekstensi .pdf</p>
+                                <p>Pastikan ukuran file yang diupload kurang dari 2MB</p>
                             </div>
                             <input type="text" name="idTA" style="display: none;" value="{{$detailta->id_ta}}">
                             <div class="form-group">
                                 <label class="control-label"><h6>Select File</h6></label>
-                                <input type="file" name="fileTugasAkhir" class="file col-md-12" style="height: 30px;" accept=".zip">
+                                <input type="file" name="fileTugasAkhir" class="file col-md-12" style="height: 30px;" accept=".pdf">
                             </div>
                             <br>
                             <hr style="border-top: 1px solid #24292e;">

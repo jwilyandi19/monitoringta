@@ -10,7 +10,7 @@
         <h6>:</h6>
     </div>
     <div class="col-md-9">
-        <h6>{{$detailta->ujianTA->jadwalUjian->tanggal}} - Sesi : {{$detailta->ujianTA->jadwalUjian->sesi}}</h6>
+        <h6>{{date('d-m-Y', strtotime($detailta->ujianTA->jadwalUjian->tanggal))}} - Sesi : {{$detailta->ujianTA->jadwalUjian->sesi}}</h6>
     </div>
 </div>
 
@@ -202,6 +202,20 @@
             <h6>-</h6>
         @else
             <h6>{{$detailta->ujianTA->evaluasi}}</h6>
+        @endif
+    </div>
+</div>
+
+<div class="row">
+    <label class="col-md-2"><h6 class="pull-left">File Sidang</h6></label>
+    <div class="col-md-1" style="text-align: right;">
+        <h6>:</h6>
+    </div>
+    <div class="col-md-9">
+        @if($detailta->ujianTA->file)
+            <h6><a href="{{url(asset('storage/file_ta/'.$detailta->user->username.'_'.$detailta->id_ta.'/sidang_'.$detailta->user->username.'_'.$detailta->id_ta.'.pdf'))}}">{{'sidang_'.$detailta->user->username.'_'.$detailta->id_ta}}</a></h6>
+        @else
+            <h6>-<h6>
         @endif
     </div>
 </div>

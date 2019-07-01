@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-md-9">
                         @if($detailta->file)
-                            <h6><a href="{{url(asset('storage/file_ta/'.$detailta->user->username.'_'.$detailta->id_ta.'/'.$detailta->user->username.'_'.$detailta->id_ta.'.zip'))}}">{{$detailta->user->username.'_'.$detailta->id_ta}}</a></h6>
+                            <h6><a href="{{url(asset('storage/file_ta/'.$detailta->user->username.'_'.$detailta->id_ta.'/'.$detailta->user->username.'_'.$detailta->id_ta.'.pdf'))}}">{{$detailta->user->username.'_'.$detailta->id_ta}}</a></h6>
                         @else
                             <h6>-</h6>
                         @endif

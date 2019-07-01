@@ -118,3 +118,61 @@
     </div>
 </div>
 
+{{--File--}}
+<div class="row">
+    <label class="col-md-2"><h6 class="pull-left">File Seminar</h6></label>
+    <div class="col-md-1" style="text-align: right;">
+        <h6>:</h6>
+    </div>
+    <div class="col-md-9">
+        @if($detailta->seminarTA->file)
+            <h6><a href="{{url(asset('storage/file_ta/'.$detailta->user->username.'_'.$detailta->id_ta.'/seminar_'.$detailta->user->username.'_'.$detailta->id_ta.'.pdf'))}}">{{'seminar_'.$detailta->user->username.'_'.$detailta->id_ta}}</a></h6>
+        @else
+            <h6>-<h6>
+        @endif
+    </div>
+</div>
+
+@if($detailta->seminarTA->file)
+<div class="row">
+    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#seminarUploadModal"><i class="glyphicon glyphicon-file"></i> Update File</button>
+</div>
+@else
+<div class="row">
+    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#seminarUploadModal"><i class="glyphicon glyphicon-file"></i> Tambahkan File</button>
+</div>
+@endif
+
+<div class="modal fade" id="seminarUploadModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                <button type="button" class="close" data-dismiss="modal" style="color: #ffffff;">&times;</button>
+                <h4 class="modal-title" style="color: #ffffff;"> Upload File Seminar</h4>
+            </div>
+            <div class="modal-body panel panel-body" style="margin-bottom: 0px; padding: 30px;">
+                <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{url('/seminar/uploadfile')}}" style="padding: 0px 20px;">
+                    <div class="form-group alert alert-warning">
+                        <h4>Perhatian</h4>
+                        <p>File yang dapat diupload adalah file dengan ekstensi .pdf</p>
+                        <p>Pastikan ukuran file yang diupload kurang dari 2MB</p>
+                    </div>
+                    <input type="text" name="idTA" style="display: none;" value="{{$detailta->id_ta}}">
+                    <div class="form-group">
+                        <label class="control-label"><h6>Select File</h6></label>
+                        <input type="file" name="fileSeminar" class="file col-md-12" style="height: 30px;" accept=".pdf">
+                    </div>
+                    <br>
+                    <hr style="border-top: 1px solid #24292e;">
+                    {{csrf_field()}}
+                    {{method_field('POST')}}
+                    <div class="form-group" style="height: 30px;">
+                        <button type="submit" class="btn btn-primary pull-right">Tambahkan File</button>
+                        <button class="btn btn-default pull-right" style="margin-right: 10px;" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

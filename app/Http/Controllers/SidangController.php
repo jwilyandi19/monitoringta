@@ -78,7 +78,7 @@ class SidangController extends Controller
             }
         }
         else{
-            return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena pengisian ketersediaan seminar belum dibuka');
+            return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena pengisian ketersediaan sidang belum dibuka');
         }
         
     }
@@ -243,6 +243,52 @@ class SidangController extends Controller
         }
         else{
             return Redirect::to(url('/pengajuanujian'))->withError('Gagal membatalkan pengajuan TA, silahkan coba lagi');
+        }
+    }
+
+    public function uploadFile(Request $request){
+        if($request->hasFile('fileSidang') && $request->file('fileSidang')->isValid()){
+            $file = $request->fileSidang;
+            if($file->guessExtension() != 'pdf'){
+                return Redirect::to('/detailta')->withErrors('Gagal menyimpan file, ekstensi file yang diupload bukan .pdf');
+            }
+            else{
+                
+                $fileOriginal = $file->getClientOriginalName();
+                $fileName = "sidang_".session('user')['username']."_".$request->idTA.".pdf";
+                $path = 'public/file_ta/'.session('user')['username']."_".$request->idTA;
+
+                $sidang = UjianTA::where('id_ta', $request->idTA)->first();
+                if(!$sidang->file){
+                    $sidang->file = 1;
+                    if($sidang->save()){
+                        $flag = $request->fileSidang->storeAs($path."/", $fileName);
+                        if($flag){
+                            return Redirect::to('/detailta')->with('message', 'Berhasil menyimpan file ujian sidang');
+                        }
+                        else{
+                            return Redirect::to('/detailta')->withErrors('Gagal menyimpan file, terjadi kesalahan dalam proses upload file, silahkan coba lagi');
+                        }
+                    }
+                    else{
+                        return Redirect::to('/detailta')->withErrors('Gagal menyimpan file tugas akhir, terjadi kesalahan dalam proses penyimpanan data, silahkan coba lagi');
+                    }
+
+                }
+                else{
+                    $flag = $request->fileSidang->storeAs($path, $fileName);
+                    if($flag){
+                        return Redirect::to('/detailta')->with('message', 'Berhasil menyimpan file terbaru');
+                    }
+                    else{
+                        return Redirect::to('/detailta')->withErrors('Gagal menyimpan file, terjadi kesalahan dalam proses upload file, silahkan coba lagi');
+                    }
+                }
+                
+            }
+        }
+        else{
+            return Redirect::to('/detailta')->withErrors('Gagal menyimpan file, terjadi kesalahan dalam proses upload file, silahkan coba lagi!!');
         }
     }
 }

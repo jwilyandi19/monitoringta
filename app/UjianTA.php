@@ -28,6 +28,7 @@ class UjianTA extends Model
     'nilai',
     'nilai_angka',
     'evaluasi',
+    'file',
     'created_at',
     'updated_at',
     ];

@@ -45,6 +45,8 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
     //Detail TA
     Route::get('/detailta', 'ProgresController@detail');
     Route::post('/progres/uploadfile', 'ProgresController@uploadFile');
+    Route::post('/seminar/uploadfile', 'SeminarController@uploadFile');
+    Route::post('/sidang/uploadfile','SidangController@uploadFile');
 
     //Pengajuan Seminar
     Route::get('/pengajuanseminar', 'SeminarController@pengajuanJadwal');

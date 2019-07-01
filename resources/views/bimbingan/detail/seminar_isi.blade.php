@@ -117,4 +117,17 @@
         @endif
     </div>
 </div>
+<div class="row">
+    <label class="col-md-2"><h6 class="pull-left">File Seminar</h6></label>
+    <div class="col-md-1" style="text-align: right;">
+        <h6>:</h6>
+    </div>
+    <div class="col-md-9">
+        @if($detailta->seminarTA->file)
+            <h6><a href="{{url(asset('storage/file_ta/'.$detailta->user->username.'_'.$detailta->id_ta.'/seminar_'.$detailta->user->username.'_'.$detailta->id_ta.'.pdf'))}}">{{'seminar_'.$detailta->user->username.'_'.$detailta->id_ta}}</a></h6>
+        @else
+            <h6>-<h6>
+        @endif
+    </div>
+</div>
 
