@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $x = session('user')['id'];
-        $data['users'] = User::where('id_user','!=',$x)->orderBy('id_user','DESC')->get();
+        $data['users'] = User::where('id_user','!=',$x)->orderBy('id_user')->get();
         return view('user.index',$data);
     }
 
@@ -209,9 +209,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //dd($id);
+        $user = User::where('id_user',$id)->get();
         if(User::where('id_user',$id)->delete())
         {
+            if($user->role==2) {
+                Dosen::where('id_user',$id)->delete();
+            }
+            
             return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
         }
         else

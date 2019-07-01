@@ -31,7 +31,6 @@
         </div>
         <div class="data-user">
             <table id="listUser" class="table table-striped">
-                Hae
                 <thead>
                 <tr>
                     <th class="col-md-1 text-center"><strong>id user</strong></th>
