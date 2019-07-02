@@ -224,7 +224,7 @@
                         @endif
                 @endif
                 <div class="row">
-                    <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                    <label class="col-md-2"><h6 class="pull-left">Status</h6></label>
                     <div class="col-md-1" style="text-align: right;">
                         <h6>:</h6>
                     </div>
@@ -232,8 +232,25 @@
                         @if($detailta->seminarTA->nilai == null)
                             <h6>-</h6>
                         @else
-                            <h6>{{$detailta->seminarTA->nilai}}</h6>
+                            @if($detailta->seminarTA->nilai == 'A')
+                                <h6>Diterima dengan perbaikan</h6>
+                            @endif
+                            @if($detailta->seminarTA->nilai == 'B')
+                                <h6>Diterima dengan perubahan judul</h6>
+                            @endif
+                            @if($detailta->seminarTA->nilai == 'C')
+                                <h6>Ditolak</h6>
+                            @endif
                         @endif
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        <h6>{{$detailta->seminarTA->nilai_angka}}</h6>
                     </div>
                 </div>
                 <div class="row">
@@ -254,7 +271,22 @@
                         <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#seminarModal">Beri Penilaian</button>
                     </div>
                 @endif
+                <div class="row">
+                    <label class="col-md-2"><h6 class="pull-left">File Seminar</h6></label>
+                    <div class="col-md-1" style="text-align: right;">
+                        <h6>:</h6>
+                    </div>
+                    <div class="col-md-9">
+                        @if($detailta->seminarTA->file)
+                            <h6><a href="{{url(asset('storage/file_ta/'.$detailta->user->username.'_'.$detailta->id_ta.'/seminar_'.$detailta->user->username.'_'.$detailta->id_ta.'.pdf'))}}">{{'seminar_'.$detailta->user->username.'_'.$detailta->id_ta}}</a></h6>
+                        @else
+                            <h6>-<h6>
+                        @endif
+                    </div>
+                </div>
             </div>
+
+
 
             <hr>
 
@@ -410,29 +442,15 @@
                 @endif
 
                 <div class="row">
-                    <label class="col-md-2"><h6 class="pull-left">Nilai Angka</h6></label>
-                    <div class="col-md-1" style="text-align: right;">
-                        <h6>:</h6>
-                    </div>
-                    <div class="col-md-9">
-                        @if($detailta->ujianTA->nilai == null)
-                            <h6>-</h6>
-                        @else
-                            <h6>{{$detailta->ujianTA->nilai_angka}}</h6>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="row">
                     <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
                     <div class="col-md-1" style="text-align: right;">
                         <h6>:</h6>
                     </div>
                     <div class="col-md-9">
-                        @if($detailta->ujianTA->nilai == null)
+                        @if($detailta->ujianTA->nilai_angka == null)
                             <h6>-</h6>
                         @else
-                            <h6>{{$detailta->ujianTA->nilai}}</h6>
+                            <h6>{{$detailta->ujianTA->nilai_angka}}</h6>
                         @endif
                     </div>
                 </div>

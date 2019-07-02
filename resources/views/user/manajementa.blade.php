@@ -52,13 +52,13 @@
                             <td>{{$tugasAkhir->judul}}</td>
                             
                             @if($tugasAkhir->seminarTA && $tugasAkhir->seminarTA->nilai)
-                                <td class="text-center">{{$tugasAkhir->seminarTA->nilai}}</td>
+                                <td class="text-center">{{$tugasAkhir->seminarTA->nilai_angka}}</td>
                             @else
                                 <td class="text-center">-</td>
                             @endif
                             
                             @if($tugasAkhir->ujianTA && $tugasAkhir->ujianTA->nilai)
-                                <td class="text-center">{{$tugasAkhir->ujianTA->nilai}}</td>
+                                <td class="text-center">{{$tugasAkhir->ujianTA->nilai_angka}}</td>
                             @else
                                 <td class="text-center">-</td>
                             @endif

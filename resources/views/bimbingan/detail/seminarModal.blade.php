@@ -11,26 +11,26 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="{{url('/seminar/nilai')}}">
                     <div class="form-group" >
-                        <label class="col-md-2 control-label">Nilai</label>
+                        <label class="col-md-2 control-label">Status</label>
                         <div class="col-md-10">
                             <select class="form-control" name="nilai">
                                 @if($detailta->seminarTA->nilai == 'A')
-                                    <option value="A" selected> A (Diterima dengan perbaikan)</option>
-                                    <option value="B" > B (Diterima dengan perubahan judul)</option>
-                                    <option value="C" > C (Ditolak)</option>
+                                    <option value="A" selected>Diterima dengan perbaikan</option>
+                                    <option value="B" >Diterima dengan perubahan judul</option>
+                                    <option value="C" >Ditolak</option>
                                 @elseif($detailta->seminarTA->nilai == 'B')
-                                    <option value="A" > A (Diterima dengan perbaikan)</option>
-                                    <option value="B" selected> B (Diterima dengan perubahan judul)</option>
-                                    <option value="C" > C (Ditolak)</option>
+                                    <option value="A" >Diterima dengan perbaikan</option>
+                                    <option value="B" selected>Diterima dengan perubahan judul</option>
+                                    <option value="C" >Ditolak</option>
                                 @elseif($detailta->seminarTA->nilai == 'C')
-                                    <option value="A" > A (Diterima dengan perbaikan)</option>
-                                    <option value="B" > B (Diterima dengan perubahan judul)</option>
-                                    <option value="C" selected> C (Ditolak)</option>
+                                    <option value="A" >Diterima dengan perbaikan</option>
+                                    <option value="B" >Diterima dengan perubahan judul</option>
+                                    <option value="C" selected>Ditolak</option>
                                 @else
                                     <option value="" selected >Nilai Seminar</option>
-                                    <option value="A" > A (Diterima dengan perbaikan)</option>
-                                    <option value="B" > B (Diterima dengan perubahan judul)</option>
-                                    <option value="C" > C (Ditolak)</option>
+                                    <option value="A" >Diterima dengan perbaikan</option>
+                                    <option value="B" >Diterima dengan perubahan judul</option>
+                                    <option value="C" >Ditolak</option>
                                 @endif
                             </select>
                         </div>
@@ -45,6 +45,12 @@
                         <label class="col-md-2 control-label">id ta</label>
                         <div class="col-md-10">
                             <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Nilai</label>
+                        <div class="col-md-10">
+                            <input type="text" name="nilai_angka" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">

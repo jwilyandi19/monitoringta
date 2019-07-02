@@ -211,9 +211,9 @@ Detail Tugas Akhir
                             <div class="col-md-10" >
                                 <select class="form-control" id="status">
                                     <option>Pilih Nilai / Status Tugas Akhir</option>
-                                    <option>A (Diterima Dengan Perbaikan)</option>
-                                    <option>B (Diterima Dengan Perubahan Judul)</option>
-                                    <option>C (Ditolak)</option>
+                                    <option>Diterima Dengan Perbaikan</option>
+                                    <option>Diterima Dengan Perubahan Judul</option>
+                                    <option>Ditolak</option>
                                 </select>
                             </div>
                         </div>
@@ -249,9 +249,9 @@ Detail Tugas Akhir
                             <div class="col-md-10" >
                                 <select class="form-control" id="status">
                                     <option>Pilih Nilai / Status Tugas Akhir</option>
-                                    <option>A (Diterima Dengan Perbaikan)</option>
-                                    <option>B (Diterima Dengan Perubahan Judul)</option>
-                                    <option>C (Ditolak)</option>
+                                    <option>Diterima Dengan Perbaikan</option>
+                                    <option>Diterima Dengan Perubahan Judul</option>
+                                    <option>Ditolak</option>
                                 </select>
                             </div>
                         </div>

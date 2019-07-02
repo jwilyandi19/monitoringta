@@ -94,10 +94,10 @@
         <h6>:</h6>
     </div>
     <div class="col-md-9">
-        @if($detailta->ujianTA->nilai == null)
+        @if($detailta->ujianTA->nilai_angka == null)
             <h6>-</h6>
         @else
-            <h6>{{$detailta->ujianTA->nilai}}</h6>
+            <h6>{{$detailta->ujianTA->nilai_angka}}</h6>
         @endif
     </div>
 </div>

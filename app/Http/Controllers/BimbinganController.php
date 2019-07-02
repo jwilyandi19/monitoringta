@@ -209,6 +209,7 @@ class BimbinganController extends Controller
         $seminar = SeminarTA::where('id_seminar_ta',$request->id_seminar_ta)->first();
         //dd($seminar);
         $seminar->nilai = $request->nilai;
+        $seminar->nilai_angka = $request->nilai_angka;
         $seminar->evaluasi = $request->evaluasi;
         if($seminar->save())
         {

@@ -90,7 +90,7 @@
 
 {{--Nilai--}}
 <div class="row">
-    <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+    <label class="col-md-2"><h6 class="pull-left">Status</h6></label>
     <div class="col-md-1" style="text-align: right;">
         <h6>:</h6>
     </div>
@@ -98,8 +98,26 @@
         @if($detailta->seminarTA->nilai == null)
             <h6>-</h6>
         @else
-            <h6>{{$detailta->seminarTA->nilai}}</h6>
+            @if($detailta->seminarTA->nilai == 'A')
+                <h6>Diterima dengan perbaikan</h6>
+            @endif
+            @if($detailta->seminarTA->nilai == 'B')
+                <h6>Diterima dengan perubahan judul</h6>
+            @endif
+            @if($detailta->seminarTA->nilai == 'C')
+                <h6>Ditolak</h6>
+            @endif
         @endif
+    </div>
+</div>
+
+<div class="row">
+    <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
+    <div class="col-md-1" style="text-align: right;">
+        <h6>:</h6>
+    </div>
+    <div class="col-md-9">
+        <h6>{{$detailta->seminarTA->nilai_angka}}</h6>
     </div>
 </div>
 

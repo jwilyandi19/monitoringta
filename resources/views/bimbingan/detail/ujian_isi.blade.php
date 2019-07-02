@@ -163,30 +163,15 @@
 
 {{--Nilai Rata - Rata--}}
 <div class="row">
-    <label class="col-md-2"><h6 class="pull-left">Nilai Angka</h6></label>
-    <div class="col-md-1" style="text-align: right;">
-        <h6>:</h6>
-    </div>
-    <div class="col-md-9">
-        @if($detailta->ujianTA->nilai == null)
-            <h6>-</h6>
-        @else
-            <h6>{{$detailta->ujianTA->nilai_angka}}</h6>
-        @endif
-    </div>
-</div>
-
-{{--Nilai Huruf--}}
-<div class="row">
     <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
     <div class="col-md-1" style="text-align: right;">
         <h6>:</h6>
     </div>
     <div class="col-md-9">
-        @if($detailta->ujianTA->nilai == null)
+        @if($detailta->ujianTA->nilai_angka == null)
             <h6>-</h6>
         @else
-            <h6>{{$detailta->ujianTA->nilai}}</h6>
+            <h6>{{$detailta->ujianTA->nilai_angka}}</h6>
         @endif
     </div>
 </div>
