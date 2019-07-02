@@ -56,7 +56,7 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
     Route::get('/pengajuanseminar', 'SeminarController@pengajuanJadwal');
     Route::post('/pengajuanseminar', 'SeminarController@doPengajuan');
     Route::get('/formpengajuanseminar/{id}', 'SeminarController@formPengajuan');
-    Route::post('/batalkanpengajuanseminar', 'SeminarController@pembatalanJadwal');
+    //Route::post('/batalkanpengajuanseminar', 'SeminarController@pembatalanJadwal');
     Route::get('/pengajuanujian', 'SidangController@pengajuanJadwal');
     Route::post('/pengajuanujian', 'SidangController@doPengajuan');
     Route::get('/formpengajuanujian/{id}', 'SidangController@formPengajuan');
@@ -127,5 +127,8 @@ Route::group(['middleware' => ['Koordinator']], function(){
         'uses' => 'ProgresController@update',
         'as' => 'progres.update'
     ));
+
+    Route::post('/batalkanpengajuanseminar', 'SeminarController@pembatalanJadwal');
+    //Route::post('/batalkanpengajuanujian', 'SidangController@pembatalanJadwal');
 
 });

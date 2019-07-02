@@ -36,7 +36,7 @@
                     @elseif($seminarTA->status == 0)
                         <h6>Anda sudah mengajukan jadwal seminar pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
                     @endif
-                    <h6>Berikut daftar TA yang juga mendaftar dapa jadwal ini :</h6>
+                    <h6>Berikut daftar TA yang juga mendaftar pada jadwal ini :</h6>
                 </div>
                 <div class="">
                     <table class="table table-striped">

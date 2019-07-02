@@ -122,6 +122,7 @@
                                     <td>
                                         @if($seminar->status == 0)
                                             <a class="btn btn-success btn-sm" value="{{$seminar->id_seminar_ta}}">Terima</a>
+                                            <a class="btn btn-danger btn-sm" id="batalpengajuanseminartombol" value="{{$seminar->id_seminar_ta}}">Batalkan</a>
                                         @else
                                             -
                                         @endif
@@ -235,7 +236,7 @@
                                         <td>
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-block btn-info btn-sm">Simpan</button>
-                                                <a class="btn btn-block btn-danger btn-sm" value="{{$seminarDiterima->id_seminar_ta}}">Batalkan</a>
+                                                <a id="batalseminartombol" class="btn btn-block btn-danger btn-sm" value="{{$seminarDiterima->id_seminar_ta}}">Batalkan</a>
                                             </div>
                                         </td>
                                     </form>
@@ -263,6 +264,12 @@
         <input type="text" name="idJadwalSeminar" value="{{$jadwal->id_js}}">
         <input type="text" name="idSeminarTA" id="inpSeminarDitolak">
     </form>
+    <form id="batalkanPengajuan" action="{{url('/batalkanpengajuanseminar')}}" method="POST" style="display: none;">
+        {{csrf_field()}}
+        {{method_field('POST')}}
+        <input type="text" name="idJadwalSeminar" value="{{$jadwal->id_js}}">
+        <input type="text" name="idSeminar" id="inpSeminarDibatalkan">
+    </form>
 @endsection
 
 @section('moreScript')
@@ -284,6 +291,7 @@
             "searching" : false,
             "ordering" : false,
         });
+    });
         $('.btn-success').click(function(){
             var idSeminarTA = $(this).attr('value');
 
@@ -300,7 +308,7 @@
                 $('#terimaSeminar').submit();
             });
         });
-        $('.btn-danger').click(function(){
+        $('#batalseminartombol').click(function(){
             var idSeminarTA = $(this).attr('value');
 
             swal({
@@ -316,7 +324,22 @@
                 $('#batalkanSeminar').submit();
             });
         });
-    });
+        $('#batalpengajuanseminartombol').click(function(){
+            var idSeminarTA = $(this).attr('value');
+            
+            swal({
+                title: "Perhatian",
+                text: "Apakah anda yakin ingin membatalkan pengajuan jadwal seminar?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, Batalkan",
+                cancelButtonText: "Batal"
+            },
+            function(){
+                $('#inpSeminarDibatalkan').val(idSeminarTA)
+                $('#batalkanPengajuan').submit();
+            });
+        });
 </script>
 @endsection
 
