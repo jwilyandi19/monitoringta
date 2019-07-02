@@ -40,7 +40,11 @@ Route::get('/error', 'FrontendController@error');
 
 Route::group(['middleware' => ['Mahasiswa']], function(){
 
-    Route::resource('/progres', 'ProgresController');
+    Route::get('/progres','ProgresController@index')->name('progres.index');
+    Route::get('/progres/create', 'ProgresController@create')->name('progres.create');
+    Route::post('/progres','ProgresController@store')->name('progres.store');
+    Route::get('/progres/{progre}','ProgresController@show')->name('progres.show');
+    Route::delete('/progres/{progre}','ProgresController@destroy')->name('progres.destroy');
 
     //Detail TA
     Route::get('/detailta', 'ProgresController@detail');
@@ -118,5 +122,10 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::post('/tidaklulus', 'UserController@tidakLulus');
     Route::post('/dinyatakanlulus', 'UserController@dinyatakanLulus');
     Route::get('/detailta/{id}', 'UserController@detailTA');
+    Route::get('/progres/{progre}/edit','ProgresController@edit')->name('progres.edit');
+    Route::match(array('PUT', 'PATCH'), "/progres/{progre}", array(
+        'uses' => 'ProgresController@update',
+        'as' => 'progres.update'
+    ));
 
 });

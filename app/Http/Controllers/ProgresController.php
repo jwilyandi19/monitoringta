@@ -160,11 +160,11 @@ class ProgresController extends Controller
 
         if($tugasAkhir->save()){
             $url = url('/progres')."/".$id_ta."/edit";
-            return Redirect::to($url)->with('message', 'Perubahan data Tugas Akhir anda berhasil disimpan');
+            return Redirect::to($url)->with('message', 'Perubahan data Tugas Akhir berhasil disimpan');
         }
         else{
             $url = url('/progres')."/".$id_ta."/edit";
-            return Redirect::to($url)->withErrors('Perubahan data Tugas Akhir anda gagal disimpan');
+            return Redirect::to($url)->withErrors('Perubahan data Tugas Akhir gagal disimpan');
         }
     }
 

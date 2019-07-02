@@ -38,7 +38,6 @@ Status TA
                         <th class="col-md-1 text-center">Pembimbing 1</th>
                         <th class="col-md-1 text-center">Pembimbing 2</th>
                         <th class="col-md-1 text-center">Status</th>
-                        <th class="text-center">Aksi</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -61,13 +60,6 @@ Status TA
                             
                             <td>{{$tugasAkhir->status->keterangan}}</td>
                             
-                            @if($tugasAkhir->id_status == 0)
-                                <td class="text-center">
-                                    <a href="{{url('/progres')}}/{{$tugasAkhir->id_ta}}/edit" class="btn btn-sm btn-info">Ubah</a>
-                                </td>
-                            @else
-                                <td class="text-center">-</td>
-                            @endif
                              
                         </tr>    
                     @endforeach

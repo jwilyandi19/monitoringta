@@ -339,7 +339,6 @@ class UserController extends Controller
             },'ujianTA' => function($query){
                 $query->with(['penguji1Ujian','penguji2Ujian','penguji3Ujian','penguji4Ujian','penguji5Ujian','jadwalUjian']);
             }])->first();
-        //dd($detailta);
         if($detailta){
             $bulan = array(
                 '01' => 'JANUARI',

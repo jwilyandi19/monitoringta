@@ -31,11 +31,6 @@ Ubah Detail Tugas Akhir
         <div class="panel-body isi-halaman">
             <form class="form-horizontal col-md-10 col-md-offset-1" method="POST" action="{{str_replace('/edit','',Request::url())}}">
                 <fieldset>
-                    <div class="form-group alert alert-dismissable alert-warning" style="margin-bottom: 0;">
-                        <button type="button" class="close fade" data-dismiss="alert">&times;</button>
-                        <h4>Perhatian</h4>
-                        <p><strong>Dengan melakukan perubahan anda dinyatakan sadar betul akan perubahan yang anda lakukan pada tugas akhir anda dan sudah menghubungi dosen pembimbing anda</strong></p>
-                    </div>
                     <div class="form-group has-warning">
                         <label class="control-label" for="judulta"><h5>Judul Tugas Akhir</h5></label>
                         <textarea type="text" name="judulTA" class="form-control col-md-10">{{$tugasAkhir->judul}}</textarea>
