@@ -15,6 +15,7 @@ class Berita extends Model
         'id_user',
         'judul_berita',
         'isi_berita',
+        'file',
         'created_at',
         'updated_at',
     ];

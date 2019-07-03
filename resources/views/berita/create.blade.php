@@ -25,11 +25,11 @@
     @endif
     <div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
         <div class="judul-halaman">
-            <h4><strong>Pengajuan Judul Tugas Akhir </strong></h4>
+            <h4><strong>Form Berita </strong></h4>
             <hr>
         </div>
         <div class="panel-body isi-halaman">
-            <form class="form-horizontal col-md-10 col-md-offset-1" method="POST" action="{{url('/home')}}">
+            <form class="form-horizontal col-md-10 col-md-offset-1" enctype="multipart/form-data" method="POST" action="{{url('/home')}}">
                 <fieldset>
                     <div class="form-group has-warning">
                         <label class="control-label" for="judulta"><h5>Judul Berita *</h5></label>
@@ -38,6 +38,10 @@
                     <div class="form-group has-warning">
                         <label class="control-label" for="judulta"><h5>Isi Berita *</h5></label>
                         <textarea type="text" name="isi" class="form-control col-md-10" placeholder="Isi Berita..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"><h5>File Berita</h5></label>
+                        <input type="file" name="fileBerita" class="file form-control col-md-10">
                     </div>
                     <input type="hidden" name="id_user" value="{{Session('user')['id']}}">
                     <br>

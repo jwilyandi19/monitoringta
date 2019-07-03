@@ -1,4 +1,4 @@
-@extends('layout.main')
+ @extends('layout.main')
 
 @section('title')
     Detail Tugas Akhir
@@ -33,6 +33,9 @@
         </div>
         <hr>
         <div class="pull-right">
+            @if($berita->file)
+                <a href="{{url(asset('storage/berita/'.$berita->file))}}" class="btn btn-primary">Download File Berita</a>
+            @endif
             <a href="{{url('/')}}" class="btn btn-default">Kembali</a>
         </div>
         <br>

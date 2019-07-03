@@ -61,9 +61,31 @@ class BeritaController extends Controller
             $berita->judul_berita = $request->judul;
             $berita->isi_berita = $request->isi;
             $berita->id_user = $request->id_user;
-            if($berita->save())
+            if($berita)
             {
-                return Redirect::to('/home/create')->with('message','Berhasil menambahkan berita '.$request->judul);
+                if($request->hasFile('fileBerita') && $request->file('fileBerita')->isValid()) {
+                    $file = $request->fileBerita;
+                    $filename = $file->getClientOriginalName();
+                    $path = 'public/berita';
+                    $flag = $request->fileBerita->storeAs($path."/",$filename);
+
+                    if($flag) {
+                        $berita->file = $filename;
+                        $berita->save();
+                        return Redirect::to('/home/create')->with('message','Berhasil menambahkan berita '.$request->judul);
+                    }
+                    else {
+                        return Redirect::to('/home/create')->withErrors('Gagal membuat Berita');
+                    }
+                }
+                elseif(!$request->hasFile('fileBerita')) {
+                    $berita->save();
+                    return Redirect::to('/home/create')->with('message','Berhasil menambahkan berita');
+                }
+                else {
+                    return Redirect::to('/home/create')->withErrors('Gagal membuat Berita. File tidak valid');
+                }
+
             }
             else
             {
@@ -120,13 +142,35 @@ class BeritaController extends Controller
             $berita->id_user = $request->id_user;
             $berita->judul_berita = $request->judul;
             $berita->isi_berita = $request->isi;
-            if($berita->save())
+            if($berita)
             {
-                return Redirect::to('/home')->with('message','Berhasil mengubah berita');
+                if($request->hasFile('fileBerita') && $request->file('fileBerita')->isValid()) {
+                    $file = $request->fileBerita;
+                    $filename = $file->getClientOriginalName();
+                    $path = 'public/berita';
+                    $flag = $request->fileBerita->storeAs($path."/",$filename);
+
+                    if($flag) {
+                        $berita->file = $filename;
+                        $berita->save();
+                        return Redirect::to('/home')->with('message','Berhasil mengupdate berita '.$request->judul);
+                    }
+                    else {
+                        return Redirect::to('/home')->withErrors('Gagal mengupdate Berita');
+                    }
+                }
+                elseif(!$request->hasFile('fileBerita')) {
+                    $berita->save();
+                    return Redirect::to('/home')->with('message','Berhasil mengupdate berita');
+                }
+                else {
+                    return Redirect::to('/home')->withErrors('Gagal mengupdate Berita. File tidak valid');
+                }
+
             }
             else
             {
-                return Redirect::to('/home')->withErrors('Gagal ketika menyimpan data');
+                return Redirect::to('/home')->withErrors('Gagal mengupdate Berita '.$request->judul);
             }
         }
         else
