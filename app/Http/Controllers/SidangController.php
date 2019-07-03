@@ -238,11 +238,12 @@ class SidangController extends Controller
 
     public function pembatalanJadwal(Request $request){
         $ujianTA = UjianTA::where('id_ujian_ta', $request->idUjian)->first();
+        $id_ju = $request->idJadwalUjian;
         if($ujianTA->delete()){
-            return Redirect::to(url('/pengajuanujian'))->with('message', 'Berhasil membatalkan pengajuan TA');
+            return Redirect::to(url('/formpengujiujian/'.$id_ju))->with('message', 'Berhasil membatalkan pengajuan jadwal sidang TA');
         }
         else{
-            return Redirect::to(url('/pengajuanujian'))->withError('Gagal membatalkan pengajuan TA, silahkan coba lagi');
+            return Redirect::to(url('/formpengujiujian/'.$id_ju))->withError('Gagal membatalkan pengajuan jadwal sidang TA, silahkan coba lagi');
         }
     }
 

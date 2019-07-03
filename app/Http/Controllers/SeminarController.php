@@ -239,10 +239,10 @@ class SeminarController extends Controller
         $seminarTA = SeminarTA::where('id_seminar_ta', $request->idSeminar)->first();
         $id_js = $request->idJadwalSeminar;
         if($seminarTA->delete()){
-            return Redirect::to(url('/formpengujiseminar/'.$id_js))->with('message', 'Berhasil membatalkan pengajuan TA');
+            return Redirect::to(url('/formpengujiseminar/'.$id_js))->with('message', 'Berhasil membatalkan pengajuan jadwal seminar TA');
         }
         else{
-            return Redirect::to(url('/formpengujiseminar/'.$id_js))->withError('Gagal membatalkan pengajuan TA, silahkan coba lagi');
+            return Redirect::to(url('/formpengujiseminar/'.$id_js))->withError('Gagal membatalkan pengajuan jadwal seminar TA, silahkan coba lagi');
         }
     }
 

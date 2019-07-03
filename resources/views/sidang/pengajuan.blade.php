@@ -68,11 +68,6 @@
                         </tbody>
                     </table>
                 </div>
-                @if($ujianTA->status == 0)
-                    <div class="center" style="text-align: center;">
-                        <button class="btn btn-danger" value="{{$ujianTA->id_ujian_ta}}"><i class="glyphicon glyphicon-trash"></i> Batalkan Pengajuan Jadwal Sidang</button>
-                    </div>
-                @endif
             </div>
             <hr>
         @endif

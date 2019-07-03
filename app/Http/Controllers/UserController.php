@@ -209,13 +209,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::where('id_user',$id)->get();
+        $user = User::where('id_user',$id)->first();
         if(User::where('id_user',$id)->delete())
         {
             if($user->role==2) {
                 Dosen::where('id_user',$id)->delete();
             }
-            
             return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
         }
         else

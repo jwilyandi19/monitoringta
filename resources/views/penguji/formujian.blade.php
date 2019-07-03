@@ -122,6 +122,7 @@
                                     <td>
                                         @if($ujian->status == 0)
                                             <a class="btn btn-success btn-sm" value="{{$ujian->id_ujian_ta}}">Terima</a>
+                                            <a class="btn btn-danger btn-sm" id="batalpengajuanujiantobol" value="{{$ujian->id_ujian_ta}}>
                                         @else
                                             -
                                         @endif
@@ -235,7 +236,7 @@
                                         <td>
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-block btn-info btn-sm">Simpan</button>
-                                                <a class="btn btn-block btn-danger btn-sm" value="{{$ujianDiterima->id_ujian_ta}}">Batalkan</a>
+                                                <a id="batalujiantombol" class="btn btn-block btn-danger btn-sm" value="{{$ujianDiterima->id_ujian_ta}}">Batalkan</a>
                                             </div>
                                         </td>
                                     </form>
@@ -263,6 +264,12 @@
         <input type="text" name="idJadwalUjian" value="{{$jadwal->id_ju}}">
         <input type="text" name="idUjianTA" id="inpUjianDitolak">
     </form>
+    <form id="batalkanPengajuan" action="{{url('/batalkanpengajuanujian')}}" method="POST" style="display: none;">
+        {{csrf_field()}}
+        {{method_field('POST')}}
+        <input type="text" name="idJadwalUjian" value="{{$jadwal->id_ju}}">
+        <input type="text" name="idUjian" id="inpSeminarDibatalkan">
+    </form>
 @endsection
 
 @section('moreScript')
@@ -284,6 +291,7 @@
             "searching" : false,
             "ordering" : false,
         });
+    });
         $('.btn-success').click(function(){
             var idUjianTA = $(this).attr('value');
             swal({
@@ -299,7 +307,7 @@
                 $('#terimaUjian').submit();
             });
         });
-        $('.btn-danger').click(function(){
+        $('#batalujiantombol').click(function(){
             var idUjianTA = $(this).attr('value');
 
             swal({
@@ -315,7 +323,22 @@
                 $('#batalkanUjian').submit();
             });
         });
-    });
+        $('#batalpengajuanujiantombol').click(function(){
+            var idUjianTA = $(this).attr('value');
+            
+            swal({
+                title: "Perhatian",
+                text: "Apakah anda yakin ingin membatalkan pengajuan jadwal ujian?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, Batalkan",
+                cancelButtonText: "Batal"
+            },
+            function(){
+                $('#inpUjianDibatalkan').val(idUjianTA)
+                $('#batalkanPengajuan').submit();
+            });
+        });
 </script>
 @endsection
 

@@ -68,11 +68,6 @@
                         </tbody>
                     </table>
                 </div>
-                @if($seminarTA->status == 0)
-                    <div class="center" style="text-align: center;">
-                        <button class="btn btn-danger" value="{{$seminarTA->id_seminar_ta}}"><i class="glyphicon glyphicon-trash"></i> Batalkan Pengajuan Jadwal Seminar</button>
-                    </div>
-                @endif
             </div>
             <hr>
         @endif

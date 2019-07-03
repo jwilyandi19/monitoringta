@@ -60,7 +60,7 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
     Route::get('/pengajuanujian', 'SidangController@pengajuanJadwal');
     Route::post('/pengajuanujian', 'SidangController@doPengajuan');
     Route::get('/formpengajuanujian/{id}', 'SidangController@formPengajuan');
-    Route::post('/batalkanpengajuanujian', 'SidangController@pembatalanJadwal');
+    //Route::post('/batalkanpengajuanujian', 'SidangController@pembatalanJadwal');
     Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
     Route::get('/pengajuan/create', 'PengajuanController@create');
     Route::post('/pengajuan', 'PengajuanController@store');
@@ -129,6 +129,6 @@ Route::group(['middleware' => ['Koordinator']], function(){
     ));
 
     Route::post('/batalkanpengajuanseminar', 'SeminarController@pembatalanJadwal');
-    //Route::post('/batalkanpengajuanujian', 'SidangController@pembatalanJadwal');
+    Route::post('/batalkanpengajuanujian', 'SidangController@pembatalanJadwal');
 
 });
