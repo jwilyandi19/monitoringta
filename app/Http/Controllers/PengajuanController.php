@@ -79,6 +79,8 @@ class PengajuanController extends Controller
             $taBaru->id_user = session('user')['id'];
             $taBaru->id_bidang_mk = $request->bidangMK;
             $taBaru->judul = $request->judulTA;
+            $taBaru->temp_dosbing1 = $request->pembimbing1;
+            $taBaru->temp_dosbing2 = $request->pembimbing2;
             //dd($taBaru);
             if(!$statusTA->tugasAkhirs()->save($taBaru)){
                 return Redirect::to(url('/pengajuan/create'))->withErrors('Gagal Menyimpan Data');
@@ -100,7 +102,7 @@ class PengajuanController extends Controller
                 $dosbing1->peran = 1;
                 $dosbing1->status = 0;
                 if(!$dosbing1->save()){
-                    return Redirect::to(url('/pengajuan/create'))->withErrors('Gagal Menyimpan Data Pembimbing1');
+                    return Redirect::to(url('/pengajuan/create'))->withErrors('Gagal Menyimpan Data pembimbing 1');
                 }
             }
 

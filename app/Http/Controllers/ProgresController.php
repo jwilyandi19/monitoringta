@@ -23,7 +23,14 @@ class ProgresController extends Controller
     public function index()
     {
         $data['tugasAkhirs'] = TugasAkhir::where('id_user', session('user')['id'])->orderBy('id_ta', 'desc')->with(['dosbing1', 'dosbing2', 'status'])->get();
-        //dd($data);
+        $data['pembimbing1temps'] = [];
+        $data['pembimbing2temps'] = [];
+        foreach($data['tugasAkhirs'] as $tugasAkhir) {
+            $dosen1 = Dosen::where('id_dosen',$tugasAkhir->temp_dosbing1)->first();
+            $dosen2 = Dosen::where('id_dosen',$tugasAkhir->temp_dosbing2)->first();
+            array_push($data['pembimbing1temps'], $dosen1);
+            array_push($data['pembimbing2temps'], $dosen2);
+        }
         return view('progres.status', $data);
     }
 
@@ -71,6 +78,11 @@ class ProgresController extends Controller
         $data['bidang_mks'] = BidangMK::all();
         $data['pembimbing1s'] = Dosen::where('pembimbing1', 1)->orderBy('nama')->get();
         $data['pembimbing2s'] = Dosen::orderBy('nama')->get();
+        $p1 = Dosen::where('id_dosen',$data['tugasAkhir']->temp_dosbing1)->first();
+        $p2 = Dosen::where('id_dosen',$data['tugasAkhir']->temp_dosbing2)->first();
+        $data['pembimbing1temp'] = $p1;
+        //dd($data['pembimbing1temp']->id_dosen);
+        $data['pembimbing2temp'] = $p2;
         return view('progres.edit', $data);
     }
 
@@ -87,6 +99,8 @@ class ProgresController extends Controller
         $tugasAkhir = TugasAkhir::where('id_ta',$id_ta)->first();
         $tugasAkhir->judul = $request->judulTA;
         $tugasAkhir->id_bidang_mk = $request->bidangMK;
+        $tugasAkhir->temp_dosbing1 = $request->pembimbing1;
+        $tugasAkhir->temp_dosbing2 = $request->pembimbing2;
         if($tugasAkhir->id_dosbing1){
             if($request->pembimbing1){
                 if($tugasAkhir->id_dosbing1 != $request->pembimbing1){
@@ -185,6 +199,8 @@ class ProgresController extends Controller
         if($detailta){
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
+            $data['pembimbing1'] = Dosen::where('id_dosen',$detailta->temp_dosbing1)->first();
+            $data['pembimbing2'] = Dosen::where('id_dosen',$detailta->temp_dosbing2)->first();
             return view('progres.detail',$data);
         }
         else

@@ -379,6 +379,8 @@ class UserController extends Controller
             $data['semester'] = $semester;
             $data['dibuat'] = $dibuat;
             $data['detailta'] = $detailta;
+            $data['pembimbing1'] = Dosen::where('id_dosen',$detailta->temp_dosbing1)->first();
+            $data['pembimbing2'] = Dosen::where('id_dosen',$detailta->temp_dosbing2)->first();
             $data['bidang_mks'] = BidangMK::all();
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
             return view('user.detail_koordinator',$data);

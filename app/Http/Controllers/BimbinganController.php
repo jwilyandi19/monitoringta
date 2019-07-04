@@ -176,7 +176,17 @@ class BimbinganController extends Controller
 
     public function tolakTA(Request $request){
         $bimbingan = DosenPembimbing::where([['id_ta', '=', $request->idTugasAkhir],['id_dosen', '=', session('user')['id_dosen']]])->first();
+        $pembimbing1 = TugasAkhir::where([['id_ta', '=', $request->idTugasAkhir],['temp_dosbing1', '=', session('user')['id_dosen']]])->first();
+        $pembimbing2 = TugasAkhir::where([['id_ta', '=', $request->idTugasAkhir],['temp_dosbing2', '=', session('user')['id_dosen']]])->first();
         if($bimbingan->delete()){
+            if($pembimbing1) {
+                $pembimbing1->temp_dosbing1 = NULL;
+                $pembimbing1->save();
+            }
+            else if ($pembimbing2) {
+                $pembimbing2->temp_dosbing2 = NULL;
+                $pembimbing2->save();
+            }
             return Redirect::to('/bimbingan')->with('message', 'Berhasil menolak permintaan bimbingan');
         }
         else{

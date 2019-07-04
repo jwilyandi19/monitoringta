@@ -56,6 +56,10 @@ Ubah Detail Tugas Akhir
                             @foreach($pembimbing1s as $key => $pembimbing1)
                                 @if($tugasAkhir->id_dosbing1 && $pembimbing1->id_dosen == $tugasAkhir->id_dosbing1)
                                     <option value="{{$pembimbing1->id_dosen}}" selected>{{$pembimbing1->nama}}</option>
+                                @elseif($pembimbing1temp)
+                                    @if($pembimbing1temp->id_dosen && $pembimbing1->id_dosen == $pembimbing1temp->id_dosen)
+                                        <option value="{{$pembimbing1temp->id_dosen}}" selected>{{$pembimbing1->nama}}</option>
+                                    @endif
                                 @else
                                     <option value="{{$pembimbing1->id_dosen}}">{{$pembimbing1->nama}}</option>
                                 @endif
@@ -71,6 +75,10 @@ Ubah Detail Tugas Akhir
                             @foreach($pembimbing2s as $pembimbing2)
                                 @if($tugasAkhir->id_dosbing2 && $pembimbing2->id_dosen == $tugasAkhir->id_dosbing2)
                                     <option value="{{$pembimbing2->id_dosen}}" selected>{{$pembimbing2->nama}}</option>
+                                @elseif($pembimbing2temp)
+                                    @if($pembimbing2temp->id_dosen && $pembimbing2->id_dosen == $pembimbing2temp->id_dosen)
+                                        <option value="{{$pembimbing2temp->id_dosen}}" selected>{{$pembimbing2->nama}}</option>
+                                    @endif
                                 @else
                                     <option value="{{$pembimbing2->id_dosen}}">{{$pembimbing2->nama}}</option>
                                 @endif

@@ -65,6 +65,8 @@
                     <div class="col-md-9">
                         @if($detailta->id_dosbing1!=null)
                             <h6>{{$detailta->dosbing1->nama_lengkap}}</h6>
+                        @elseif($pembimbing1!=null)
+                            <h6>{{$pembimbing1->nama_lengkap}} (Mengajukan)</h6>
                         @else
                             <h6>-</h6>
                         @endif
@@ -79,6 +81,8 @@
                     <div class="col-md-9">
                         @if($detailta->id_dosbing2!=null)
                             <h6>{{$detailta->dosbing2->nama_lengkap}}</h6>
+                        @elseif($pembimbing2!=null)
+                            <h6>{{$pembimbing2->nama_lengkap}} (Mengajukan)</h6>
                         @else
                             <h6>-</h6>
                         @endif

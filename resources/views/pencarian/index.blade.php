@@ -61,12 +61,16 @@ Pencarian Tugas Akhir
                             
                             @if($tugasAkhir->dosbing1)
                                 <td id="row-pembimbing1" style="white-space: nowrap;">{{$tugasAkhir->dosbing1->nama_lengkap}}</td>
+                            @elseif($pembimbing1temps[$key])
+                                <td id="row-pembimbing1" style="white-space: nowrap;">{{$pembimbing1temps[$key]->nama_lengkap}} (Mengajukan)</td>
                             @else
                                 <td id="row-pembimbing1" style="white-space: nowrap;">-</td>
                             @endif
                             
                             @if($tugasAkhir->dosbing2)
                                 <td id="row-pembimbing2" style="white-space: nowrap;">{{$tugasAkhir->dosbing2->nama_lengkap}}</td>
+                            @elseif($pembimbing2temps[$key])
+                                <td id="row-pembimbing2" style="white-space: nowrap;">{{$pembimbing2temps[$key]->nama_lengkap}} (Mengajukan)</td>
                             @else
                                 <td id="row-pembimbing2" style="white-space: nowrap;">-</td>
                             @endif

@@ -20,6 +20,8 @@ class TugasAkhir extends Model
     'id_rumpun_mk',
     'judul',
     'file',
+    'temp_dosbing1',
+    'temp_dosbing2',
     'created_at',
     'updated_at',
     ];

@@ -41,19 +41,23 @@ Status TA
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($tugasAkhirs as $keys => $tugasAkhir)
+                    @foreach($tugasAkhirs as $index => $tugasAkhir)
                         <tr>
                             <td class="text-center">{{$tugasAkhir->id_ta}}</td>
                             <td>{{date('Y-m-d',strtotime($tugasAkhir->created_at))}}</td>
                             <td>{{$tugasAkhir->judul}}</td>
                             @if($tugasAkhir->dosbing1)
                                 <td>{{$tugasAkhir->dosbing1->nama_lengkap}}</td>
+                            @elseif($pembimbing1temps[$index])
+                                <td>{{$pembimbing1temps[$index]->nama_lengkap}} (Mengajukan)</td>
                             @else
                                 <td class="text-center">-</td>
                             @endif
 
                             @if($tugasAkhir->dosbing2)
                                 <td>{{$tugasAkhir->dosbing2->nama_lengkap}}</td>
+                            @elseif($pembimbing2temps[$index])
+                                <td>{{$pembimbing2temps[$index]->nama_lengkap}} (Mengajukan)</td>
                             @else
                                 <td class="text-center">-</td>
                             @endif
