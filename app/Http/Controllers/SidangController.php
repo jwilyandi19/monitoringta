@@ -39,8 +39,8 @@ class SidangController extends Controller
         $jadwalUjian = array();
         $tanggalUjians = array();
         
-        $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Ujian')->first()->tanggal;
-        $tanggalBuka = Jadwal::where('nama', 'Buka Ketersediaan Ujian')->first()->tanggal;
+        $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Sidang')->first()->tanggal;
+        $tanggalBuka = Jadwal::where('nama', 'Buka Ketersediaan Sidang')->first()->tanggal;
         if((time()-(60*60*24)) > strtotime($tanggalBuka) && (time()-(60*60*24)) < strtotime($tanggalTutup)){
             $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
             $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('sesi')->get();
@@ -98,8 +98,8 @@ class SidangController extends Controller
     }
 
     public function pengajuanJadwal(){
-        $batasTanggalBawah = Jadwal::where('nama', 'Buka Pengajuan Jadwal Ujian')->first()->tanggal;
-        $batasTanggalAtas = Jadwal::where('nama', 'Tutup Pengajuan Jadwal Ujian')->first()->tanggal;
+        $batasTanggalBawah = Jadwal::where('nama', 'Buka Pengajuan Jadwal Sidang')->first()->tanggal;
+        $batasTanggalAtas = Jadwal::where('nama', 'Tutup Pengajuan Jadwal Sidang')->first()->tanggal;
         if((time()-(60*60*24)) > strtotime($batasTanggalBawah) && (time()-(60*60*24)) < strtotime($batasTanggalAtas)){
             $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0']])->first();
             $dayList = array(

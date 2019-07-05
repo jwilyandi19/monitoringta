@@ -23,7 +23,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-calendar"></i> Manajemen Jadwal</a>
                     <ul class="dropdown-menu">
                         <li><a href="{{url('/jadwalseminar')}}"><i class="glyphicon glyphicon-blackboard"></i> Jadwal Seminar TA</a></li>
-                        <li><a href="{{url('/jadwalujian')}}"><i class="glyphicon glyphicon-book"></i> Jadwal Ujian TA</a></li>
+                        <li><a href="{{url('/jadwalujian')}}"><i class="glyphicon glyphicon-book"></i> Jadwal Sidang TA</a></li>
                         <li><a href="{{url('/jadwal')}}"><i class="glyphicon glyphicon-list"></i> Jadwal Aplikasi</a></li>
                     </ul>
                 </li>

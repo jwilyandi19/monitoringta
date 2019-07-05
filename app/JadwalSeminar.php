@@ -14,6 +14,7 @@ class JadwalSeminar extends Model
     'id_js',
     'tanggal',
     'sesi',
+    'ruang',
     'created_at',
     'updated_at',
     ];

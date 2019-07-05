@@ -11,6 +11,11 @@ use App\User;
 use App\TugasAkhir;
 use App\BidangMK;
 use App\Asistensi;
+use App\KetersediaanSeminar;
+use App\KetersediaanUjian;
+use App\PengujiSeminar;
+use App\PengujiUjian;
+use App\DosenPembimbing;
 
 class UserController extends Controller
 {
@@ -210,16 +215,30 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::where('id_user',$id)->first();
-        if(User::where('id_user',$id)->delete())
+        $tugasAkhir = TugasAkhir::where('id_user',$id)->get()->isEmpty();
+        if($tugasAkhir)
         {
             if($user->role==2) {
-                Dosen::where('id_user',$id)->delete();
+                $dosen = Dosen::where('id_user',$id)->first();
+                $ketersediaanSeminar = KetersediaanSeminar::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
+                $ketersediaanUjian = KetersediaanUjian::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
+                $asistensi = Asistensi::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
+                $dosenPembimbing = DosenPembimbing::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
+
+                if($ketersediaanSeminar && $ketersediaanUjian && $asistensi && $dosenPembimbing) {
+                    if(User::where('id_user',$id)->delete() && Dosen::where('id_user',$id)->delete()) {
+                        return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
+                    }
+                }
+                else {
+                    return Redirect::to('/user')->withErrors('Gagal menghapus user. Ada data dosen yang masih tersisa.');
+                }
             }
             return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
         }
         else
         {
-            return Redirect::to('/user')->withErrors('User Tidak Ditemukan');
+            return Redirect::to('/user')->withErrors('Gagal menghapus user. Ada data tugas akhir mahasiswa yang masih tersisa.');
         }
     }
 

@@ -28,6 +28,13 @@
             <h4><strong>List Jadwal Seminar</strong></h4>
             <hr>
         </div>
+        <div class="form-group alert alert-dismissable alert-warning" style="margin-bottom: 0;">
+                <button type="button" class="close fade" data-dismiss="alert">&times;</button>
+                <h4>Perhatian</h4>
+                <p><strong>Pastikan menambah jadwal seminar berada di antara jadwal Buka Pengajuan Jadwal Seminar dan jadwal Tutup Pengajuan Jadwal Seminar. Dan juga 
+                    di antara jadwal Buka Ketersediaan Seminar dan Tutup Ketersediaan Seminar.</strong></p>
+                <p><strong>Jadwal Seminar tidak dapat dihapus jika masih ada Tugas Akhir yang terdapat dalam jadwal tersebut.</strong></p>
+        </div>
         <div class="alert alert-warning center" style="text-align: center;">
             <h5>Tambahkan Tanggal Seminar Baru</h5>
             <button class="btn btn-primary" data-toggle="modal" data-target="#tambahSeminar">Tambahkan Jadwal</button>

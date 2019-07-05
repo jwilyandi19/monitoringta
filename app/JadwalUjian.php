@@ -14,6 +14,7 @@ class JadwalUjian extends Model
     'id_ju',
     'tanggal',
     'sesi',
+    'ruang',
     'created_at',
     'updated_at',
     ];
