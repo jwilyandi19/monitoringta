@@ -62,7 +62,7 @@
                                 {{' Jumat '}}
                             @elseif(date('D',strtotime($ujian->jadwalUjian->tanggal)) == 'Sat')
                                 {{' Sabtu '}}
-                            @endif, {{date('d/m/Y',strtotime($ujian->jadwalUjian->tanggal)).' Sesi '.$ujian->jadwalUjian->sesi}}
+                            @endif, {{date('d/m/Y',strtotime($ujian->jadwalUjian->tanggal)).' Sesi '.$ujian->jadwalUjian->sesi}} (Ruang {{$ujian->jadwalUjian->ruang}})
                             </td>
                             <td style="white-space: nowrap;">{{$ujian->tugasAkhir->bidang->nama_bidang}}</td>
                             <td style="white-space: nowrap;">{{$ujian->tugasAkhir->user->username}}</td>

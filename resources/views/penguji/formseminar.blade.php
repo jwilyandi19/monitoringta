@@ -33,17 +33,17 @@
         <div class="alert alert-warning">
             <div class="col-md-12">
                 @if($jadwal->sesi > 1)
-                    <div class="col-md-3 text-left">
+                    <div class="col-md-2 text-left">
                         <a href="{{url('/formpengujiseminar/'.($jadwal->id_js - 1))}}" class="btn btn-primary">Sesi {{$jadwal->sesi - 1}}</a>
                     </div>
-                    <div class="col-md-6 text-center">
+                    <div class="col-md-8 text-center">
                 @else
-                    <div class="col-md-offset-3 col-md-6 text-center" style="vertical-align: center;">
+                    <div class="col-md-offset-2 col-md-8 text-center" style="vertical-align: center;">
                 @endif
-                    <h5>Hari {{$hari}}, Tanggal {{date('d-m-Y',strtotime($jadwal->tanggal))}} Sesi {{$jadwal->sesi}}</h5>
+                    <h5>Hari {{$hari}}, Tanggal {{date('d-m-Y',strtotime($jadwal->tanggal))}} Ruang {{$jadwal->ruang}} Sesi {{$jadwal->sesi}}</h5>
                 </div>
                 @if($jadwal->sesi < 3)
-                    <div class="col-md-3 text-right" style="vertical-align: center;">
+                    <div class="col-md-2 text-right" style="vertical-align: center;">
                         <a href="{{url('/formpengujiseminar/'.($jadwal->id_js + 1))}}" class="btn btn-primary"> Sesi {{$jadwal->sesi + 1}}</a>
                     </div>
                 @endif

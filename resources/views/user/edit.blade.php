@@ -41,24 +41,6 @@
                         <input type="text" name="username" class="form-control col-md-10" value="{{$user->username}}">
                     </div>
                     <div class="form-group has-warning">
-                        <label class="control-label" for="bidang"><h5>Peran *</h5></label>
-                        <select onchange="hideFunction()" id="peran" class="form-control" name="role">
-                            @if($user->role == 1)
-                                <option value="1" selected>Mahasiswa</option>
-                                <option value="2">Dosen</option>
-                                <option value="3">Koordinator TA</option>
-                            @elseif($user->role == 2)
-                                <option value="1">Mahasiswa</option>
-                                <option value="2" selected>Dosen</option>
-                                <option value="3">Koordinator TA</option>
-                            @else
-                                <option value="1">Mahasiswa</option>
-                                <option value="2">Dosen</option>
-                                <option value="3" selected>Koordinator TA</option>
-                            @endif
-                        </select>
-                    </div>
-                    <div class="form-group has-warning">
                         <label class="control-label" for="judulta"><h5>Nama *</h5></label>
                         <input type="text" name="nama" class="form-control col-md-10" value="{{$user->nama}}">
                     </div>
@@ -92,7 +74,7 @@
             console.log("MASUK")
             var x = document.getElementById("peran").value
             console.log(x)
-            if(x===2) {
+            if(x==2) {
                 console.log("Dosen")
                 $("#nama-lengkap").show()
             }

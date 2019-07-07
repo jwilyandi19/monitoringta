@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    Form Penguji Ujian
+    Form Penguji Sidang
 @endsection
 
 @section('moreStyle')
@@ -27,23 +27,23 @@
 	<div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
 		<div class="judul-halaman">
             <a class="btn btn-default pull-right" href="{{url('/pengujiujian')}}">Kembali</a>
-            <h4><strong>Pengajuan Penguji Ujian</strong></h4>
+            <h4><strong>Pengajuan Penguji Sidang</strong></h4>
             <hr>
         </div>
         <div class="alert alert-warning">
             <div class="col-md-12">
                 @if($jadwal->sesi > 1)
-                    <div class="col-md-3 text-left">
+                    <div class="col-md-2 text-left">
                         <a href="{{url('/formpengujiujian/'.($jadwal->id_ju - 1))}}" class="btn btn-primary">Sesi {{$jadwal->sesi - 1}}</a>
                     </div>
-                    <div class="col-md-6 text-center">
+                    <div class="col-md-8 text-center">
                 @else
-                    <div class="col-md-offset-3 col-md-6 text-center" style="vertical-align: center;">
+                    <div class="col-md-offset-2 col-md-8 text-center" style="vertical-align: center;">
                 @endif
-                    <h5>Hari {{$hari}}, Tanggal {{date('d-m-Y',strtotime($jadwal->tanggal))}} Sesi {{$jadwal->sesi}}</h5>
+                    <h5>Hari {{$hari}}, Tanggal {{date('d-m-Y',strtotime($jadwal->tanggal))}} Ruang {{$jadwal->ruang}} Sesi {{$jadwal->sesi}}</h5>
                 </div>
                 @if($jadwal->sesi < 3)
-                    <div class="col-md-3 text-right" style="vertical-align: center;">
+                    <div class="col-md-2 text-right" style="vertical-align: center;">
                         <a href="{{url('/formpengujiujian/'.($jadwal->id_ju + 1))}}" class="btn btn-primary"> Sesi {{$jadwal->sesi + 1}}</a>
                     </div>
                 @endif
@@ -122,7 +122,7 @@
                                     <td>
                                         @if($ujian->status == 0)
                                             <a class="btn btn-success btn-sm" value="{{$ujian->id_ujian_ta}}">Terima</a>
-                                            <a class="btn btn-danger btn-sm" id="batalpengajuanujiantobol" value="{{$ujian->id_ujian_ta}}>
+                                            <a class="btn btn-danger btn-sm" id="batalpengajuanujiantombol" value="{{$ujian->id_ujian_ta}}">Batalkan</a>
                                         @else
                                             -
                                         @endif
@@ -268,7 +268,7 @@
         {{csrf_field()}}
         {{method_field('POST')}}
         <input type="text" name="idJadwalUjian" value="{{$jadwal->id_ju}}">
-        <input type="text" name="idUjian" id="inpSeminarDibatalkan">
+        <input type="text" name="idUjian" id="inpUjianDibatalkan">
     </form>
 @endsection
 
@@ -325,10 +325,11 @@
         });
         $('#batalpengajuanujiantombol').click(function(){
             var idUjianTA = $(this).attr('value');
+            console.log(idUjianTA);
             
             swal({
                 title: "Perhatian",
-                text: "Apakah anda yakin ingin membatalkan pengajuan jadwal ujian?",
+                text: "Apakah anda yakin ingin membatalkan pengajuan jadwal sidang?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Ya, Batalkan",

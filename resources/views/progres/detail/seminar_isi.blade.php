@@ -10,7 +10,7 @@
         <h6>:</h6>
     </div>
     <div class="col-md-9">
-        <h6>{{date('d-m-Y', strtotime($detailta->seminarTA->jadwalSeminar->tanggal))}} - Sesi : {{$detailta->seminarTA->jadwalSeminar->sesi}}</h6>
+        <h6>{{date('d-m-Y', strtotime($detailta->seminarTA->jadwalSeminar->tanggal))}} - Sesi : {{$detailta->seminarTA->jadwalSeminar->sesi}} Ruang : {{$detailta->seminarTA->jadwalSeminar->ruang}}</h6>
     </div>
 </div>
 

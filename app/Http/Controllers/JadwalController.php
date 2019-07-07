@@ -108,6 +108,7 @@ class JadwalController extends Controller
 
     public function tambahJadwalSeminar(Request $request){
         $tanggal = $request->tanggal;
+        $ruang = $request->ruang;
         $jadwal1 = new JadwalSeminar();
         $jadwal2 = new JadwalSeminar();
         $jadwal3 = new JadwalSeminar();
@@ -117,6 +118,9 @@ class JadwalController extends Controller
         $jadwal1->sesi = 1;
         $jadwal2->sesi = 2;
         $jadwal3->sesi = 3;
+        $jadwal1->ruang = $ruang;
+        $jadwal2->ruang = $ruang;
+        $jadwal3->ruang = $ruang;
         if($jadwal1->save() && $jadwal2->save() && $jadwal3->save()){
             return Redirect::to('/jadwalseminar')->with('message', 'Berhasil menambahkan jadwal seminar baru');
         }
@@ -127,8 +131,9 @@ class JadwalController extends Controller
 
     public function hapusJadwalSeminar(Request $request){
         $tanggal = $request->tanggalPilihan;
+        $ruang = $request->ruang;
         $flag = 0;
-        $jadwalSeminars = JadwalSeminar::select('id_js')->where('tanggal',$tanggal)->get();
+        $jadwalSeminars = JadwalSeminar::select('id_js')->where([['tanggal',$tanggal],['ruang',$ruang]])->get();
         foreach($jadwalSeminars as $jadwalSeminar) {
             $seminar = SeminarTA::where('id_js',$jadwalSeminar->id_js)->get();
             if($seminar->first()) {
@@ -144,7 +149,7 @@ class JadwalController extends Controller
             foreach($jadwalSeminars as $jadwalSeminar) {
                 $ketersediaanSeminar = KetersediaanSeminar::where('id_js',$jadwalSeminar->id_js)->delete();
             }
-            $deleteTanggals = JadwalSeminar::where('tanggal', $tanggal)->delete();
+            $deleteTanggals = JadwalSeminar::where([['tanggal', $tanggal],['ruang',$ruang]])->delete();
             if($deleteTanggals){
                 return Redirect::to('/jadwalseminar');
             }
@@ -162,6 +167,7 @@ class JadwalController extends Controller
 
     public function tambahJadwalUjian(Request $request){
         $tanggal = $request->tanggal;
+        $ruang = $request->ruang;
         $jadwal1 = new JadwalUjian();
         $jadwal2 = new JadwalUjian();
         $jadwal3 = new JadwalUjian();
@@ -171,18 +177,22 @@ class JadwalController extends Controller
         $jadwal1->sesi = 1;
         $jadwal2->sesi = 2;
         $jadwal3->sesi = 3;
+        $jadwal1->ruang = $ruang;
+        $jadwal2->ruang = $ruang;
+        $jadwal3->ruang = $ruang;
         if($jadwal1->save() && $jadwal2->save() && $jadwal3->save()){
             return Redirect::to('/jadwalujian');
         }
         else{
-            return Redirect::to('/jadwalujian')->withError('Gagal menambahkan jadwal seminar baru');
+            return Redirect::to('/jadwalujian')->withError('Gagal menambahkan jadwal sidang baru');
         }
     }
 
     public function hapusJadwalUjian(Request $request){
         $tanggal = $request->tanggalPilihan;
+        $ruang = $request->ruang;
         $flag = 0;
-        $jadwalUjians = JadwalUjian::select('id_ju')->where('tanggal',$tanggal)->get();
+        $jadwalUjians = JadwalUjian::select('id_ju')->where([['tanggal',$tanggal],['ruang',$ruang]])->get();
         foreach($jadwalUjians as $jadwalUjian) {
             $ujian = UjianTA::where('id_ju',$jadwalUjian->id_ju)->get();
             if($ujian->first()) {
@@ -198,7 +208,7 @@ class JadwalController extends Controller
             foreach($jadwalUjians as $jadwalUjian) {
                 $ketersediaanUjian = KetersediaanUjian::where('id_ju',$jadwalUjian->id_ju)->delete();
             }
-            $deleteTanggals = JadwalUjian::where('tanggal', $tanggal)->delete();
+            $deleteTanggals = JadwalUjian::where([['tanggal', $tanggal],['ruang',$ruang]])->delete();
             if($deleteTanggals){
                 return Redirect::to('/jadwalujian');
             }

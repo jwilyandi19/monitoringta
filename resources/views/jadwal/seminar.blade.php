@@ -53,8 +53,8 @@
                     @foreach($jadwal_seminars as $key => $jadwal_seminar)
                         <tr>
                             <td class="text-center">{{$key+1}}</td>
-                            <td class="text-center">{{date('d-m-Y', strtotime($jadwal_seminar->tanggal))}}</td>
-                            <td class="text-center"><button class="btn btn-danger btn-sm" value="{{$jadwal_seminar->tanggal}}"><i class="glyphicon glyphicon-trash"></i> Hapus</button></td>
+                            <td class="text-center">{{date('d-m-Y', strtotime($jadwal_seminar->tanggal))}} (Ruang {{$jadwal_seminar->ruang}})</td>
+                            <td class="text-center"><button class="btn btn-danger btn-sm" value="{{$jadwal_seminar->tanggal}}|{{$jadwal_seminar->ruang}}"><i class="glyphicon glyphicon-trash"></i> Hapus</button></td>
                         </tr>
                     @endforeach
                 @endif
@@ -81,6 +81,12 @@
                                 <input type="date" name="tanggal" class="form-control">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><h6>Pilih Ruang</h6></label>
+                            <div class="col-md-9">
+                                <input type="number" name="ruang" min="1" max="3" class="form-control">
+                            </div>
+                        </div>
                         <hr style="border-top: 1px solid #24292e;">
                         {{csrf_field()}}
                         {{method_field('POST')}}
@@ -98,6 +104,7 @@
         {{csrf_field()}}
         {{method_field('POST')}}
         <input type="date" name="tanggalPilihan" id="inpTanggalPilihan">
+        <input type="number" name="ruang" id="inpRuang">
     </form>
 @endsection
 
@@ -105,8 +112,12 @@
 <script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
 <script type="text/javascript">
     $(document).on('click', '.btn-danger', function(){
-        var tanggal = $(this).attr('value');
+        var inp = $(this).attr('value');
+        var res = inp.split("|");
+        var tanggal = res[0];
+        var ruang = res[1];
         console.log(tanggal);
+        console.log(ruang);
 
         swal({
             title: "Perhatian",
@@ -118,6 +129,7 @@
         },
         function(){
             $('#inpTanggalPilihan').val(tanggal);
+            $('#inpRuang').val(ruang);
             $('#hapusSeminar').submit();
         });
     });

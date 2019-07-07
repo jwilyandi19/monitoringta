@@ -15,7 +15,7 @@ class SeminarController extends Controller
     public function seminarJadwal(){
         $seminarTA = SeminarTA::where('status', 1)->orderBy('created_at')->with([
             'jadwalSeminar' => function($query){
-                $query->orderBy('tanggal', 'des')->orderBy('sesi');
+                $query->orderBy('tanggal', 'des')->orderBy('ruang')->orderBy('sesi');
             }, 'tugasAkhir' => function($query){
                 $query->with(['bidang', 'user']);
             }, 'penguji1', 'penguji2', 'penguji3', 'penguji4', 'penguji5',
@@ -43,7 +43,7 @@ class SeminarController extends Controller
         $tanggalTutup = Jadwal::where('nama', 'Tutup Ketersediaan Seminar')->first()->tanggal;
         if((time()-(60*60*24)) > strtotime($tanggalBuka) && (time()-(60*60*24)) < strtotime($tanggalTutup)){
             $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
-            $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('sesi')->get();
+            $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('ruang')->orderBy('sesi')->get();
             $jumlahJadwal = count($jadwals);
             
             if($jumlahJadwal == 0){
@@ -51,29 +51,32 @@ class SeminarController extends Controller
             }
             else{
                 foreach ($jadwals as $key => $jadwal) {
-                    $jadwalSeminar[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_js;
+                    $jadwalSeminar[$jadwal->tanggal][$jadwal->ruang][$jadwal->sesi] = $jadwal->id_js;
                 }
 
                 $dosens = KetersediaanSeminar::where('id_dosen', session('user')['id_dosen'])->with(['jadwalSeminar' => function($query) use ($awalSemester){
                     $query->where('tanggal', '>', $awalSemester);
                 }])->get();
-                
                 foreach ($dosens as $key => $dosen) {
                     if($dosen->jadwalSeminar){
-                        $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi] = 1;
+                        $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->ruang][$dosen->jadwalSeminar->sesi] = 1;
                     }
                 }
 
-                $dates = array_keys($jadwalSeminar);
-                foreach ($dates as $key => $date) {
-                    $tanggalSeminars[$key]['tanggal'] = $date;
-                    $day = date('D', strtotime($date));
+                $jadwalseminards = JadwalSeminar::where('sesi','1')->get();
+                //dd($jadwalseminards);
+                foreach ($jadwalseminards as $key => $jadwalseminard) {
+                    //dd($jadwalSeminar[$date]);
+                    $tanggalSeminars[$key]['tanggal'] = $jadwalseminard->tanggal;
+                    $day = date('D', strtotime($jadwalseminard->tanggal));
                     $tanggalSeminars[$key]['hari'] = $dayList[$day];
-                    $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$date];
+                    $tanggalSeminars[$key]['ruang'] = $jadwalseminard->ruang;
+                    $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$jadwalseminard->tanggal][$jadwalseminard->ruang];
+    
                 }
                 $data['tanggalSeminars'] = $tanggalSeminars;
                 $data['ketersediaanDosen'] = $ketersediaanDosen;
-
+                //dd($data);
                 return view('seminar.ketersediaan', $data);
             }
         }
@@ -122,6 +125,7 @@ class SeminarController extends Controller
                     $day = date('D', strtotime($jadwalTerdaftar->tanggal));
                     $data['hari'] = $dayList[$day];
                     $data['jadwalTerdaftar'] = $jadwalTerdaftar;
+                    $data['ruang'] = $jadwalTerdaftar->ruang;
                 }
                 $data['seminarTA'] = $seminarTA;
 
@@ -130,7 +134,7 @@ class SeminarController extends Controller
                 $tanggalSeminars = array();
                 
                 $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
-                $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('sesi')->get();
+                $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('ruang')->orderBy('sesi')->get();
                 $jumlahJadwal = count($jadwals);
                 if($jumlahJadwal == 0){
                     return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal seminar belum disediakan');
@@ -168,19 +172,22 @@ class SeminarController extends Controller
                         }
                     }
                     foreach ($jadwals as $key => $jadwal) {
-                        $jadwalSeminar[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_js;
+                        $jadwalSeminar[$jadwal->tanggal][$jadwal->ruang][$jadwal->sesi] = $jadwal->id_js;
                     }
 
-                    $dates = array_keys($jadwalSeminar);
-                    foreach ($dates as $key => $date) {
-                        $tanggalSeminars[$key]['tanggal'] = $date;
-                        $day = date('D', strtotime($date));
+                    $jadwalseminards = JadwalSeminar::where('sesi','1')->get();
+                    //dd($jadwalseminards);
+                    foreach ($jadwalseminards as $key => $jadwalseminard) {
+                        //dd($jadwalSeminar[$date]);
+                        $tanggalSeminars[$key]['tanggal'] = $jadwalseminard->tanggal;
+                        $day = date('D', strtotime($jadwalseminard->tanggal));
                         $tanggalSeminars[$key]['hari'] = $dayList[$day];
-                        $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$date];
+                        $tanggalSeminars[$key]['ruang'] = $jadwalseminard->ruang;
+                        $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$jadwalseminard->tanggal][$jadwalseminard->ruang];
+        
                     }
                     $data['tanggalSeminars'] = $tanggalSeminars;
                     $data['ketersediaanDosen'] = $ketersediaanDosen;
-
                     return view('seminar.pengajuan', $data);
                 }
             }

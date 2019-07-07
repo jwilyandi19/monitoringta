@@ -30,24 +30,30 @@ class PengujiController extends Controller
         $tanggalSeminars = array();
         
         $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
-        $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
+        $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('ruang')->orderBy('sesi')->get();
+        //dd($jadwals);
         $jumlahJadwal = count($jadwals);
         if($jumlahJadwal == 0){
         	return Redirect::to('/error')->with('message', 'Halaman tidak ditemukan, tidak ada tanggal seminar yang sedang aktif saat ini');
         }
         else{
         	foreach ($jadwals as $key => $jadwal) {
-                $jadwalSeminar[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_js;
+                $jadwalSeminar[$jadwal->tanggal][$jadwal->ruang][$jadwal->sesi] = $jadwal->id_js;
             }
-
-            $dates = array_keys($jadwalSeminar);
-            foreach ($dates as $key => $date) {
-                $tanggalSeminars[$key]['tanggal'] = $date;
-                $day = date('D', strtotime($date));
+            //dd($jadwalSeminar);
+            $jadwalseminards = JadwalSeminar::where('sesi','1')->get();
+            //dd($jadwalseminards);
+            foreach ($jadwalseminards as $key => $jadwalseminard) {
+                //dd($jadwalSeminar[$date]);
+                $tanggalSeminars[$key]['tanggal'] = $jadwalseminard->tanggal;
+                $day = date('D', strtotime($jadwalseminard->tanggal));
                 $tanggalSeminars[$key]['hari'] = $dayList[$day];
-                $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$date];
+                $tanggalSeminars[$key]['ruang'] = $jadwalseminard->ruang;
+                $tanggalSeminars[$key]['sesi'] = $jadwalSeminar[$jadwalseminard->tanggal][$jadwalseminard->ruang];
+
             }
             $data['tanggalSeminars'] = $tanggalSeminars;
+            //dd($data);
             
             return view('penguji.pengujiseminar', $data);
         }
@@ -66,6 +72,7 @@ class PengujiController extends Controller
         );
         $jadwal = JadwalSeminar::where('id_js', $id)->first();
         $day = date('D', strtotime($jadwal->tanggal));
+        $ruang = $jadwal->ruang;
 
         $ketersediaanSeminars = KetersediaanSeminar::where('id_js', $id)->with([
             'dosen' => function($query){
@@ -124,6 +131,7 @@ class PengujiController extends Controller
         $data['dosenBersedias'] = $dosenBersedia;
         $data['hari'] = $dayList[$day];
         $data['jadwal'] = $jadwal;
+        $data['ruang'] = $ruang;
         
         return view('penguji.formseminar', $data);
     }
@@ -204,31 +212,30 @@ class PengujiController extends Controller
         $tanggalUjians = array();
         
         $awalSemester = Jadwal::where('nama', 'Awal Semester')->first()->tanggal;
-        $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->get();
+        $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('ruang')->orderBy('sesi')->get();
         $jumlahJadwal = count($jadwals);
         if($jumlahJadwal == 0){
             return Redirect::to('/error')->with('message', 'Halaman tidak ditemukan, tidak ada tanggal ujian yang sedang aktif saat ini');
         }
         else{
             foreach ($jadwals as $key => $jadwal) {
-                $jadwalUjian[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_ju;
+                $jadwalUjian[$jadwal->tanggal][$jadwal->ruang][$jadwal->sesi] = $jadwal->id_ju;
             }
-
-            $dates = array_keys($jadwalUjian);
-            foreach ($dates as $key => $date) {
-                $tanggalUjians[$key]['tanggal'] = $date;
-                $day = date('D', strtotime($date));
+            $jadwalujiands = JadwalUjian::where('sesi','1')->get();
+            foreach ($jadwalujiands as $key => $jadwalujiand) {
+                $tanggalUjians[$key]['tanggal'] = $jadwalujiand->tanggal;
+                $day = date('D', strtotime($jadwalujiand->tanggal));
                 $tanggalUjians[$key]['hari'] = $dayList[$day];
-                $tanggalUjians[$key]['sesi'] = $jadwalUjian[$date];
+                $tanggalUjians[$key]['ruang'] = $jadwalujiand->ruang;
+                $tanggalUjians[$key]['sesi'] = $jadwalUjian[$jadwalujiand->tanggal][$jadwalujiand->ruang];
             }
             $data['tanggalUjians'] = $tanggalUjians;
-            
             return view('penguji.pengujiujian', $data);
         }
     }
 
     public function formUjian($id){
-        $tanggal = Jadwal::where('nama', 'Tutup Ketersediaan Ujian')->first()->tanggal;
+        $tanggal = Jadwal::where('nama', 'Tutup Ketersediaan Sidang')->first()->tanggal;
         $dayList = array(
             'Sun' => 'Minggu',
             'Mon' => 'Senin',
@@ -240,6 +247,7 @@ class PengujiController extends Controller
         );
         $jadwal = JadwalUjian::where('id_ju', $id)->first();
         $day = date('D', strtotime($jadwal->tanggal));
+        $ruang = $jadwal->ruang;
 
         $ketersediaanUjians = KetersediaanUjian::where('id_ju', $id)->with([
             'dosen' => function($query){
@@ -296,6 +304,7 @@ class PengujiController extends Controller
         $data['dosenBersedias'] = $dosenBersedia;
         $data['hari'] = $dayList[$day];
         $data['jadwal'] = $jadwal;
+        $data['ruang'] = $ruang;
         
         return view('penguji.formujian', $data);
     }

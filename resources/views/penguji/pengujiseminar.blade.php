@@ -32,7 +32,7 @@
                 @foreach($tanggalSeminars as $key => $tanggalSeminar)
                     <div class="kotak-tanggal">
                         <div class="panel tanggal">
-                            <p><strong>{{$tanggalSeminar['hari'].", ".date('d-m-Y',strtotime($tanggalSeminar['tanggal']))}}</strong></p>
+                            <p><strong>{{$tanggalSeminar['hari'].", ".date('d-m-Y',strtotime($tanggalSeminar['tanggal']))}} (Ruang {{$tanggalSeminar['ruang']}})</strong></p>
                         </div>
                         <div class="panel sesi-tanggal">
                             @foreach($tanggalSeminar['sesi'] as $keys => $sesi)

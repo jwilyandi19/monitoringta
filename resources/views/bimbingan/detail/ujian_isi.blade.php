@@ -1,16 +1,16 @@
 {{--Header--}}
 <div>
-    <h4>Ujian Tugas Akhir</h4>
+    <h4>Sidang Tugas Akhir</h4>
 </div>
 
 {{--Tanggal--}}
 <div class="row">
-    <label class="col-md-2"><h6 class="pull-left">Tanggal Seminar</h6></label>
+    <label class="col-md-2"><h6 class="pull-left">Tanggal Sidang</h6></label>
     <div class="col-md-1" style="text-align: right;">
         <h6>:</h6>
     </div>
     <div class="col-md-9">
-        <h6>{{date('d-m-Y', strtotime($detailta->ujianTA->jadwalUjian->tanggal))}} - Sesi : {{$detailta->ujianTA->jadwalUjian->sesi}}</h6>
+        <h6>{{date('d-m-Y', strtotime($detailta->ujianTA->jadwalUjian->tanggal))}} - Sesi : {{$detailta->ujianTA->jadwalUjian->sesi}} - Ruang : {{$detailta->ujianTA->jadwalUjian->ruang}}</h6>
     </div>
 </div>
 

@@ -42,11 +42,11 @@
                 @foreach($tanggalSeminars as $key => $tanggalSeminar)
                     <div class="kotak-tanggal">
                         <div class="panel tanggal">
-                            <p><strong>{{$tanggalSeminar['hari'].", ".$tanggalSeminar['tanggal']}}</strong></p>
+                            <p><strong>{{$tanggalSeminar['hari'].", ".$tanggalSeminar['tanggal']}} (Ruang {{$tanggalSeminar['ruang']}})</strong></p>
                         </div>
                         <div class="panel sesi-tanggal">
                             @foreach($tanggalSeminar['sesi'] as $key => $sesi)
-                                @if(isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$key]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$key] == 1)
+                                @if(isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key] == 1)
                                     <button id="tombolBersedia" class="btn btn-default btn-xs btn-block sesi sesi-success" value="{{$sesi}}"><p>sesi {{$key}}</p></button>
                                 @else
                                     <button id="tidakBersedia" class="btn btn-default btn-xs btn-block sesi" value="{{$sesi}}"><p>sesi {{$key}}</p></button>

@@ -32,11 +32,11 @@
             <div class="">
                 <div class="">
                     @if($ujianTA->status == 1)
-                        <h6>Pengajuan jadwal sidang anda sudah disetujui pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                        <h6>Pengajuan jadwal sidang anda sudah disetujui pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} ruang {{$jadwalTerdaftar->ruang}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
                     @elseif($ujianTA->status == 0)
-                        <h6>Anda sudah mengajukan jadwal sidang pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                        <h6>Anda sudah mengajukan jadwal sidang pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} ruang {{$jadwalTerdaftar->ruang}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
                     @endif
-                    <h6>Berikut daftar TA yang juga mendaftar dapa jadwal ini :</h6>
+                    <h6>Berikut daftar TA yang juga mendaftar pada jadwal ini :</h6>
                 </div>
                 <div class="">
                     <table class="table table-striped">
@@ -71,6 +71,7 @@
             </div>
             <hr>
         @endif
+        @if(!$ujianTA)
         <div class="alert alert-info">
             <h4>Perhatian</h4>
             <p>Berikut merupakan jadwal sidang yang tersedia, dengan menekan tombol sesi anda akan diarahkan pada form pengajuan jadwal dari sesi dan tanggal yang anda pilih.</p>
@@ -94,13 +95,13 @@
                 @foreach($tanggalUjians as $key => $tanggalUjian)
                     <div class="kotak-tanggal">
                         <div class="panel tanggal">
-                            <p><strong>{{$tanggalUjian['hari'].", ".$tanggalUjian['tanggal']}}</strong></p>
+                            <p><strong>{{$tanggalUjian['hari'].", ".$tanggalUjian['tanggal']}} (Ruang {{$tanggalUjian['ruang']}})</strong></p>
                         </div>
                         <div class="panel sesi-tanggal">
                             @foreach($tanggalUjian['sesi'] as $key => $sesi)
-                                @if((isset($ketersediaanDosen[$tanggalUjian['tanggal']][$key][1]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$key][1] == 1) && (isset($ketersediaanDosen[$tanggalUjian['tanggal']][$key][2]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$key][2] == 1))
+                                @if((isset($ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key][1]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key][1] == 1) && (isset($ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key][2]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key][2] == 1))
                                     <a href="{{url('/formpengajuanujian/'.$sesi)}}" class="btn btn-default btn-xs btn-block sesi sesi-success"><p>sesi {{$key}}</p></a>
-                                @elseif((isset($ketersediaanDosen[$tanggalUjian['tanggal']][$key][1]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$key][1] == 1) || (isset($ketersediaanDosen[$tanggalUjian['tanggal']][$key][2]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$key][2] == 1))
+                                @elseif((isset($ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key][1]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key][1] == 1) || (isset($ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key][2]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key][2] == 1))
                                     <button id="tombolBersedia" class="btn btn-default btn-xs btn-block sesi sesi-warning"><p>sesi {{$key}}</p></button>
                                 @else
                                     <button id="tidakBersedia" class="btn btn-default btn-xs btn-block sesi" value="{{$sesi}}"><p>sesi {{$key}}</p></button>
@@ -111,6 +112,7 @@
                 @endforeach
             </div>
         </div>
+        @endif
     </div>  
     <form id="batalkanPengajuan" action="{{url('/batalkanpengajuanujian')}}" method="POST" style="display: none;">
         {{csrf_field()}}

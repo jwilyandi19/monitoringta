@@ -16,6 +16,8 @@ use App\KetersediaanUjian;
 use App\PengujiSeminar;
 use App\PengujiUjian;
 use App\DosenPembimbing;
+use App\SeminarTA;
+use App\UjianTA;
 
 class UserController extends Controller
 {
@@ -164,7 +166,6 @@ class UserController extends Controller
         if($user->role == 2)
         {
             $data['user'] = User::where('id_user',$id)->with('akunDosen')->first();
-            dd($data['user']);
             return view('user.edit',$data);
         }
         else
@@ -215,12 +216,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::where('id_user',$id)->first();
-        $tugasAkhir = TugasAkhir::where('id_user',$id)->get()->isEmpty();
-        if($tugasAkhir)
+        $tugasAkhir = TugasAkhir::where('id_user',$id)->first();
+        if(!$tugasAkhir)
         {
             if($user->role==2) {
                 $dosen = Dosen::where('id_user',$id)->first();
-                $ketersediaanSeminar = KetersediaanSeminar::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
+                KetersediaanSeminar::where('id_dosen',$dosen->id_dosen)->
                 $ketersediaanUjian = KetersediaanUjian::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
                 $asistensi = Asistensi::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
                 $dosenPembimbing = DosenPembimbing::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
@@ -234,11 +235,20 @@ class UserController extends Controller
                     return Redirect::to('/user')->withErrors('Gagal menghapus user. Ada data dosen yang masih tersisa.');
                 }
             }
-            return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
+            else {
+                User::where($id_user,$id)->delete();
+                return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
+            }
         }
         else
         {
-            return Redirect::to('/user')->withErrors('Gagal menghapus user. Ada data tugas akhir mahasiswa yang masih tersisa.');
+            Asistensi::where('id_ta',$tugasAkhir->id_ta)->delete();
+            SeminarTA::where('id_ta',$tugasAkhir->id_ta)->delete();
+            UjianTA::where('id_ta',$tugasAkhir->id_ta)->delete();
+            DosenPembimbing::where('id_ta',$tugasAkhir->id_ta)->delete();
+            TugasAkhir::where('id_user',$id)->delete();
+            User::where('id_user',$id)->delete();
+            return Redirect::to('/user')->with('message','Data user '.$id.' berhasil terhapus.');
         }
     }
 

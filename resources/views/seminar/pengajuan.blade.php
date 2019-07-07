@@ -32,9 +32,9 @@
             <div class="">
                 <div class="">
                     @if($seminarTA->status == 1)
-                        <h6>Pengajuan jadwal seminar anda sudah disetujui pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                        <h6>Pengajuan jadwal seminar anda sudah disetujui pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} ruang {{$jadwalTerdaftar->ruang}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
                     @elseif($seminarTA->status == 0)
-                        <h6>Anda sudah mengajukan jadwal seminar pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
+                        <h6>Anda sudah mengajukan jadwal seminar pada hari {{$hari}} tanggal {{$jadwalTerdaftar->tanggal}} ruang {{$jadwalTerdaftar->ruang}} sesi {{$jadwalTerdaftar->sesi}}.</h6>
                     @endif
                     <h6>Berikut daftar TA yang juga mendaftar pada jadwal ini :</h6>
                 </div>
@@ -71,6 +71,7 @@
             </div>
             <hr>
         @endif
+        @if(!$seminarTA)
         <div class="alert alert-info">
             <h4>Perhatian</h4>
             <p>Berikut merupakan jadwal seminar yang tersedia, dengan menekan tombol sesi anda akan diarahkan pada form pengajuan jadwal dari sesi dan tanggal yang anda pilih.</p>
@@ -94,7 +95,7 @@
                 @foreach($tanggalSeminars as $key => $tanggalSeminar)
                     <div class="kotak-tanggal">
                         <div class="panel tanggal">
-                            <p><strong>{{$tanggalSeminar['hari'].", ".$tanggalSeminar['tanggal']}}</strong></p>
+                            <p><strong>{{$tanggalSeminar['hari'].", ".$tanggalSeminar['tanggal']}} (Ruang {{$tanggalSeminar['ruang']}})</strong></p>
                         </div>
                         <div class="panel sesi-tanggal">
                             @foreach($tanggalSeminar['sesi'] as $key => $sesi)
@@ -111,6 +112,7 @@
                 @endforeach
             </div>
         </div>
+        @endif
     </div>  
     <form id="batalkanPengajuan" action="{{url('/batalkanpengajuanseminar')}}" method="POST" style="display: none;">
         {{csrf_field()}}

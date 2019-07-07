@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    Penguji Ujian
+    Penguji Sidang
 @endsection
 
 @section('moreStyle')
@@ -24,7 +24,7 @@
     @endif
     <div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
         <div class="judul-halaman">
-            <h4><strong>Penguji Ujian</strong></h4>
+            <h4><strong>Penguji Sidang</strong></h4>
             <hr>
         </div>
         <div class="">
@@ -32,7 +32,7 @@
                 @foreach($tanggalUjians as $key => $tanggalUjian)
                     <div class="kotak-tanggal">
                         <div class="panel tanggal">
-                            <p><strong>{{$tanggalUjian['hari'].", ".date('d-m-Y',strtotime($tanggalUjian['tanggal']))}}</strong></p>
+                            <p><strong>{{$tanggalUjian['hari'].", ".date('d-m-Y',strtotime($tanggalUjian['tanggal']))}} (Ruang {{$tanggalUjian['ruang']}})</strong></p>
                         </div>
                         <div class="panel sesi-tanggal">
                             @foreach($tanggalUjian['sesi'] as $keys => $sesi)

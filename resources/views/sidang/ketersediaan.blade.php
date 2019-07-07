@@ -25,12 +25,12 @@
     @endif
 	<div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
 		<div class="judul-halaman">
-            <h4><strong>Ketersediaan Jadwal Ujian</strong></h4>
+            <h4><strong>Ketersediaan Jadwal Sidang</strong></h4>
             <hr>
         </div>
         <div class="alert alert-warning">
             <h4>Perhatian</h4>
-            <p>Berikut merupakan form ketersediaan jadwal seminar dosen, dengan menekan tombol sesi anda dinyatakan bersedia untuk mengikuti seminar pada sesi dan tanggal yang terpilih </p>
+            <p>Berikut merupakan form ketersediaan jadwal sidang dosen, dengan menekan tombol sesi anda dinyatakan bersedia untuk mengikuti sidang pada sesi dan tanggal yang terpilih </p>
             <br>
             <div class="center row" style="text-align: center;">
                 <button class="col-md-offset-2 col-md-3 btn btn-default btn-xs sesi sesi-success"><p>Bersedia</p></button>
@@ -42,11 +42,11 @@
                 @foreach($tanggalUjians as $key => $tanggalUjian)
                     <div class="kotak-tanggal">
                         <div class="panel tanggal">
-                            <p><strong>{{$tanggalUjian['hari'].", ".$tanggalUjian['tanggal']}}</strong></p>
+                            <p><strong>{{$tanggalUjian['hari'].", ".$tanggalUjian['tanggal']}} (Ruang {{$tanggalUjian['ruang']}})</strong></p>
                         </div>
                         <div class="panel sesi-tanggal">
                             @foreach($tanggalUjian['sesi'] as $key => $sesi)
-                                @if(isset($ketersediaanDosen[$tanggalUjian['tanggal']][$key]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$key] == 1)
+                                @if(isset($ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key]) && $ketersediaanDosen[$tanggalUjian['tanggal']][$tanggalUjian['ruang']][$key] == 1)
                                     <button id="tombolBersedia" class="btn btn-default btn-xs btn-block sesi sesi-success" value="{{$sesi}}"><p>sesi {{$key}}</p></button>
                                 @else
                                     <button id="tidakBersedia" class="btn btn-default btn-xs btn-block sesi" value="{{$sesi}}"><p>sesi {{$key}}</p></button>

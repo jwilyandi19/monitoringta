@@ -51,7 +51,7 @@ class SidangController extends Controller
             }
             else{
                 foreach ($jadwals as $key => $jadwal) {
-                    $jadwalUjian[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_ju;
+                    $jadwalUjian[$jadwal->tanggal][$jadwal->ruang][$jadwal->sesi] = $jadwal->id_ju;
                 }
 
                 $dosens = KetersediaanUjian::where('id_dosen', session('user')['id_dosen'])->with(['jadwalUjian' => function($query) use ($awalSemester){
@@ -60,16 +60,17 @@ class SidangController extends Controller
                 
                 foreach ($dosens as $key => $dosen) {
                     if($dosen->jadwalUjian){
-                        $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->sesi] = 1;
+                        $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->ruang][$dosen->jadwalUjian->sesi] = 1;
                     }
                 }
 
-                $dates = array_keys($jadwalUjian);
-                foreach ($dates as $key => $date) {
-                    $tanggalUjians[$key]['tanggal'] = $date;
-                    $day = date('D', strtotime($date));
+                $jadwalujiands = JadwalUjian::where('sesi','1')->get();
+                foreach ($jadwalujiands as $key => $jadwalujiand) {
+                    $tanggalUjians[$key]['tanggal'] = $jadwalujiand->tanggal;
+                    $day = date('D', strtotime($jadwalujiand->tanggal));
                     $tanggalUjians[$key]['hari'] = $dayList[$day];
-                    $tanggalUjians[$key]['sesi'] = $jadwalUjian[$date];
+                    $tanggalUjians[$key]['ruang'] = $jadwalujiand->ruang;
+                    $tanggalUjians[$key]['sesi'] = $jadwalUjian[$jadwalujiand->tanggal][$jadwalujiand->ruang];
                 }
                 $data['tanggalUjians'] = $tanggalUjians;
                 $data['ketersediaanDosen'] = $ketersediaanDosen;
@@ -162,23 +163,24 @@ class SidangController extends Controller
                     foreach ($dosens as $key => $dosen) {
                         if($dosen->jadwalUjian){
                             if($dosen->id_dosen == $tugasAkhir->id_dosbing1){
-                                $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->sesi][1] = 1;
+                                $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->ruang][$dosen->jadwalUjian->sesi][1] = 1;
                             }
                             else if($dosen->id_dosen == $tugasAkhir->id_dosbing2){
-                                $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->sesi][2] = 1;
+                                $ketersediaanDosen[$dosen->jadwalUjian->tanggal][$dosen->jadwalUjian->ruang][$dosen->jadwalUjian->sesi][2] = 1;
                             }
                         }
                     }
                     foreach ($jadwals as $key => $jadwal) {
-                        $jadwalUjian[$jadwal->tanggal][$jadwal->sesi] = $jadwal->id_ju;
+                        $jadwalUjian[$jadwal->tanggal][$jadwal->ruang][$jadwal->sesi] = $jadwal->id_ju;
                     }
 
-                    $dates = array_keys($jadwalUjian);
-                    foreach ($dates as $key => $date) {
-                        $tanggalUjians[$key]['tanggal'] = $date;
-                        $day = date('D', strtotime($date));
+                    $jadwalujiands = JadwalUjian::where('sesi','1')->get();
+                    foreach ($jadwalujiands as $key => $jadwalujiand) {
+                        $tanggalUjians[$key]['tanggal'] = $jadwalujiand->tanggal;
+                        $day = date('D', strtotime($jadwalujiand->tanggal));
                         $tanggalUjians[$key]['hari'] = $dayList[$day];
-                        $tanggalUjians[$key]['sesi'] = $jadwalUjian[$date];
+                        $tanggalUjians[$key]['ruang'] = $jadwalujiand->ruang;
+                        $tanggalUjians[$key]['sesi'] = $jadwalUjian[$jadwalujiand->tanggal][$jadwalujiand->ruang];
                     }
                     $data['tanggalUjians'] = $tanggalUjians;
                     $data['ketersediaanDosen'] = $ketersediaanDosen;
@@ -195,8 +197,8 @@ class SidangController extends Controller
     }
 
     public function formPengajuan($id){
-        $batasTanggalBawah = Jadwal::where('nama', 'Buka Pengajuan Jadwal Ujian')->first()->tanggal;
-        $batasTanggalAtas = Jadwal::where('nama', 'Tutup Pengajuan Jadwal Ujian')->first()->tanggal;
+        $batasTanggalBawah = Jadwal::where('nama', 'Buka Pengajuan Jadwal Sidang')->first()->tanggal;
+        $batasTanggalAtas = Jadwal::where('nama', 'Tutup Pengajuan Jadwal Sidang')->first()->tanggal;
         if((time()-(60*60*24)) > strtotime($batasTanggalBawah) && (time()-(60*60*24)) < strtotime($batasTanggalAtas)) {
             $tugasAkhir = TugasAkhir::where([['id_user', session('user')['id']],['id_status', '>=', '0']])->first();
             $ujianTA = UjianTA::where('id_ta', $tugasAkhir->id_ta)->first();
