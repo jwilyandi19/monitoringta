@@ -164,10 +164,10 @@ class SeminarController extends Controller
                     foreach ($dosens as $key => $dosen) {
                         if($dosen->jadwalSeminar){
                             if($dosen->id_dosen == $tugasAkhir->id_dosbing1){
-                                $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi][1] = 1;
+                                $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->ruang][$dosen->jadwalSeminar->sesi][1] = 1;
                             }
                             else if($dosen->id_dosen == $tugasAkhir->id_dosbing2){
-                                $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->sesi][2] = 1;
+                                $ketersediaanDosen[$dosen->jadwalSeminar->tanggal][$dosen->jadwalSeminar->ruang][$dosen->jadwalSeminar->sesi][2] = 1;
                             }
                         }
                     }

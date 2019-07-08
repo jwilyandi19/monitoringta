@@ -131,4 +131,6 @@ Route::group(['middleware' => ['Koordinator']], function(){
     Route::post('/batalkanpengajuanseminar', 'SeminarController@pembatalanJadwal');
     Route::post('/batalkanpengajuanujian', 'SidangController@pembatalanJadwal');
 
+    Route::get('/ketersediaanseminardosen','KetersediaanController@ketersediaanSeminar');
+    Route::get('/ketersediaansidangdosen','KetersediaanController@ketersediaanSidang');
 });

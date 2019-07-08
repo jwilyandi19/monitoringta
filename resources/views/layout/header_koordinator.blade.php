@@ -37,6 +37,14 @@
                 </li>
 
                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Ketersediaan</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{url('/ketersediaanseminardosen')}}"><i class="glyphicon glyphicon-blackboard"></i> Seminar</a></li>
+                        <li><a href="{{url('/ketersediaansidangdosen')}}"><i class="glyphicon glyphicon-book"></i> Sidang</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-education"></i> Manage User </a>
                     <ul class="dropdown-menu">
                         <li><a href="{{url('/user/create')}}"><i class="glyphicon glyphicon-user"></i> Buat User</a></li>
