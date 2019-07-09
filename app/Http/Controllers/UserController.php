@@ -221,19 +221,23 @@ class UserController extends Controller
         {
             if($user->role==2) {
                 $dosen = Dosen::where('id_user',$id)->first();
-                KetersediaanSeminar::where('id_dosen',$dosen->id_dosen)->
-                $ketersediaanUjian = KetersediaanUjian::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
-                $asistensi = Asistensi::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
-                $dosenPembimbing = DosenPembimbing::where('id_dosen',$dosen->id_dosen)->get()->isEmpty();
-
-                if($ketersediaanSeminar && $ketersediaanUjian && $asistensi && $dosenPembimbing) {
-                    if(User::where('id_user',$id)->delete() && Dosen::where('id_user',$id)->delete()) {
-                        return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
-                    }
+                $idDosen = $dosen->id_dosen
+                $dosenPembimbing = DosenPembimbing::where('id_dosen',$idDosen)->get();
+                $seminarTA = SeminarTA::where('id_penguji1',$idDosen)->orWhere('id_penguji2',$idDosen)->orWhere('id_penguji3',$idDosen)->orWhere('id_penguji4',$idDosen)->orWhere('id_penguji5',$idDosen)->get();
+                $sidangTA = UjianTA::where('id_penguji1',$idDosen)->orWhere('id_penguji2',$idDosen)->orWhere('id_penguji3',$idDosen)->orWhere('id_penguji4',$idDosen)->orWhere('id_penguji5',$idDosen)->get();
+                if($dosenPembimbing || $seminarTA || $sidangTA) {
+                    return Redirect::to('/user')->withErrors('Gagal menghapus user. Dosen yang bersangkutan masih menjadi penguji ataupun pembimbing');
                 }
                 else {
-                    return Redirect::to('/user')->withErrors('Gagal menghapus user. Ada data dosen yang masih tersisa.');
+                    KetersediaanSeminar::where('id_dosen',$dosen->id_dosen)->delete();
+                    KetersediaanUjian::where('id_dosen',$dosen->id_dosen)->delete();
+                    Asistensi::where('id_dosen',$dosen->id_dosen)->delete();
+                    Dosen::where('id_user',$id)->delete();
+                    User::where('id_user',$id)->delete();
+                    return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
+
                 }
+
             }
             else {
                 User::where($id_user,$id)->delete();
