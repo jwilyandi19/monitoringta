@@ -28,7 +28,7 @@ class KetersediaanController extends Controller
         $jadwals = JadwalSeminar::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('ruang')->orderBy('sesi')->get();
         $jumlahJadwal = count($jadwals);
         if($jumlahJadwal == 0){
-            return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal seminar belum disediakan');
+            return Redirect::to(url('/error'))->withErrors('Halaman tidak tersedia karena jadwal seminar belum disediakan');
         }
         else {
             $dosens = Dosen::all();
@@ -66,7 +66,7 @@ class KetersediaanController extends Controller
         $jadwals = JadwalUjian::where('tanggal', '>', $awalSemester)->orderBy('tanggal')->orderBy('ruang')->orderBy('sesi')->get();
         $jumlahJadwal = count($jadwals);
         if($jumlahJadwal == 0){
-            return Redirect::to(url('/error'))->with('message', 'Halaman tidak tersedia karena jadwal sidang belum disediakan');
+            return Redirect::to(url('/error'))->withErrors('Halaman tidak tersedia karena jadwal sidang belum disediakan');
         }
         else {
             $dosens = Dosen::all();
