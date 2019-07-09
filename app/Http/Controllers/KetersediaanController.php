@@ -9,6 +9,7 @@ use App\Jadwal;
 use App\JadwalSeminar;
 use App\JadwalUjian;
 use App\Dosen;
+use Redirect;
 
 class KetersediaanController extends Controller
 {
