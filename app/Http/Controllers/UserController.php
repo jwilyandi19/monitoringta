@@ -222,9 +222,9 @@ class UserController extends Controller
             if($user->role==2) {
                 $dosen = Dosen::where('id_user',$id)->first();
                 $idDosen = $dosen->id_dosen;
-                $dosenPembimbing = DosenPembimbing::where('id_dosen',$idDosen)->get();
-                $seminarTA = SeminarTA::where('id_penguji1',$idDosen)->orWhere('id_penguji2',$idDosen)->orWhere('id_penguji3',$idDosen)->orWhere('id_penguji4',$idDosen)->orWhere('id_penguji5',$idDosen)->get();
-                $sidangTA = UjianTA::where('id_penguji1',$idDosen)->orWhere('id_penguji2',$idDosen)->orWhere('id_penguji3',$idDosen)->orWhere('id_penguji4',$idDosen)->orWhere('id_penguji5',$idDosen)->get();
+                $dosenPembimbing = DosenPembimbing::where('id_dosen',$idDosen)->first();
+                $seminarTA = SeminarTA::where('id_penguji1',$idDosen)->orWhere('id_penguji2',$idDosen)->orWhere('id_penguji3',$idDosen)->orWhere('id_penguji4',$idDosen)->orWhere('id_penguji5',$idDosen)->first();
+                $sidangTA = UjianTA::where('id_penguji1',$idDosen)->orWhere('id_penguji2',$idDosen)->orWhere('id_penguji3',$idDosen)->orWhere('id_penguji4',$idDosen)->orWhere('id_penguji5',$idDosen)->first();
                 if($dosenPembimbing || $seminarTA || $sidangTA) {
                     return Redirect::to('/user')->withErrors('Gagal menghapus user. Dosen yang bersangkutan masih menjadi penguji ataupun pembimbing');
                 }
