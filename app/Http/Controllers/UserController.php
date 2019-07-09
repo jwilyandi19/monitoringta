@@ -240,7 +240,7 @@ class UserController extends Controller
 
             }
             else {
-                User::where($id_user,$id)->delete();
+                User::where('id_user',$id)->delete();
                 return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
             }
         }

@@ -34,7 +34,7 @@ class AuthController extends Controller
         }
         else{
         	$username = $request->username;
-        	$user = DB::table('user')->where('username', $username)->first();
+        	$user = User::where('username', $username)->first();
         	if($user){
         		if(Hash::check($request->password, $user->password)){
     				if($user->role == 2){
