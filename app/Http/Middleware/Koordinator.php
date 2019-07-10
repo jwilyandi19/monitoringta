@@ -16,11 +16,11 @@ class Koordinator
     public function handle($request, Closure $next)
     {
         if(!session('user')){
-            return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
+            return redirect('/')->withErrors('Halaman Tidak Ditemukan');
         }
         else{
             if(session('user')['role'] != 3){
-                return redirect('/home')->withErrors('Halaman Tidak Ditemukan');
+                return redirect('/')->withErrors('Halaman Tidak Ditemukan');
             }
             return $next($request);
         }
