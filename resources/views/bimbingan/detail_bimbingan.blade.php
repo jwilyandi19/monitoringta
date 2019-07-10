@@ -66,7 +66,7 @@
                         @if($detailta->id_dosbing1!=null)
                             <h6>{{$detailta->dosbing1->nama_lengkap}}</h6>
                         @elseif($detailta->temp_dosbing1!=null)
-                            <h6>{{$pembimbing1->nama_lengkap}}</h6>
+                            <h6>{{$pembimbing1->nama_lengkap}} (Mengajukan)</h6>
                         @else
                             <h6>-</h6>
                         @endif
@@ -82,7 +82,7 @@
                         @if($detailta->id_dosbing2!=null)
                             <h6>{{$detailta->dosbing2->nama_lengkap}}</h6>
                         @elseif($detailta->temp_dosbing2!=null)
-                            <h6>{{$pembimbing2->nama_lengkap}}</h6>
+                            <h6>{{$pembimbing2->nama_lengkap}} (Mengajukan)</h6>
                         @else
                             <h6>-</h6>
                         @endif
