@@ -99,7 +99,7 @@
                         </div>
                         <div class="panel sesi-tanggal">
                             @foreach($tanggalSeminar['sesi'] as $key => $sesi)
-                                @if((isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][1]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][1] == 1) && (isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][2]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$tanggalSeminar[]][$key][2] == 1))
+                                @if((isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][1]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][1] == 1) && (isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][2]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][2] == 1))
                                     <a href="{{url('/formpengajuanseminar/'.$sesi)}}" class="btn btn-default btn-xs btn-block sesi sesi-success"><p>sesi {{$key}}</p></a>
                                 @elseif((isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][1]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][1] == 1) || (isset($ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][2]) && $ketersediaanDosen[$tanggalSeminar['tanggal']][$tanggalSeminar['ruang']][$key][2] == 1))
                                     <button id="tombolBersedia" class="btn btn-default btn-xs btn-block sesi sesi-warning"><p>sesi {{$key}}</p></button>
