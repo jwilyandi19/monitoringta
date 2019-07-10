@@ -98,38 +98,38 @@
         $('#listTA').DataTable({
 
         });
-        $('.btn-danger').click( function(){
-            var idTA = $(this).attr('value');
-            console.log(idTA);
-            swal({
-                title: "Perhatian",
-                text: "Apakah anda yakin menyatakan bahwa TA ini dinyatakan tidak lulus ?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Ya, Konfirmasi",
-                cancelButtonText: "Batal"
-            },
-            function(){
-                $('#inpTidakLulus').val(idTA);
-                $('#tidakLulus').submit();
-            });
+    });
+    $('.btn-danger').click( function(){
+        var idTA = $(this).attr('value');
+        console.log(idTA);
+        swal({
+            title: "Perhatian",
+            text: "Apakah anda yakin menyatakan bahwa TA ini dinyatakan tidak lulus ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, Konfirmasi",
+            cancelButtonText: "Batal"
+        },
+        function(){
+            $('#inpTidakLulus').val(idTA);
+            $('#tidakLulus').submit();
         });
-        $('.btn-primary').click(function(){
-            var idTA = $(this).attr('value');
-            console.log(idTA);
-            swal({
-                title: "Perhatian",
-                text: "Apakah anda yakin menyatakan bahwa TA ini dinyatakan lulus ?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Ya, Konfirmasi",
-                cancelButtonText: "Batal"
-            },
-            function(){
-                $('#inpLulus').val(idTA);
-                $('#dinyatakanLulus').submit();
-            });            
-        });
+    });
+    $('.btn-primary').click(function(){
+        var idTA = $(this).attr('value');
+        console.log(idTA);
+        swal({
+            title: "Perhatian",
+            text: "Apakah anda yakin menyatakan bahwa TA ini dinyatakan lulus ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, Konfirmasi",
+            cancelButtonText: "Batal"
+        },
+        function(){
+            $('#inpLulus').val(idTA);
+            $('#dinyatakanLulus').submit();
+        });            
     });
 </script>
 @endsection

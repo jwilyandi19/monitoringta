@@ -171,26 +171,26 @@ Pencarian Tugas Akhir
             "autoWidth" : true,
             "scrollCollapse" : true,
         });
-        $('.btn-link').click(function(){
-            var nrp = $(this).find('#row-nrp').text();
-            var nama = $(this).find('#row-nama').text();
-            var judul = $(this).find('#row-judul').text();
-            var pembimbing1 = $(this).find('#row-pembimbing1').text();
-            var pembimbing2 = $(this).find('#row-pembimbing2').text();
-            var rumpun = $(this).find('#row-rumpun').text();
-            var status = $(this).find('#row-status').text();
-            console.log(pembimbing1);
-            $('#modal-nrp').text(nrp);
-            $('#modal-nama').text(nama);
-            $('#modal-judul').text(judul);
-            $('#modal-pembimbing1').text(pembimbing1);
-            $('#modal-pembimbing2').text(pembimbing2);
-            $('#modal-rumpun').text(rumpun);
-            $('#modal-status').text(status);
-        });
-        $('close').click(function(){
+    });
+    $('.btn-link').click(function(){
+        var nrp = $(this).find('#row-nrp').text();
+        var nama = $(this).find('#row-nama').text();
+        var judul = $(this).find('#row-judul').text();
+        var pembimbing1 = $(this).find('#row-pembimbing1').text();
+        var pembimbing2 = $(this).find('#row-pembimbing2').text();
+        var rumpun = $(this).find('#row-rumpun').text();
+        var status = $(this).find('#row-status').text();
+        console.log(pembimbing1);
+        $('#modal-nrp').text(nrp);
+        $('#modal-nama').text(nama);
+        $('#modal-judul').text(judul);
+        $('#modal-pembimbing1').text(pembimbing1);
+        $('#modal-pembimbing2').text(pembimbing2);
+        $('#modal-rumpun').text(rumpun);
+        $('#modal-status').text(status);
+    });
+    $('close').click(function(){
 
-        });
     });
 </script>
 <script type="text/javascript">
