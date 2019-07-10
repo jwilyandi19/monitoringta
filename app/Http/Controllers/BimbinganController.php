@@ -110,6 +110,8 @@ class BimbinganController extends Controller
             $data['detailta'] = $detailta;
             $data['bidang_mks'] = BidangMK::all();
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
+            $data['pembimbing1'] = Dosen::where('id_dosen',$detailta->temp_dosbing1)->first();
+            $data['pembimbing2'] = Dosen::where('id_dosen',$detailta->temp_dosbing2)->first();
             return view('bimbingan.detail_bimbingan',$data);
         }
         else
