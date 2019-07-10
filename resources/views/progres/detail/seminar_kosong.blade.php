@@ -25,15 +25,6 @@
 </div>
 
 {{--Nilai--}}
-<div class="row">
-    <label class="col-md-2"><h6 class="pull-left">Nilai</h6></label>
-    <div class="col-md-1" style="text-align: right;">
-        <h6>:</h6>
-    </div>
-    <div class="col-md-9">
-        <h6>-</h6>
-    </div>
-</div>
 
 {{--Evaluasi--}}
 <div class="row">
