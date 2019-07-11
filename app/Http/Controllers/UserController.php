@@ -93,6 +93,7 @@ class UserController extends Controller
                         $dosen->nip = $request->username;
                         $dosen->nama = $request->nama;
                         $dosen->nama_lengkap = $request->nama;
+                        $dosen->pembimbing1 = 0;
                         if($dosen->save())
                         {
                             return Redirect::to('/user/create')->with('message','Berhasil Membuat User '.$request->username);
