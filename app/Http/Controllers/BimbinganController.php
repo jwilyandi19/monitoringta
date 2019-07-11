@@ -109,7 +109,8 @@ class BimbinganController extends Controller
             $data['dibuat'] = $dibuat;
             $data['detailta'] = $detailta;
             $data['bidang_mks'] = BidangMK::all();
-            $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
+            $data['asistensi0s'] = Asistensi::where([['id_ta',$detailta->id_ta],['disetujui','0']])->with('dosen')->get();
+            $data['asistensi1s'] = Asistensi::where([['id_ta',$detailta->id_ta],['disetujui','1']])->with('dosen')->get();
             $data['pembimbing1'] = Dosen::where('id_dosen',$detailta->temp_dosbing1)->first();
             $data['pembimbing2'] = Dosen::where('id_dosen',$detailta->temp_dosbing2)->first();
             return view('bimbingan.detail_bimbingan',$data);
@@ -200,18 +201,17 @@ class BimbinganController extends Controller
     {
         $asistensi = new Asistensi();
         $asistensi->id_ta = $request->id_ta;
-        $asistensi->id_dosen = session('user')['id_dosen'];
+        $asistensi->id_dosen = TugasAkhir::where('id_ta',$request->id_ta)->first()->id_dosbing1;
         $asistensi->tanggal = $request->tanggal;
         $asistensi->materi = $request->materi;
+        $asistensi->disetujui = 0;
         if($asistensi->save())
         {
-            $ta = (string)$request->id_ta;
-            $url = url('/bimbingan')."/".$ta;
-            return Redirect::to($url)->with('message', 'Berhasil Menambahkan data asistensi');
+            return Redirect::to('/detailta')->with('message', 'Berhasil Menambahkan data asistensi');
         }
         else
         {
-            return Redirect::to('/bimbingan')->withErrors('Gagal Mengisi Asistensi');
+            return Redirect::to('/detailta')->withErrors('Gagal Mengisi Asistensi');
         }
     }
 
@@ -406,4 +406,30 @@ class BimbinganController extends Controller
             return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors('Terjadi Error Ketika Menginputkan Data TA baru');
         }
     }
+
+    public function terimaAsistensi(Request $request) {
+        $idAsistensi = $request->idAsistensi;
+        $asistensi = Asistensi::where('id_asistensi',$idAsistensi)->first();
+        $asistensi->disetujui = 1;
+        if($asistensi->save()) {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->with('message','Berhasil Menyetujui Asistensi.');
+        }
+        else {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors('Gagal menyetujui asistensi.');
+        }
+        
+    }
+
+    public function batalkanAsistensi(Request $request) {
+        $idAsistensi = $request->idAsistensi;
+        $asistensi = Asistensi::where('id_asistensi',$idAsistensi)->first();
+        if($asistensi->delete()) {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->with('message','Berhasil Membatalkan Asistensi.');
+        }
+        else {
+            return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors('Gagal membatalkan asistensi.');
+        }
+    }
+
+
 }

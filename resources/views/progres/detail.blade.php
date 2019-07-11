@@ -23,11 +23,18 @@
             {{Session::get('message')}}
         </div>
     @endif
+    
     <div class="panel" style="margin-left: auto; margin-right: auto; padding : 30px;">
         <div class="judul-halaman">
             <h4><strong>Detail Progres Tugas Akhir </strong></h4>
             <hr>
         </div>
+        <div class="form-group alert alert-dismissable alert-warning" style="margin-bottom: 0;">
+            <button type="button" class="close fade" data-dismiss="alert">&times;</button>
+            <h4>Perhatian</h4>
+            <p><strong>Untuk mengajukan asistensi, pastikan Anda mendapat persetujuan dari dosen pembimbing 1 dan dosen pembimbing 2.</strong></p>
+        </div>
+        
         <div class="panel-body isi-halaman">
             <div class="form-group">
                 <div class="row" >
@@ -156,6 +163,11 @@
                         </tbody>
                     </table>
                 </div>
+                @if($detailta->id_dosbing1 && $detailta->id_dosbing2)
+                <div class="row">
+                    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#bimbinganModal">Tambahkan Asistensi</button>
+                </div>
+                @endif
             </div>
             <hr>
             <div class="form-group">
@@ -203,6 +215,44 @@
                             </div>
                         </form>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="bimbinganModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #24292e; padding-left: 20px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+                        <h4 class="modal-title" style="color: #ffffff;">Tambahkan Data Asistensi</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" method="POST" action="{{url('/bimbingan/asistensi')}}">
+                            <div class="form-group" style="display: none;">
+                                <label class="col-md-2 control-label">ID TA</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="id_ta" class="form-control" value="{{$detailta->id_ta}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Tanggal</label>
+                                <div class="col-md-10">
+                                    <input type="date" name="tanggal" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Materi</label>
+                                <div class="col-md-10">
+                                    <textarea type="text" name="materi" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{csrf_field()}}
+                                {{method_field('POST')}}
+                                <button type="submit" class="btn btn-primary pull-right" style="margin : 0 15px;" >Simpan</button>
+                                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Batal</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

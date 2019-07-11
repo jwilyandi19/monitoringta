@@ -64,6 +64,7 @@ Route::group(['middleware' => ['Mahasiswa']], function(){
     Route::get('/pengajuanta', 'FrontendController@pengajuanTa');
     Route::get('/pengajuan/create', 'PengajuanController@create');
     Route::post('/pengajuan', 'PengajuanController@store');
+    Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
 });
 
 Route::group(['middleware' => ['Dosen']], function(){
@@ -82,9 +83,10 @@ Route::group(['middleware' => ['Dosen']], function(){
     Route::post('/seminar/nilai', 'BimbinganController@nilaiSeminar');
     Route::post('/ujian/nilai', 'BimbinganController@nilaiUjian');
     Route::get('/mahasiswauji', 'BimbinganController@mahasiswaUji');
-    Route::post('/bimbingan/asistensi', 'BimbinganController@asistensi');
     Route::get('/detailuji/{id}', 'BimbinganController@detailUji');
     Route::post('/bimbingan/ubahdetail', 'BimbinganController@ubahDetail');
+    Route::post('/terimaasistensi','BimbinganController@terimaAsistensi');
+    Route::post('/batalkanasistensi','BimbinganController@batalkanAsistensi');
     
     Route::get('/datadosen', 'AuthController@dataDosen');
     Route::post('/tambahkanbidang', 'AuthController@tambahkanBidang');

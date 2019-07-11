@@ -5,7 +5,7 @@
 @endsection
 
 @section('moreStyle')
-
+<link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
 @endsection
 
 @section('content')
@@ -146,6 +146,38 @@
             </div>
             <hr>
             <div>
+                <h4>Permintaan Asistensi</h4>
+                <div class="row">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Materi Asistensi</th>
+                            <th>Dosen</th>
+                            <th>Aksi</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if($asistensi0s)
+                            @foreach($asistensi0s as $key => $asistensi0)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$asistensi0->tanggal}}</td>
+                                    <td>{{$asistensi0->materi}}</td>
+                                    <td>{{$asistensi0->dosen->nama_lengkap}}</td>
+                                    <td>
+                                        <a class="btn btn-success btn-sm" value="{{$asistensi0->id_asistensi}}">Terima</a>
+                                        <a class="btn btn-danger btn-sm" id="batalasistensitombol" value="{{$asistensi0->id_asistensi}}">Batalkan</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
                 <h4>Progres Asistensi</h4>
                 <div class="row">
                     <table class="table table-striped table-hover">
@@ -158,21 +190,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if($asistensis)
-                            @foreach($asistensis as $key => $asistensi)
+                        @if($asistensi1s)
+                            @foreach($asistensi1s as $key => $asistensi1)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$asistensi->tanggal}}</td>
-                                    <td>{{$asistensi->materi}}</td>
-                                    <td>{{$asistensi->dosen->nama_lengkap}}</td>
+                                    <td>{{$asistensi1->tanggal}}</td>
+                                    <td>{{$asistensi1->materi}}</td>
+                                    <td>{{$asistensi1->dosen->nama_lengkap}}</td>
                                 </tr>
                             @endforeach
                         @endif
                         </tbody>
                     </table>
-                </div>
-                <div class="row">
-                    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#bimbinganModal">Tambahkan Asistensi</button>
                 </div>
             </div>
             <hr>
@@ -292,9 +321,57 @@
             </div>
         </div>
     </div>
+    <form id="terimaAsistensi" action="{{url('/terimaasistensi')}}" method="POST" style="display: none;">
+        {{csrf_field()}}
+        {{method_field('POST')}}
+        <input type="text" name="id_ta" value="{{$detailta->id_ta}}">
+        <input type="text" name="idAsistensi" id="inpAsistensiDiterima">
+    </form>
+    <form id="batalkanAsistensi" action="{{url('/batalkanasistensi')}}" method="POST" style="display: none;">
+        {{csrf_field()}}
+        {{method_field('POST')}}
+        <input type="text" name="id_ta" value="{{$detailta->id_ta}}">
+        <input type="text" name="idAsistensi" id="inpAsistensiDitolak">
+    </form>
 @endsection
 
 @section('moreScript')
+<script type="text/javascript" src="{{asset('js/sweetalert.min.js')}}"></script>
+<script type="text/javascript">
+$('.btn-success').click(function(){
+    var idAsistensi = $(this).attr('value');
+
+    swal({
+        title: "Perhatian",
+        text: "Apakah anda yakin ingin menerima pengajuan asistensi berikut ?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, Terima",
+        cancelButtonText: "Batal"
+    },
+    function(){
+        $('#inpAsistensiDiterima').val(idAsistensi);
+        $('#terimaAsistensi').submit();
+    });
+});
+$('#batalasistensitombol').click(function(){
+    var idAsistensi = $(this).attr('value');
+
+    swal({
+        title: "Perhatian",
+        text: "Apakah anda yakin ingin membatalkan penerimaan pengajuan asistensi dari TA ini ?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya",
+        cancelButtonText: "Batal"
+    },
+    function(){
+        $('#inpAsistensiDitolak').val(idAsistensi);
+        $('#batalkanAsistensi').submit();
+    });
+});
+</script>
+
 
 @endsection
 

@@ -16,6 +16,7 @@ class Asistensi extends Model
     'id_dosen',
     'tanggal',
     'materi',
+    'disetujui',
     'created_at',
     'updated_at',
     ];
