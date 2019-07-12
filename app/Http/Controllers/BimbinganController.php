@@ -113,6 +113,11 @@ class BimbinganController extends Controller
             $data['asistensi1s'] = Asistensi::where([['id_ta',$detailta->id_ta],['disetujui','1']])->with('dosen')->get();
             $data['pembimbing1'] = Dosen::where('id_dosen',$detailta->temp_dosbing1)->first();
             $data['pembimbing2'] = Dosen::where('id_dosen',$detailta->temp_dosbing2)->first();
+            $data['penguji1'] = UjianTA::where([['id_penguji1',session('user')['id_dosen']],['id_ta',$detailta->id_ta]])->first();
+            $data['penguji2'] = UjianTA::where([['id_penguji2',session('user')['id_dosen']],['id_ta',$detailta->id_ta]])->first();
+            $data['penguji3'] = NULL;
+            $data['penguji4'] = NULL;
+            $data['penguji5'] = NULL;
             return view('bimbingan.detail_bimbingan',$data);
         }
         else
@@ -236,62 +241,62 @@ class BimbinganController extends Controller
     public function nilaiUjian(Request $request)
     {
         //dd($request);
-        if($request->nilai5 == null)
-        {
             $messagesError = [
-                'nilai1.required' => 'Input nilai penguji 1 harus berupa angka antara 0 - 100',
-                'nilai2.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
-                'nilai3.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
-                'nilai4.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
+                'nilai.required' => 'Input nilai penguji harus berupa angka antara 0 - 100',
             ];
 
             $validator = Validator::make($request->all(), [
-                'nilai1' => 'numeric|min:0|max:100',
-                'nilai2' => 'numeric|min:0|max:100',
-                'nilai3' => 'numeric|min:0|max:100',
-                'nilai4' => 'numeric|min:0|max:100',
+                'nilai' => 'numeric|min:0|max:100',
             ], $messagesError);
             if($validator->fails())
             {
-                return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors($validator)->withInput();
+                if($request->status=='1' || $request->status=='2') {
+                    return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors($validator)->withInput();
+                }
+                else {
+                    return Redirect::to('/detailuji/'.$request->id_ta)->withErrors($validator)->withInput();
+                }
             }
-        }
-        else{
-            $messagesError = [
-                'nilai1.required' => 'Input nilai penguji 1 harus berupa angka antara 0 - 100',
-                'nilai2.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
-                'nilai3.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
-                'nilai4.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
-                'nilai5.required' => 'Input nilai penguji 2 harus berupa angka antara 0 - 100',
-            ];
-
-            $validator = Validator::make($request->all(), [
-                'nilai1' => 'numeric|min:0|max:100',
-                'nilai2' => 'numeric|min:0|max:100',
-                'nilai3' => 'numeric|min:0|max:100',
-                'nilai4' => 'numeric|min:0|max:100',
-                'nilai5' => 'numeric|min:0|max:100',
-            ], $messagesError);
-            if($validator->fails())
-            {
-                return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors($validator)->withInput();
-            }
-        }
 
         $ujian = UjianTA::where('id_ujian_ta',$request->id_ujian_ta)->first();
-        $ujian->nilai_penguji1 = $request->nilai1;
-        $ujian->nilai_penguji2 = $request->nilai2;
-        $ujian->nilai_penguji3 = $request->nilai3;
-        $ujian->nilai_penguji4 = $request->nilai4;
-        $ujian->nilai_penguji5 = $request->nilai5;
-        if($request->nilai5 != null)
-        {
-            $ujian->nilai_angka = ($request->nilai1 * 0.2) + ($request->nilai2 * 0.2) + ($request->nilai3 * 0.2) + ($request->nilai4 * 0.2) + ($request->nilai5 * 0.2);
+        $status = intval($request->status);
+        if($request->status=='1') {
+            $ujian->nilai_penguji1 = $request->nilai;
         }
-        else
-        {
-            $ujian->nilai_angka = ($request->nilai1 * 0.25) + ($request->nilai2 * 0.25) + ($request->nilai3 * 0.25) + ($request->nilai4 * 0.25);
+        else if($request->status=='2') {
+            $ujian->nilai_penguji2 = $request->nilai;
         }
+        else if($request->status=='3') {
+            $ujian->nilai_penguji3 = $request->nilai;
+        }
+        else if($request->status=='4') {
+            $ujian->nilai_penguji4 = $request->nilai;
+        }
+        else if($request->status=='5') {
+            $ujian->nilai_penguji5 = $request->nilai;
+        }
+        $flag = 0;
+        $nilais = array();
+        if(!is_null($ujian->nilai_penguji1)) {
+            array_push($nilais,$ujian->nilai_penguji1);
+        }
+        if(!is_null($ujian->nilai_penguji2)) {
+            array_push($nilais,$ujian->nilai_penguji2);
+        }
+        if(!is_null($ujian->nilai_penguji3)) {
+            array_push($nilais,$ujian->nilai_penguji3);
+        }
+        if(!is_null($ujian->nilai_penguji4)) {
+            array_push($nilais,$ujian->nilai_penguji4);
+        }
+        if(!is_null($ujian->nilai_penguji5)) {
+            array_push($nilais,$ujian->nilai_penguji5);
+        }
+        $nilaiAngka = 0;
+        foreach($nilais as $nilai) {
+            $nilaiAngka += $nilai * (1/count($nilais));
+        }
+        $ujian->nilai_angka = $nilaiAngka;
         if($ujian->nilai_angka>=88)
         {
             $ujian->nilai = 'A';
@@ -319,11 +324,21 @@ class BimbinganController extends Controller
         $ujian->evaluasi = $request->evaluasi;
         if($ujian->save())
         {
-            return Redirect::to('/bimbingan/'.$request->id_ta)->with('message', 'Berhasil Menginputkan Nilai Ujian');
+            if($request->status == '1' || $request->status == '2') {
+                return Redirect::to('/bimbingan/'.$request->id_ta)->with('message', 'Berhasil Menginputkan Nilai Sidang');
+            }
+            else {
+                return Redirect::to('/detailuji/'.$request->id_ta)->with('message', 'Berhasil Menginputkan Nilai Sidang');
+            }
         }
         else
         {
-            return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors('Terjadi Error Ketika Menginputkan Nilai Ujian');
+            if($request->status == '1' || $request->status == '2') {
+                return Redirect::to('/bimbingan/'.$request->id_ta)->withErrors('Terjadi Error Ketika Menginputkan Nilai Sidang');
+            }
+            else {
+                return Redirect::to('/detailuji/'.$request->id_ta)->withErrors('Terjadi Error Ketika Menginputkan Nilai Sidang');
+            }
         }
     }
 
@@ -384,6 +399,11 @@ class BimbinganController extends Controller
             $data['dibuat'] = $dibuat;
             $data['detailta'] = $detailta;
             $data['asistensis'] = Asistensi::where('id_ta',$detailta->id_ta)->with('dosen')->get();
+            $data['penguji1'] = NULL;
+            $data['penguji2'] = NULL;
+            $data['penguji3'] = UjianTA::where([['id_penguji3',session('user')['id_dosen']],['id_ta',$detailta->id_ta]])->first();
+            $data['penguji4'] = UjianTA::where([['id_penguji4',session('user')['id_dosen']],['id_ta',$detailta->id_ta]])->first();
+            $data['penguji5'] = UjianTA::where([['id_penguji5',session('user')['id_dosen']],['id_ta',$detailta->id_ta]])->first();
             return view('bimbingan.detail_penguji',$data);
         }
         else

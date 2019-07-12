@@ -174,6 +174,10 @@
             <div class="form-group">
                 @if($detailta->ujianTA && $detailta->ujianTA->status == 1)
                     @include('bimbingan.detail.ujian_isi')
+                    <div class="row">
+                        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#ujianModal">Ubah Nilai</button>
+                    </div>
+                    @include('bimbingan.detail.ujianModal')
                 @else
                     @include('bimbingan.detail.ujian_kosong')
                 @endif
