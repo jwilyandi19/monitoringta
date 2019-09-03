@@ -1,137 +1,103 @@
--- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
---
--- Host: localhost    Database: monitoringta
--- ------------------------------------------------------
--- Server version	5.7.19-0ubuntu0.16.04.1
+-- --------------------------------------------------------
+-- Host:                         localhost
+-- Server version:               10.1.34-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win32
+-- HeidiSQL Version:             10.2.0.5599
+-- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Table structure for table `asistensi`
---
 
+-- Dumping database structure for monta
+DROP DATABASE IF EXISTS `monta`;
+CREATE DATABASE IF NOT EXISTS `monta` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `monta`;
+
+-- Dumping structure for table monta.asistensi
 DROP TABLE IF EXISTS `asistensi`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `asistensi` (
+CREATE TABLE IF NOT EXISTS `asistensi` (
   `id_asistensi` int(11) NOT NULL AUTO_INCREMENT,
   `id_ta` int(11) NOT NULL,
   `id_dosen` int(11) DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `materi` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `disetujui` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_asistensi`),
   KEY `id_ta` (`id_ta`),
   KEY `id_dosen` (`id_dosen`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `asistensi`
---
-
-LOCK TABLES `asistensi` WRITE;
+-- Dumping data for table monta.asistensi: ~0 rows (approximately)
+DELETE FROM `asistensi`;
 /*!40000 ALTER TABLE `asistensi` DISABLE KEYS */;
-INSERT INTO `asistensi` VALUES (1,1,7,'2017-08-03','Bab 1','2017-08-02 10:16:53','2017-08-02 10:16:53'),(2,1,7,'2017-08-04','Metode Deteksi','2017-08-02 10:17:17','2017-08-02 10:17:17'),(3,2,16,'2017-08-03','Bab 2','2017-08-02 10:18:29','2017-08-02 10:18:29'),(4,2,16,'2017-08-04','Neovascularization','2017-08-02 10:18:55','2017-08-02 10:18:55'),(5,1,16,'2017-08-04','Bab 2','2017-08-02 10:19:36','2017-08-02 10:19:36'),(6,1,16,'2017-08-05','Metode Deteksi','2017-08-02 10:19:54','2017-08-02 10:19:54'),(7,2,11,'2017-08-02',NULL,'2017-08-02 10:20:42','2017-08-02 10:20:42'),(8,2,11,'2017-08-04','Metode Deteksi','2017-08-02 10:21:06','2017-08-02 10:21:06'),(9,4,16,'2017-07-20','Bab 1','2017-08-02 15:59:31','2017-08-02 15:59:31'),(10,6,16,'2017-07-29','Metode Efisiensi','2017-08-02 16:00:28','2017-08-02 16:00:28'),(11,5,7,'2017-08-03','Bab 1','2017-08-02 16:02:13','2017-08-02 16:02:13'),(12,3,10,'2017-08-02','Bab 1','2017-08-02 16:04:37','2017-08-02 16:04:37'),(13,4,10,'2017-08-01','Bab 2','2017-08-02 16:05:22','2017-08-02 16:05:22'),(14,3,25,'2017-08-03','Fenomena Die Soldering','2017-08-02 16:07:26','2017-08-02 16:07:26'),(15,5,25,'2017-08-03','bab 2','2017-08-02 16:08:29','2017-08-02 16:08:29'),(16,6,25,'2017-08-01','Bab 1','2017-08-02 16:09:03','2017-08-02 16:09:03');
+INSERT INTO `asistensi` (`id_asistensi`, `id_ta`, `id_dosen`, `tanggal`, `materi`, `disetujui`, `created_at`, `updated_at`) VALUES
+	(1, 125, 94, '2019-07-11', 'Cara Mengajukan Asistensi', 1, '2019-07-11 10:56:05', '2019-07-11 11:23:53');
 /*!40000 ALTER TABLE `asistensi` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `berita`
---
-
+-- Dumping structure for table monta.berita
 DROP TABLE IF EXISTS `berita`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `berita` (
+CREATE TABLE IF NOT EXISTS `berita` (
   `id_berita` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) DEFAULT NULL,
   `judul_berita` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `isi_berita` text COLLATE utf8mb4_unicode_ci,
+  `file` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_berita`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `berita`
---
-
-LOCK TABLES `berita` WRITE;
+-- Dumping data for table monta.berita: ~0 rows (approximately)
+DELETE FROM `berita`;
 /*!40000 ALTER TABLE `berita` DISABLE KEYS */;
-INSERT INTO `berita` VALUES (1,7,'Coba Buat','<p>Lorem ipsum dolor sit amet, vis quaeque appetere incorrupte et. Vim nihil virtute explicari ei, no vis numquam persequeris, ad per solet efficiantur reprehendunt. Eu qui quas deseruisse, mel commodo aperiam ut. Mei te option neglegentur conclusionemque, ei vim repudiare urbanitas, eum te atqui facilis abhorreant.</p>','2017-07-27 08:50:30','2017-07-30 23:00:52');
+INSERT INTO `berita` (`id_berita`, `id_user`, `judul_berita`, `isi_berita`, `file`, `created_at`, `updated_at`) VALUES
+	(8, 1, 'Pendaftaran Seminar dan Sidang Tugas Akhir', '<p>Dibuka mulai tanggal 8 Juli 2019</p>', NULL, '2019-07-09 16:41:59', '2019-07-09 16:41:59');
 /*!40000 ALTER TABLE `berita` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `bidang_dosen`
---
-
+-- Dumping structure for table monta.bidang_dosen
 DROP TABLE IF EXISTS `bidang_dosen`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bidang_dosen` (
+CREATE TABLE IF NOT EXISTS `bidang_dosen` (
   `id_bidang_dosen` int(11) NOT NULL AUTO_INCREMENT,
   `id_dosen` int(11) DEFAULT NULL,
   `id_bidang_mk` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_bidang_dosen`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `bidang_dosen`
---
-
-LOCK TABLES `bidang_dosen` WRITE;
+-- Dumping data for table monta.bidang_dosen: ~0 rows (approximately)
+DELETE FROM `bidang_dosen`;
 /*!40000 ALTER TABLE `bidang_dosen` DISABLE KEYS */;
-INSERT INTO `bidang_dosen` VALUES (4,1,1);
+INSERT INTO `bidang_dosen` (`id_bidang_dosen`, `id_dosen`, `id_bidang_mk`) VALUES
+	(1, 98, 3);
 /*!40000 ALTER TABLE `bidang_dosen` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `bidang_mk`
---
-
+-- Dumping structure for table monta.bidang_mk
 DROP TABLE IF EXISTS `bidang_mk`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bidang_mk` (
+CREATE TABLE IF NOT EXISTS `bidang_mk` (
   `id_bidang_mk` int(11) NOT NULL AUTO_INCREMENT,
   `nama_bidang` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_bidang_mk`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `bidang_mk`
---
-
-LOCK TABLES `bidang_mk` WRITE;
+-- Dumping data for table monta.bidang_mk: ~4 rows (approximately)
+DELETE FROM `bidang_mk`;
 /*!40000 ALTER TABLE `bidang_mk` DISABLE KEYS */;
-INSERT INTO `bidang_mk` VALUES (1,'Material Inovatif'),(2,'Metalurgi Manufaktur'),(3,'Korosi dan Kegagalan');
+INSERT INTO `bidang_mk` (`id_bidang_mk`, `nama_bidang`) VALUES
+	(1, 'Korosi dan Kegagalan (KK)'),
+	(2, 'Metalurgi Manufaktur (MM)'),
+	(3, 'Material Inovatif (MI)'),
+	(4, 'Metalurgi Ekstraksi (ME)');
 /*!40000 ALTER TABLE `bidang_mk` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `dosen`
---
-
+-- Dumping structure for table monta.dosen
 DROP TABLE IF EXISTS `dosen`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `dosen` (
+CREATE TABLE IF NOT EXISTS `dosen` (
   `id_dosen` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) DEFAULT NULL,
   `id_bidang_mk` int(11) DEFAULT NULL,
@@ -141,27 +107,42 @@ CREATE TABLE `dosen` (
   `pembimbing1` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_dosen`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `dosen`
---
-
-LOCK TABLES `dosen` WRITE;
+-- Dumping data for table monta.dosen: ~25 rows (approximately)
+DELETE FROM `dosen`;
 /*!40000 ALTER TABLE `dosen` DISABLE KEYS */;
-INSERT INTO `dosen` VALUES (1,4,NULL,'5110100001','RIZKY JANUAR AKBAR','RIZKY JANUAR AKBAR, S.Kom., M.Eng.',1),(2,5,NULL,'5110100002','WIJAYANTI NURUL K.','WIJAYANTI NURUL K.,S.Kom., M.Sc.',1),(3,6,NULL,'5110100003','DOSEN 3','DOSEN 3 S.KOM',NULL),(4,411,NULL,'196203261987011001','Sulistijono','Prof. Dr. Ir. Sulistijono, DEA',1),(5,412,NULL,'195709241986031002','Moh. Farid','Ir. Moh. Farid, DEA',1),(6,413,NULL,'195809101986031002','Rochman Rochiem','Ir. Rochman Rochiem, M.Sc.',1),(7,417,NULL,'197605282002121003','Agung Purniawan','Dr. Agung Purniawan, S.T., M.Eng.',1),(8,418,NULL,'197604102002121002','Budi Agung Kurniawan','Budi Agung Kurniawan, S.T., M.Sc.',1),(9,414,NULL,'196809302000031001','Sungging Pintowantoro','Dr. Sungging Pintowantoro, S.T., M.T.',1),(10,415,NULL,'197701162003122007','Diah Susanti','Dr. Diah Susanti, S.T., M.T.',1),(11,416,NULL,'197801132002121003','Sigit Tri Wicasono','Dr. Sigit Tri Wicasono, S.Si., M.Si.',1),(12,419,NULL,'197703132003121001','Lukman Neorochiem','Dr. Lukman Neorochiem, S.T., M.Sc.Eng.',1),(13,420,NULL,'197610272003121001','Mas Irfan P. Hidayat','Mas Irfan P. Hidayat, S.T., M.Sc., Ph.D.',1),(14,421,NULL,'197708172005011004','Sutarsis','Sutarsis, S.T., M.Sc.',1),(15,422,NULL,'197907242005012003','Yuli Setiyorini','Yuli Setiyorini, S.T., M.Phil.',1),(16,423,NULL,'198012072005011004','Hosta Ardhyananta','Dr. Eng. Hosta Ardhyananta, S.T., M.Sc.',1),(17,424,NULL,'197410172006042001','Hariyati Purwaningsih','Hariyati Purwaningsih, S.Si., M.Si.',1),(18,425,NULL,'198302012008122002','Widyastuti','Dr. Widyastuti, S.Si., M.Si.',1),(19,426,NULL,'198302012008122002','Rindang Fajarin','Rindang Fajarin, S.Si., M.Si.',1),(20,427,NULL,'198205262012121002','Tubagus Noor R.','Tubagus Noor R., S.T., M.Sc.',1),(21,428,NULL,'198303252014042003','Wikan Jatimurti','Wikan Jatimurti, S.T., M.Sc.',NULL),(22,429,NULL,'198405152014042003','Dian Mughni F.','Dian Mughni F., S.T., M.Sc.',NULL),(23,430,NULL,'199007262015041002','Haniffudin Nurdiansah','Haniffudin Nurdiansah, S.T., M.T.',NULL),(24,431,NULL,'199102172015041002','Fakhreza Abdul','Fakhreza Abdul, S.T., M.T.',NULL),(25,432,NULL,'199106092015041001','Alvian Toto Wibisono','Alvian Toto Wibisono, S.T., M.T.',NULL),(26,433,NULL,'dosen01','Amaliya Rasyida','Amaliya Rasyida, S.T., M.Sc.',NULL),(27,434,NULL,'dosen02','Vania Mitha Pratiwi','Vania Mitha Pratiwi, S.T., M.T.',NULL);
+INSERT INTO `dosen` (`id_dosen`, `id_user`, `id_bidang_mk`, `nip`, `nama`, `nama_lengkap`, `pembimbing1`) VALUES
+	(94, 978, NULL, '196203261987011001', 'Prof. Dr. Ir. Sulistijono, DEA', 'Prof. Dr. Ir. Sulistijono, DEA', 1),
+	(95, 979, NULL, '195709241986031002', 'Ir. Moh. Farid, DEA', 'Ir. Moh. Farid, DEA', 1),
+	(96, 980, NULL, '195809101986031002', 'Ir. Rochman Rochiem, M.Sc', 'Ir. Rochman Rochiem, M.Sc', 1),
+	(97, 981, NULL, '196809302000031001', 'Dr. Sungging Pintowantoro, ST. MT', 'Dr. Sungging Pintowantoro, ST. MT', 1),
+	(98, 982, NULL, '197701162003122007', 'Dr. Diah Susanti, ST. MT', 'Dr. Diah Susanti, ST. MT', 1),
+	(99, 983, NULL, '197801132002121003', 'Dr. Sigit Tri Wicaksono, S.Si, M.Si', 'Dr. Sigit Tri Wicaksono, S.Si, M.Si', 1),
+	(100, 984, NULL, '197605282002121003', 'Dr. Agung Purniawan, ST, M.Eng', 'Dr. Agung Purniawan, ST, M.Eng', 1),
+	(101, 985, NULL, '197604102002121002', 'Budi Agung Kurniawan, ST, MSc', 'Budi Agung Kurniawan, ST, MSc', 1),
+	(102, 986, NULL, '197703132003121001', 'Dr. Lukman Noerochiem, ST, MSc.Eng', 'Dr. Lukman Noerochiem, ST, MSc.Eng', 1),
+	(103, 987, NULL, '197610272003121001', 'Mas Irfan P. Hidayat, ST., M.Sc., Ph.D', 'Mas Irfan P. Hidayat, ST., M.Sc., Ph.D', 1),
+	(105, 989, NULL, '198012072005011004', 'Dr. Eng. Hosta Ardhyananta, ST, M.Sc', 'Dr. Eng. Hosta Ardhyananta, ST, M.Sc', 1),
+	(106, 990, NULL, '197906202006042001', 'Dr. Widyastuti, S.Si, M.Si', 'Dr. Widyastuti, S.Si, M.Si', 1),
+	(107, 991, NULL, '198205262012121002', 'Tubagus Noor R. ST., M.Sc', 'Tubagus Noor R. ST., M.Sc', 1),
+	(108, 992, NULL, '198303252014041001', 'Wikan Jatimurti, ST. M.Sc', 'Wikan Jatimurti, ST. M.Sc', 1),
+	(109, 993, NULL, '198405152014042003', 'Dian Mughni F, ST. M.Sc', 'Dian Mughni F, ST. M.Sc', 1),
+	(110, 994, NULL, '199007262015041002', 'Haniffudin Nurdiansah, ST., MT', 'Haniffudin Nurdiansah, ST., MT', 0),
+	(111, 995, NULL, '199102172015041002', 'Fakhreza Abdul, ST., MT', 'Fakhreza Abdul, ST., MT', 0),
+	(112, 996, NULL, '199106092015041001', 'Alvian Toto Wibisono, ST., MT', 'Alvian Toto Wibisono, ST., MT', 0),
+	(113, 997, NULL, '198805012019031008', 'Mavindra Ramadhani, ST, MT', 'Mavindra Ramadhani, ST, MT', 0),
+	(114, 999, NULL, '198707072018032001', 'Amaliya Rasyida, S.T., M.Sc', 'Amaliya Rasyida, S.T., M.Sc', 0),
+	(115, 1001, NULL, '194707171978031001', 'Ir. Muchtar Karokaro, MSc', 'Ir. Muchtar Karokaro, MSc', 0),
+	(116, 1002, NULL, '194712111974121001', 'Ir. Sadino, MT', 'Ir. Sadino, MT', 0),
+	(117, 1003, NULL, '000000000130532034', 'Ir. Wahid Suherman', 'Ir. Wahid Suherman', 0),
+	(118, 1004, NULL, '197907242005012003', 'Yuli Setiyorini, ST, M.Phil, Ph.D', 'Yuli Setiyorini, ST, M.Phil, Ph.D', 0),
+	(119, 1005, NULL, '000001989201812021', 'Vania Mitha Pratiwi, ST, MT', 'Vania Mitha Pratiwi, ST, MT', 0);
 /*!40000 ALTER TABLE `dosen` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `dosen_pembimbing`
---
-
+-- Dumping structure for table monta.dosen_pembimbing
 DROP TABLE IF EXISTS `dosen_pembimbing`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `dosen_pembimbing` (
+CREATE TABLE IF NOT EXISTS `dosen_pembimbing` (
   `id_dosen_pembimbing` int(11) NOT NULL AUTO_INCREMENT,
   `id_dosen` int(11) DEFAULT NULL,
   `id_ta` int(11) DEFAULT NULL,
@@ -172,106 +153,394 @@ CREATE TABLE `dosen_pembimbing` (
   PRIMARY KEY (`id_dosen_pembimbing`),
   KEY `id_dosen` (`id_dosen`),
   KEY `id_ta` (`id_ta`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=358 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `dosen_pembimbing`
---
-
-LOCK TABLES `dosen_pembimbing` WRITE;
+-- Dumping data for table monta.dosen_pembimbing: ~137 rows (approximately)
+DELETE FROM `dosen_pembimbing`;
 /*!40000 ALTER TABLE `dosen_pembimbing` DISABLE KEYS */;
-INSERT INTO `dosen_pembimbing` VALUES (1,7,1,1,1,'2017-08-02 10:11:30','2017-08-02 10:16:08'),(2,16,1,2,1,'2017-08-02 10:11:30','2017-08-02 10:18:10'),(3,16,2,1,1,'2017-08-02 10:15:18','2017-08-02 10:18:12'),(4,11,2,2,1,'2017-08-02 10:15:18','2017-08-02 10:20:23'),(5,10,3,1,1,'2017-08-02 15:53:17','2017-08-02 16:03:41'),(6,25,3,2,1,'2017-08-02 15:53:17','2017-08-02 16:06:11'),(7,16,4,1,1,'2017-08-02 15:54:54','2017-08-02 15:58:47'),(8,10,4,2,1,'2017-08-02 15:54:54','2017-08-02 16:03:43'),(9,7,5,1,1,'2017-08-02 15:56:32','2017-08-02 16:02:00'),(10,25,5,2,1,'2017-08-02 15:56:32','2017-08-02 16:06:14'),(11,16,6,1,1,'2017-08-02 15:58:09','2017-08-02 15:58:50'),(12,25,6,2,1,'2017-08-02 15:58:09','2017-08-02 16:06:15'),(13,7,7,1,1,'2017-08-02 16:30:06','2017-08-02 16:30:26'),(14,23,7,2,1,'2017-08-02 16:30:06','2017-08-02 16:30:46');
+INSERT INTO `dosen_pembimbing` (`id_dosen_pembimbing`, `id_dosen`, `id_ta`, `peran`, `status`, `created_at`, `updated_at`) VALUES
+	(221, 100, 110, 1, 0, '2019-07-09 16:26:48', '2019-07-09 16:26:48'),
+	(222, 98, 110, 2, 0, '2019-07-09 16:26:48', '2019-07-09 16:26:48'),
+	(223, 109, 111, 1, 1, '2019-07-09 16:32:45', '2019-07-09 20:08:35'),
+	(224, 112, 111, 2, 0, '2019-07-09 16:32:45', '2019-07-09 16:32:45'),
+	(225, 97, 112, 1, 0, '2019-07-09 16:35:59', '2019-07-09 16:35:59'),
+	(226, 111, 112, 2, 0, '2019-07-09 16:35:59', '2019-07-09 16:35:59'),
+	(227, 100, 113, 1, 0, '2019-07-09 16:38:08', '2019-07-09 16:38:08'),
+	(228, 114, 113, 2, 0, '2019-07-09 16:38:08', '2019-07-09 16:38:08'),
+	(229, 96, 114, 1, 0, '2019-07-09 16:51:54', '2019-07-09 16:51:54'),
+	(230, 112, 114, 2, 0, '2019-07-09 16:51:54', '2019-07-09 16:51:54'),
+	(231, 96, 115, 1, 0, '2019-07-09 17:02:53', '2019-07-09 17:02:53'),
+	(232, 112, 115, 2, 0, '2019-07-09 17:02:53', '2019-07-09 17:02:53'),
+	(233, 99, 116, 1, 1, '2019-07-09 17:04:48', '2019-07-09 19:48:50'),
+	(234, 105, 116, 2, 1, '2019-07-09 17:04:48', '2019-07-09 19:26:25'),
+	(235, 95, 117, 1, 0, '2019-07-09 17:16:32', '2019-07-09 17:16:32'),
+	(236, 99, 117, 2, 1, '2019-07-09 17:16:32', '2019-07-09 19:49:07'),
+	(237, 105, 118, 1, 0, '2019-07-09 17:17:39', '2019-07-09 17:17:39'),
+	(238, 114, 118, 2, 0, '2019-07-09 17:17:39', '2019-07-09 17:17:39'),
+	(239, 103, 119, 1, 0, '2019-07-09 17:18:24', '2019-07-09 17:18:24'),
+	(240, 112, 119, 2, 0, '2019-07-09 17:18:24', '2019-07-09 17:18:24'),
+	(241, 96, 120, 1, 0, '2019-07-09 17:19:25', '2019-07-09 17:19:25'),
+	(242, 112, 120, 2, 0, '2019-07-09 17:19:25', '2019-07-09 17:19:25'),
+	(243, 107, 121, 1, 0, '2019-07-09 17:20:05', '2019-07-09 17:20:05'),
+	(244, 102, 121, 2, 0, '2019-07-09 17:20:05', '2019-07-09 17:20:05'),
+	(245, 96, 122, 1, 0, '2019-07-09 17:26:28', '2019-07-09 17:26:28'),
+	(246, 109, 122, 2, 1, '2019-07-09 17:26:28', '2019-07-09 20:08:39'),
+	(247, 99, 123, 1, 1, '2019-07-09 17:27:12', '2019-07-09 19:49:00'),
+	(248, 114, 123, 2, 0, '2019-07-09 17:27:12', '2019-07-09 17:27:12'),
+	(249, 107, 124, 1, 0, '2019-07-09 17:27:22', '2019-07-09 17:27:22'),
+	(250, 102, 124, 2, 0, '2019-07-09 17:27:22', '2019-07-09 17:27:22'),
+	(251, 94, 125, 1, 1, '2019-07-09 17:28:12', '2019-07-11 10:42:28'),
+	(252, 101, 125, 2, 1, '2019-07-09 17:28:12', '2019-07-11 10:23:31'),
+	(253, 108, 126, 1, 0, '2019-07-09 17:30:12', '2019-07-09 17:30:12'),
+	(254, 112, 126, 2, 0, '2019-07-09 17:30:12', '2019-07-09 17:30:12'),
+	(255, 100, 127, 1, 0, '2019-07-09 17:32:10', '2019-07-09 17:32:10'),
+	(256, 98, 127, 2, 0, '2019-07-09 17:32:10', '2019-07-09 17:32:10'),
+	(257, 96, 128, 1, 0, '2019-07-09 17:37:19', '2019-07-09 17:37:19'),
+	(258, 112, 128, 2, 0, '2019-07-09 17:37:19', '2019-07-09 17:37:19'),
+	(259, 100, 129, 1, 0, '2019-07-09 17:49:58', '2019-07-09 17:49:58'),
+	(260, 114, 129, 2, 0, '2019-07-09 17:49:58', '2019-07-09 17:49:58'),
+	(261, 100, 130, 1, 0, '2019-07-09 17:54:06', '2019-07-09 17:54:06'),
+	(262, 107, 130, 2, 0, '2019-07-09 17:54:06', '2019-07-09 17:54:06'),
+	(263, 108, 131, 1, 0, '2019-07-09 17:55:48', '2019-07-09 17:55:48'),
+	(264, 99, 131, 2, 1, '2019-07-09 17:55:48', '2019-07-09 19:49:10'),
+	(265, 107, 132, 1, 0, '2019-07-09 18:05:35', '2019-07-09 18:05:35'),
+	(266, 102, 132, 2, 0, '2019-07-09 18:05:35', '2019-07-09 18:05:35'),
+	(267, 108, 133, 1, 0, '2019-07-09 18:09:56', '2019-07-09 18:09:56'),
+	(268, 99, 133, 2, 1, '2019-07-09 18:09:56', '2019-07-09 19:49:12'),
+	(269, 94, 134, 1, 0, '2019-07-09 18:11:33', '2019-07-09 18:11:33'),
+	(270, 98, 135, 1, 0, '2019-07-09 18:24:49', '2019-07-09 18:24:49'),
+	(271, 119, 135, 2, 0, '2019-07-09 18:24:49', '2019-07-09 18:24:49'),
+	(272, 97, 136, 1, 0, '2019-07-09 18:30:23', '2019-07-09 18:30:23'),
+	(273, 111, 136, 2, 0, '2019-07-09 18:30:23', '2019-07-09 18:30:23'),
+	(274, 95, 137, 1, 0, '2019-07-09 18:41:50', '2019-07-09 18:41:50'),
+	(275, 119, 137, 2, 0, '2019-07-09 18:41:51', '2019-07-09 18:41:51'),
+	(276, 97, 138, 1, 0, '2019-07-09 19:05:04', '2019-07-09 19:05:04'),
+	(277, 111, 138, 2, 0, '2019-07-09 19:05:04', '2019-07-09 19:05:04'),
+	(278, 98, 139, 1, 0, '2019-07-09 19:09:35', '2019-07-09 19:09:35'),
+	(279, 110, 139, 2, 0, '2019-07-09 19:09:35', '2019-07-09 19:09:35'),
+	(280, 94, 140, 1, 0, '2019-07-09 19:21:13', '2019-07-09 19:21:13'),
+	(281, 119, 140, 2, 0, '2019-07-09 19:21:13', '2019-07-09 19:21:13'),
+	(282, 97, 141, 1, 0, '2019-07-09 19:27:42', '2019-07-09 19:27:42'),
+	(283, 111, 141, 2, 0, '2019-07-09 19:27:42', '2019-07-09 19:27:42'),
+	(284, 105, 142, 1, 0, '2019-07-09 19:40:32', '2019-07-09 19:40:32'),
+	(285, 114, 142, 2, 0, '2019-07-09 19:40:32', '2019-07-09 19:40:32'),
+	(286, 98, 143, 1, 0, '2019-07-09 20:12:24', '2019-07-09 20:12:24'),
+	(287, 110, 143, 2, 0, '2019-07-09 20:12:24', '2019-07-09 20:12:24'),
+	(288, 97, 144, 1, 0, '2019-07-09 20:50:02', '2019-07-09 20:50:02'),
+	(289, 111, 144, 2, 0, '2019-07-09 20:50:02', '2019-07-09 20:50:02'),
+	(290, 105, 145, 1, 0, '2019-07-09 20:54:30', '2019-07-09 20:54:30'),
+	(291, 106, 145, 2, 0, '2019-07-09 20:54:30', '2019-07-09 20:54:30'),
+	(292, 95, 146, 1, 0, '2019-07-09 21:14:31', '2019-07-09 21:14:31'),
+	(293, 98, 146, 2, 0, '2019-07-09 21:14:31', '2019-07-09 21:14:31'),
+	(294, 105, 147, 1, 0, '2019-07-09 21:14:33', '2019-07-09 21:14:33'),
+	(295, 110, 147, 2, 0, '2019-07-09 21:14:33', '2019-07-09 21:14:33'),
+	(296, 94, 148, 1, 0, '2019-07-09 21:19:59', '2019-07-09 21:19:59'),
+	(297, 107, 148, 2, 0, '2019-07-09 21:20:00', '2019-07-09 21:20:00'),
+	(298, 95, 149, 1, 0, '2019-07-09 21:28:00', '2019-07-09 21:28:00'),
+	(299, 119, 149, 2, 0, '2019-07-09 21:28:00', '2019-07-09 21:28:00'),
+	(300, 103, 150, 1, 0, '2019-07-09 21:28:01', '2019-07-09 21:28:01'),
+	(301, 96, 150, 2, 0, '2019-07-09 21:28:01', '2019-07-09 21:28:01'),
+	(302, 98, 151, 1, 0, '2019-07-09 21:31:36', '2019-07-09 21:31:36'),
+	(303, 110, 151, 2, 0, '2019-07-09 21:31:36', '2019-07-09 21:31:36'),
+	(304, 94, 152, 1, 0, '2019-07-09 21:39:43', '2019-07-09 21:39:43'),
+	(305, 119, 152, 2, 0, '2019-07-09 21:39:43', '2019-07-09 21:39:43'),
+	(306, 94, 153, 1, 0, '2019-07-09 21:41:10', '2019-07-09 21:41:10'),
+	(307, 102, 153, 2, 0, '2019-07-09 21:41:10', '2019-07-09 21:41:10'),
+	(308, 95, 154, 1, 0, '2019-07-09 22:04:59', '2019-07-09 22:04:59'),
+	(309, 119, 154, 2, 0, '2019-07-09 22:04:59', '2019-07-09 22:04:59'),
+	(310, 105, 155, 1, 0, '2019-07-09 22:08:00', '2019-07-09 22:08:00'),
+	(311, 99, 155, 2, 0, '2019-07-09 22:08:00', '2019-07-09 22:08:00'),
+	(312, 98, 156, 1, 0, '2019-07-09 22:37:06', '2019-07-09 22:37:06'),
+	(313, 110, 156, 2, 0, '2019-07-09 22:37:06', '2019-07-09 22:37:06'),
+	(314, 105, 157, 1, 0, '2019-07-09 22:46:10', '2019-07-09 22:46:10'),
+	(315, 106, 157, 2, 0, '2019-07-09 22:46:11', '2019-07-09 22:46:11'),
+	(316, 109, 158, 1, 0, '2019-07-09 22:46:19', '2019-07-09 22:46:19'),
+	(317, 112, 158, 2, 0, '2019-07-09 22:46:19', '2019-07-09 22:46:19'),
+	(318, 94, 159, 1, 0, '2019-07-09 23:06:25', '2019-07-09 23:06:25'),
+	(319, 107, 159, 2, 0, '2019-07-09 23:06:25', '2019-07-09 23:06:25'),
+	(320, 95, 160, 1, 0, '2019-07-09 23:31:21', '2019-07-09 23:31:21'),
+	(321, 119, 160, 2, 0, '2019-07-09 23:31:21', '2019-07-09 23:31:21'),
+	(322, 103, 161, 1, 0, '2019-07-10 00:15:49', '2019-07-10 00:15:49'),
+	(323, 109, 161, 2, 0, '2019-07-10 00:15:49', '2019-07-10 00:15:49'),
+	(324, 107, 162, 1, 0, '2019-07-10 00:39:29', '2019-07-10 00:39:29'),
+	(325, 102, 162, 2, 0, '2019-07-10 00:39:29', '2019-07-10 00:39:29'),
+	(326, 100, 163, 1, 0, '2019-07-10 00:43:47', '2019-07-10 00:43:47'),
+	(327, 110, 163, 2, 0, '2019-07-10 00:43:47', '2019-07-10 00:43:47'),
+	(328, 106, 164, 1, 0, '2019-07-10 01:04:17', '2019-07-10 01:04:17'),
+	(329, 108, 164, 2, 0, '2019-07-10 01:04:17', '2019-07-10 01:04:17'),
+	(330, 109, 165, 1, 0, '2019-07-10 02:23:15', '2019-07-10 02:23:15'),
+	(331, 112, 165, 2, 0, '2019-07-10 02:23:15', '2019-07-10 02:23:15'),
+	(332, 106, 166, 1, 0, '2019-07-10 02:48:04', '2019-07-10 02:48:04'),
+	(333, 103, 166, 2, 0, '2019-07-10 02:48:04', '2019-07-10 02:48:04'),
+	(334, 103, 167, 1, 0, '2019-07-10 03:49:34', '2019-07-10 03:49:34'),
+	(335, 106, 167, 2, 0, '2019-07-10 03:49:34', '2019-07-10 03:49:34'),
+	(336, 97, 168, 1, 0, '2019-07-10 07:39:27', '2019-07-10 07:39:27'),
+	(337, 111, 168, 2, 0, '2019-07-10 07:39:27', '2019-07-10 07:39:27'),
+	(338, 99, 169, 1, 0, '2019-07-10 08:23:22', '2019-07-10 08:23:22'),
+	(339, 114, 169, 2, 0, '2019-07-10 08:23:22', '2019-07-10 08:23:22'),
+	(340, 102, 170, 1, 0, '2019-07-10 08:49:05', '2019-07-10 08:49:05'),
+	(341, 99, 170, 2, 0, '2019-07-10 08:49:05', '2019-07-10 08:49:05'),
+	(342, 100, 171, 1, 0, '2019-07-10 09:06:16', '2019-07-10 09:06:16'),
+	(343, 114, 171, 2, 0, '2019-07-10 09:06:16', '2019-07-10 09:06:16'),
+	(344, 100, 172, 1, 0, '2019-07-10 09:50:52', '2019-07-10 09:50:52'),
+	(345, 114, 172, 2, 0, '2019-07-10 09:50:52', '2019-07-10 09:50:52'),
+	(346, 103, 173, 1, 0, '2019-07-10 10:11:27', '2019-07-10 10:11:27'),
+	(347, 109, 173, 2, 0, '2019-07-10 10:11:27', '2019-07-10 10:11:27'),
+	(348, 103, 174, 1, 0, '2019-07-10 10:14:50', '2019-07-10 10:14:50'),
+	(349, 108, 174, 2, 0, '2019-07-10 10:14:50', '2019-07-10 10:14:50'),
+	(350, 99, 175, 1, 0, '2019-07-10 10:30:50', '2019-07-10 10:30:50'),
+	(351, 103, 175, 2, 0, '2019-07-10 10:30:50', '2019-07-10 10:30:50'),
+	(352, 109, 176, 1, 0, '2019-07-10 10:39:40', '2019-07-10 10:39:40'),
+	(353, 112, 176, 2, 0, '2019-07-10 10:39:40', '2019-07-10 10:39:40'),
+	(354, 102, 177, 1, 0, '2019-07-10 10:50:13', '2019-07-10 10:50:13'),
+	(355, 95, 177, 2, 0, '2019-07-10 10:50:13', '2019-07-10 10:50:13'),
+	(356, 108, 178, 1, 0, '2019-09-03 20:18:58', '2019-09-03 20:18:58'),
+	(357, 116, 178, 2, 0, '2019-09-03 20:18:58', '2019-09-03 20:18:58');
 /*!40000 ALTER TABLE `dosen_pembimbing` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `jadwal`
---
-
+-- Dumping structure for table monta.jadwal
 DROP TABLE IF EXISTS `jadwal`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jadwal` (
+CREATE TABLE IF NOT EXISTS `jadwal` (
   `id_jadwal` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal` datetime DEFAULT NULL,
   PRIMARY KEY (`id_jadwal`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `jadwal`
---
-
-LOCK TABLES `jadwal` WRITE;
+-- Dumping data for table monta.jadwal: ~9 rows (approximately)
+DELETE FROM `jadwal`;
 /*!40000 ALTER TABLE `jadwal` DISABLE KEYS */;
-INSERT INTO `jadwal` VALUES (1,'Awal Semester','2017-02-08 00:00:00'),(2,'Buka Ketersediaan Seminar','2017-07-28 00:00:00'),(3,'Tutup Ketersediaan Seminar','2017-08-05 23:59:00'),(4,'Buka Pengajuan Jadwal Seminar','2017-07-28 00:00:00'),(5,'Tutup Pengajuan Jadwal Seminar','2017-08-05 23:59:00'),(6,'Buka Ketersediaan Ujian','2017-07-28 00:00:00'),(7,'Tutup Ketersediaan Ujian','2017-08-05 23:59:00'),(8,'Buka Pengajuan Jadwal Ujian','2017-07-28 00:00:00'),(9,'Tutup Pengajuan Jadwal Ujian','2017-08-05 23:59:00');
+INSERT INTO `jadwal` (`id_jadwal`, `nama`, `tanggal`) VALUES
+	(1, 'Awal Semester', '2019-02-04 23:59:00'),
+	(2, 'Buka Ketersediaan Seminar', '2019-02-06 23:59:00'),
+	(3, 'Tutup Ketersediaan Seminar', '2019-07-26 23:59:00'),
+	(4, 'Buka Pengajuan Jadwal Seminar', '2019-02-06 23:59:00'),
+	(5, 'Tutup Pengajuan Jadwal Seminar', '2019-07-26 23:59:00'),
+	(6, 'Buka Ketersediaan Sidang', '2019-06-11 23:59:00'),
+	(7, 'Tutup Ketersediaan Sidang', '2019-07-26 23:59:00'),
+	(8, 'Buka Pengajuan Jadwal Sidang', '2019-06-11 23:59:00'),
+	(9, 'Tutup Pengajuan Jadwal Sidang', '2019-07-26 23:59:00');
 /*!40000 ALTER TABLE `jadwal` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `jadwal_seminar`
---
-
+-- Dumping structure for table monta.jadwal_seminar
 DROP TABLE IF EXISTS `jadwal_seminar`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jadwal_seminar` (
+CREATE TABLE IF NOT EXISTS `jadwal_seminar` (
   `id_js` int(11) NOT NULL AUTO_INCREMENT,
   `tanggal` date DEFAULT NULL,
   `sesi` int(11) DEFAULT NULL,
+  `ruang` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_js`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=320 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `jadwal_seminar`
---
-
-LOCK TABLES `jadwal_seminar` WRITE;
+-- Dumping data for table monta.jadwal_seminar: ~90 rows (approximately)
+DELETE FROM `jadwal_seminar`;
 /*!40000 ALTER TABLE `jadwal_seminar` DISABLE KEYS */;
-INSERT INTO `jadwal_seminar` VALUES (11,'2017-07-31',1,'2017-07-20 18:27:26','2017-07-20 18:27:26'),(12,'2017-07-31',2,'2017-07-20 18:27:26','2017-07-20 18:27:26'),(13,'2017-07-31',3,'2017-07-20 18:27:26','2017-07-20 18:27:26'),(14,'2017-07-30',1,'2017-07-20 18:30:23','2017-07-20 18:30:23'),(15,'2017-07-30',2,'2017-07-20 18:30:23','2017-07-20 18:30:23'),(16,'2017-07-30',3,'2017-07-20 18:30:23','2017-07-20 18:30:23'),(17,'2017-07-29',1,'2017-07-20 18:30:28','2017-07-20 18:30:28'),(18,'2017-07-29',2,'2017-07-20 18:30:29','2017-07-20 18:30:29'),(19,'2017-07-29',3,'2017-07-20 18:30:29','2017-07-20 18:30:29'),(20,'2017-08-01',1,'2017-07-21 02:59:37','2017-07-21 02:59:37'),(21,'2017-08-01',2,'2017-07-21 02:59:37','2017-07-21 02:59:37'),(22,'2017-08-01',3,'2017-07-21 02:59:37','2017-07-21 02:59:37'),(23,'2017-08-02',1,'2017-07-21 02:59:45','2017-07-21 02:59:45'),(24,'2017-08-02',2,'2017-07-21 02:59:45','2017-07-21 02:59:45'),(25,'2017-08-02',3,'2017-07-21 02:59:46','2017-07-21 02:59:46'),(26,'2017-08-05',1,'2017-07-21 07:11:24','2017-07-21 07:11:24'),(27,'2017-08-05',2,'2017-07-21 07:11:24','2017-07-21 07:11:24'),(28,'2017-08-05',3,'2017-07-21 07:11:24','2017-07-21 07:11:24');
+INSERT INTO `jadwal_seminar` (`id_js`, `tanggal`, `sesi`, `ruang`, `created_at`, `updated_at`) VALUES
+	(224, '2019-07-08', 1, 1, '2019-07-09 16:26:36', '2019-07-09 16:26:36'),
+	(225, '2019-07-08', 2, 1, '2019-07-09 16:26:36', '2019-07-09 16:26:36'),
+	(226, '2019-07-08', 3, 1, '2019-07-09 16:26:36', '2019-07-09 16:26:36'),
+	(227, '2019-07-08', 1, 2, '2019-07-09 16:26:43', '2019-07-09 16:26:43'),
+	(228, '2019-07-08', 2, 2, '2019-07-09 16:26:43', '2019-07-09 16:26:43'),
+	(229, '2019-07-08', 3, 2, '2019-07-09 16:26:43', '2019-07-09 16:26:43'),
+	(230, '2019-07-09', 1, 1, '2019-07-09 16:26:52', '2019-07-09 16:26:52'),
+	(231, '2019-07-09', 2, 1, '2019-07-09 16:26:52', '2019-07-09 16:26:52'),
+	(232, '2019-07-09', 3, 1, '2019-07-09 16:26:52', '2019-07-09 16:26:52'),
+	(233, '2019-07-09', 1, 2, '2019-07-09 16:27:04', '2019-07-09 16:27:04'),
+	(234, '2019-07-09', 2, 2, '2019-07-09 16:27:04', '2019-07-09 16:27:04'),
+	(235, '2019-07-09', 3, 2, '2019-07-09 16:27:04', '2019-07-09 16:27:04'),
+	(242, '2019-07-10', 1, 1, '2019-07-09 16:27:44', '2019-07-09 16:27:44'),
+	(243, '2019-07-10', 2, 1, '2019-07-09 16:27:44', '2019-07-09 16:27:44'),
+	(244, '2019-07-10', 3, 1, '2019-07-09 16:27:44', '2019-07-09 16:27:44'),
+	(245, '2019-07-10', 1, 2, '2019-07-09 16:27:51', '2019-07-09 16:27:51'),
+	(246, '2019-07-10', 2, 2, '2019-07-09 16:27:51', '2019-07-09 16:27:51'),
+	(247, '2019-07-10', 3, 2, '2019-07-09 16:27:51', '2019-07-09 16:27:51'),
+	(248, '2019-07-11', 1, 1, '2019-07-09 16:28:00', '2019-07-09 16:28:00'),
+	(249, '2019-07-11', 2, 1, '2019-07-09 16:28:00', '2019-07-09 16:28:00'),
+	(250, '2019-07-11', 3, 1, '2019-07-09 16:28:00', '2019-07-09 16:28:00'),
+	(251, '2019-07-11', 1, 2, '2019-07-09 16:28:08', '2019-07-09 16:28:08'),
+	(252, '2019-07-11', 2, 2, '2019-07-09 16:28:08', '2019-07-09 16:28:08'),
+	(253, '2019-07-11', 3, 2, '2019-07-09 16:28:08', '2019-07-09 16:28:08'),
+	(254, '2019-07-12', 1, 1, '2019-07-09 16:28:15', '2019-07-09 16:28:15'),
+	(255, '2019-07-12', 2, 1, '2019-07-09 16:28:15', '2019-07-09 16:28:15'),
+	(256, '2019-07-12', 3, 1, '2019-07-09 16:28:15', '2019-07-09 16:28:15'),
+	(257, '2019-07-12', 1, 2, '2019-07-09 16:28:22', '2019-07-09 16:28:22'),
+	(258, '2019-07-12', 2, 2, '2019-07-09 16:28:22', '2019-07-09 16:28:22'),
+	(259, '2019-07-12', 3, 2, '2019-07-09 16:28:22', '2019-07-09 16:28:22'),
+	(260, '2019-07-15', 1, 1, '2019-07-09 16:28:29', '2019-07-09 16:28:29'),
+	(261, '2019-07-15', 2, 1, '2019-07-09 16:28:29', '2019-07-09 16:28:29'),
+	(262, '2019-07-15', 3, 1, '2019-07-09 16:28:29', '2019-07-09 16:28:29'),
+	(263, '2019-07-15', 1, 2, '2019-07-09 16:28:36', '2019-07-09 16:28:36'),
+	(264, '2019-07-15', 2, 2, '2019-07-09 16:28:36', '2019-07-09 16:28:36'),
+	(265, '2019-07-15', 3, 2, '2019-07-09 16:28:36', '2019-07-09 16:28:36'),
+	(266, '2019-07-16', 1, 1, '2019-07-09 16:28:42', '2019-07-09 16:28:42'),
+	(267, '2019-07-16', 2, 1, '2019-07-09 16:28:42', '2019-07-09 16:28:42'),
+	(268, '2019-07-16', 3, 1, '2019-07-09 16:28:42', '2019-07-09 16:28:42'),
+	(269, '2019-07-16', 1, 2, '2019-07-09 16:28:48', '2019-07-09 16:28:48'),
+	(270, '2019-07-16', 2, 2, '2019-07-09 16:28:48', '2019-07-09 16:28:48'),
+	(271, '2019-07-16', 3, 2, '2019-07-09 16:28:48', '2019-07-09 16:28:48'),
+	(272, '2019-07-17', 1, 1, '2019-07-09 16:28:58', '2019-07-09 16:28:58'),
+	(273, '2019-07-17', 2, 1, '2019-07-09 16:28:58', '2019-07-09 16:28:58'),
+	(274, '2019-07-17', 3, 1, '2019-07-09 16:28:58', '2019-07-09 16:28:58'),
+	(275, '2019-07-17', 1, 2, '2019-07-09 16:29:04', '2019-07-09 16:29:04'),
+	(276, '2019-07-17', 2, 2, '2019-07-09 16:29:04', '2019-07-09 16:29:04'),
+	(277, '2019-07-17', 3, 2, '2019-07-09 16:29:04', '2019-07-09 16:29:04'),
+	(278, '2019-07-18', 1, 1, '2019-07-09 16:29:12', '2019-07-09 16:29:12'),
+	(279, '2019-07-18', 2, 1, '2019-07-09 16:29:12', '2019-07-09 16:29:12'),
+	(280, '2019-07-18', 3, 1, '2019-07-09 16:29:12', '2019-07-09 16:29:12'),
+	(281, '2019-07-18', 1, 2, '2019-07-09 16:29:18', '2019-07-09 16:29:18'),
+	(282, '2019-07-18', 2, 2, '2019-07-09 16:29:18', '2019-07-09 16:29:18'),
+	(283, '2019-07-18', 3, 2, '2019-07-09 16:29:18', '2019-07-09 16:29:18'),
+	(284, '2019-07-19', 1, 1, '2019-07-09 16:29:24', '2019-07-09 16:29:24'),
+	(285, '2019-07-19', 2, 1, '2019-07-09 16:29:24', '2019-07-09 16:29:24'),
+	(286, '2019-07-19', 3, 1, '2019-07-09 16:29:24', '2019-07-09 16:29:24'),
+	(287, '2019-07-19', 1, 2, '2019-07-09 16:29:30', '2019-07-09 16:29:30'),
+	(288, '2019-07-19', 2, 2, '2019-07-09 16:29:30', '2019-07-09 16:29:30'),
+	(289, '2019-07-19', 3, 2, '2019-07-09 16:29:30', '2019-07-09 16:29:30'),
+	(290, '2019-07-22', 1, 1, '2019-07-09 16:29:38', '2019-07-09 16:29:38'),
+	(291, '2019-07-22', 2, 1, '2019-07-09 16:29:38', '2019-07-09 16:29:38'),
+	(292, '2019-07-22', 3, 1, '2019-07-09 16:29:38', '2019-07-09 16:29:38'),
+	(293, '2019-07-22', 1, 2, '2019-07-09 16:29:46', '2019-07-09 16:29:46'),
+	(294, '2019-07-22', 2, 2, '2019-07-09 16:29:46', '2019-07-09 16:29:46'),
+	(295, '2019-07-22', 3, 2, '2019-07-09 16:29:46', '2019-07-09 16:29:46'),
+	(296, '2019-07-23', 1, 1, '2019-07-09 16:30:00', '2019-07-09 16:30:00'),
+	(297, '2019-07-23', 2, 1, '2019-07-09 16:30:00', '2019-07-09 16:30:00'),
+	(298, '2019-07-23', 3, 1, '2019-07-09 16:30:00', '2019-07-09 16:30:00'),
+	(299, '2019-07-23', 1, 2, '2019-07-09 16:30:06', '2019-07-09 16:30:06'),
+	(300, '2019-07-23', 2, 2, '2019-07-09 16:30:06', '2019-07-09 16:30:06'),
+	(301, '2019-07-23', 3, 2, '2019-07-09 16:30:06', '2019-07-09 16:30:06'),
+	(302, '2019-07-24', 1, 1, '2019-07-09 16:30:14', '2019-07-09 16:30:14'),
+	(303, '2019-07-24', 2, 1, '2019-07-09 16:30:14', '2019-07-09 16:30:14'),
+	(304, '2019-07-24', 3, 1, '2019-07-09 16:30:14', '2019-07-09 16:30:14'),
+	(305, '2019-07-24', 1, 2, '2019-07-09 16:30:20', '2019-07-09 16:30:20'),
+	(306, '2019-07-24', 2, 2, '2019-07-09 16:30:20', '2019-07-09 16:30:20'),
+	(307, '2019-07-24', 3, 2, '2019-07-09 16:30:20', '2019-07-09 16:30:20'),
+	(308, '2019-07-25', 1, 1, '2019-07-09 16:30:31', '2019-07-09 16:30:31'),
+	(309, '2019-07-25', 2, 1, '2019-07-09 16:30:31', '2019-07-09 16:30:31'),
+	(310, '2019-07-25', 3, 1, '2019-07-09 16:30:31', '2019-07-09 16:30:31'),
+	(311, '2019-07-25', 1, 2, '2019-07-09 16:30:37', '2019-07-09 16:30:37'),
+	(312, '2019-07-25', 2, 2, '2019-07-09 16:30:37', '2019-07-09 16:30:37'),
+	(313, '2019-07-25', 3, 2, '2019-07-09 16:30:37', '2019-07-09 16:30:37'),
+	(314, '2019-07-26', 1, 1, '2019-07-09 16:30:43', '2019-07-09 16:30:43'),
+	(315, '2019-07-26', 2, 1, '2019-07-09 16:30:43', '2019-07-09 16:30:43'),
+	(316, '2019-07-26', 3, 1, '2019-07-09 16:30:43', '2019-07-09 16:30:43'),
+	(317, '2019-07-26', 1, 2, '2019-07-09 16:30:48', '2019-07-09 16:30:48'),
+	(318, '2019-07-26', 2, 2, '2019-07-09 16:30:48', '2019-07-09 16:30:48'),
+	(319, '2019-07-26', 3, 2, '2019-07-09 16:30:48', '2019-07-09 16:30:48');
 /*!40000 ALTER TABLE `jadwal_seminar` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `jadwal_ujian`
---
-
+-- Dumping structure for table monta.jadwal_ujian
 DROP TABLE IF EXISTS `jadwal_ujian`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jadwal_ujian` (
+CREATE TABLE IF NOT EXISTS `jadwal_ujian` (
   `id_ju` int(11) NOT NULL AUTO_INCREMENT,
   `tanggal` date DEFAULT NULL,
   `sesi` int(11) DEFAULT NULL,
+  `ruang` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_ju`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `jadwal_ujian`
---
-
-LOCK TABLES `jadwal_ujian` WRITE;
+-- Dumping data for table monta.jadwal_ujian: ~90 rows (approximately)
+DELETE FROM `jadwal_ujian`;
 /*!40000 ALTER TABLE `jadwal_ujian` DISABLE KEYS */;
-INSERT INTO `jadwal_ujian` VALUES (4,'2017-07-22',1,'2017-07-21 02:47:15','2017-07-21 02:47:15'),(5,'2017-07-22',2,'2017-07-21 02:47:15','2017-07-21 02:47:15'),(6,'2017-07-22',3,'2017-07-21 02:47:15','2017-07-21 02:47:15'),(7,'2017-07-26',1,'2017-07-21 02:53:12','2017-07-21 02:53:12'),(8,'2017-07-26',2,'2017-07-21 02:53:12','2017-07-21 02:53:12'),(9,'2017-07-26',3,'2017-07-21 02:53:12','2017-07-21 02:53:12'),(13,'2017-07-27',1,'2017-07-21 02:57:20','2017-07-21 02:57:20'),(14,'2017-07-27',2,'2017-07-21 02:57:20','2017-07-21 02:57:20'),(15,'2017-07-27',3,'2017-07-21 02:57:20','2017-07-21 02:57:20'),(16,'2017-07-28',1,'2017-07-21 02:57:33','2017-07-21 02:57:33'),(17,'2017-07-28',2,'2017-07-21 02:57:33','2017-07-21 02:57:33'),(18,'2017-07-28',3,'2017-07-21 02:57:33','2017-07-21 02:57:33'),(19,'2017-07-29',1,'2017-07-21 02:58:29','2017-07-21 02:58:29'),(20,'2017-07-29',2,'2017-07-21 02:58:29','2017-07-21 02:58:29'),(21,'2017-07-29',3,'2017-07-21 02:58:29','2017-07-21 02:58:29'),(22,'2017-07-30',1,'2017-07-21 02:58:34','2017-07-21 02:58:34'),(23,'2017-07-30',2,'2017-07-21 02:58:34','2017-07-21 02:58:34'),(24,'2017-07-30',3,'2017-07-21 02:58:34','2017-07-21 02:58:34'),(25,'2017-08-16',1,'2017-07-27 06:06:31','2017-07-27 06:06:31'),(26,'2017-08-16',2,'2017-07-27 06:06:31','2017-07-27 06:06:31'),(27,'2017-08-16',3,'2017-07-27 06:06:31','2017-07-27 06:06:31');
+INSERT INTO `jadwal_ujian` (`id_ju`, `tanggal`, `sesi`, `ruang`, `created_at`, `updated_at`) VALUES
+	(142, '2019-07-08', 1, 1, '2019-07-09 16:32:18', '2019-07-09 16:32:18'),
+	(143, '2019-07-08', 2, 1, '2019-07-09 16:32:18', '2019-07-09 16:32:18'),
+	(144, '2019-07-08', 3, 1, '2019-07-09 16:32:18', '2019-07-09 16:32:18'),
+	(145, '2019-07-08', 1, 2, '2019-07-09 16:32:24', '2019-07-09 16:32:24'),
+	(146, '2019-07-08', 2, 2, '2019-07-09 16:32:24', '2019-07-09 16:32:24'),
+	(147, '2019-07-08', 3, 2, '2019-07-09 16:32:24', '2019-07-09 16:32:24'),
+	(148, '2019-07-09', 1, 1, '2019-07-09 16:32:30', '2019-07-09 16:32:30'),
+	(149, '2019-07-09', 2, 1, '2019-07-09 16:32:30', '2019-07-09 16:32:30'),
+	(150, '2019-07-09', 3, 1, '2019-07-09 16:32:30', '2019-07-09 16:32:30'),
+	(151, '2019-07-09', 1, 2, '2019-07-09 16:32:37', '2019-07-09 16:32:37'),
+	(152, '2019-07-09', 2, 2, '2019-07-09 16:32:37', '2019-07-09 16:32:37'),
+	(153, '2019-07-09', 3, 2, '2019-07-09 16:32:37', '2019-07-09 16:32:37'),
+	(154, '2019-07-10', 1, 1, '2019-07-09 16:32:44', '2019-07-09 16:32:44'),
+	(155, '2019-07-10', 2, 1, '2019-07-09 16:32:44', '2019-07-09 16:32:44'),
+	(156, '2019-07-10', 3, 1, '2019-07-09 16:32:44', '2019-07-09 16:32:44'),
+	(157, '2019-07-10', 1, 2, '2019-07-09 16:32:52', '2019-07-09 16:32:52'),
+	(158, '2019-07-10', 2, 2, '2019-07-09 16:32:52', '2019-07-09 16:32:52'),
+	(159, '2019-07-10', 3, 2, '2019-07-09 16:32:52', '2019-07-09 16:32:52'),
+	(160, '2019-07-11', 1, 1, '2019-07-09 16:33:01', '2019-07-09 16:33:01'),
+	(161, '2019-07-11', 2, 1, '2019-07-09 16:33:01', '2019-07-09 16:33:01'),
+	(162, '2019-07-11', 3, 1, '2019-07-09 16:33:01', '2019-07-09 16:33:01'),
+	(163, '2019-07-11', 1, 2, '2019-07-09 16:33:18', '2019-07-09 16:33:18'),
+	(164, '2019-07-11', 2, 2, '2019-07-09 16:33:18', '2019-07-09 16:33:18'),
+	(165, '2019-07-11', 3, 2, '2019-07-09 16:33:18', '2019-07-09 16:33:18'),
+	(166, '2019-07-12', 1, 1, '2019-07-09 16:34:25', '2019-07-09 16:34:25'),
+	(167, '2019-07-12', 2, 1, '2019-07-09 16:34:25', '2019-07-09 16:34:25'),
+	(168, '2019-07-12', 3, 1, '2019-07-09 16:34:25', '2019-07-09 16:34:25'),
+	(169, '2019-07-12', 1, 2, '2019-07-09 16:34:32', '2019-07-09 16:34:32'),
+	(170, '2019-07-12', 2, 2, '2019-07-09 16:34:32', '2019-07-09 16:34:32'),
+	(171, '2019-07-12', 3, 2, '2019-07-09 16:34:32', '2019-07-09 16:34:32'),
+	(172, '2019-07-15', 1, 1, '2019-07-09 16:34:43', '2019-07-09 16:34:43'),
+	(173, '2019-07-15', 2, 1, '2019-07-09 16:34:44', '2019-07-09 16:34:44'),
+	(174, '2019-07-15', 3, 1, '2019-07-09 16:34:44', '2019-07-09 16:34:44'),
+	(175, '2019-07-15', 1, 2, '2019-07-09 16:34:51', '2019-07-09 16:34:51'),
+	(176, '2019-07-15', 2, 2, '2019-07-09 16:34:51', '2019-07-09 16:34:51'),
+	(177, '2019-07-15', 3, 2, '2019-07-09 16:34:51', '2019-07-09 16:34:51'),
+	(178, '2019-07-16', 1, 1, '2019-07-09 16:34:57', '2019-07-09 16:34:57'),
+	(179, '2019-07-16', 2, 1, '2019-07-09 16:34:57', '2019-07-09 16:34:57'),
+	(180, '2019-07-16', 3, 1, '2019-07-09 16:34:57', '2019-07-09 16:34:57'),
+	(181, '2019-07-16', 1, 2, '2019-07-09 16:35:02', '2019-07-09 16:35:02'),
+	(182, '2019-07-16', 2, 2, '2019-07-09 16:35:02', '2019-07-09 16:35:02'),
+	(183, '2019-07-16', 3, 2, '2019-07-09 16:35:03', '2019-07-09 16:35:03'),
+	(184, '2019-07-17', 1, 1, '2019-07-09 16:35:14', '2019-07-09 16:35:14'),
+	(185, '2019-07-17', 2, 1, '2019-07-09 16:35:14', '2019-07-09 16:35:14'),
+	(186, '2019-07-17', 3, 1, '2019-07-09 16:35:14', '2019-07-09 16:35:14'),
+	(187, '2019-07-17', 1, 2, '2019-07-09 16:35:23', '2019-07-09 16:35:23'),
+	(188, '2019-07-17', 2, 2, '2019-07-09 16:35:23', '2019-07-09 16:35:23'),
+	(189, '2019-07-17', 3, 2, '2019-07-09 16:35:23', '2019-07-09 16:35:23'),
+	(190, '2019-07-18', 1, 1, '2019-07-09 16:35:34', '2019-07-09 16:35:34'),
+	(191, '2019-07-18', 2, 1, '2019-07-09 16:35:34', '2019-07-09 16:35:34'),
+	(192, '2019-07-18', 3, 1, '2019-07-09 16:35:34', '2019-07-09 16:35:34'),
+	(193, '2019-07-18', 1, 2, '2019-07-09 16:35:42', '2019-07-09 16:35:42'),
+	(194, '2019-07-18', 2, 2, '2019-07-09 16:35:42', '2019-07-09 16:35:42'),
+	(195, '2019-07-18', 3, 2, '2019-07-09 16:35:42', '2019-07-09 16:35:42'),
+	(196, '2019-07-19', 1, 1, '2019-07-09 16:35:55', '2019-07-09 16:35:55'),
+	(197, '2019-07-19', 2, 1, '2019-07-09 16:35:55', '2019-07-09 16:35:55'),
+	(198, '2019-07-19', 3, 1, '2019-07-09 16:35:55', '2019-07-09 16:35:55'),
+	(199, '2019-07-19', 1, 2, '2019-07-09 16:36:02', '2019-07-09 16:36:02'),
+	(200, '2019-07-19', 2, 2, '2019-07-09 16:36:02', '2019-07-09 16:36:02'),
+	(201, '2019-07-19', 3, 2, '2019-07-09 16:36:02', '2019-07-09 16:36:02'),
+	(202, '2019-07-22', 1, 1, '2019-07-09 16:36:08', '2019-07-09 16:36:08'),
+	(203, '2019-07-22', 2, 1, '2019-07-09 16:36:08', '2019-07-09 16:36:08'),
+	(204, '2019-07-22', 3, 1, '2019-07-09 16:36:08', '2019-07-09 16:36:08'),
+	(205, '2019-07-22', 1, 2, '2019-07-09 16:36:13', '2019-07-09 16:36:13'),
+	(206, '2019-07-22', 2, 2, '2019-07-09 16:36:13', '2019-07-09 16:36:13'),
+	(207, '2019-07-22', 3, 2, '2019-07-09 16:36:13', '2019-07-09 16:36:13'),
+	(208, '2019-07-23', 1, 1, '2019-07-09 16:36:19', '2019-07-09 16:36:19'),
+	(209, '2019-07-23', 2, 1, '2019-07-09 16:36:19', '2019-07-09 16:36:19'),
+	(210, '2019-07-23', 3, 1, '2019-07-09 16:36:19', '2019-07-09 16:36:19'),
+	(211, '2019-07-23', 1, 2, '2019-07-09 16:36:25', '2019-07-09 16:36:25'),
+	(212, '2019-07-23', 2, 2, '2019-07-09 16:36:25', '2019-07-09 16:36:25'),
+	(213, '2019-07-23', 3, 2, '2019-07-09 16:36:25', '2019-07-09 16:36:25'),
+	(214, '2019-07-24', 1, 1, '2019-07-09 16:36:31', '2019-07-09 16:36:31'),
+	(215, '2019-07-24', 2, 1, '2019-07-09 16:36:31', '2019-07-09 16:36:31'),
+	(216, '2019-07-24', 3, 1, '2019-07-09 16:36:31', '2019-07-09 16:36:31'),
+	(217, '2019-07-24', 1, 2, '2019-07-09 16:36:36', '2019-07-09 16:36:36'),
+	(218, '2019-07-24', 2, 2, '2019-07-09 16:36:36', '2019-07-09 16:36:36'),
+	(219, '2019-07-24', 3, 2, '2019-07-09 16:36:36', '2019-07-09 16:36:36'),
+	(220, '2019-07-25', 1, 1, '2019-07-09 16:36:41', '2019-07-09 16:36:41'),
+	(221, '2019-07-25', 2, 1, '2019-07-09 16:36:41', '2019-07-09 16:36:41'),
+	(222, '2019-07-25', 3, 1, '2019-07-09 16:36:41', '2019-07-09 16:36:41'),
+	(223, '2019-07-25', 1, 2, '2019-07-09 16:36:46', '2019-07-09 16:36:46'),
+	(224, '2019-07-25', 2, 2, '2019-07-09 16:36:46', '2019-07-09 16:36:46'),
+	(225, '2019-07-25', 3, 2, '2019-07-09 16:36:46', '2019-07-09 16:36:46'),
+	(226, '2019-07-26', 1, 1, '2019-07-09 16:36:51', '2019-07-09 16:36:51'),
+	(227, '2019-07-26', 2, 1, '2019-07-09 16:36:51', '2019-07-09 16:36:51'),
+	(228, '2019-07-26', 3, 1, '2019-07-09 16:36:51', '2019-07-09 16:36:51'),
+	(229, '2019-07-26', 1, 2, '2019-07-09 16:36:57', '2019-07-09 16:36:57'),
+	(230, '2019-07-26', 2, 2, '2019-07-09 16:36:57', '2019-07-09 16:36:57'),
+	(231, '2019-07-26', 3, 2, '2019-07-09 16:36:57', '2019-07-09 16:36:57');
 /*!40000 ALTER TABLE `jadwal_ujian` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `ketersediaan_seminar`
---
-
+-- Dumping structure for table monta.ketersediaan_seminar
 DROP TABLE IF EXISTS `ketersediaan_seminar`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ketersediaan_seminar` (
+CREATE TABLE IF NOT EXISTS `ketersediaan_seminar` (
   `id_ks` int(11) NOT NULL AUTO_INCREMENT,
   `id_js` int(11) DEFAULT NULL,
   `id_dosen` int(11) DEFAULT NULL,
@@ -280,27 +549,61 @@ CREATE TABLE `ketersediaan_seminar` (
   PRIMARY KEY (`id_ks`),
   KEY `id_dosen` (`id_dosen`),
   KEY `id_js` (`id_js`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `ketersediaan_seminar`
---
-
-LOCK TABLES `ketersediaan_seminar` WRITE;
+-- Dumping data for table monta.ketersediaan_seminar: ~41 rows (approximately)
+DELETE FROM `ketersediaan_seminar`;
 /*!40000 ALTER TABLE `ketersediaan_seminar` DISABLE KEYS */;
-INSERT INTO `ketersediaan_seminar` VALUES (1,14,2,'2017-07-21 02:29:18','2017-07-21 02:29:18'),(3,19,2,'2017-07-21 02:29:23','2017-07-21 02:29:23'),(4,11,2,'2017-07-21 02:29:28','2017-07-21 02:29:28'),(5,12,2,'2017-07-21 02:29:29','2017-07-21 02:29:29'),(6,14,1,'2017-07-21 02:29:42','2017-07-21 02:29:42'),(7,15,1,'2017-07-21 02:32:26','2017-07-21 02:32:26'),(8,15,2,'2017-07-21 03:07:40','2017-07-21 03:07:40'),(10,17,23,'2017-07-21 07:14:02','2017-07-21 07:14:02'),(11,14,23,'2017-07-21 07:14:22','2017-07-21 07:14:22'),(12,15,23,'2017-07-21 07:14:23','2017-07-21 07:14:23'),(14,12,23,'2017-07-21 07:14:25','2017-07-21 07:14:25'),(15,26,23,'2017-07-21 07:14:26','2017-07-21 07:14:26'),(16,14,7,'2017-07-27 00:24:36','2017-07-27 00:24:36'),(17,15,7,'2017-07-27 00:24:38','2017-07-27 00:24:38'),(18,12,7,'2017-07-27 00:24:40','2017-07-27 00:24:40'),(19,11,7,'2017-07-27 00:24:40','2017-07-27 00:24:40'),(20,13,7,'2017-07-27 00:24:41','2017-07-27 00:24:41'),(21,26,1,'2017-07-31 07:30:29','2017-07-31 07:30:29'),(22,27,1,'2017-07-31 07:30:31','2017-07-31 07:30:31'),(23,20,7,'2017-08-02 10:22:00','2017-08-02 10:22:00'),(24,23,7,'2017-08-02 10:22:01','2017-08-02 10:22:01'),(25,24,7,'2017-08-02 10:22:02','2017-08-02 10:22:02'),(26,14,12,'2017-08-02 10:22:15','2017-08-02 10:22:15'),(27,15,12,'2017-08-02 10:22:15','2017-08-02 10:22:15'),(28,13,12,'2017-08-02 10:22:16','2017-08-02 10:22:16'),(29,11,12,'2017-08-02 10:22:17','2017-08-02 10:22:17'),(30,22,12,'2017-08-02 10:22:18','2017-08-02 10:22:18'),(31,21,12,'2017-08-02 10:22:19','2017-08-02 10:22:19'),(32,23,12,'2017-08-02 10:22:20','2017-08-02 10:22:20'),(33,25,12,'2017-08-02 10:22:21','2017-08-02 10:22:21'),(34,26,12,'2017-08-02 10:22:23','2017-08-02 10:22:23'),(35,14,11,'2017-08-02 10:23:03','2017-08-02 10:23:03'),(36,12,11,'2017-08-02 10:23:04','2017-08-02 10:23:04'),(37,13,11,'2017-08-02 10:23:04','2017-08-02 10:23:04'),(38,18,11,'2017-08-02 10:23:06','2017-08-02 10:23:06'),(39,19,11,'2017-08-02 10:23:07','2017-08-02 10:23:07'),(40,27,11,'2017-08-02 10:23:08','2017-08-02 10:23:08'),(41,26,11,'2017-08-02 10:23:10','2017-08-02 10:23:10'),(42,23,11,'2017-08-02 10:23:11','2017-08-02 10:23:11'),(43,24,11,'2017-08-02 10:23:12','2017-08-02 10:23:12'),(44,25,11,'2017-08-02 10:23:13','2017-08-02 10:23:13'),(45,22,11,'2017-08-02 10:23:16','2017-08-02 10:23:16'),(46,14,16,'2017-08-02 10:25:04','2017-08-02 10:25:04'),(47,17,16,'2017-08-02 10:25:06','2017-08-02 10:25:06'),(48,12,16,'2017-08-02 10:25:07','2017-08-02 10:25:07'),(49,13,16,'2017-08-02 10:25:08','2017-08-02 10:25:08'),(50,21,16,'2017-08-02 10:25:08','2017-08-02 10:25:08'),(51,24,16,'2017-08-02 10:25:09','2017-08-02 10:25:09'),(52,23,16,'2017-08-02 10:25:10','2017-08-02 10:25:10'),(53,26,16,'2017-08-02 10:25:12','2017-08-02 10:25:12'),(54,19,16,'2017-08-02 10:25:14','2017-08-02 10:25:14'),(55,13,10,'2017-08-02 16:03:48','2017-08-02 16:03:48'),(56,12,10,'2017-08-02 16:03:49','2017-08-02 16:03:49'),(57,11,10,'2017-08-02 16:03:50','2017-08-02 16:03:50'),(58,14,10,'2017-08-02 16:03:51','2017-08-02 16:03:51'),(59,15,10,'2017-08-02 16:03:51','2017-08-02 16:03:51'),(60,24,10,'2017-08-02 16:03:53','2017-08-02 16:03:53'),(61,25,10,'2017-08-02 16:03:53','2017-08-02 16:03:53'),(62,17,10,'2017-08-02 16:03:54','2017-08-02 16:03:54'),(63,18,10,'2017-08-02 16:03:54','2017-08-02 16:03:54'),(64,26,10,'2017-08-02 16:03:56','2017-08-02 16:03:56'),(65,20,10,'2017-08-02 16:03:59','2017-08-02 16:03:59'),(66,14,25,'2017-08-02 16:07:39','2017-08-02 16:07:39'),(68,20,25,'2017-08-02 16:07:41','2017-08-02 16:07:41'),(70,24,25,'2017-08-02 16:07:44','2017-08-02 16:07:44'),(71,23,25,'2017-08-02 16:07:44','2017-08-02 16:07:44'),(73,21,25,'2017-08-02 16:07:46','2017-08-02 16:07:46'),(74,28,25,'2017-08-02 16:07:48','2017-08-02 16:07:48'),(75,26,25,'2017-08-02 16:07:50','2017-08-02 16:07:50'),(76,19,25,'2017-08-02 16:07:51','2017-08-02 16:07:51'),(77,17,25,'2017-08-02 16:07:52','2017-08-02 16:07:52'),(78,16,25,'2017-08-02 16:07:55','2017-08-02 16:07:55'),(79,25,25,'2017-08-02 16:07:56','2017-08-02 16:07:56'),(80,13,25,'2017-08-02 16:10:57','2017-08-02 16:10:57'),(81,23,10,'2017-08-02 16:23:40','2017-08-02 16:23:40'),(82,11,25,'2017-08-02 16:26:29','2017-08-02 16:26:29'),(83,15,25,'2017-08-02 16:26:31','2017-08-02 16:26:31'),(84,12,25,'2017-08-02 16:26:32','2017-08-02 16:26:32'),(85,11,16,'2017-08-02 16:26:47','2017-08-02 16:26:47'),(86,11,23,'2017-08-02 16:31:36','2017-08-02 16:31:36'),(87,13,23,'2017-08-02 16:31:37','2017-08-02 16:31:37');
+INSERT INTO `ketersediaan_seminar` (`id_ks`, `id_js`, `id_dosen`, `created_at`, `updated_at`) VALUES
+	(241, 230, 105, '2019-07-09 16:41:21', '2019-07-09 16:41:21'),
+	(242, 249, 105, '2019-07-09 16:41:25', '2019-07-09 16:41:25'),
+	(243, 284, 105, '2019-07-09 16:41:30', '2019-07-09 16:41:30'),
+	(244, 225, 99, '2019-07-09 19:53:34', '2019-07-09 19:53:34'),
+	(245, 255, 99, '2019-07-09 19:53:40', '2019-07-09 19:53:40'),
+	(246, 246, 99, '2019-07-09 19:53:40', '2019-07-09 19:53:40'),
+	(247, 273, 99, '2019-07-09 19:53:43', '2019-07-09 19:53:43'),
+	(248, 279, 99, '2019-07-09 19:53:45', '2019-07-09 19:53:45'),
+	(249, 297, 99, '2019-07-09 19:53:48', '2019-07-09 19:53:48'),
+	(250, 303, 99, '2019-07-09 19:53:51', '2019-07-09 19:53:51'),
+	(251, 234, 99, '2019-07-09 19:53:53', '2019-07-09 19:53:53'),
+	(252, 225, 109, '2019-07-09 20:12:32', '2019-07-09 20:12:32'),
+	(253, 224, 109, '2019-07-09 20:12:34', '2019-07-09 20:12:34'),
+	(257, 230, 109, '2019-07-09 20:12:39', '2019-07-09 20:12:39'),
+	(259, 231, 109, '2019-07-09 20:12:41', '2019-07-09 20:12:41'),
+	(261, 242, 109, '2019-07-09 20:12:50', '2019-07-09 20:12:50'),
+	(262, 243, 109, '2019-07-09 20:12:51', '2019-07-09 20:12:51'),
+	(263, 249, 109, '2019-07-09 20:12:53', '2019-07-09 20:12:53'),
+	(264, 248, 109, '2019-07-09 20:12:54', '2019-07-09 20:12:54'),
+	(265, 254, 109, '2019-07-09 20:12:57', '2019-07-09 20:12:57'),
+	(266, 255, 109, '2019-07-09 20:12:57', '2019-07-09 20:12:57'),
+	(267, 260, 109, '2019-07-09 20:12:59', '2019-07-09 20:12:59'),
+	(269, 261, 109, '2019-07-09 20:13:00', '2019-07-09 20:13:00'),
+	(270, 266, 109, '2019-07-09 20:13:04', '2019-07-09 20:13:04'),
+	(272, 267, 109, '2019-07-09 20:13:06', '2019-07-09 20:13:06'),
+	(274, 273, 109, '2019-07-09 20:13:09', '2019-07-09 20:13:09'),
+	(275, 278, 109, '2019-07-09 20:13:11', '2019-07-09 20:13:11'),
+	(276, 279, 109, '2019-07-09 20:13:11', '2019-07-09 20:13:11'),
+	(279, 291, 109, '2019-07-09 20:13:15', '2019-07-09 20:13:15'),
+	(280, 290, 109, '2019-07-09 20:13:15', '2019-07-09 20:13:15'),
+	(281, 296, 109, '2019-07-09 20:13:18', '2019-07-09 20:13:18'),
+	(283, 284, 109, '2019-07-09 20:13:23', '2019-07-09 20:13:23'),
+	(285, 297, 109, '2019-07-09 20:13:27', '2019-07-09 20:13:27'),
+	(286, 302, 109, '2019-07-09 20:13:41', '2019-07-09 20:13:41'),
+	(287, 280, 109, '2019-07-09 20:13:42', '2019-07-09 20:13:42'),
+	(288, 303, 109, '2019-07-09 20:13:44', '2019-07-09 20:13:44'),
+	(289, 308, 109, '2019-07-09 20:13:46', '2019-07-09 20:13:46'),
+	(292, 224, 98, '2019-07-09 20:14:48', '2019-07-09 20:14:48'),
+	(293, 227, 98, '2019-07-09 20:15:14', '2019-07-09 20:15:14'),
+	(294, 231, 98, '2019-07-09 20:16:03', '2019-07-09 20:16:03'),
+	(295, 234, 98, '2019-07-09 20:16:07', '2019-07-09 20:16:07'),
+	(296, 224, 105, '2019-07-12 12:21:47', '2019-07-12 12:21:47'),
+	(297, 225, 105, '2019-07-12 12:21:51', '2019-07-12 12:21:51'),
+	(298, 226, 105, '2019-07-12 12:21:54', '2019-07-12 12:21:54');
 /*!40000 ALTER TABLE `ketersediaan_seminar` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `ketersediaan_ujian`
---
-
+-- Dumping structure for table monta.ketersediaan_ujian
 DROP TABLE IF EXISTS `ketersediaan_ujian`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ketersediaan_ujian` (
+CREATE TABLE IF NOT EXISTS `ketersediaan_ujian` (
   `id_ku` int(11) NOT NULL AUTO_INCREMENT,
   `id_ju` int(11) DEFAULT NULL,
   `id_dosen` int(11) DEFAULT NULL,
@@ -309,75 +612,80 @@ CREATE TABLE `ketersediaan_ujian` (
   PRIMARY KEY (`id_ku`),
   KEY `id_dosen` (`id_dosen`),
   KEY `id_ju` (`id_ju`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `ketersediaan_ujian`
---
-
-LOCK TABLES `ketersediaan_ujian` WRITE;
+-- Dumping data for table monta.ketersediaan_ujian: ~33 rows (approximately)
+DELETE FROM `ketersediaan_ujian`;
 /*!40000 ALTER TABLE `ketersediaan_ujian` DISABLE KEYS */;
-INSERT INTO `ketersediaan_ujian` VALUES (1,1,1,'2017-07-21 02:45:20','2017-07-21 02:45:20'),(2,13,2,'2017-07-21 03:00:08','2017-07-21 03:00:08'),(3,19,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(4,17,2,'2017-07-21 03:00:10','2017-07-21 03:00:10'),(5,20,2,'2017-07-21 03:00:12','2017-07-21 03:00:12'),(6,16,1,'2017-07-25 06:39:57','2017-07-25 06:39:57'),(7,18,1,'2017-07-25 06:39:59','2017-07-25 06:39:59'),(8,17,1,'2017-07-25 06:40:00','2017-07-25 06:40:00'),(9,19,1,'2017-07-25 06:40:00','2017-07-25 06:40:00'),(10,20,1,'2017-07-25 06:40:01','2017-07-25 06:40:01'),(11,13,1,'2017-07-25 06:40:02','2017-07-25 06:40:02'),(12,14,1,'2017-07-25 06:40:03','2017-07-25 06:40:03'),(13,19,7,'2017-07-27 03:25:32','2017-07-27 03:25:32'),(14,20,7,'2017-07-27 03:25:34','2017-07-27 03:25:34'),(15,16,7,'2017-07-27 03:25:36','2017-07-27 03:25:36'),(16,17,7,'2017-07-27 03:25:39','2017-07-27 03:25:39'),(17,21,7,'2017-07-27 03:25:41','2017-07-27 03:25:41'),(18,19,12,'2017-07-31 02:44:11','2017-07-31 02:44:11'),(19,20,12,'2017-07-31 02:44:12','2017-07-31 02:44:12'),(20,22,12,'2017-07-31 02:44:13','2017-07-31 02:44:13'),(21,13,12,'2017-08-02 10:22:27','2017-08-02 10:22:27'),(22,14,12,'2017-08-02 10:22:27','2017-08-02 10:22:27'),(23,7,12,'2017-08-02 10:22:28','2017-08-02 10:22:28'),(24,18,12,'2017-08-02 10:22:29','2017-08-02 10:22:29'),(25,17,12,'2017-08-02 10:22:30','2017-08-02 10:22:30'),(26,9,12,'2017-08-02 10:22:32','2017-08-02 10:22:32'),(27,7,7,'2017-08-02 10:22:44','2017-08-02 10:22:44'),(28,14,7,'2017-08-02 10:22:45','2017-08-02 10:22:45'),(29,9,7,'2017-08-02 10:22:46','2017-08-02 10:22:46'),(30,8,11,'2017-08-02 10:23:20','2017-08-02 10:23:20'),(31,9,11,'2017-08-02 10:23:21','2017-08-02 10:23:21'),(32,15,11,'2017-08-02 10:23:21','2017-08-02 10:23:21'),(33,17,11,'2017-08-02 10:23:22','2017-08-02 10:23:22'),(34,18,11,'2017-08-02 10:23:23','2017-08-02 10:23:23'),(35,19,11,'2017-08-02 10:23:24','2017-08-02 10:23:24'),(36,25,11,'2017-08-02 10:23:25','2017-08-02 10:23:25'),(37,26,11,'2017-08-02 10:23:26','2017-08-02 10:23:26'),(38,9,16,'2017-08-02 10:25:19','2017-08-02 10:25:19'),(39,8,16,'2017-08-02 10:25:20','2017-08-02 10:25:20'),(40,15,16,'2017-08-02 10:25:21','2017-08-02 10:25:21'),(41,14,16,'2017-08-02 10:25:21','2017-08-02 10:25:21'),(42,18,16,'2017-08-02 10:25:22','2017-08-02 10:25:22'),(43,16,16,'2017-08-02 10:25:23','2017-08-02 10:25:23'),(44,6,16,'2017-08-02 10:25:24','2017-08-02 10:25:24'),(45,4,16,'2017-08-02 10:25:25','2017-08-02 10:25:25'),(46,23,16,'2017-08-02 10:25:26','2017-08-02 10:25:26'),(47,26,16,'2017-08-02 10:25:29','2017-08-02 10:25:29'),(48,20,16,'2017-08-02 10:25:30','2017-08-02 10:25:30'),(49,7,25,'2017-08-02 16:26:15','2017-08-02 16:26:15'),(50,13,25,'2017-08-02 16:26:16','2017-08-02 16:26:16'),(51,14,25,'2017-08-02 16:26:17','2017-08-02 16:26:17'),(52,9,25,'2017-08-02 16:26:17','2017-08-02 16:26:17'),(53,8,25,'2017-08-02 16:26:17','2017-08-02 16:26:17'),(54,16,25,'2017-08-02 16:26:18','2017-08-02 16:26:18'),(55,17,25,'2017-08-02 16:26:19','2017-08-02 16:26:19'),(56,22,25,'2017-08-02 16:26:22','2017-08-02 16:26:22'),(57,23,25,'2017-08-02 16:26:22','2017-08-02 16:26:22'),(58,21,25,'2017-08-02 16:26:23','2017-08-02 16:26:23');
+INSERT INTO `ketersediaan_ujian` (`id_ku`, `id_ju`, `id_dosen`, `created_at`, `updated_at`) VALUES
+	(78, 145, 105, '2019-07-09 16:40:27', '2019-07-09 16:40:27'),
+	(79, 164, 105, '2019-07-09 16:40:30', '2019-07-09 16:40:30'),
+	(80, 153, 105, '2019-07-09 16:40:34', '2019-07-09 16:40:34'),
+	(82, 142, 99, '2019-07-09 19:54:10', '2019-07-09 19:54:10'),
+	(83, 146, 99, '2019-07-09 19:54:11', '2019-07-09 19:54:11'),
+	(84, 149, 99, '2019-07-09 19:54:12', '2019-07-09 19:54:12'),
+	(85, 152, 99, '2019-07-09 19:54:13', '2019-07-09 19:54:13'),
+	(86, 155, 99, '2019-07-09 19:54:14', '2019-07-09 19:54:14'),
+	(87, 158, 99, '2019-07-09 19:54:15', '2019-07-09 19:54:15'),
+	(88, 161, 99, '2019-07-09 19:54:16', '2019-07-09 19:54:16'),
+	(90, 179, 99, '2019-07-09 19:54:18', '2019-07-09 19:54:18'),
+	(91, 194, 99, '2019-07-09 19:54:21', '2019-07-09 19:54:21'),
+	(92, 145, 98, '2019-07-09 20:07:00', '2019-07-09 20:07:00'),
+	(93, 148, 98, '2019-07-09 20:07:03', '2019-07-09 20:07:03'),
+	(94, 151, 98, '2019-07-09 20:07:05', '2019-07-09 20:07:05'),
+	(95, 142, 109, '2019-07-09 20:15:46', '2019-07-09 20:15:46'),
+	(97, 150, 109, '2019-07-09 20:15:48', '2019-07-09 20:15:48'),
+	(98, 154, 109, '2019-07-09 20:15:52', '2019-07-09 20:15:52'),
+	(99, 160, 109, '2019-07-09 20:15:53', '2019-07-09 20:15:53'),
+	(100, 167, 109, '2019-07-09 20:15:54', '2019-07-09 20:15:54'),
+	(101, 173, 109, '2019-07-09 20:15:55', '2019-07-09 20:15:55'),
+	(102, 180, 109, '2019-07-09 20:15:57', '2019-07-09 20:15:57'),
+	(103, 186, 109, '2019-07-09 20:15:57', '2019-07-09 20:15:57'),
+	(104, 190, 109, '2019-07-09 20:15:58', '2019-07-09 20:15:58'),
+	(105, 198, 109, '2019-07-09 20:15:59', '2019-07-09 20:15:59'),
+	(106, 204, 109, '2019-07-09 20:16:02', '2019-07-09 20:16:02'),
+	(107, 196, 109, '2019-07-09 20:16:03', '2019-07-09 20:16:03'),
+	(108, 208, 109, '2019-07-09 20:16:05', '2019-07-09 20:16:05'),
+	(109, 214, 109, '2019-07-09 20:16:08', '2019-07-09 20:16:08'),
+	(110, 215, 109, '2019-07-09 20:16:10', '2019-07-09 20:16:10'),
+	(111, 221, 109, '2019-07-09 20:16:12', '2019-07-09 20:16:12'),
+	(112, 226, 109, '2019-07-09 20:16:15', '2019-07-09 20:16:15'),
+	(113, 231, 109, '2019-07-09 20:16:23', '2019-07-09 20:16:23'),
+	(114, 142, 105, '2019-07-12 12:28:19', '2019-07-12 12:28:19'),
+	(115, 143, 105, '2019-07-12 12:28:22', '2019-07-12 12:28:22'),
+	(116, 144, 105, '2019-07-12 12:28:24', '2019-07-12 12:28:24');
 /*!40000 ALTER TABLE `ketersediaan_ujian` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `rmk_dosen`
---
-
+-- Dumping structure for table monta.rmk_dosen
 DROP TABLE IF EXISTS `rmk_dosen`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rmk_dosen` (
+CREATE TABLE IF NOT EXISTS `rmk_dosen` (
   `id_rmk_dosen` int(11) NOT NULL AUTO_INCREMENT,
   `id_dosen` int(11) DEFAULT NULL,
   `id_rumpun_mk` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_rmk_dosen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `rmk_dosen`
---
-
-LOCK TABLES `rmk_dosen` WRITE;
+-- Dumping data for table monta.rmk_dosen: ~0 rows (approximately)
+DELETE FROM `rmk_dosen`;
 /*!40000 ALTER TABLE `rmk_dosen` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rmk_dosen` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `rumpun_mk`
---
-
+-- Dumping structure for table monta.rumpun_mk
 DROP TABLE IF EXISTS `rumpun_mk`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rumpun_mk` (
+CREATE TABLE IF NOT EXISTS `rumpun_mk` (
   `id_rumpun_mk` int(11) NOT NULL AUTO_INCREMENT,
   `nama_rumpun` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_rumpun_mk`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `rumpun_mk`
---
-
-LOCK TABLES `rumpun_mk` WRITE;
+-- Dumping data for table monta.rumpun_mk: ~0 rows (approximately)
+DELETE FROM `rumpun_mk`;
 /*!40000 ALTER TABLE `rumpun_mk` DISABLE KEYS */;
-INSERT INTO `rumpun_mk` VALUES (1,'Pengelasan');
 /*!40000 ALTER TABLE `rumpun_mk` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `seminar_ta`
---
-
+-- Dumping structure for table monta.seminar_ta
 DROP TABLE IF EXISTS `seminar_ta`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `seminar_ta` (
+CREATE TABLE IF NOT EXISTS `seminar_ta` (
   `id_seminar_ta` int(11) NOT NULL AUTO_INCREMENT,
   `id_ta` int(11) DEFAULT NULL,
   `id_js` int(11) DEFAULT NULL,
@@ -390,56 +698,47 @@ CREATE TABLE `seminar_ta` (
   `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nilai_angka` int(11) DEFAULT NULL,
   `evaluasi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_seminar_ta`),
   KEY `id_ps` (`id_ta`),
   KEY `id_js` (`id_js`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `seminar_ta`
---
-
-LOCK TABLES `seminar_ta` WRITE;
+-- Dumping data for table monta.seminar_ta: ~0 rows (approximately)
+DELETE FROM `seminar_ta`;
 /*!40000 ALTER TABLE `seminar_ta` DISABLE KEYS */;
-INSERT INTO `seminar_ta` VALUES (1,1,12,7,16,11,23,NULL,1,'A',NULL,'Sudah Ok','2017-08-02 10:26:01','2017-08-02 16:35:38'),(2,2,12,16,11,7,23,NULL,1,'A',NULL,'Sudah Ok','2017-08-02 10:26:41','2017-08-02 16:36:31'),(3,3,12,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-08-02 16:19:01','2017-08-02 16:19:01'),(4,5,23,7,25,NULL,NULL,NULL,1,NULL,NULL,NULL,'2017-08-02 16:22:36','2017-08-02 16:33:56'),(6,6,12,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-08-02 16:27:55','2017-08-02 16:27:55'),(7,7,12,7,23,11,16,NULL,1,NULL,NULL,NULL,'2017-08-02 16:31:55','2017-08-02 16:33:32');
+INSERT INTO `seminar_ta` (`id_seminar_ta`, `id_ta`, `id_js`, `id_penguji1`, `id_penguji2`, `id_penguji3`, `id_penguji4`, `id_penguji5`, `status`, `nilai`, `nilai_angka`, `evaluasi`, `file`, `created_at`, `updated_at`) VALUES
+	(1, 116, 225, 99, 105, 109, NULL, NULL, 1, 'A', 88, 'Good', NULL, '2019-07-12 12:23:00', '2019-07-12 12:26:05');
 /*!40000 ALTER TABLE `seminar_ta` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `status_ta`
---
-
+-- Dumping structure for table monta.status_ta
 DROP TABLE IF EXISTS `status_ta`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `status_ta` (
+CREATE TABLE IF NOT EXISTS `status_ta` (
   `id_status` int(11) NOT NULL,
   `keterangan` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `status_ta`
---
-
-LOCK TABLES `status_ta` WRITE;
+-- Dumping data for table monta.status_ta: ~9 rows (approximately)
+DELETE FROM `status_ta`;
 /*!40000 ALTER TABLE `status_ta` DISABLE KEYS */;
-INSERT INTO `status_ta` VALUES (-2,'Batal'),(-1,'Ditolak'),(0,'Mengajukan Judul'),(1,'Menunggu Seminar'),(2,'Revisi'),(3,'OK'),(5,'Maju Sidang'),(6,'Lulus'),(7,'Tidak Lulus');
+INSERT INTO `status_ta` (`id_status`, `keterangan`) VALUES
+	(-2, 'Batal'),
+	(-1, 'Ditolak'),
+	(0, 'Mengajukan Judul'),
+	(1, 'Menunggu Seminar'),
+	(2, 'Revisi'),
+	(3, 'OK'),
+	(5, 'Maju Sidang'),
+	(6, 'Lulus'),
+	(7, 'Tidak Lulus');
 /*!40000 ALTER TABLE `status_ta` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `tugas_akhir`
---
-
+-- Dumping structure for table monta.tugas_akhir
 DROP TABLE IF EXISTS `tugas_akhir`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tugas_akhir` (
+CREATE TABLE IF NOT EXISTS `tugas_akhir` (
   `id_ta` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_dosbing1` int(11) DEFAULT NULL,
@@ -449,33 +748,94 @@ CREATE TABLE `tugas_akhir` (
   `id_rumpun_mk` int(11) DEFAULT NULL,
   `judul` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `file` int(11) DEFAULT NULL,
+  `temp_dosbing1` int(11) DEFAULT NULL,
+  `temp_dosbing2` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_ta`),
   KEY `nrp` (`id_user`),
   KEY `id_dosbing1` (`id_dosbing1`),
   KEY `id_dosbing2` (`id_dosbing2`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `tugas_akhir`
---
-
-LOCK TABLES `tugas_akhir` WRITE;
+-- Dumping data for table monta.tugas_akhir: ~69 rows (approximately)
+DELETE FROM `tugas_akhir`;
 /*!40000 ALTER TABLE `tugas_akhir` DISABLE KEYS */;
-INSERT INTO `tugas_akhir` VALUES (1,442,7,16,5,3,NULL,'Deteksi Eksudat Otomatis dengan menggabungkan beberapa Active Contours dan Klasifikasi Regionwise',1,'2017-08-02 10:11:30','2017-08-02 16:37:50'),(2,444,16,11,1,3,NULL,'Deteksi Neovascularization untuk Proliferative Diabetic Retinopathy pada Citra Fundus Retina',NULL,'2017-08-02 10:15:18','2017-08-02 15:43:44'),(3,446,10,25,0,3,NULL,'Pengaruh unsur Mn pada paduan Al-12 wt % Si terhadap sifat fisik dan mekanik lapisan intermetalik pada fenomena die soldering',NULL,'2017-08-02 15:53:17','2017-08-02 16:06:12'),(4,445,16,10,1,1,NULL,'Pengaruh konsentrasi serat rami terhadap sifat mekanik material komposit poliester - serat alam',NULL,'2017-08-02 15:54:54','2017-08-02 16:34:00'),(5,447,7,25,1,3,NULL,'Studi awal pengembangan metode prediksi ketebalan difusi hasil karburisasi pada baja karbon rendah dengan ultrasonik',NULL,'2017-08-02 15:56:32','2017-08-02 16:33:56'),(6,448,16,25,0,2,NULL,'Efisiensi perlakuan panas dengan menggati proses T6 (Artificial Ageing) dengan T4 (Natural Ageing) pada pembuatan piston dengan material AC8H',NULL,'2017-08-02 15:58:09','2017-08-02 16:06:15'),(7,449,7,23,1,3,NULL,'Studi morfologi mikrostruktur dan pengaruhnya terhadap laju korosi antara baja HSLA 0,029 % Nb dan baja karbon rendah setelah pemanasan isothermal',NULL,'2017-08-02 16:30:06','2017-08-02 16:33:22');
+INSERT INTO `tugas_akhir` (`id_ta`, `id_user`, `id_dosbing1`, `id_dosbing2`, `id_status`, `id_bidang_mk`, `id_rumpun_mk`, `judul`, `file`, `temp_dosbing1`, `temp_dosbing2`, `created_at`, `updated_at`) VALUES
+	(110, 917, NULL, NULL, 0, 2, NULL, 'ANALISA PENGARUH KONSENTRASI PREKURSOR DAN DOPING ALUMINIUM TERHADAP KARAKTERISTIK THIN FILM ZnO SEBAGAI APLIKASI SENSOR GAS SO2 DENGAN METODE DEPOSISI SPRAY PYROLISIS', NULL, 100, 98, '2019-07-09 16:26:47', '2019-07-09 17:23:40'),
+	(111, 862, 109, NULL, 0, 2, NULL, 'STUDI PENGARUH ARTIFICIAL AGING PADA PADUAN ALUMINIUM 339 TERHADAP STRUKTUR MIKRO, KEKERASAN, DAN KEKUATAN UNTUK APLIKASI PISTON MAHLE M142', 1, 109, 112, '2019-07-09 16:32:45', '2019-07-09 22:47:22'),
+	(112, 932, NULL, NULL, 0, 4, NULL, 'Analisa Pengaruh Rasio Massa Limestone dan Dolomit Terhadap Kadar Ni, Kekuatan, dan Perolehan Sinter Pada Proses Sintering Bijih Nikel Laterit', NULL, 97, 111, '2019-07-09 16:35:59', '2019-07-09 16:35:59'),
+	(113, 890, NULL, NULL, 0, 3, NULL, 'ANALISA PENGARUH VARIASI TEMPERATUR REAKSI TERHADAP MORFOLOGI DAN SIFAT TERMAL MIKROKAPSUL POLY (UREA-FORMALDEHID) UNTUK APLIKASI SELF-HEALING COATING', 1, 100, 114, '2019-07-09 16:38:08', '2019-07-10 08:06:35'),
+	(114, 878, NULL, NULL, 0, 2, NULL, 'ANALISIS PENGARUH VARIASI MEDIA PENDINGIN PADA HARDENING DAN TEMPERATUR TEMPERING TERHADAP KEKERASAN BAJA AISI 4340 UNTUK APLIKASI POROS POMPA MULTISTAGE', 1, 96, 112, '2019-07-09 16:51:54', '2019-07-09 17:53:23'),
+	(115, 881, NULL, NULL, 0, 2, NULL, 'ANALISIS PENGARUH VARIASI HOLDING TIME DAN TEMPERATUR TEMPERING TERHADAP KEKERASAN BAJA AISI 4340 UNTUK KOMPONEN POROS POMPA SENTRIFUGAL MULTISTAGE HORIZONTAL DENGAN METODE KANG DAN LEE EQUATION', 1, 96, 112, '2019-07-09 17:02:53', '2019-07-09 20:24:04'),
+	(116, 897, 99, 105, 5, 3, NULL, 'Studi Penambahan Alumunium Hidroksida Terhadap Sifat Mekanik dan Morfologi Komposit Tahan Api Glass Fiber Reinforced Polymer Untuk Material Interior Kereta Api', 1, 99, 105, '2019-07-09 17:04:48', '2019-07-12 12:29:46'),
+	(117, 877, NULL, 99, 0, 3, NULL, 'Pengaruh Filler Ampas Tebu dan Agregat Terhadap Sifat Mekanik dan Fisik Cork Concrete Material Lantai Kereta Api', 1, 95, 99, '2019-07-09 17:16:32', '2019-07-09 19:49:07'),
+	(118, 954, NULL, NULL, 0, 3, NULL, 'ANALISA PENGARUH PENAMBAHAN PVA PADA ROOM TEMPERATURE VULCANIZED SILICONE RUBBER/ POLY(VINYL ALCOHOL) HYDROGEL TERHADAP SIFAT BIOKOMPATIBILITAS DAN BIODEGRADASI SEBAGAI KANDIDAT MATERIAL PENGGANTI BANTALAN TULANG BELAKANG', 1, 105, 114, '2019-07-09 17:17:39', '2019-07-09 17:44:02'),
+	(119, 926, NULL, NULL, 0, 2, NULL, 'ANALISA DISTRIBUSI TEMPERATUR DAN TEGANGAN TERMAL PADA CETAKAN BEDA MATERIAL DALAM PROSES INJECTION MOLDING METODE RAPID HEAT CYCLE MOLDING MENGGUNAKAN METODE ELEMEN HINGGA', 1, 103, 112, '2019-07-09 17:18:24', '2019-07-10 10:25:57'),
+	(120, 934, NULL, NULL, 0, 2, NULL, 'Analisis Pengaruh Temperatur dan Holding Time Tempering terhadap Kekerasan Baja AISI 1045 yang di-Hardening untuk Aplikasi Poros Mesin Uap', NULL, 96, 112, '2019-07-09 17:19:25', '2019-07-09 17:19:25'),
+	(121, 912, NULL, NULL, 0, 1, NULL, 'ANALISA PENGARUH BENTUK ANODA DAN MEDIA ELEKTROLIT TERHADAP KARAKTERISTIK EFISIENSI ANODA KORBAN METODE IMMERSI DENGAN PENGUJIAN DNVGL-RPB401', 1, 107, 102, '2019-07-09 17:20:05', '2019-07-09 17:54:51'),
+	(122, 873, NULL, 109, 0, 2, NULL, 'Studi Pengaruh Natural Aging Terhadap Struktur Mikro, Sifat Mekanik, dan Konduktivitas Listrik Paduan Aluminium 6061', 1, 96, 109, '2019-07-09 17:26:28', '2019-07-09 20:08:39'),
+	(123, 953, 99, NULL, 0, 3, NULL, 'ANALISA PENAMBAHAN HIDROGEL POLYVINYL ALCOHOL PADA ROOM TEMPERATURE VULCANIZED SILICONE RUBBER / POLYVINYL ALCOHOL TERHADAP SIFAT FISIK DAN MEKANIK SEBAGAI KANDIDAT MATERIAL ALTERNATIF PENGGANTI BANTALAN TULANG BELAKANG', NULL, 99, 114, '2019-07-09 17:27:12', '2019-07-09 19:49:00'),
+	(124, 937, NULL, NULL, 0, 1, NULL, 'ANALISIS PENGAURH LUAS PERMUKAAN DAN JENIS KATODA TERHADAP EFISIENSI ANODA PADA PENGUJIAN IMERSI DENGAN MENGGUNAKAN METODE DNV GL RP-B401', 1, 107, 102, '2019-07-09 17:27:22', '2019-07-10 07:21:22'),
+	(125, 874, 94, 101, 0, 2, NULL, 'Pengaruh Tegangan dan Lapisan Dasar Tembaga Nikel pada Proses Elektroplating Kuningan terhadap Ketebalan,Kelekatan, dan Kekilapan Lapisan', 1, 94, 101, '2019-07-09 17:28:12', '2019-07-11 10:42:28'),
+	(126, 875, NULL, NULL, 0, 2, NULL, 'Pengaruh Heat Input dan Variasi Komposisi Shielding Gas Terhadap Struktur Mikro dan Sifat Mekanik Sambungan Baja Karbon Rendah JIS G3101 Hasil Gas Metal Arc Welding (GMAW) Sebagai Aplikasi Arm Excavator di PT. X', NULL, 108, 112, '2019-07-09 17:30:12', '2019-07-09 17:30:12'),
+	(127, 882, NULL, NULL, 0, 2, NULL, 'Analisa Pengaruh Temperatur dan Waktu Deposisi Terhadap Karakteristik Lapisan Tipis Aluminium-Doped Zinc Oxide dengan Metode Spray Pyrolysis Deposition Untuk Aplikasi Kaca Konduktif Transparan', NULL, 100, 98, '2019-07-09 17:32:10', '2019-07-09 17:32:10'),
+	(128, 915, NULL, NULL, 0, 2, NULL, 'Analisa Pengaruh Penambahan Energizer Na2CO3 Pada Proses Carburizing Dengan Variasi Waktu Tahan Terhadap Kekerasan dan Struktur Mikro Baja Karbon Medium', 1, 96, 112, '2019-07-09 17:37:19', '2019-07-10 05:45:09'),
+	(129, 942, NULL, NULL, 0, 3, NULL, 'Analisa Pengaruh Kecepatan Agitasi Terhadap Morfologi dan Sifat Termal Mikrokapsul Poly(Urea-formaldehid) Untuk Aplikasi Self-healing Coating', 1, 100, 114, '2019-07-09 17:49:58', '2019-07-10 10:30:20'),
+	(130, 856, NULL, NULL, 0, 1, NULL, 'Pengaruh Penambahan  Alumina (AL2O3) dan Silika (SIO2) Terhadap Daya Lekat dan Ketahanan Abrasi Cat Epoksi', NULL, 100, 107, '2019-07-09 17:54:06', '2019-07-09 17:54:06'),
+	(131, 939, NULL, 99, 0, 3, NULL, 'Studi Pengaruh Komposisi Filler Limbah Ampas Tebu yang Diperkuat Wire-mesh terhadap Sifat Fisis dan Sifat Mekanik Komposit Untuk Aplikasi Papan Partikel Semen', NULL, 108, 99, '2019-07-09 17:55:48', '2019-07-09 19:49:10'),
+	(132, 867, NULL, NULL, 0, 1, NULL, 'ANALISA KEGAGALAN PADA SHAFT MESIN CIRCULATING WATER PUMP DI PEMBANGKIT LISTRIK PT. X', NULL, 107, 102, '2019-07-09 18:05:35', '2019-07-09 18:05:35'),
+	(133, 899, NULL, 99, 0, 3, NULL, 'STUDI PENGARUH VARIASI KOMPOSISI FILLER HIGH DENSITY POLYETHYLENE (HDPE) YANG DIPERKUAT WIRE MESH TERHADAP SIFAT FISIS DAN SIFAT MEKANIK MATERIAL KOMPOSIT UNTUK APLIKASI PAPAN PARTIKEL SEMEN', NULL, 108, 99, '2019-07-09 18:09:56', '2019-07-09 19:49:12'),
+	(134, 906, NULL, NULL, 0, 1, NULL, 'Analisa Pengaruh Variasi Konsentrasi, Temperatur dan Waktu Perendaman Ekstrak Biji Juwet (Syzygium cumini) sebagai Inhibitor Baja API 5L Grade B dengan Media HCl 1M', 1, 94, NULL, '2019-07-09 18:11:33', '2019-07-09 18:28:28'),
+	(135, 929, NULL, NULL, 0, 3, NULL, 'ANALISA PENGARUH KONSENTRASI CETYLTRIMETHYL AMMONIUM BROMIDE (CTAB) TERHADAP DISOLUSI RATA-RATA PIROXICAM PADA NANOPARTIKEL SILIKA MESOPORI MCM-41', 1, 98, 119, '2019-07-09 18:24:49', '2019-07-09 19:35:26'),
+	(136, 883, NULL, NULL, 0, 4, NULL, 'STUDI VARIASI JENIS FLUKS TERHADAP KADAR Ni, KEKUATAN DAN PEROLEHAN SINTER PADA PROSES SINTERING BIJIH NIKEL LATERIT', 1, 97, 111, '2019-07-09 18:30:23', '2019-07-09 18:34:39'),
+	(137, 946, NULL, NULL, 0, 3, NULL, 'Karakterisasi komposit resin fenolik berpenguat serat ampas tebu untuk aplikasi kampas rem bebas asbestos', NULL, 95, 119, '2019-07-09 18:41:50', '2019-07-09 18:41:50'),
+	(138, 866, NULL, NULL, 0, 4, NULL, 'Analisa Pengaruh Variasi Tebal Bed Terhadap Kadar Ni, Kekuatan Sinter, dan Perolehan Sinter pada Proses Sintering Bijih Nikel Laterit', 1, 97, 111, '2019-07-09 19:05:04', '2019-07-09 19:13:07'),
+	(139, 880, NULL, NULL, 0, 3, NULL, 'PENGARUH VARIASI TEMPERATUR KALSINASI KOMPOSIT rGO/ZNO/TiO2 TERHADAP SIFAT FOTOKATALITIK UNTUK DEGRADASI RHODAMINE-B', 1, 98, 110, '2019-07-09 19:09:35', '2019-07-09 19:10:34'),
+	(140, 879, NULL, NULL, 0, 1, NULL, 'PENGARUH VARIASI TEMPERATUR DAN WAKTU ELEKTROPLATING SENG TERHADAP KETEBALAN, KEKUATAN LEKAT, DAN KETAHANAN BAJA AISI 1020', 1, 94, 119, '2019-07-09 19:21:13', '2019-07-09 20:07:50'),
+	(141, 923, NULL, NULL, 0, 4, NULL, 'Analisa Pengaruh Variasi Ukuran Arang terhadap Kadar Ni, Kekuatan dan Perolehan Sinter pada Proses Sintering Bijih Nikel Laterit', 1, 97, 111, '2019-07-09 19:27:42', '2019-07-09 19:41:15'),
+	(142, 931, NULL, NULL, 0, 3, NULL, 'SINTESIS DAN KARAKTERISASI INJECTABLE HYDROGEL BIOKOMPOSIT ALGINAT/PVA/rGO UNTUK APLIKASI REKAYASA JARINGAN', NULL, 105, 114, '2019-07-09 19:40:32', '2019-07-09 19:40:32'),
+	(143, 891, NULL, NULL, 0, 3, NULL, 'ANALISIS PENGARUH PENAMBAHAN GREEN REDUCTOR FERROUS PADA PROSES SINTESIS REDUCED GRAPHENE OXIDE (rGO) TERHADAP SIFAT KAPASITIF SUPERKAPASITOR', 1, 98, 110, '2019-07-09 20:12:24', '2019-07-09 20:29:47'),
+	(144, 944, NULL, NULL, 0, 4, NULL, 'ANALISIS PENGARUH VARIASI PERSENTASE MASSA BATU BARA TERHADAP KADAR Ni, KEKUATAN DAN PEROLEHAN SINTER PADA PROSES SINTERING BIJIH NIKEL LATERIT', 1, 97, 111, '2019-07-09 20:50:02', '2019-07-09 20:53:50'),
+	(145, 889, NULL, NULL, 0, 3, NULL, 'Pengaruh Cobalt Naphthenate sebagai Akselerator terhadap Sifat Mekanik Komposit Epoksi/Serat Kaca untuk Material Bilah Turbin Angin', 1, 105, 106, '2019-07-09 20:54:30', '2019-07-09 21:01:44'),
+	(146, 905, NULL, NULL, 0, 3, NULL, 'PENGARUH UKURAN DAN KOMPOSISI SERAT TERHADAP NILAI SOUND TRANSMISSION CLASS KOMPOSIT POLIESTER BERPENGUAT SERAT RAMI UNTUK APLIKASI MATERIAL AKUSTIK', NULL, 95, 98, '2019-07-09 21:14:31', '2019-07-09 21:14:31'),
+	(147, 863, NULL, NULL, 0, 3, NULL, 'STUDI PENAMBAHAN COUPLING AGENT AMINOPROPYLTRIETHOXYSILANE (APTES) TERHADAP SIFAT MEKANIK DAN MORFOLOGI KOMPOSIT EPOKSI/SERAT KACA UNTUK LAMBUNG KAPAL', 1, 105, 110, '2019-07-09 21:14:33', '2019-07-09 21:24:00'),
+	(148, 865, NULL, NULL, 0, 1, NULL, 'PENGARUH VARIASI KONSENTRASI EKSTRAK DAUN JAMBU BIJI SEBAGAI INHIBITOR KOROSI TERHADAP LAMA PERENDAMAN DAN TEMPERATUR UNTUK MENGANALISA LAJU KOROSI PADA BAJA API 5L GRADE B DALAM MEDIA HCl 1M', 1, 94, 107, '2019-07-09 21:19:59', '2019-07-09 21:24:58'),
+	(149, 922, NULL, NULL, 0, 3, NULL, 'Analisa Pengaruh Perlakuan Alkalisasi Serat dan Penambahan Nanoselulosa Terhadap Nilai Sound Transmission Loss Komposit Poliester / Serat Rami / Nanoselulosa Untuk Aplikasi Material Akustik.', 1, 95, 119, '2019-07-09 21:28:00', '2019-07-10 00:19:48'),
+	(150, 868, NULL, NULL, 0, 1, NULL, 'ANALISA FAKTOR INTENSITAS TEGANGAN DAN USIA SIKLUS PADA SIMULASI PERAMBATAN RETAK KOMPONEN POROS MESIN UAP MENGGUNAKAN METODE SMART CRACK GROWTH', 1, 103, 96, '2019-07-09 21:28:01', '2019-07-10 10:37:42'),
+	(151, 914, NULL, NULL, 0, 3, NULL, 'PENGARUH VARIASI MASSA REDUCED GRAPHENE OXIDE TERHADAP SIFAT FOTOKATALITIK KOMPOSIT ZnO/REDUCED GRAPHENE OXIDE UNTUK DEGRADASI METHYLENE BLUE', NULL, 98, 110, '2019-07-09 21:31:36', '2019-07-09 21:31:36'),
+	(152, 947, NULL, NULL, 0, 1, NULL, 'ANALISA PENGARUH VARIASI KONSENTRASI LARUTAN ELEKTROLIT ZINC CHLORIDE ACID TERHADAP KETEBALAN, KEKUATAN LEKAT, DAN KETAHANAN KOROSI BAJA AISI 1020 DENGAN METODE ELEKTROPLATING', 1, 94, 119, '2019-07-09 21:39:43', '2019-07-09 21:41:03'),
+	(153, 951, NULL, NULL, 0, 1, NULL, 'Analisa Pengaruh Variasi Konsentrasi, Temperatur dan Waktu Perendaman Menggunakan Inhibitor Ekstrak Daun Pepaya dalam Larutan HCL 1M terhadap Baja API 5 L Grade B', 1, 94, 102, '2019-07-09 21:41:10', '2019-07-09 23:22:45'),
+	(154, 893, NULL, NULL, 0, 3, NULL, 'KARAKTERISASI KOMPOSIT RESIN EPOKSI BERPENGUAT SELULOSA AMPAS TEBU UNTUK APLIKASI KAMPAS REM BEBAS ASBESTOS', 1, 95, 119, '2019-07-09 22:04:59', '2019-07-09 22:09:27'),
+	(155, 892, NULL, NULL, 0, 3, NULL, 'STUDI SIFAT MEKANIK DAN MORFOLOGI TERMOSET BIORESIN UNSATURATED POLYESTER/MINYAK NABATI SEBAGAI LAMINATING RESIN UNTUK APLIKASI LAMBUNG KAPAL SESUAI STANDAR BIRO KLASIFIKASI INDONESIA', 1, 105, 99, '2019-07-09 22:08:00', '2019-07-09 22:17:32'),
+	(156, 949, NULL, NULL, 0, 3, NULL, 'Pengaruh Penambahan Massa Reduced Graphene Oxide Terhadap Sifat Fotokatalitik CuO/Reduced Graphene Oxide Untuk Degradasi Methylene Blue', 1, 98, 110, '2019-07-09 22:37:06', '2019-07-09 22:38:41'),
+	(157, 918, NULL, NULL, 0, 3, NULL, 'PENGARUH KATALIS SENG ASETAT TERHADAP BERAT MOLEKUL, BIODEGRADASI, DAN WATER ABSORPTION PADA BIOPLASTIK POLI(ASAM LAKTAT) HASIL SINTESIS METODE RING – OPENING POLIMERIZATION LAKTIDA DARI ASAM LAKTAT', 1, 105, 106, '2019-07-09 22:46:10', '2019-07-09 22:49:05'),
+	(158, 911, NULL, NULL, 0, 2, NULL, 'Pengaruh Temperatur dan Waktu Tahan Artificial Aging Terhadap Kekuatan, Kekerasan dan Struktur Mikro Paduan Aluminium 339 Untuk Aplikasi Piston Mahle M142', 1, 109, 112, '2019-07-09 22:46:19', '2019-07-09 22:47:27'),
+	(159, 876, NULL, NULL, 0, 1, NULL, 'PENGARUH VARIASI KONSENTRASI EKSTRAK DAUN PANDAN SEBAGAI INHIBITOR KOROSI TERHADAP TEMPERATUR DAN LAMA PERENDAMAN UNTUK MENGANALISA LAJU KOROSI MENGGUNAKAN BAJA API 5L GRADE B DALAM LARUTAN HCL 1M', 1, 94, 107, '2019-07-09 23:06:25', '2019-07-09 23:15:57'),
+	(160, 938, NULL, NULL, 0, 3, NULL, 'ANALISA ABSORPSI SUARA DAN PENYERAPAN GELOMBANG MIKRO KOMPOSIT SILICONE RUBBER BERPENGUAT BARIUM HEKSAFERRIT DOPPING Zn, NANOSELULOSA DAN SERAT BAMBU BETUNG', 1, 95, 119, '2019-07-09 23:31:21', '2019-07-09 23:32:28'),
+	(161, 927, NULL, NULL, 0, 2, NULL, 'Simulasi dan Permodelan Proses Artificial Aging Pada Piston Berbahan Paduan Aluminium 6061 Menggunakan Metode Elemen Hingga', 1, 103, 109, '2019-07-10 00:15:49', '2019-07-10 00:16:47'),
+	(162, 858, NULL, NULL, 0, 1, NULL, 'Perancangan Sistem Proteksi Katodik Arus Paksa pada Pipa Baja API 5L Grade B Dengan Variasi Jenis Backfill Menggunakan Sumber Arus Listrik Baterai', 1, 107, 102, '2019-07-10 00:39:29', '2019-07-10 01:40:59'),
+	(163, 919, NULL, NULL, 0, 1, NULL, 'PENGARUH KONSENTRASI POLYCAPROLACTONE SEBAGAI POST TREATMENT TERHADAP LAJU DEGRADASI PADUAN MAGNESIUM AZ31B YANG TEROKSIDASI UNTUK APLIKASI BIODEGRADABLE ORTHOPEDIC DEVICES', 1, 100, 110, '2019-07-10 00:43:47', '2019-07-10 01:05:16'),
+	(164, 895, NULL, NULL, 0, 3, NULL, 'ANALISIS KINERJA DAN EFISIENSI CONTINUOUS FURNACE UNTUK APLIKASI PRODUKSI FRANGIBLE BULLET', 1, 106, 108, '2019-07-10 01:04:17', '2019-07-10 01:07:43'),
+	(165, 950, NULL, NULL, 0, 2, NULL, 'Pengaruh Variasi Media Pendingin pada Proses Heat Treatment Cu-23,6 Zn-5 Al Shape Memory Alloys terhadap Efek Shape Memory dan Struktur Mikro', 1, 109, 112, '2019-07-10 02:23:15', '2019-07-10 02:41:12'),
+	(166, 894, NULL, NULL, 0, 3, NULL, 'Simulasi Frangibilitas dan Analisis Frangibility Factor Peluru Frangible dengan Metode Explicit Dynamics', 1, 106, 103, '2019-07-10 02:48:04', '2019-07-10 04:23:24'),
+	(167, 887, NULL, NULL, 0, 3, NULL, 'ANALISIS PENGARUH PENGUATAN SERAT KARBON TERHADAP KARAKTERISTIK DELAMINASI PADA DOUBLE CANTILEVER BEAM DENGAN MENGGUNAKAN COHESIVE ZONE MODEL', 1, 103, 106, '2019-07-10 03:49:34', '2019-07-10 05:39:03'),
+	(168, 900, NULL, NULL, 0, 4, NULL, 'STUDI PENGARUH VARIASI MASSA LIMESTONE TERHADAP KADAR Ni DAN Fe, RECOVERY Ni DAN Fe, SERTA SENYAWA PADA PRODUK LOGAM DAN SLAG PADA PROSES SMELTING BIJIH NIKEL LATERIT MENGGUNAKAN MINI BLAST FURNACE', 1, 97, 111, '2019-07-10 07:39:27', '2019-07-10 07:49:34'),
+	(169, 936, NULL, NULL, 0, 3, NULL, 'PENGARUH PENAMBAHAN KOMPOSISI rGO TERHADAP BIOKOMPATIBILITAS DAN  DEGRADASI HIDROLITIK  MATERIAL INJECTABLE KOMPOSIT HIDROGEL ALGINAT/PVA/rGO UNTUK APLIKASI TISSUE ENGINEERING', NULL, 99, 114, '2019-07-10 08:23:22', '2019-07-10 08:23:22'),
+	(170, 909, NULL, NULL, 0, 3, NULL, 'PENGARUH KOMPOSISI FILLER LIMBAH CANGKANG KERANG DAN AMPAS TEBU TERHADAP SIFAT FISIS DAN MEKANIK KOMPOSIT UNTUK APLIKASI PAPAN PARTIKEL SEMEN', 1, 102, 99, '2019-07-10 08:49:05', '2019-07-10 08:50:36'),
+	(171, 903, NULL, NULL, 0, 3, NULL, 'Pengaruh Penambahan chitosan terhadap sifat fisik dan mekanik  komposit silicone rubber rtv 585/chitosan sebagai kandidat injectable material untuk pengganti bantalan tulang belakang', 1, 100, 114, '2019-07-10 09:06:16', '2019-07-10 09:48:27'),
+	(172, 910, NULL, NULL, 0, 3, NULL, 'ANALISA PENGARUH PENAMBAHAN CHITOSAN SOLUTION TERHADAP SIFAT BIOKOMPATIBILITAS DAN  HYDROLITIC DEGRADATION KOMPOSIT SILICONE RUBBER RTV 585/ CHITOSAN SEBAGAI KANDIDAT MATERIAL UNTUK PENGGANTI BANTALAN TULANG BELAKANG', NULL, 100, 114, '2019-07-10 09:50:52', '2019-07-10 09:50:52'),
+	(173, 941, NULL, NULL, 0, 2, NULL, 'Analisis Simulasi Numerik Pengaruh Variasi Ukuran Side Clearance Groove dan Hardening terhadap Peningkatan Umur Piston Al-Si Eksavator Hidrolik KOMATSU PC-300', 1, 103, 109, '2019-07-10 10:11:27', '2019-07-10 10:14:38'),
+	(174, 925, NULL, NULL, 0, 2, NULL, 'Simulasi Perambatan Retak pada Baja dan Aluminium Akibat Pembebanan Statis dengan Menggunakan Metode Elemen Hinggaq', NULL, 103, 108, '2019-07-10 10:14:50', '2019-07-10 10:14:50'),
+	(175, 933, NULL, NULL, 0, 3, NULL, 'STUDI PENGARUH VARIASI KOMPOSISI FILLER POLYPROPYLENE (PP) YANG DIPERKUAT OLEH WOVEN FIBERGLASS TERHADAP SIFAT FISIS DAN SIFAT MEKANIK KOMPOSIT UNTUK APLIKASI PAPAN PARTIKEL SEMEN', 1, 99, 103, '2019-07-10 10:30:50', '2019-07-10 10:34:00'),
+	(176, 864, NULL, NULL, 0, 2, NULL, 'Pengaruh Variasi Media Pendingin pada Proses Heat Treatment Cu-21,8Zn-7Al Shape Memory Alloy terhadap Efek Shape Memory dan Struktur Mikro', 1, 109, 112, '2019-07-10 10:39:40', '2019-07-10 10:41:10'),
+	(177, 859, NULL, NULL, 0, 2, NULL, 'Analisa Sifat Akustik, Fisik,  dan Mekanik Komposit Poliester Berpenguat Serat Rami dan Bambu Untuk Aplikasi Penyerap Suara', NULL, 102, 95, '2019-07-10 10:50:13', '2019-07-10 10:50:13'),
+	(178, 861, NULL, NULL, 0, 4, NULL, 'gdsgsgzdgszdg', NULL, 108, 116, '2019-09-03 20:18:58', '2019-09-03 20:18:58');
 /*!40000 ALTER TABLE `tugas_akhir` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `ujian_ta`
---
-
+-- Dumping structure for table monta.ujian_ta
 DROP TABLE IF EXISTS `ujian_ta`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ujian_ta` (
+CREATE TABLE IF NOT EXISTS `ujian_ta` (
   `id_ujian_ta` int(11) NOT NULL AUTO_INCREMENT,
   `id_ta` int(11) DEFAULT NULL,
   `id_ju` int(11) DEFAULT NULL,
@@ -493,32 +853,24 @@ CREATE TABLE `ujian_ta` (
   `nilai` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nilai_angka` int(11) DEFAULT NULL,
   `evaluasi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_ujian_ta`),
   KEY `id_pu` (`id_ta`),
   KEY `id_ju` (`id_ju`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `ujian_ta`
---
-
-LOCK TABLES `ujian_ta` WRITE;
+-- Dumping data for table monta.ujian_ta: ~0 rows (approximately)
+DELETE FROM `ujian_ta`;
 /*!40000 ALTER TABLE `ujian_ta` DISABLE KEYS */;
-INSERT INTO `ujian_ta` VALUES (3,1,9,7,82,16,77,25,79,12,81,NULL,NULL,1,'B',80,'Sudah Ok','2017-08-02 10:27:24','2017-08-02 16:39:12'),(4,2,9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'2017-08-02 10:27:49','2017-08-02 10:27:49');
+INSERT INTO `ujian_ta` (`id_ujian_ta`, `id_ta`, `id_ju`, `id_penguji1`, `nilai_penguji1`, `id_penguji2`, `nilai_penguji2`, `id_penguji3`, `nilai_penguji3`, `id_penguji4`, `nilai_penguji4`, `id_penguji5`, `nilai_penguji5`, `status`, `nilai`, `nilai_angka`, `evaluasi`, `file`, `created_at`, `updated_at`) VALUES
+	(1, 116, 142, 99, 89, 105, 86, 109, 81, NULL, NULL, NULL, NULL, 1, 'AB', 85, 'Mantap', NULL, '2019-07-12 12:29:00', '2019-07-12 14:05:58');
 /*!40000 ALTER TABLE `ujian_ta` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `user`
---
-
+-- Dumping structure for table monta.user
 DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(65) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -526,26 +878,141 @@ CREATE TABLE `user` (
   `nama` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=534 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=1006 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
+-- Dumping data for table monta.user: ~127 rows (approximately)
+DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'admin','$2y$10$nAZbfn03JTWYLysDHvdzNu305NNvcRvVT74ZXS3Gfxk4Cxkm/kEaa',1,'Admin'),(3,'5114100109','$2y$10$l73YkuQpTcnbRiVwmyeNbuqTpmFgVKlS5bNtdjjXhlCAp8IEHAVLi',1,'Nafiar Rahmansyah'),(4,'5110100001','$2y$10$VcrpSk5qgk7rA73PQlououx7F8TgRy7YfHC4ME2pr0Xe9kBbzF6xC',2,'RIZKY JANUAR AKBAR'),(5,'5110100002','$2y$10$PbJJo0rzA2neQV.gKEFeguTQbn8IFwI/33QtcdzozzpMxH/A2lV6q',2,'WIJAYANTI NURUL K.'),(6,'5110100003','$2y$10$JNAEF7q43bO7GfRbx5C2JOM34utercBDs/WwTTlzMIyBCqC0RU66m',2,'dosen3'),(7,'admin1','$2y$10$vN6d6qcVvU6AkjZ2IRUAeOOjSR1Z/pGFzx2.JwXiSNfqAlF76wKhi',3,'nafiar'),(8,'5114100110','$2y$10$r90OX3LLyZdNIFMH7YUiEuk29xmRzvy.PmpxtBfacjApiKlPKqoTu',1,'Rafiar Rahmansyah'),(411,'196203261987011001','$2y$10$1qjThG1M7O.FXiFz7A/Bae/dom530n3kXvJrE2/fY/pSfkO7glLI6',2,'Prof. Dr. Ir. Sulistijono, DEA'),(412,'195709241986031002','$2y$10$YQIXDU9EaQNIc4oG2fRx3uwM0nqCwO8ytzNXstpuDio8T4BxbqCLm',2,'Ir. Moh. Farid, DEA'),(413,'195809101986031002','$2y$10$RiqRFbjwUItQmd19Bl6RT.cXNgaBalmJDumDeCD5DA.ZsjtGhvnQe',2,'Ir. Rochman Rochiem, MSc.'),(414,'196809302000031001','$2y$10$.WWweNURU3tltoZ4ouSz2uCS7UZqMC69FQrMpk5IwM//XxvVPr4GW',2,'Dr. Sungging Pintowantoro, S.T., M.T.'),(415,'197701162003122007','$2y$10$CcgcegHFX/AY4hF6RyZZMOAzJqn9LNcbjMgsz4fA09ZtDHVqSZIaq',2,'Dr. Diah Susanti, S.T., M.T.'),(416,'197801132002121003','$2y$10$OlmrJJyQadWssFWKJAuB1egsJd.jA3xfD.D6N.G.7YxGiumbcpR12',2,'Dr. Sigit Tri Wicasono, S.Si., M.Si.'),(417,'197605282002121003','$2y$10$qqejXLtkmlPf7v9WQDwxXeKHbsUY4MAtVsrZzo2IC09VHpS64nVA6',2,'Dr. Agung Purniawan, S.T., M.Eng.'),(418,'197604102002121002','$2y$10$.etHTI5xfsbqbyee9OEGgO6O1ZIxJjRjz6urQ9zY9MRu.LzpReew.',2,'Budi Agung Kurniawan, S.T., M.Sc.'),(419,'197703132003121001','$2y$10$BNl3oRD2xwhQ8/7oW85j6.5AWOTSOHKmkftAOrEi8Z61ZfeHV9HWi',2,'Dr. Lukman Neorochiem, S.T., M.Sc.Eng.'),(420,'197610272003121001','$2y$10$5.QJNb8HQO/oqBxK8R.5ZOCD8.WPLCz9.r/FOqauV5UeWYfn8MKe2',2,'Mas Irfan P. Hidayat, S.T., M.Sc., Ph.D.'),(421,'197708172005011004','$2y$10$oJg.f5mbm1WwXK8S80OnTuOvolrf.2uCzA/WhMsiOKyCJs4qobTdm',2,'Sutarsis, S.T., M.Sc.'),(422,'197907242005012003','$2y$10$nGwHmyHNIFkzLn1YodmtpO3ZHTkMWrESVspv7uztANJ79dAvKuH7W',2,'Yuli Setiyorini, S.T., M.Phil.'),(423,'198012072005011004','$2y$10$5YFH.Es0nkBpm/DN5hGVwers.iE2dIs9BeReeu7Yr0y.wALhsibMC',2,'Dr. Eng. Hosta Ardhyananta, S.T., M.Sc.'),(424,'197410172006042001','$2y$10$mkPswMi6tSHt0P08wX2qFOb0ZURoMPOZn9XYIxPfD1lKhzhTEYIoe',2,'Hariyati Purwaningsih, S.Si., M.Si.'),(425,'197906202006042001','$2y$10$/ZFm6OMImOIvu0xqs/Eyv..wB0yTvybxSRDspWg2Af/il/30qzeoe',2,'Dr. Widyastuti, S.Si., M.Si.'),(426,'198302012008122002','$2y$10$JhQqRgWCm.gsESWFdEdofebkI2RxoxFk9XIakbGDdxD4qdtmrU5Wa',2,'Rindang Fajarin, S.Si., M.Si.'),(427,'198205262012121002','$2y$10$1kKLCeh4AV1jJ4e.IWTuLOYhCwpbLXQ1Y.UFURpIPw9S4TT0Qgvxe',2,'Tubagus Noor R., S.T., M.Sc.'),(428,'198303252014042003','$2y$10$wPk3dsuA5piop/YVYCJ39eStCej4InvWywBjZGoTMxQ6kVDPuCZGG',2,'Wikan Jatimurti, S.T., M.Sc.'),(429,'198405152014042003','$2y$10$d9dDXQG5eCZChu3Z//wCh.AbRb4Zv2gl4Jluau2ejAh68SuWYr/vK',2,'Dian Mughni F., S.T., M.Sc.'),(430,'199007262015041002','$2y$10$pkai7BRcSHWF2MgSEsaGm.ZJ5jERevBWdPtzBIY2PCpSChfz5sFi6',2,'Haniffudin Nurdiansah, S.T., M.T.'),(431,'199102172015041002','$2y$10$j8VYBgUo55Npe69vcXcSL.qiY9GHGPByjGswwg/3VeaQjFGQr4C3m',2,'Fakhreza Abdul, S.T., M.T.'),(432,'199106092015041001','$2y$10$DlzXBt3GxmIzur3LdyrT8OTEzxBsAQQOQNer8cELfVnFycIQ.hvvS',2,'Alvian Toto Wibisono, S.T., M.T.'),(433,'dosen01','$2y$10$fX0dstwj35dWkEM/viiV1u8/5B0Upg317ofk1XZUvdFjuTg1lMEvm',2,'Amaliya Rasyida, S.T., M.Sc.'),(434,'dosen02','$2y$10$jR8RUWVcGeZsb05c05jWR.2CpZLQOx4fYkzEvoqXw07GDJr8UZIEq',2,'Vania Mitha Pratiwi, S.T., M.T.'),(435,'2710100022','$2y$10$9oT1IZVJQStVlPJ7w63EcOHQBIamfZTHy1RrEUqJ7.xoW.L9aNfSm',1,'MOHAMMAD KHABIBI ALBISTHOMI'),(436,'2710100046','$2y$10$x4NP1CWVnPFwrRYuY4DJNuq5akqNVfAvIht1meGKSxwj8Vr4p.GM.',1,'OLGA LEONEV VASDAZARA'),(437,'2711100108','$2y$10$82AawMnAC11kBIyuJNtM9.uEgeLX/Mvu9Jl4msW5VGPuXSoHGXZae',1,'GABRIEL FEBRUANDO'),(438,'2711100134','$2y$10$F0msMzXlIIgOIwjzsRgqEOF5PCNTPxYJAhQUj/T3RvHUhOO1rFIca',1,'DHARMA KIYAT PERKASA'),(439,'2712100048','$2y$10$P77A/1.BbOPAB6dRwL8VjOlXU7gPjPD0wpGKwuHjT2qy7pxrJaqy.',1,'ANGGA DEA SAPUTRA HIDAYAT'),(440,'2712100094','$2y$10$p3BjpqSyhYxZPUHgGA/t9OLC.xf.U/3zMgu3omi4CGsDSEKTA91jK',1,'DESI SAPANG'),(441,'2712100113','$2y$10$IG4PnyKSxO5AxyLGu.nhDu7nA7sQjaAX5AkNhJQ6ZvrbrqW0u2RZq',1,'MUHAMMAD YUSUF BAIHAQI'),(442,'2713100001','$2y$10$AhRCVzy5sQ39i4pmezWGNeLhKo.py4fjfUILrP9iYyH4DJgsAlPO2',1,'MOHAMMAD RIZKI FEBRIANTO'),(443,'2713100002','$2y$10$CttyKTBJbt38Q5FNRR4jF.X7XEODDs4B0lRk/FXNaj.GnWjsAP0Ry',1,'MUHAMMAD REZA'),(444,'2713100003','$2y$10$l44/ypw28fODpIa/fOyDo.rc/4MxEp4NC46xiX9bSOdmReEZvvZJe',1,'PUTU DITHA PRATAMA'),(445,'2713100004','$2y$10$EDpha7BKkEGd9JSM0Qi5zubrXs1BbbJhGXHn94Uc5F0URBHOTLBVq',1,'MUHAMMAD RIZAL PAMBUDI'),(446,'2713100005','$2y$10$ft/91ty8Gie1Rr/EUn1WJ.zjv3RzPiaoN0WKR5vPAnZKKbpBh.ncS',1,'MAHENDRA KRESNA PUTRA'),(447,'2713100008','$2y$10$10YcN96PjEp2OYo0tdi7SuvMuGPsy4QKu2dwb9Wos.WfHHxUeKJUK',1,'LUTFI IRFAN'),(448,'2713100012','$2y$10$w4gKGqZqYkyvnxkjtQQ01uXCEwDCmanEHrAB7G6r1svYQ/sdAU9yu',1,'NOVIA DIAJENG ARUMSARI'),(449,'2713100013','$2y$10$VvZADAR7BcLD/hZv5ok.zu6x3ZToPa51t1na.IPXFQI8nIQGQPAHa',1,'SITI ANNISAA BANI PURWANA'),(450,'2713100014','$2y$10$s0Sok//X1Ham9NixWh6I8e51iPhuHVDd7tubA.8OiYMssFfWS32N6',1,'INGGIL HANIDYA'),(451,'2713100017','$2y$10$sXNKrJOPV1DjXRVFC77VM.KqP1FlmHChtzSJCyoVNOZUs.tVwv7va',1,'ROMMEL. T'),(452,'2713100018','$2y$10$CWJS5Ayyn8f4YEecRGrQ.eRvK4c2DU0UnsKe6XgZsfw7KQowM.X7a',1,'IHSAN MAULA'),(453,'2713100020','$2y$10$034V7qNixwFjUGtGqaI46u.Ld9VmDDXB4K7heB2/dVt26jp3YOB8e',1,'MUHAMMAD TAUFIK AKBAR OFRIAL'),(454,'2713100024','$2y$10$aFMuhDgpkw28H8oNzBoXU.ji4tWrneevAMrDpW6cTTJKel0oGdgHi',1,'IGFAR CITA'),(455,'2713100027','$2y$10$O9VKj9MA9dQdtktD89Ks7.N5bxbhGMXPFOmI1LGvr0u8nZVAIqTBS',1,'HAMZAH SYAIFULLAH'),(456,'2713100028','$2y$10$s1bREDiHaac4rAEixxxuSOaiDV.yqig9z2nkMhDA7nYazQNlFN.MC',1,'NURUL LAILATUL MUZAYADAH'),(457,'2713100029','$2y$10$pmk0QGIIzsUDQ3g2fFfwG.jk862acwgjMcfyDhjHe.T6ndAotKz.2',1,'FADLI KURNIAWAN'),(458,'2713100030','$2y$10$SVBeuHrsYjDoN.bK3awHZ.oxDGi37o4ocGo1oAqt/Q0ugrwIA7WUy',1,'FIKRI ADHI NUGRAHA'),(459,'2713100031','$2y$10$Xs7is51RXZG5YffWj9jqZOmdq4S7VO/kdUgSpWIpSHxicGshQ4nK6',1,'ARDYA ADHITYAMEIDY ANDARU'),(460,'2713100034','$2y$10$cvi.L956NJmtXbH654zTkOAQhP9On7eohj4urs2iOqIw6lhDFp6Zq',1,'QORY MAGHFIROH'),(461,'2713100038','$2y$10$69j/ie.pT5M8/FvKHZT8NOsiP7pz0BR0N32wCD42iIZwcXgTtO43.',1,'RIDWAN BAGUS YUWANDONO'),(462,'2713100039','$2y$10$gopZCF0e87IU6qkNzNuH2OBHuTQVHib4HrMKwkn94csBPHutXuOs.',1,'ANDIKA PRATAMA'),(463,'2713100041','$2y$10$eMtXkjdj6xF9wqP1D28msOLHHF1GUSm6PeR0WRSx0cjs9fh.4aEWi',1,'FARID RIZAL'),(464,'2713100042','$2y$10$bOHy2IYXjc3wrWEgrgQHr.PDtvPsYmvvq7FTMi0QWjJvO8P2QWN9G',1,'RATNA HERMASTUTI'),(465,'2713100044','$2y$10$.EnYFyhgPcVpvaFlm7LOoOPsWPyRUkkygB6EegUQoRL8/oiORi9A2',1,'MEILATI PASCA MUNA'),(466,'2713100046','$2y$10$9qaGuBPCfDMexlCrN/cWZOpMbih31XPase99LGjGsJ1lQZ6HPeAqC',1,'DESHINTA IKASARI'),(467,'2713100047','$2y$10$T/u3nzP3K6YUjuWXUmTace3/MvX56ObQc7DNwEjLBCsXCt2KCE/hy',1,'FAJAR KURNIAWATI'),(468,'2713100048','$2y$10$vVkjp3Yyz/Ot.gow95AyEuo/70pfCVstFpl0.ivfb40ejhB8rwAxK',1,'DYAH AYU KUSUMA HAPSARI'),(469,'2713100050','$2y$10$9Vl2x1aRrgZZ4CXi2w2Ta.eZWqlDwDpeadnVRb/fbb9ld4uiE32e.',1,'AHMAD PROSCA H'),(470,'2713100052','$2y$10$NcgrRruKbEArDOj1iTEWgeb6.zxhIaQYb9P32AsuNFA9Ijsgkho7e',1,'PRADITYA HADI PRABOWO'),(471,'2713100054','$2y$10$WBHRUm1OyAGmVKfxP.hFcOn.D2g81Nm25akR9RVpqMbR6BA.HboXm',1,'ANGGUN NURHAYATI'),(472,'2713100055','$2y$10$XOLik4usrhDwcEtrJanade1qIwjgsYH0tB1Rc3rvWIQvXgo5ukvl.',1,'MOHAMMAD MIFTAH FADLIKA MAKMUR'),(473,'2713100057','$2y$10$A82MGGX.cgLSigLvzY2cAuXKoicIkhLDVNaEChSE1Lfkdp.oASPAa',1,'JONAS MARTUA TAMBUNAN'),(474,'2713100060','$2y$10$cjuTeQI/7Hubd/oMBOenSOuhrHzFZ69iIpGF4qT1fg7vVFfAxfjL2',1,'ADVEN F.N. HUTAJULU'),(475,'2713100063','$2y$10$MTlCQfKTlcpjf05WSlauwev/y8AyH2AO/J1UpSqfwzw/Yn4mPzxya',1,'RACHMADHANI DIAN PRATAMA'),(476,'2713100066','$2y$10$CDgZarDBFtav/b1b0B4TOeQaaRkOH6vZCVMUeK6/exQRKwanKHJIy',1,'ZULFA ILHAM BASYARAHIL'),(477,'2713100067','$2y$10$arXHbAYxSzt5c785UtT0KO7biltCuIl1vFF2axd4DkUnmGs94AjYa',1,'ANGGIAT RAMOS JUNIARTO'),(478,'2713100068','$2y$10$oQT3vDhDjUOcdS56eXztyeVdOLRhZ8J6vzzOnNa1LHiHZj/hCzLGC',1,'HAIRUL WASIK'),(479,'2713100069','$2y$10$og0eSM2RQpc4aCIVMRRd6uNitJgBN9mbP1dpCQpjzTsS8nBZoukSy',1,'AJI PAMBUDI'),(480,'2713100070','$2y$10$25LU5GH08NOn.juwOWmvzOpSAsOfvacnuQAljVU/rgRstzmfhAY/a',1,'MUHAMMAD ADITYA PRADANA'),(481,'2713100074','$2y$10$EGsfL9CoD71EuZvGBUxSNOXYw8w9zN1Q.eN5nY9uEvZbKsSSwnYIG',1,'ORLANDO BANJARNAHOR'),(482,'2713100075','$2y$10$ZdVGGpO7Va8VknfSUlIbEu3cDdXZiAdvjdNRd6mTPhsfR1Mll/deS',1,'RIFKI RACHMAN KHOLID'),(483,'2713100076','$2y$10$WF4tCsyDt9ITbTk0OuqEhO8D7bsuhTcE4dxiP7EJsRzeD0jRC9MAG',1,'MUSTAFID AMNA RAMBEY'),(484,'2713100078','$2y$10$7uyF.eX57NmuX0/NncD4qeO19vDqpb5QtBE.O531jQ7lsOjIq5WFe',1,'DWIKI HAFIZHUL OKTORIO'),(485,'2713100080','$2y$10$iW9h4Cs/V8fdsO436HnP7ejZKMSYppR3dWhDuXULO.8p.lh9/Dmxq',1,'CANDRA SIMON SEPTYAN'),(486,'2713100081','$2y$10$IGbkZONMsGJUYPqaO31TTeC9Untj0bctR6NWNML4bxDoWk0EZD.z6',1,'LAURENTIUS BASKORO ADITYA PUTRA'),(487,'2713100082','$2y$10$DIt/QqMwesM7ehqONxo2OuBpIFm1WhvgdG1f0DmDZP28hFLM0r61e',1,'RINUSH FEDRIKDO PALTGOR'),(488,'2713100083','$2y$10$Jv2KdZsve/Z4elvbwYmawORvNUosVcaxkG4rLi4R52zxMtQDSuSD.',1,'MUHAMMAD FARISI'),(489,'2713100084','$2y$10$ptVV2fqtcCHTWvthjN9DQeuYFedP82LqVfX7nIJ3KUhZ3.B17Z4vK',1,'DANIEL JANTHINUS KRISTIANTO'),(490,'2713100085','$2y$10$GPXAOh/MAroRoJvMTuy9feQ7fNGjKQW.DU4S2BGPcuEvyIvoERFRO',1,'PRIBADI RIDZKY MULYONO'),(491,'2713100087','$2y$10$6jKNG2v6bx2ZmQcRPdol3e8cCCBE.SJkW09MNWrPjGPCJUEv8.WlC',1,'JAN WESLIN SARAGIH'),(492,'2713100089','$2y$10$dj2LDcaQRZ6EO6panu8E.ePJJvgNoVBTOBYFadD702sio8Wy1qiwi',1,'DWIKY OKKA TJAHJANTO'),(493,'2713100090','$2y$10$czqIix36jGVgt1TCk3xTHeJowzfKvKqmT4w6CSiYInUPlMXM4RvEi',1,'HENRY JULIANTO'),(494,'2713100091','$2y$10$Mt4uaT/x4TThPRrGJn2pSObeVwt9qCqKpI8fxq4Dw3wIDKxzoZYFi',1,'SAMUEL BUDI UTOMO'),(495,'2713100092','$2y$10$PV.t1wWZ6v8BAieiRLapr.fphJKuTzQXAEsPUPDnopr4IS.VZVBWW',1,'FIQRI SANUBARI EKAPUTRA'),(496,'2713100094','$2y$10$ILXWyHtMC/h/Xh4eCyk7pOfwJQCtLuGJU0h.9It3nT4DlLeJJTqZ.',1,'STANDLEY MELYAN LAIA'),(497,'2713100095','$2y$10$khman8n4EqauiWSa4FdQmu9UpV.ClVOj.ha9GtZLpMpuIZ2CF3D6u',1,'PENIEL SIMAREMARE'),(498,'2713100096','$2y$10$FdzJJjDvND6Z135fwt1gM.iLfSMPXlVFCeKRQPT/RDm.KtKXbX1pe',1,'HANA MUTIALIF M'),(499,'2713100099','$2y$10$khw4e6i7mxRjFUK3tCRz..P12xOwfGHPY0hdkPCr/7wk0mMnx7jEK',1,'GREGGY PRAISVITO ROMADHONI'),(500,'2713100100','$2y$10$m8uvgR41MeRxyv7nSntyMeNpzcFKESqk/P3VBReBZ8qPucVgJhZke',1,'MUHAMMAD FAJAR ISMAIL'),(501,'2713100101','$2y$10$1wockdYplFaWC/Bz0hX2O.DeIhTo/H7NnccJ.pdKk.vaNgt7WEaii',1,'YUDHISTIRA SURYA ANDIKA K.'),(502,'2713100103','$2y$10$lYMblFIfurg8b2kb/k8bD.2OffTkeccZEIaLHryBkW.V4FEFIE5N6',1,'M FIQHI DZIKRIANSYAH'),(503,'2713100104','$2y$10$m82SlP2vCiMdtW8K.IbZr.Ndd61vV37nD5GHkdQLey6FxdAy3NjJW',1,'RANGGA RAMANDANA'),(504,'2713100105','$2y$10$5STllQ.81/7x3RtLWXYDLeOjtNeBpLRDnilDMcSfZpfGiMJpmQbT2',1,'BUDI CHRISTOFER MANIK'),(505,'2713100106','$2y$10$dM7NeHxIySXlUwJUALe7Beb8l2wxbh2J0sIMWrt03RCmYX.XdhAm2',1,'MAULANA MALIK SADIQUN'),(506,'2713100108','$2y$10$zA2jorKgxg4gUblW2597gexd.yfTbHYMtD2A3ZTabdEGCeNwtLO9G',1,'FAKHRI AULIA ABDILLAH'),(507,'2713100111','$2y$10$DgGHOBXOFMbG3BIflO2tR.cy9hvutFDpX5YrMPCjR/7V5rs4MhU0y',1,'PETER ANDREAS TIMOTIUS'),(508,'2713100112','$2y$10$/7dshmJ/alMSCYCj2ElLbOSR7DRZywi/PBEhC4oxb1HzI/az3BFiC',1,'BIMA PRAMESWARA'),(509,'2713100119','$2y$10$7wW8R9RgNMWZ.FU6u3EpZeDn0OW5wc0Lo8ohIpk.TM2jeNh2ksSeS',1,'GEMA RIVALDA RAIS'),(510,'2713100120','$2y$10$.Baxqk4g3kC/em4zba9Gc.savV7H2nx5J7XYBHfK9wjRce6HQtTu2',1,'ARIEF RIZALDI PRASETYA'),(511,'2713100121','$2y$10$GBwwnZtN8hCsd44CMintCOPelHrjbhRh2juRSUssopHqwTSxiiUIu',1,'MUHAMMAD YUNUS'),(512,'2713100122','$2y$10$FEbZ3PiDPTaaZYKq76FdduewXYxcve59kgf3NO.8Rpybp2Ve5XooC',1,'ACHMAD FAJAR FAISAL'),(513,'2713100124','$2y$10$ZceT/zvCRKD/MRiYbpqg0ODNcbaDHtTzHeO5KUnTJB7BcXK0FKe6.',1,'MUHAMMAD DIMASYQI'),(514,'2713100125','$2y$10$xkvJvhW9DC1rwvzRKnbVUu5wEO4xvepuUTvwwQdPNMKbmdc3AtPd6',1,'MAJDI MAULID ADITYO'),(515,'2713100126','$2y$10$kI/sjCdNywr58Gk4zVCFyurSWgkegxEhJ1UK38zd8PjRG3p0KtL6i',1,'AGNY MUCHAMAD NUREZA'),(516,'2713100127','$2y$10$FwljUHk0XDUI8xJaGwx.YOScN/ki/mOUNIv5pRyH/lsYAYHk9paO2',1,'EVIANTO RIZKY KURNIA'),(517,'2713100128','$2y$10$KMz6xE3IrS4t2MBrBtnD5.eaBH8Tiqw5A1TyXvRXk/arCXT.39psq',1,'ASAD JABBAR NURU'),(518,'2713100129','$2y$10$5PWw4Map7.Y1Ip3fC03gp.C9WeFdngBDsuqBdfnPZum6hGYiZbUqu',1,'MUTHIA EGI RAHMASITA'),(519,'2713100130','$2y$10$t6VWYivmyyfTsIjVUVgEQ.H3Kq6q8wl.HeRXAaT/fvGHb9BIalkJ6',1,'MUHAMMAD ADIYAKSA FEBRIYANTO'),(520,'2713100131','$2y$10$jQ5GnCCSwIaEZw9ALh6qluksshZp3GMYXDNtnN7/.us9LKB8w0pY6',1,'RYAN TRI KURNIAWAN'),(521,'2713100132','$2y$10$vbPIUo4LzW2UqUeFc6Lb.e.Qlw2GuafT.JhZUYcm3.44vFU8g5Ukm',1,'RAHMANIA AGUSTIN ASWIN'),(522,'2713100133','$2y$10$bbWtzZqL5Gm09HQ5SB0GCejwRWtDiQ4BXZFmLcOKjKzot8zLVCQZm',1,'BEDRY NURHADI SIMANJUNTAK'),(523,'2713100136','$2y$10$a.TJIQUhBNDb1BHCvHlBee./dcuqN4Q7yJ04m0MdWZXAjV3U0wrLe',1,'ILMI MAYUNI BUMI'),(524,'2713100137','$2y$10$Xx3siDOLUp12rX8XEcoPRub0lIDPXUWcem6wW7gmkaH93UqHfYWaW',1,'AXEL GIAN ADITAMA'),(525,'2713100138','$2y$10$55DC7tvCQ1R4NieuiuVtB.4lKU9i5Wc0lLxtniCdX58/02SpXPYXi',1,'RIFQI TANTYO PUTRA'),(526,'2713100139','$2y$10$Ev02PayrOePngGJT7glJCuMgK3buoY/mYxs1.8j59fs2DswIAsicS',1,'AULIA UR RAHMAN AMINUDDIN'),(527,'2713100140','$2y$10$DLN5Ces4gBh5TwXgfM13WuSDccuGNaBkqYTBiqF2mi7lJhyLBHOWC',1,'M AFZA NUR HAKIM'),(528,'2713100141','$2y$10$ZgetyLv6cin2qD03ioANOe9U3JMJ/2zxDOJBwO2nD1CQhbCrubyJG',1,'MUHAMMAD NAUFAL IQBAL'),(529,'2713100142','$2y$10$HVLaEI2QUDuYURh9wyv6gekVIKWaOSiZkgvi7twFk8BTZomaWHFja',1,'FARIDZ MOHAMMAD EDRIE'),(530,'2713100146','$2y$10$mgNOY7GeV/a8nq1q/jx42.b5DCZNcCvGNccX9y9YkPY.7yNKprhEi',1,'ADITYA DWIHUTAMA SUMARYANTO'),(531,'2713100147','$2y$10$VBF99VsFYMBlMjCZmDCa6O4Cvv4r8VkNcrwF7byMzLPp0sOdki2ZW',1,'M RIFQI MAHENDRA PUTRA'),(532,'2713100149','$2y$10$Pr5bAnQfq4SmVZpKIOuQyOTIXj8Yp4cLtzXnwqcY885LR91ynBUOK',1,'FAIZAL NUGRAHA RAMADHAN'),(533,'2713100150','$2y$10$PzU266a0BA/SqzJqKHv5je/56hHdWpUK3/7XFQnRIFmcjZj/Hu4KC',1,'AHLIDIN NURSIDIQ');
+INSERT INTO `user` (`id_user`, `username`, `password`, `role`, `nama`) VALUES
+	(1, 'admin', '$2y$10$ti2nEXDMJWTmKylICG/4.uxnPuHvumlNnv1ZrjE9rB.li9bOJWylW', 3, 'admin'),
+	(855, '02511140000108', '$2y$10$V7QhTCiKrdq7n.ooffx8..Ir8kD8tb9XQVDb7rs4JszO4IGkmfndm', 1, 'GABRIEL FEBRUANDO'),
+	(856, '02511140000134', '$2y$10$nnZV3fpahrlnXIKNERsRDOU12yCK4EpN3SE6rE5OWo2zUrbihrus.', 1, 'DHARMA KIYAT PERKASA'),
+	(857, '02511240000094', '$2y$10$ewmGUUK/O0ZkVCymVtPBre0gniuLzQ73mB.3uQLy7c/hJlEVWzCrq', 1, 'DESI SAPANG'),
+	(858, '02511340000021', '$2y$10$bnb22tCjA/nTu8phfo2I2.vEaS68xGLucHFbdkdqmnkoAkkKtAMd2', 1, 'BAYU MUHAMMAD AJI'),
+	(859, '02511440000021', '$2y$10$JqClbnIgWGUrF5tLXaRik.VQ8lpjnDjqAXlVWDdjRgh.QYUFF5eJS', 1, 'DANI WULANDARI'),
+	(860, '02511440000051', '$2y$10$WwxH2t82r7U4V9yynGLlD.OQ69c/wwOLN5KNR4dlKcUpcbYlyd46q', 1, 'YUNANTARA I KADEK'),
+	(861, '02511440000107', '$2y$10$QLEySsmVS0R0ynS6/2Oahubzaqp4nGZqP1fpmXhI.CzHpCGNf3iby', 1, 'MUHAMMAD WALID A'),
+	(862, '02511540000003', '$2y$10$IUoYmuMtiL0VN6uxFucKvOmbrAyU3OvaM/k1LXzCV6sdBYecZxn4i', 1, 'Iqbal Azka Al Hamid'),
+	(863, '02511540000004', '$2y$10$zqlFZf9dqpBqkL4xpR99aO/LELHlgHBwgbBH2n8ZEyLAPKH0k47eK', 1, 'Faris Mahdi Kholiq'),
+	(864, '02511540000005', '$2y$10$UN6x4jP/wKkzX1O0ejKoPO.X1cezLcbOxbA8xHTWA9jTtPw9GxTya', 1, 'Garias Devara'),
+	(865, '02511540000007', '$2y$10$FVQgjUQ748.EujMUAbMD6esYAfqa6FI67zgVCCrb5wO/GAlJ0kTKm', 1, 'Muhammad Ghifari Pratama'),
+	(866, '02511540000008', '$2y$10$mLWFFzbiy/PXR3LFIS5Mm.285AaZV04cXJ9AwoywKDyhN/SnU1Zu2', 1, 'Galih Dwiyan Putra'),
+	(867, '02511540000010', '$2y$10$YX5M7eos6Khed3yQgheAVeNp5q0F4XI3Qo0yZ3A4uRwq1DXCZYcVu', 1, 'Brian Hariman Triantoro'),
+	(868, '02511540000012', '$2y$10$HPEuaViF76YV3N6BDCsX.enS3533jz0rdSIgN3Wr/RMgu8EU2ISum', 1, 'Anky Fitrian Wibowo'),
+	(869, '02511540000013', '$2y$10$4P6MBF1eBO.Wrl4zelm0ze5lKN9D/UC7pK3v9aH2PFv1bFc7LvTRC', 1, 'Ronald Brian'),
+	(870, '02511540000014', '$2y$10$arohFUz7LO6mzu3CRNc3tek3uTS2fU0v5Zw882h2DDrtaydRIJbo.', 1, 'Hanif Prakusya'),
+	(871, '02511540000015', '$2y$10$DQuYUUeSVGWyRY.Q8vp.LeJhKlaneOCOm6ySoGK0GWKTzcnT3eojW', 1, 'Arif Tri Kurniawan'),
+	(872, '02511540000016', '$2y$10$PgNk6lhsN7M3ykzgKYEk7uya66Co3Mf2TswHmDxP6/VCKPyZea7ui', 1, 'Muhammad Maulana'),
+	(873, '02511540000019', '$2y$10$wQcJk5Sr30mW16ukanKm9OWblwni5zT8QWLn2Rhpj1Ie4MlzBm..W', 1, 'Muhammad Rafi Wirawan Putra'),
+	(874, '02511540000020', '$2y$10$FTmCJ7jPaDCXCHzYhOj28OpiI3Ah9cuuM0UEKdIyJZ8K5vZkDc73O', 1, 'Nella Mauretha'),
+	(875, '02511540000021', '$2y$10$YaXhivYw.t58bS.m8elJjeAzpaVJDCtRJpYa.iKyEK6BZMdxKdLz2', 1, 'Ajeng Prameswati'),
+	(876, '02511540000023', '$2y$10$4/3Mci2rHiWTBldTD3J3LeN8rSpOsP/X1Qh25.5y8HSaws9bNXkQ2', 1, 'Fikra Muhammad Iqbal'),
+	(877, '02511540000025', '$2y$10$7HhhU7SttZEsbNEMi9q4Qef.Oi1R3Stc8LHJ.d9gD2.vXfHlDjihG', 1, 'Tri Wahyuni'),
+	(878, '02511540000026', '$2y$10$iTOh4lUFo7t39lWajHEQRubvDNw7rxgo.1OtwtkTNwAWfzDFZWtyK', 1, 'Rosa Amalia Dwi Andika'),
+	(879, '02511540000027', '$2y$10$CRN99aSPWPVIcyRctPtDJOPrw7woEtmyNkG0RHwrN2i6y0JjCdNEu', 1, 'Handis Zuniandra'),
+	(880, '02511540000028', '$2y$10$e2zOM4vwfJjTK3fr59hv0u4O73Llk9iJ.G2ZSRNG2AoL2CkOuHmuO', 1, 'Nikmah'),
+	(881, '02511540000029', '$2y$10$wR3UnFRx9HHOXGNZs9x2QOkl2/hASHYuOJgsTq3mKD8bZdqhd77/u', 1, 'Ghazi Labib Naufal Insan'),
+	(882, '02511540000030', '$2y$10$TiKFcDfBLCBfQvHnnljvXOM.Tk602eExEuO/x5o2RR8tJDIf6gRfK', 1, 'Diaz Perdana'),
+	(883, '02511540000031', '$2y$10$XD0ieqOlOygPajOfGvfMG.8HVt43du9dt93SVJics2q68bcfSnzMa', 1, 'Pambayun Indria Nindhita'),
+	(884, '02511540000033', '$2y$10$bhQ8xH1viV7cDP1yaHbQS..X5fey65Zp7HH7otwbbsOfv1oNqQs4a', 1, 'Kurnia Reza Septandri'),
+	(885, '02511540000034', '$2y$10$hdAdDePno8MN3X76jcuT2.0p6GvWIRG8SJOmuQdyyRZu87EkmLLkK', 1, 'Ibrahim Ali Ramdhani'),
+	(886, '02511540000035', '$2y$10$EEK7npPQFjngPQYExtPwhebMtaCWMYgCu39mYzIPwuylNjyPHgnRS', 1, 'Ismail Fatah Robbani'),
+	(887, '02511540000036', '$2y$10$WShuldlwn4cbmlVfuTzT5efNC8/v117cFq1mfAN12makDyAQrJLxu', 1, 'Kuni Ulya'),
+	(888, '02511540000037', '$2y$10$Yk0jLvHB9okoJC9ONKdPhuBAkEzLRy790lXTYqxMloYmwQGLW/JBm', 1, 'Firman Azharudien Hanggara'),
+	(889, '02511540000038', '$2y$10$bM2aAXwWyQ9yBwunkMk/jOmEs2MNknrkUYiiPz4zoXrbt2kVxMduq', 1, 'Ihzat Mahendra Ismail'),
+	(890, '02511540000039', '$2y$10$fObzyjtXgTYZSO4CXd5YW.XFJxxMsgzHIcP7QqZWxoFHUJm3Im2BS', 1, 'Taufiq Byomantoro Hanurogo'),
+	(891, '02511540000040', '$2y$10$9JPUWvIwvZ7h/Bu36HHeOuqVBq7mfzx9mH2BXKBInmvkBNEf/lalm', 1, 'David Septian Sinaga'),
+	(892, '02511540000041', '$2y$10$pcWoJjhhFM/qxu/0g8qSaeegBjqeplO8Wa5N5mZcA3wkMRBW4MoI6', 1, 'Galih Yuniardi F.'),
+	(893, '02511540000042', '$2y$10$qCvJi8yvK3tOVUGc9sb1iepiE.uLpM3SdcQJc9BZw9ozVtWgsZtNe', 1, 'Audi Armadhani'),
+	(894, '02511540000044', '$2y$10$ZYUJ3hiNdl3IkfyQtu0hreGwgIiPpEfD77yn0DQnL8KLJ/cazer6W', 1, 'Holly Indi Ramadhian'),
+	(895, '02511540000046', '$2y$10$rCt2umfKVBlEcOrwSstiv./U0Ti52T2vx4jGUZgd1EL6NKZS0nS/i', 1, 'Muhammad Fahmi Dwi Rizaldi'),
+	(896, '02511540000052', '$2y$10$9XzTF8/TQ/yYvZ8NZMnIsuBxHQlUvvE7GPvBwbXJFtjK1dk6gxPNS', 1, 'Muhammad Wildan Ibnu Saputra'),
+	(897, '02511540000053', '$2y$10$b2OnJC8koxjOhrpfF6.chuCNy5dc0MesVrolyD4Kj.YDBcLBHf3Hi', 1, 'Muhammad Lutfi Hidayat'),
+	(898, '02511540000054', '$2y$10$5p5g/o1Dt6dz7C2VMqkC2e3IkvGkQz7GVlflPetYFI8a5sX2w5nTm', 1, 'Aldi Putra Riyanto'),
+	(899, '02511540000055', '$2y$10$.wSa9eNYSrDX0ggONcgO9ersmkWTgV3pnh4jBnEHKZuZb.8mOw.Xu', 1, 'Amirul Ghufron An Najib'),
+	(900, '02511540000056', '$2y$10$rUgqBEo8NJL2vbWzS1h3SuSqVhtdlRx4mmKklSE8IVkF4YexgZfeq', 1, 'Patrick Christopher Panggabean'),
+	(901, '02511540000057', '$2y$10$XvqYLpFh5TaeDxeehFg0dOtcSzfX/Dzhk/9CTdSRvikv5eDOCMREi', 1, 'Yoga Mugiyo Pratama'),
+	(902, '02511540000059', '$2y$10$FvIp4BU3hy1UrX6wnPcdKu4gazyzZ9/L4UMS7vAo0Ef8V5FnxVPLi', 1, 'Berryl Ilham Yuditfiansyah'),
+	(903, '02511540000060', '$2y$10$XP94ULAukfvxu0yj.V3hROU.vPI68Tj0nZguNq6OtZO.tn.9VFUu6', 1, 'Muhammad Fikri Kurniawan'),
+	(904, '02511540000061', '$2y$10$Oa/1pesVCLmm/8yzaMGIwuAFol6.ZON8oJLTy2V/wlFK40xEAsfNq', 1, 'Abim Sebastyantito'),
+	(905, '02511540000062', '$2y$10$DaTlIiQ/51kuoueWuSeZWeiDiv/KUKH5oKLq4treEsmqyMEoNaDt2', 1, 'Musthofa'),
+	(906, '02511540000063', '$2y$10$Cm7iv/YOnvNfTClGZWMyaeBLa88gonuBl/iRLHRYv7Hc9bGyi0gU6', 1, 'Retno Ambarwasih'),
+	(907, '02511540000064', '$2y$10$x8CTYpYyyVKwxVBW3XvcOuudnM8JjDAOaKkGrL2wszw4gQzCBygYK', 1, 'Putro Bakti Utomo'),
+	(908, '02511540000066', '$2y$10$v0pvqH9ctZ8ZqUCr./nVkOc6EyOJm9OYbMAqFvebWDJhXzXzE5zs6', 1, 'Mukhammad Khoirul Umam'),
+	(909, '02511540000067', '$2y$10$G1MuvorsW1RB82ZBNfgQtuLQh05R.jLeXpiGI.7UBbzzCStpbS256', 1, 'Mochamad Puji Widodo'),
+	(910, '02511540000068', '$2y$10$JnBp3sGLCKIOqU/bPummE.H3EWTG/CfR.rGd0gOoWPtiSD8bmewI2', 1, 'Yohannes Gabriel Adven Christy Maharsiputra'),
+	(911, '02511540000069', '$2y$10$gjO8qQuTsf4xoPlX9ItWC.GhVCcjwNfcdXCXAf/HCH6/Qv25ofR5O', 1, 'BAYUZEN AHMAD'),
+	(912, '02511540000070', '$2y$10$lbysoNMRJpHf0ZK8S9N/Ae71f9czUO1ZTcy4QWfpviZjInyNMXTRe', 1, 'ZAID SULAIMAN'),
+	(913, '02511540000073', '$2y$10$gXKlSG289A..BuPglcu6L.x4AW74tpmLqzVuR6nyhELnQNTzjIfm2', 1, 'ABU MUSLIM ALJAUHARI'),
+	(914, '02511540000074', '$2y$10$6wRjJuT3e.ax6S2DJ2xUXebFqZt3i3nFGekDGf7baytQI2jtKWcQu', 1, 'ILHAM TAUFIQURRAHMAN UNTORO'),
+	(915, '02511540000075', '$2y$10$sbc4gfDSY7MAK.4fajEbcubldfLlFsU1Vvcvzng1VDg5KKI9r8152', 1, 'AM. BAYU DEWANTARA'),
+	(916, '02511540000078', '$2y$10$un/N02XgLjwqLOINYcct/urgvlCTVMSmtx16zM46IQBFAbrXLlt12', 1, 'AHMAD MUHAYAT'),
+	(917, '02511540000079', '$2y$10$PTG0w1GcBQaB6QnmWiQd9OXwW9tN6anmgM.VRIUUD9KWX7ACpIhRa', 1, 'FIRDOS NUR FADILLAH'),
+	(918, '02511540000080', '$2y$10$Agh9yrfHwDAhUgO6zq.c7.rp0FGNGXbXlyM4lpUInQ1UY9ezU6pFS', 1, 'MUHAMMAD BAKHTIAR'),
+	(919, '02511540000082', '$2y$10$LhVMGm3iHCfY0aCYcUR.I.rVtbG0YrRfKnNelqzKE52ND0j.X95zG', 1, 'RAFIIANDY EL FURQON'),
+	(920, '02511540000083', '$2y$10$Qj.tMHtN588mvdinUy9y5uz20bTrhxn.qgBqKRj8cX1UEo/sYgty2', 1, 'BINTANG PUTRA ANGGARA'),
+	(921, '02511540000084', '$2y$10$io.7.SZ.naBUzvzl6g6V/OZSy5Nd8oxOFdVSPd4u2G0aQ.xKbfTvW', 1, 'KEVIN ADDERY'),
+	(922, '02511540000085', '$2y$10$ed7Go83heflwNAUGH/y.t.NNIlEkyyxOBZ0edTpfUFWP4SmtJ9oQu', 1, 'MUHAMMAD ILHAM YOESSA'),
+	(923, '02511540000086', '$2y$10$8XjYDBu9zSlrAbng2qZN9OUb8v13DuxUbhUkEhAYOigza1IOyXgbO', 1, 'YANUARDI IBADILLAH'),
+	(924, '02511540000089', '$2y$10$49OX926m7DsGbjyEUJsohOjTNxP1U1iCYODZUqynWTQ31wl.E2CRa', 1, 'FAISAL FAHMY SULISTYA'),
+	(925, '02511540000092', '$2y$10$p7g2Z3kaG1t9uw2vcS91.eGtr7NkTAaKiA3nv71JzWAZRQdDHr232', 1, 'NIMBA SHARON LANDE'),
+	(926, '02511540000093', '$2y$10$tyuoDCPzeK6W4IUsGifWJOed00TbAUSDsSjEqHC/C/gz5j4z4ltnW', 1, 'KHARISMA PUTRA ANURA'),
+	(927, '02511540000094', '$2y$10$sArF3eKXstBn0zFpzphom.MdG3kDX5pWeXqFxL2nyaqkFa5xrRf0.', 1, 'ARYO SENO WASISTO'),
+	(928, '02511540000097', '$2y$10$a2l845G9Zk.pfocXxNpVluaVcg5IZVNOfRQTWvq2D2QwB8tvcSkei', 1, 'MOHAMMAD RIZKY SEPTIAWAN'),
+	(929, '02511540000100', '$2y$10$O3BnQeb2UaVprLnSgQy49e1jh7lnMQ2tYAd9kqqBGeigJ2cQovOKe', 1, 'HELMI SON HAJI'),
+	(930, '02511540000101', '$2y$10$Qz9ybCzUvf5MDb0azIdFTuL9803poG4nim3Bo57jdCVW9xT7tfOlS', 1, 'MOHD. PRIYHAN ADELMA'),
+	(931, '02511540000102', '$2y$10$ZGN2gX/FWTNS9DJGXAX7BOpP2PuWYrYlEtgMkObtEej43czzdSSM.', 1, 'YOHANNES MARUDUT TUA SILAEN'),
+	(932, '02511540000106', '$2y$10$KyIlTNX11yyJbgwI2yBQsOGmWaLebIpDUEiZHGuOXIbrgHUly1c3q', 1, 'HABLI MASYAHID'),
+	(933, '02511540000107', '$2y$10$Ukt4vRK4WmmgpZA5O5H3qe5n3au/XjSah6p5AD7/kXF15XIrEQ/W2', 1, 'AZHARUDDIN FAUZI'),
+	(934, '02511540000108', '$2y$10$93Vugi6/uA81wLV.4RWqfOJY/rawq1rNoiCGJ4Vib63hihVyxFWxu', 1, 'NABIL MUSYAFFA`'),
+	(935, '02511540000109', '$2y$10$yTOFxl/Xxwq4qV2zJWPOpuvOdAdPe/R8DpS.Sz1XorAReCmTdzK.6', 1, 'MUHAMMAD IHSAN PRAYOGO'),
+	(936, '02511540000110', '$2y$10$9D5twPE/44AuaeJx5gUQ3eCqww9Io0zZIfAvChYIhS.pl7KO4pgJK', 1, 'SALMA HALIMAH'),
+	(937, '02511540000111', '$2y$10$y0o9P/DOEP8YyPhDOhxptOduiUQo7LdAuX7T3vfmLOsFKavWRSysW', 1, 'IFTHAR MUHAMMAD GHAZY'),
+	(938, '02511540000113', '$2y$10$XNIM8WnuxGy2ndELZ0LNleBeFVLuD7n/tJq7vE9M1pNzxixaA26k2', 1, 'ULA CHARIR ANJANI'),
+	(939, '02511540000115', '$2y$10$qiESbQCNGVHWorqPU.k9o.EYP1QR4LUhxAKpVg1v00dGsKqntNGRe', 1, 'REZA ADITYA NUGRAHA'),
+	(940, '02511540000116', '$2y$10$MnaaK8QhEhjRvjMfuGBRw.2T2Hhwb8ByS7gHH6fnFtGz4uIog9cm6', 1, 'MUHAMMAD RIZQI RAMADHAN'),
+	(941, '02511540000117', '$2y$10$hhvMWdkf/POFa3lgbLJN/.LtbI0Dgxm5XrZ59JaYiAcQFXu7PX6Xi', 1, 'REMY MAULINDA R S'),
+	(942, '02511540000119', '$2y$10$yug1Y0H4cYsQXWez0A/R8eyEvReAPaXDJgJMtzCYOnl.OoolFO9s.', 1, 'BAGAS RADITYA PUTRA'),
+	(943, '02511540000121', '$2y$10$DPYySV5qeRr668ZHO9BIXO/o1t94za5rMr28JBrGpbNGK28ESipsK', 1, 'I MADE ARYAMA SATYAWAN'),
+	(944, '02511540000122', '$2y$10$MkA9bdkmoJN/r6Uk7P7QHuUBHUFA5ktHRyj2nSTR3yUrI/DwF6QOK', 1, 'ARFIANSYAH'),
+	(945, '02511540000123', '$2y$10$ZXdm.C0vleFaXzjJCd.YsuuuEMTiMp1qJHWIc82CY1eE3flMsMUzy', 1, 'UWAISUL QARNI'),
+	(946, '02511540000126', '$2y$10$QjJ.H.ZzB9aX48wj9n3awuMWawleu0OsQmf0oUcbmneu7iBFxw3dG', 1, 'ERWIN YOLANDA DWI SYAPUTRA'),
+	(947, '02511540000128', '$2y$10$7A8NehFkDKKMsz2ngjLGE.rRElFmj2v3aZvBCOmB8qIMeEptQOdQC', 1, 'MUHAMMAD HERDIADI'),
+	(948, '02511540000129', '$2y$10$kaJoZVUbqllEeGOwQQF4qevM7KT4CgpUpz.jGedIsLYObjXs7Ckym', 1, 'MUHAMMAD RIZAL AFIF'),
+	(949, '02511540000134', '$2y$10$ODDz9RcrYcvgSn1XCl5B8eD98Fjb8wcJGz6qjXxsrLuW.jJJNHIeO', 1, 'MUHAMMAD IKHSAN A'),
+	(950, '02511540000136', '$2y$10$52zfGGpCI6yXYB0km.7JRuGv129ueZwFgJ6EMsZ3oDGqia6FnnVg2', 1, 'RAIHAN ABRAR RABBANI'),
+	(951, '02511540000137', '$2y$10$XPK0yCRTVUHwjUBDCnS3A.hDqbhpHPZeo1t7h1m1Zeqrky8KFoCzy', 1, 'BAYU AJI PRAKOSO'),
+	(952, '02511540000139', '$2y$10$CjAz9xwE/h5nnzAMc7/M1.7g0auwC68vSUpTmSPA0oVoXolGQA0U6', 1, 'MUHAMMAD RAZKAN ADLI'),
+	(953, '02511540000140', '$2y$10$YfMorBVt9EBKA31sPggR5eSFXusCt0qf6Bf5hxd4DJwBrNP5AXSJe', 1, 'EZEKIEL ADITYA'),
+	(954, '02511540000141', '$2y$10$qbtmLXg8PytKAKz1MKVCWeDzyl79xgGWkIam0jPEXGeds2qQqLQFy', 1, 'JONATHAN ARTHUR PARDAMEAN SITU'),
+	(955, '02511540000142', '$2y$10$xAqBV70CfMHIQTgzm3PKpu33mdNSiJgt/tw8LCvw6mVhjM1s1Iiq6', 1, 'HILMAN RASYAD'),
+	(978, '196203261987011001', '$2y$10$DYTWVUQ8sFhUQ19EME4A.e9w3.kxzet30t9P5ip6YSMBGrprGv7vK', 2, 'Prof. Dr. Ir. Sulistijono, DEA'),
+	(979, '195709241986031002', '$2y$10$Pa7iiUU2uECYHaw8A5M4BumfmG4slLg6eqQ/axs9vyZ3VJj7H10za', 2, 'Ir. Moh. Farid, DEA'),
+	(980, '195809101986031002', '$2y$10$MOxMW7hfyqhFz.V4YY4DyeCMrgqBSJUaN/ZPDD8seYruJkG0nn6pS', 2, 'Ir. Rochman Rochiem, M.Sc'),
+	(981, '196809302000031001', '$2y$10$TaA65CbiUrVsJ7o63KAdDOIxVcJGvxpMu.LtZ8yQb7Ly0hmbJPWQu', 2, 'Dr. Sungging Pintowantoro, ST. MT'),
+	(982, '197701162003122007', '$2y$10$Adn8lKGwq5Biymk6vLrlQeNFgsfVFn.0GNFYYHkYQfOUUZSXaJ9SC', 2, 'Dr. Diah Susanti, ST. MT'),
+	(983, '197801132002121003', '$2y$10$s0BN.IlpppYI/ls97ew2Gelo231IZD441nnFqTTRBGJ/QvGsuTFdy', 2, 'Dr. Sigit Tri Wicaksono, S.Si, M.Si'),
+	(984, '197605282002121003', '$2y$10$oI/Eoj8NOUUnR43qyA/6BOHasMl.YPz8LomyPGosv9Ch2xAyF2zUC', 2, 'Dr. Agung Purniawan, ST, M.Eng'),
+	(985, '197604102002121002', '$2y$10$oxOMr1LQ1gN8NSQZRBQ1berumn284lMDIQ3Cgc5jB3NEJa3Wrc3iu', 2, 'Budi Agung Kurniawan, ST, MSc'),
+	(986, '197703132003121001', '$2y$10$nPnf8oDVBOQOUwM85Lb2pu/nBhV2yLT9pdunJzvqaZSG47h.Wa.wm', 2, 'Dr. Lukman Noerochiem, ST, MSc.Eng'),
+	(987, '197610272003121001', '$2y$10$R04a.n1bYrJ3ih2e0E5QHONgBV6fAntgK8HABIymN8cy2LPV5//2a', 2, 'Mas Irfan P. Hidayat, ST., M.Sc., Ph.D'),
+	(989, '198012072005011004', '$2y$10$0BiVbvcHDfm.GWghyeSsKOWNfyAU9DYNvBXnc4kFiPGCO2ndT1Pvi', 2, 'Dr. Eng. Hosta Ardhyananta, ST, M.Sc'),
+	(990, '197906202006042001', '$2y$10$ezylzPRMEO4vq6tfG1x1YuHHH/dwoL2Rscz5mwzgXCVGczZnH0yTC', 2, 'Dr. Widyastuti, S.Si, M.Si'),
+	(991, '198205262012121002', '$2y$10$G7viEBA04wiQJD5aJWomNu3M01w19Wb3GBWssVw9lr0Okh59FBbxS', 2, 'Tubagus Noor R. ST., M.Sc'),
+	(992, '198303252014041001', '$2y$10$W6beMvOIrq6Vz0rbdP96OO6Z0rwPXlBo6dWSbLhgPIfbdIT6d/bTG', 2, 'Wikan Jatimurti, ST. M.Sc'),
+	(993, '198405152014042003', '$2y$10$4U8TivbEqd4.d8TSpKPY/u6dPfJYld/nsBUlrm6epJzB24wpYZwKW', 2, 'Dian Mughni F, ST. M.Sc'),
+	(994, '199007262015041002', '$2y$10$bWsVT8XuH.5s.8mXg1j8K.T8sgG4MPNX68tF7mBguQaZ5ezH8xcba', 2, 'Haniffudin Nurdiansah, ST., MT'),
+	(995, '199102172015041002', '$2y$10$iOXxsOkhZXRyu18wSqZCnOeZuOHljgtM/vQuL12a4U8bhRJIJPq7C', 2, 'Fakhreza Abdul, ST., MT'),
+	(996, '199106092015041001', '$2y$10$pv.W3/oLJeQOs2f2tBnHN.e8Omi58uhqTCErzgbY7RMM.QUXVtbxS', 2, 'Alvian Toto Wibisono, ST., MT'),
+	(997, '198805012019031008', '$2y$10$W28QH5vtfSPAGxoDRDvwteN0aFxN6Xqhi/ATafIzYSn.E76FtG/ka', 2, 'Mavindra Ramadhani, ST, MT'),
+	(999, '198707072018032001', '$2y$10$BoH2kbe7QzhtQ8KWkGM3CesVpZCI3tYfDsV/bnFUBG2keH6KrfZJu', 2, 'Amaliya Rasyida, S.T., M.Sc'),
+	(1001, '194707171978031001', '$2y$10$YIt7FdfxO.lsPqdtfTMqZuPv9BmsK8OPMF.3ynv5/.nFCakOnocWu', 2, 'Ir. Muchtar Karokaro, MSc'),
+	(1002, '194712111974121001', '$2y$10$wZZANm6M54Swesktvozfk.AX1GG7hRiAfj1JbNKhX9n1EnD50I4kW', 2, 'Ir. Sadino, MT'),
+	(1003, '000000000130532034', '$2y$10$qm4qUiB3knsSFGwCxw1CC.dyAL8vtD5UjH0xUPNqldG47.72kwhou', 2, 'Ir. Wahid Suherman'),
+	(1004, '197907242005012003', '$2y$10$IMiD8lmVpGlwhgjyWc4P5OjqgicbfNaIQNJJSQ0VRv57aJTn28VNS', 2, 'Yuli Setiyorini, ST, M.Phil, Ph.D'),
+	(1005, '000001989201812021', '$2y$10$IBP3fP4uG4h6e5/YT96Va.9..2qNBPOry3MxCHv3kRsZj/TWF.CuC', 2, 'Vania Mitha Pratiwi, ST, MT');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2017-08-02 23:48:10
