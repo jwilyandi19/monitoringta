@@ -173,8 +173,8 @@ class SidangController extends Controller
                     foreach ($jadwals as $key => $jadwal) {
                         $jadwalUjian[$jadwal->tanggal][$jadwal->ruang][$jadwal->sesi] = $jadwal->id_ju;
                     }
-
-                    $jadwalujiands = JadwalUjian::where('sesi','1')->get();
+                    $awalSemester = Jadwal::where('nama', 'Awal Semester')->first();
+                    $jadwalujiands = JadwalUjian::where([['sesi','1'],['tanggal', '>', $awalSemester->tanggal]])->get();
                     foreach ($jadwalujiands as $key => $jadwalujiand) {
                         $tanggalUjians[$key]['tanggal'] = $jadwalujiand->tanggal;
                         $day = date('D', strtotime($jadwalujiand->tanggal));
