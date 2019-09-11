@@ -173,7 +173,8 @@ class SeminarController extends Controller
                         $jadwalSeminar[$jadwal->tanggal][$jadwal->ruang][$jadwal->sesi] = $jadwal->id_js;
                     }
 
-                    $jadwalseminards = JadwalSeminar::where('sesi','1')->get();
+                    $awalSemester = Jadwal::where('nama', 'Awal Semester')->first();
+                    $jadwalseminards = JadwalSeminar::where([['sesi','1'],['tanggal', '>', $awalSemester->tanggal]])->get();
                     //dd($jadwalseminards);
                     foreach ($jadwalseminards as $key => $jadwalseminard) {
                         //dd($jadwalSeminar[$date]);
