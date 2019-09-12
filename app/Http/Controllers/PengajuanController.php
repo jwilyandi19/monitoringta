@@ -16,6 +16,7 @@ use Response;
 use Redirect;
 use Session;
 use DB;
+use App\Jadwal;
 
 class PengajuanController extends Controller
 {
@@ -57,6 +58,7 @@ class PengajuanController extends Controller
     public function store(Request $request)
     {
         //dd($request);
+        $awalSemester = Jadwal::where('nama', 'Awal Semester')->first();
         $messagesError = [ 
             'judulTA.required' => 'Judul Tugas Akhir tidak boleh kosong',
             'bidangMK.required' => 'Rumpun Matakuliah tdak boleh kosong',
@@ -88,11 +90,12 @@ class PengajuanController extends Controller
             $taUser = TugasAkhir::where('id_user', session('user')['id'])->where('id_status', '>=', '0')->first(['id_ta']);
 
             $dosen = Dosen::where('id_dosen', $request->pembimbing1)->first();
-            $taDosen = TugasAkhir::where([['id_dosbing1','=',$dosen->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5']])->orWhere([['id_dosbing2','=',$dosen->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5']])->count();
+            $taDosen1 = TugasAkhir::where([['temp_dosbing1','=',$dosen->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5'],['created_at','>',$awalSemester->tanggal]])->count();
             //dd($taDosen);
+            var_dump($taDosen1);
             $flagPembimbing1 = 0;
             $flagPembimbing2 = 0;
-            if($dosen->pembimbing1 && $taDosen == 8){
+            if($dosen->pembimbing1 && $taDosen1 >= 15){
                 $flagPembimbing1 = 1;
             }
             else{
@@ -108,8 +111,9 @@ class PengajuanController extends Controller
 
             if($request->pembimbing2){
                 $dosen2 = Dosen::where('id_dosen', $request->pembimbing2)->first();
-                $taDosen2 = TugasAkhir::where([['id_dosbing1','=',$dosen2->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5']])->orWhere([['id_dosbing2','=',$dosen2->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5']])->count();
-                if($dosen2->pembimbing1 && $taDosen2 == 8){
+                $taDosen2 = TugasAkhir::where([['temp_dosbing2','=',$dosen2->id_dosen], ['id_status', '>=', '0'], ['id_status', '<=', '5'],['created_at','>',$awalSemester->tanggal]])->count();
+                var_dump($taDosen2);
+                if($taDosen2 >= 15){
                     $flagPembimbing2 = 1;
                 }
                 else{
@@ -126,13 +130,13 @@ class PengajuanController extends Controller
              
             if($flagPembimbing1 || $flagPembimbing2){
                 if($flagPembimbing1 && $flagPembimbing2){
-                    return Redirect::to(url('/pengajuan/create'))->withErrors('Data TA sudah tersimpan, tidak dapat mengajukan permintaan bimbingan kepada kedua dosen terpilih karena bmbingan keuda tersebut dosen sudah penuh');
+                    return Redirect::to(url('/pengajuan/create'))->withErrors('Data TA sudah tersimpan, tidak dapat mengajukan permintaan bimbingan kepada kedua dosen terpilih karena bmbingan kedua dosen tersebut sudah penuh');
                 }
                 else if($flagPembimbing1){
-                    return Redirect::to(url('/pengajuan/create'))->withErrors('Data TA sudah tersimpan, tidak dapat mengajukan permintaan bimbingan kepada '.$dosen->nama_lengkap.' karena bmbingan sudah penuh');
+                    return Redirect::to(url('/pengajuan/create'))->withErrors('Data TA sudah tersimpan, tidak dapat mengajukan permintaan bimbingan kepada '.$dosen->nama_lengkap.' karena bimbingan sudah penuh');
                 }
                 else{
-                    return Redirect::to(url('/pengajuan/create'))->withErrors('Data TA sudah tersimpan, tidak dapat mengajukan permintaan bimbingan kepada '.$dosen->nama_lengkap.' karena bmbingan sudah penuh');
+                    return Redirect::to(url('/pengajuan/create'))->withErrors('Data TA sudah tersimpan, tidak dapat mengajukan permintaan bimbingan kepada '.$dosen2->nama_lengkap.' karena bimbingan sudah penuh');
                 }
             }
             else{
