@@ -230,11 +230,22 @@ class UserController extends Controller
                     return Redirect::to('/user')->withErrors('Gagal menghapus user. Dosen yang bersangkutan masih menjadi penguji ataupun pembimbing');
                 }
                 else {
-                    KetersediaanSeminar::where('id_dosen',$dosen->id_dosen)->delete();
-                    KetersediaanUjian::where('id_dosen',$dosen->id_dosen)->delete();
-                    Asistensi::where('id_dosen',$dosen->id_dosen)->delete();
-                    Dosen::where('id_user',$id)->delete();
-                    User::where('id_user',$id)->delete();
+                    if( KetersediaanSeminar::where('id_dosen',$dosen->id_dosen)->get()) {
+                        KetersediaanSeminar::where('id_dosen',$dosen->id_dosen)->delete();
+                    }
+                    if(KetersediaanUjian::where('id_dosen',$dosen->id_dosen)->get()) {
+                        KetersediaanUjian::where('id_dosen',$dosen->id_dosen)->delete();
+                    }
+                    if(Asistensi::where('id_dosen',$dosen->id_dosen)->get()) {
+                        Asistensi::where('id_dosen',$dosen->id_dosen)->delete();
+                    }
+                    if( Dosen::where('id_user',$id)->get()) {
+                        Dosen::where('id_user',$id)->delete();
+                    }
+                    if( User::where('id_user',$id)->get()) {
+                        User::where('id_user',$id)->delete();
+                    }
+                    
                     return Redirect::to('/user')->with('message','Berhasil Menghapus user '.$id);
 
                 }
@@ -247,12 +258,24 @@ class UserController extends Controller
         }
         else
         {
-            Asistensi::where('id_ta',$tugasAkhir->id_ta)->delete();
-            SeminarTA::where('id_ta',$tugasAkhir->id_ta)->delete();
-            UjianTA::where('id_ta',$tugasAkhir->id_ta)->delete();
-            DosenPembimbing::where('id_ta',$tugasAkhir->id_ta)->delete();
-            TugasAkhir::where('id_user',$id)->delete();
-            User::where('id_user',$id)->delete();
+            if(Asistensi::where('id_ta',$tugasAkhir->id_ta)->get()) {
+                Asistensi::where('id_ta',$tugasAkhir->id_ta)->delete();
+            }
+            if(SeminarTA::where('id_ta',$tugasAkhir->id_ta)->get()) {
+                SeminarTA::where('id_ta',$tugasAkhir->id_ta)->delete();
+            }
+            if(UjianTA::where('id_ta',$tugasAkhir->id_ta)->get()) {
+                UjianTA::where('id_ta',$tugasAkhir->id_ta)->delete();
+            }
+            if(DosenPembimbing::where('id_ta',$tugasAkhir->id_ta)->get()) {
+                DosenPembimbing::where('id_ta',$tugasAkhir->id_ta)->delete();
+            }
+            if(TugasAkhir::where('id_user',$id)->get()) {
+                TugasAkhir::where('id_user',$id)->delete();
+            }
+            if(User::where('id_user',$id)->get()) {
+                User::where('id_user',$id)->delete();
+            }
             return Redirect::to('/user')->with('message','Data user '.$id.' berhasil terhapus.');
         }
     }
