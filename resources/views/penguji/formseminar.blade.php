@@ -142,6 +142,7 @@
                     <thead>
                         <th class="text-center ">No</th>
                         <th class="text-center ">NRP</th>
+                        <th class="text-center ">Nama</th>
                         <th class="text-center">Bidang</th>
                         <th >Judul</th>
                         <th class="text-center ">Penguji 1</th>
@@ -161,6 +162,7 @@
                                         
                                         <td>{{$index+1}}</td>
                                         <td>{{$seminarDiterima->tugasAkhir->user->username}}</td>
+                                        <td>{{$seminarDiterima->tugasAkhir->user->nama}}</td>
                                         <td>{{$seminarDiterima->tugasAkhir->bidang->nama_bidang}}</td>
                                         <td>{{$seminarDiterima->tugasAkhir->judul}}</td>
                                         <td>
