@@ -122,7 +122,7 @@
                                     <td>
                                         @if($seminar->status == 0)
                                             <a class="btn btn-success btn-sm" value="{{$seminar->id_seminar_ta}}">Terima</a>
-                                            <a class="btn btn-danger btn-sm" id="batalpengajuanseminartombol" value="{{$seminar->id_seminar_ta}}">Batalkan</a>
+                                            <a class="batalpengajuanseminartombol btn btn-danger btn-sm" value="{{$seminar->id_seminar_ta}}">Batalkan</a>
                                         @else
                                             -
                                         @endif
@@ -238,7 +238,7 @@
                                         <td>
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-block btn-info btn-sm">Simpan</button>
-                                                <a id="batalseminartombol" class="btn btn-block btn-danger btn-sm" value="{{$seminarDiterima->id_seminar_ta}}">Batalkan</a>
+                                                <a class="batalseminartombol btn btn-block btn-danger btn-sm" value="{{$seminarDiterima->id_seminar_ta}}">Batalkan</a>
                                             </div>
                                         </td>
                                     </form>
@@ -310,7 +310,7 @@
                 $('#terimaSeminar').submit();
             });
         });
-        $('#batalseminartombol').click(function(){
+        $('.batalseminartombol').click(function(){
             var idSeminarTA = $(this).attr('value');
 
             swal({
@@ -326,7 +326,7 @@
                 $('#batalkanSeminar').submit();
             });
         });
-        $('#batalpengajuanseminartombol').click(function(){
+        $('.batalpengajuanseminartombol').click(function(){
             var idSeminarTA = $(this).attr('value');
             
             swal({

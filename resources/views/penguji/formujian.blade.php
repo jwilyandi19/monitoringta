@@ -122,7 +122,7 @@
                                     <td>
                                         @if($ujian->status == 0)
                                             <a class="btn btn-success btn-sm" value="{{$ujian->id_ujian_ta}}">Terima</a>
-                                            <a class="btn btn-danger btn-sm" id="batalpengajuanujiantombol" value="{{$ujian->id_ujian_ta}}">Batalkan</a>
+                                            <a class="batalpengajuanujiantombol btn btn-danger btn-sm" value="{{$ujian->id_ujian_ta}}">Batalkan</a>
                                         @else
                                             -
                                         @endif
@@ -238,7 +238,7 @@
                                         <td>
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-block btn-info btn-sm">Simpan</button>
-                                                <a id="batalujiantombol" class="btn btn-block btn-danger btn-sm" value="{{$ujianDiterima->id_ujian_ta}}">Batalkan</a>
+                                                <a class="batalujiantombol btn btn-block btn-danger btn-sm" value="{{$ujianDiterima->id_ujian_ta}}">Batalkan</a>
                                             </div>
                                         </td>
                                     </form>
@@ -309,7 +309,7 @@
                 $('#terimaUjian').submit();
             });
         });
-        $('#batalujiantombol').click(function(){
+        $('.batalujiantombol').click(function(){
             var idUjianTA = $(this).attr('value');
 
             swal({
@@ -325,7 +325,7 @@
                 $('#batalkanUjian').submit();
             });
         });
-        $('#batalpengajuanujiantombol').click(function(){
+        $('.batalpengajuanujiantombol').click(function(){
             var idUjianTA = $(this).attr('value');
             console.log(idUjianTA);
             
