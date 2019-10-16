@@ -86,6 +86,7 @@
                     <thead>
                         <th class="text-center">No</th>
                         <th class="text-center">NRP Mhs.</th>
+                        <th class="text-center">Nama</th>
                         <th class="text-center">Bidang MK</th>
                         <th class="">Judul TA</th>
                         <th class="text-center">Pembimbing1</th>
@@ -144,7 +145,7 @@
                         <th class="text-center ">NRP</th>
                         <th class="text-center ">Nama</th>
                         <th class="text-center">Bidang MK</th>
-                        <th >Judul</th>
+                        <th class="text-center" >Judul</th>
                         <th class="text-center ">Penguji 1</th>
                         <th class="text-center ">Penguji 2</th>
                         <th class="text-center ">Penguji 3</th>
@@ -284,7 +285,7 @@
             "autoWidth" : true,
             "columnDefs" : [
                 { 
-                    "targets" : 3, 
+                    "targets" : 4, 
                     "width" : "400px"
                 }
             ],

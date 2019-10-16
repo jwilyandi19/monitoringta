@@ -293,7 +293,6 @@ class UserController extends Controller
                     $nama = $data[2];
                     $user = User::where('username', $username)->first();
                     if($user){
-                        echo "onok bos"."\n";
                         continue;
                     }
                     else{
