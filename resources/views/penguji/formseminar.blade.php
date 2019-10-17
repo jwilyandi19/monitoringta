@@ -105,7 +105,7 @@
                                 @endif
                                     <td class="text-center">{{$keys+1}}</td>
                                     <td>{{$seminar->tugasAkhir->user->username}}</td>
-                                    <td>{{$seminar->tugasAkhir->user->name}}</td>
+                                    <td>{{$seminar->tugasAkhir->user->nama}}</td>
                                     <td>{{$seminar->tugasAkhir->bidang->nama_bidang}}</td>
                                     <td>{{$seminar->tugasAkhir->judul}}</td>
                                     
